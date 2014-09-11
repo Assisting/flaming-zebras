@@ -7,6 +7,7 @@ public class Movement : MonoBehaviour {
 	private float JUMP_FORCE; // strength of the impulse used to launch the player on a jump
 	private float PUSH_HEIGHT; // abstract height above the ground where players can be considered "on the ground"
 	private float DASH_STRENGTH; // stregth of impulse moving character laterally on a dash (to be replaced)
+	private float JUMP_HEIGHT; // factor for maximum height the player can jump
 	private int USEABLE = -1; // readable value for cooldowns that are complete
 	private float cooldown1; // 1st dash cooldown
 	private float cooldown2; // 2nd dash cooldown
@@ -17,7 +18,7 @@ public class Movement : MonoBehaviour {
 		MOVE_SPEED = 10f;
 		JUMP_FORCE = 10f;
 		PUSH_HEIGHT = 0.4f;
-		DASH_STRENGTH = 6f;
+		DASH_STRENGTH = 15f;
 		cooldown1 = USEABLE;
 		cooldown2 = USEABLE;
 
@@ -26,35 +27,47 @@ public class Movement : MonoBehaviour {
 	// FixedUpdate is called once per time unit
 	void FixedUpdate ()
 	{
+		if ( Input.GetKeyDown(KeyCode.UpArrow) && IsGrounded() )
+			Jump();
+
+		if ( Input.GetKeyDown(KeyCode.D) && CanDash() )
+			DashRight();
+
+		if ( Input.GetKeyDown(KeyCode.A) && CanDash() )
+			DashLeft();
+
 		if ( Input.GetKey(KeyCode.LeftArrow) )
 			rigidbody2D.AddForce(-Vector2.right * MOVE_SPEED);
 
 		if ( Input.GetKey(KeyCode.RightArrow) )
 			rigidbody2D.AddForce(Vector2.right * MOVE_SPEED);
-
-		if ( IsGrounded() && Input.GetKey(KeyCode.UpArrow) )
-			rigidbody2D.AddForce(Vector2.up * JUMP_FORCE, ForceMode2D.Impulse);
-
-		if ( Input.GetKeyDown(KeyCode.D) && CanDash() )
-		{
-			RemoveDashMarker();
-			rigidbody2D.AddForce(Vector2.right * DASH_STRENGTH, ForceMode2D.Impulse);
-		}
-
-		if ( Input.GetKeyDown(KeyCode.A) && CanDash() )
-		{
-			RemoveDashMarker();
-			rigidbody2D.AddForce(-Vector2.right * DASH_STRENGTH, ForceMode2D.Impulse);
-		}
 	}
 
-	// is the player on the ground (and able to jump)?
-	// returns: true if player is close enough to the ground
-	private bool IsGrounded()
+	//Stop the player's motion
+	private void StopMoving()
 	{
-		RaycastHit2D result = Physics2D.Raycast(this.transform.position, -Vector2.up, PUSH_HEIGHT);
+		rigidbody2D.velocity = Vector2.zero;
+		rigidbody2D.angularVelocity = 0;
+	}
 
-		return (null != result.collider);
+	// Dash the player to the left
+	private void DashLeft()
+	{
+		RemoveDashMarker();
+		rigidbody2D.gravityScale = 0;
+		StopMoving();
+		rigidbody2D.AddForce(-Vector2.right * DASH_STRENGTH, ForceMode2D.Impulse);
+		rigidbody2D.gravityScale = 1;
+	}
+
+	// Dash the player to the right
+	private void DashRight()
+	{
+		RemoveDashMarker();
+		rigidbody2D.gravityScale = 0;
+		StopMoving();
+		rigidbody2D.AddForce(Vector2.right * DASH_STRENGTH, ForceMode2D.Impulse);
+		rigidbody2D.gravityScale = 1;
 	}
 
 	// does the player have an available dash?
@@ -79,6 +92,18 @@ public class Movement : MonoBehaviour {
 			cooldown2 = Time.time + 5;
 	}
 
+	// is the player on the ground (and able to jump)?
+	// returns: true if player is close enough to the ground
+	private bool IsGrounded()
+	{
+		RaycastHit2D result = Physics2D.Raycast(this.transform.position, -Vector2.up, PUSH_HEIGHT);
+		return (null != result.collider);
+	}
 
+	//Make the player jump
+	private void Jump()
+	{
+		rigidbody2D.AddForce(Vector2.up * JUMP_FORCE, ForceMode2D.Impulse);
+	}
 
 }
