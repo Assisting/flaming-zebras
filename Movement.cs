@@ -24,6 +24,7 @@ public class Movement : MonoBehaviour {
 		cooldown1 = USEABLE;
 		cooldown2 = USEABLE;
 		spamcooler = USEABLE;
+
 	}
 
 	// FixedUpdate is called once per time unit
@@ -84,4 +85,7 @@ public class Movement : MonoBehaviour {
 		else
 			cooldown2 = Time.time + 5;
 	}
+
+
+
 }
