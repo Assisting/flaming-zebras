@@ -3,28 +3,48 @@ using System.Collections;
 
 public class Movement : MonoBehaviour {
 
+	//Moving
 	private float MOVE_SPEED; // the lateral speed of the players (as a force for air-control)
+
+	//Jumping
 	private float JUMP_FORCE; // strength of the impulse used to launch the player on a jump
 	private float PUSH_HEIGHT; // abstract height above the ground where players can be considered "on the ground"
-	private float DASH_STRENGTH; // stregth of impulse moving character laterally on a dash (to be replaced)
 	private float JUMP_HEIGHT; // factor for maximum height the player can jump
-	private int USEABLE = -1; // readable value for cooldowns that are complete
-	private float cooldown1; // 1st dash cooldown
-	private float cooldown2; // 2nd dash cooldown
+
+	//Dashing
+	private float DASH_POWER; // speed at which the dash is performed (inverse to WAIT_TIME)
+	private float WAIT_TIME; // time after dash to wait before turning physics back on
+	private const int USEABLE = -1; // human-readable value for cooldowns that are complete
+	private float dashCooldown1; // 1st dash cooldown timestamp
+	private float dashCooldown2; // 2nd dash cooldown timestamp
+	private float dashWait; // timestamp to wait till dash completes
 
 	// Use this for initialization
 	void Start ()
 	{
 		MOVE_SPEED = 10f;
+
 		JUMP_FORCE = 10f;
 		PUSH_HEIGHT = 0.4f;
-		DASH_STRENGTH = 15f;
-		cooldown1 = USEABLE;
-		cooldown2 = USEABLE;
 
+		DASH_POWER = 100f;
+		WAIT_TIME = 0.05f;
+		dashCooldown1 = USEABLE;
+		dashCooldown2 = USEABLE;
+		dashWait = USEABLE;
 	}
 
-	// FixedUpdate is called once per time unit
+	// Update is called once per frame (used for non-physics)
+	void Update()
+	{
+		if (USEABLE != dashWait && dashWait <= Time.time)
+		{
+			StartPhysics();
+			dashWait = USEABLE;
+		}
+	}
+
+	// FixedUpdate is called once per 0.02 sec time unit
 	void FixedUpdate ()
 	{
 		if ( Input.GetKeyDown(KeyCode.UpArrow) && IsGrounded() )
@@ -43,42 +63,49 @@ public class Movement : MonoBehaviour {
 			rigidbody2D.AddForce(Vector2.right * MOVE_SPEED);
 	}
 
-	//Stop the player's motion
-	private void StopMoving()
+	// Stop rigidbody motion (for a dash)
+	private void StopPhysics()
+	{
+		rigidbody2D.isKinematic = true;
+		rigidbody2D.velocity = Vector2.zero;
+		rigidbody2D.angularVelocity = 0;
+	}
+
+	// Begin rigidbody motion once more
+	private void StartPhysics()
 	{
 		rigidbody2D.velocity = Vector2.zero;
 		rigidbody2D.angularVelocity = 0;
+		rigidbody2D.isKinematic = false;
 	}
 
 	// Dash the player to the left
 	private void DashLeft()
 	{
 		RemoveDashMarker();
-		rigidbody2D.gravityScale = 0;
-		StopMoving();
-		rigidbody2D.AddForce(-Vector2.right * DASH_STRENGTH, ForceMode2D.Impulse);
-		rigidbody2D.gravityScale = 1;
+		StopPhysics();
+		rigidbody2D.velocity = (-Vector2.right * DASH_POWER);
+		dashWait = Time.time + WAIT_TIME;
 	}
 
 	// Dash the player to the right
 	private void DashRight()
 	{
 		RemoveDashMarker();
-		rigidbody2D.gravityScale = 0;
-		StopMoving();
-		rigidbody2D.AddForce(Vector2.right * DASH_STRENGTH, ForceMode2D.Impulse);
-		rigidbody2D.gravityScale = 1;
+		StopPhysics();
+		rigidbody2D.velocity = (Vector2.right * DASH_POWER);
+		dashWait = Time.time + WAIT_TIME;
 	}
 
-	// does the player have an available dash?
+	// Does the player have an available dash?
 	// returns: true if there is one or more dashes available
 	private bool CanDash()
 	{
-		if ( USEABLE != cooldown1 && cooldown1 <= Time.time)
-			cooldown1 = USEABLE;
-		if ( USEABLE != cooldown2 && cooldown2 <= Time.time)
-			cooldown2 = USEABLE;
-		return (USEABLE == cooldown2 || USEABLE == cooldown1);
+		if ( USEABLE != dashCooldown1 && dashCooldown1 <= Time.time)
+			dashCooldown1 = USEABLE;
+		if ( USEABLE != dashCooldown2 && dashCooldown2 <= Time.time)
+			dashCooldown2 = USEABLE;
+		return (USEABLE == dashCooldown2 || USEABLE == dashCooldown1);
 	}
 
 	// sets one of the dash cooldowns before a dash.
@@ -86,10 +113,10 @@ public class Movement : MonoBehaviour {
 	// it will consume dashes from right to left (i.e. 2nd, then 1st)
 	private void RemoveDashMarker()
 	{
-		if ( USEABLE != cooldown2 )
-			cooldown1 = Time.time + 5;
+		if ( USEABLE != dashCooldown2 )
+			dashCooldown1 = Time.time + 5;
 		else
-			cooldown2 = Time.time + 5;
+			dashCooldown2 = Time.time + 5;
 	}
 
 	// is the player on the ground (and able to jump)?
