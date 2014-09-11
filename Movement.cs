@@ -7,9 +7,10 @@ public class Movement : MonoBehaviour {
 	private float MOVE_SPEED; // the lateral speed of the players (as a force for air-control)
 
 	//Jumping
-	private float JUMP_FORCE; // strength of the impulse used to launch the player on a jump
+	private float JUMP_IMPULSE; // strength of the impulse used to launch the player on a jump
+	private float JUMP_FORCE; // constant force value that player experiences while jumping
 	private float PUSH_HEIGHT; // abstract height above the ground where players can be considered "on the ground"
-	private float JUMP_HEIGHT; // factor for maximum height the player can jump
+	private bool JUMP_EXPIRED = true; // whether or not the player must wait to hit the ground before jumping again
 
 	//Dashing
 	private float DASH_POWER; // speed at which the dash is performed (inverse to WAIT_TIME)
@@ -24,7 +25,8 @@ public class Movement : MonoBehaviour {
 	{
 		MOVE_SPEED = 10f;
 
-		JUMP_FORCE = 10f;
+		JUMP_IMPULSE = 4f;
+		JUMP_FORCE = 7f;
 		PUSH_HEIGHT = 0.4f;
 
 		DASH_POWER = 100f;
@@ -47,8 +49,14 @@ public class Movement : MonoBehaviour {
 	// FixedUpdate is called once per 0.02 sec time unit
 	void FixedUpdate ()
 	{
+		if ( Input.GetKeyUp(KeyCode.UpArrow) || rigidbody2D.velocity.y < 0)
+			JUMP_EXPIRED = true;
+
 		if ( Input.GetKeyDown(KeyCode.UpArrow) && IsGrounded() )
 			Jump();
+
+		if ( Input.GetKey(KeyCode.UpArrow) && !JUMP_EXPIRED )
+			rigidbody2D.AddForce(Vector2.up * JUMP_FORCE);
 
 		if ( Input.GetKeyDown(KeyCode.D) && CanDash() )
 			DashRight();
@@ -124,13 +132,16 @@ public class Movement : MonoBehaviour {
 	private bool IsGrounded()
 	{
 		RaycastHit2D result = Physics2D.Raycast(this.transform.position, -Vector2.up, PUSH_HEIGHT);
-		return (null != result.collider);
+		bool grounded = null != result.collider;
+		if (grounded)
+			JUMP_EXPIRED = false;
+		return (grounded);
 	}
 
 	//Make the player jump
 	private void Jump()
 	{
-		rigidbody2D.AddForce(Vector2.up * JUMP_FORCE, ForceMode2D.Impulse);
+		rigidbody2D.AddForce(Vector2.up * JUMP_IMPULSE, ForceMode2D.Impulse);
 	}
 
 }
