@@ -4,37 +4,93 @@ using System.Collections;
 public class Shop : MonoBehaviour 
 {
 	private int ShopPrice; // The amount of money the player will pay to get the shop's item
-	private GameObject Player1; //This will let us reference Player 1's stats.
-	private bool IsPlayer1InShop;
 
+	//These will let us reference the Player's stats.
+	private GameObject PlayerGreen; 
+	private GameObject PlayerBlue;
+	private GameObject PlayerYellow;
+	private GameObject PlayerRed;
 
+	//These will be used to recgonize whether the players are in this shop.
+	private bool IsPlayerGreenInShop;
+	private bool IsPlayerBlueInShop;
+	private bool IsPlayerYellowInShop;
+	private bool IsPlayerRedInShop;
 
 	// Use this for initialization
 	void Start () 
 	{
-		IsPlayer1InShop = false;
+		IsPlayerGreenInShop = false;
+		IsPlayerBlueInShop = false;
+		IsPlayerYellowInShop = false;
+		IsPlayerRedInShop = false;
 		ShopPrice = 100; //Arbritary value for now.
-		Player1=GameObject.Find ("Green_Char");
+		PlayerGreen = GameObject.Find ("Green_Char");
+		PlayerBlue = GameObject.Find ("Blue_Char");
+		PlayerYellow = GameObject.Find ("Yellow_Char");
+		PlayerRed = GameObject.Find ("Red_Char");
 	}
 
 	// FixedUpdate is called once per time unit
 	void FixedUpdate ()
 	{
-		if (Input.GetKeyDown (KeyCode.B) && IsPlayer1InShop) 
+		if (Input.GetKeyDown (KeyCode.B) && IsPlayerGreenInShop) 
 		{
-			BuyObject (Player1);
+			BuyObject (PlayerGreen);
+		}
+		else if (Input.GetKeyDown (KeyCode.B) && IsPlayerBlueInShop) 
+		{
+			BuyObject (PlayerBlue);
+		}
+		else if (Input.GetKeyDown (KeyCode.B) && IsPlayerYellowInShop) 
+		{
+			BuyObject (PlayerYellow);
+		}
+		else if (Input.GetKeyDown (KeyCode.B) && IsPlayerRedInShop) 
+		{
+			BuyObject (PlayerRed);
 		}
 	}
 
 	//Stuff that happens when player enters a shop.
-	void OnTriggerEnter2D(Collider2D other)
+	void OnTriggerEnter2D(Collider2D Player)
 	{
-		IsPlayer1InShop = true;
+		if(Player.gameObject.name=="Green_Char")
+		{
+			IsPlayerGreenInShop = true;
+		}
+		else if(Player.gameObject.name=="Blue_Char")
+		{
+			IsPlayerBlueInShop = true;
+		}
+		else if(Player.gameObject.name=="Yellow_Char")
+		{
+			IsPlayerYellowInShop = true;
+		}
+		else if(Player.gameObject.name=="Red_Char")
+		{
+			IsPlayerRedInShop = true;
+		}
 	}
 
-	void OnTriggerExit2D(Collider2D other)
+	void OnTriggerExit2D(Collider2D Player)
 	{
-		IsPlayer1InShop = false;
+		if(Player.gameObject.name=="Green_Char")
+		{
+			IsPlayerGreenInShop = false;
+		}
+		else if(Player.gameObject.name=="Blue_Char")
+		{
+			IsPlayerBlueInShop = false;
+		}
+		else if(Player.gameObject.name=="Yellow_Char")
+		{
+			IsPlayerYellowInShop = false;
+		}
+		else if(Player.gameObject.name=="Red_Char")
+		{
+			IsPlayerRedInShop = false;
+		}
 	}
 	
 	// Checks to see if user has enough money to buy object, and if it does, subtracts the money from their
@@ -45,12 +101,12 @@ public class Shop : MonoBehaviour
 		if (ShopPrice <= MoneyInfo.GetMoney ()) 
 		{
 			MoneyInfo.ChangeMoney (-ShopPrice);
-			print ("Buy Successful! You have $"+MoneyInfo.GetMoney());
+			print ("Buy Successful! "+Player.name+" has $"+MoneyInfo.GetMoney());
 			//Insert effect here.
 		}
 		else
 		{
-			print ("Buy Insuccessful, you have $"+MoneyInfo.GetMoney () );
+			print ("Buy Insuccessful, "+Player.name+" has $"+MoneyInfo.GetMoney () );
 		}
 	}
 
