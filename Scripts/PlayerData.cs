@@ -10,15 +10,10 @@ public class PlayerData : MonoBehaviour
 
 	private struct MoveLevel
 	{
-		public static float[] moveSpeed = new float[3] { 10f, 12f, 15f };
+		public static float[] moveSpeed = new float[3] { 10f, 12f, 14f };
+		public static float[] maxSpeed = new float[3] { 8f, 10f, 12f };
 	}
 
-	private struct JumpLevel
-	{
-		public static float[] impulse = new float[3] { 4f, 5f, 6f };
-		public static float[] force = new float[3] { 7f, 8f, 9f };
-	}
-	
 	private struct DashLevel
 	{
 		public static float[] powerLevel = new float[3] { 25f, 50f, 100f };
@@ -31,12 +26,12 @@ public class PlayerData : MonoBehaviour
 
 	//Moving
 	private float MOVE_SPEED; // the lateral speed of the players (as a force for air-control)
+	private float MAX_SPEED; // maximum lateral speed of the player
 
 	//Jumping
-	private float JUMP_IMPULSE; // strength of the impulse used to launch the player on a jump
-	private float JUMP_FORCE; // force value that player experiences while jumping
+	private readonly float JUMP_FORCE = 500f; // speed of player's jump
 	public readonly float PUSH_HEIGHT = 0.4f; // abstract height above the ground where players can be considered "on the ground"
-	private bool JUMP_EXPIRED; // whether or not the player must wait to hit the ground before jumping again
+	private bool JUMP_AVAILABLE; // whether or not the player must wait to hit the ground before jumping again
 
 	//Dashing
 	private float DASH_POWER; // speed at which the dash is performed (inverse to WAIT_TIME)
@@ -56,10 +51,9 @@ public class PlayerData : MonoBehaviour
 	void Start ()
 	{
 		MOVE_SPEED = 10f;
+		MAX_SPEED = 6f;
 
-		JUMP_IMPULSE = 4f;
-		JUMP_FORCE = 7f;
-		JUMP_EXPIRED = true;
+		JUMP_AVAILABLE = false;
 
 		DASH_POWER = 25f;
 		WAIT_TIME = 0.2f;
@@ -81,19 +75,12 @@ public class PlayerData : MonoBehaviour
 			case Attribute.Move :
 			{
 				MOVE_SPEED = MoveLevel.moveSpeed[level-1];
-				return;
-			}
-
-			case Attribute.Jump :
-			{
-				JUMP_IMPULSE = JumpLevel.impulse[level-1];
-				JUMP_FORCE = JumpLevel.force[level-1];
+				MAX_SPEED = MoveLevel.maxSpeed[level-1];
 				return;
 			}
 
 			case Attribute.Dash :
 			{
-				
 				DASH_POWER = DashLevel.powerLevel[level-1];
 				WAIT_TIME = DashLevel.waitTime[level-1];
 				return;
@@ -109,12 +96,12 @@ public class PlayerData : MonoBehaviour
 
 	public bool CanJump()
 	{
-		return !JUMP_EXPIRED;
+		return JUMP_AVAILABLE;
 	}
 
 	public void SetJumpable (bool setting)
 	{
-		JUMP_EXPIRED = setting;
+		JUMP_AVAILABLE = setting;
 	}
 
 	public void SetWaitTimer ()
@@ -152,9 +139,9 @@ public class PlayerData : MonoBehaviour
 		return MOVE_SPEED;
 	}
 
-	public float GetJUMP_IMPULSE ()
+	public float GetMAX_SPEED ()
 	{
-		return JUMP_IMPULSE;
+		return MAX_SPEED;
 	}
 
 	public float GetJUMP_FORCE ()

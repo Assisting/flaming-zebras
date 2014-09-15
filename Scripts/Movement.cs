@@ -13,41 +13,49 @@ public class Movement : MonoBehaviour {
 	// Update is called once per frame (used for non-physics)
 	void Update()
 	{
+		if (Input.GetKeyDown(KeyCode.UpArrow) && IsGrounded() && playerData.CanJump())
+			rigidbody2D.AddForce(Vector2.up * playerData.GetJUMP_FORCE());
+
+		if (Input.GetKeyDown(KeyCode.D) && playerData.CanDash())
+			DashRight();
+
+		if (Input.GetKeyDown(KeyCode.A) && playerData.CanDash())
+			DashLeft();
+
+		if (Input.GetKeyUp(KeyCode.UpArrow) && rigidbody2D.velocity.y >= 0 && playerData.CanJump())
+		{
+			Vector2 currentVector = rigidbody2D.velocity;
+			currentVector.y = 0;
+			playerData.SetJumpable(false);
+			rigidbody2D.velocity = currentVector;
+		}
+
 		if (playerData.IsDashOver())
 		{
 			StartPhysics();
 			playerData.ClearWaitTimer();
 		}
 
-		if (Input.GetKeyDown(KeyCode.J))
-		{
-			playerData.LevelUp(PlayerData.Attribute.Dash, 3);
-		}
+		if (Input.GetKeyDown(KeyCode.Alpha1))
+			playerData.LevelUp(PlayerData.Attribute.Move, 1);
+
+		if (Input.GetKeyDown(KeyCode.Alpha2))
+			playerData.LevelUp(PlayerData.Attribute.Move, 2);
+		
+		if (Input.GetKeyDown(KeyCode.Alpha3))
+			playerData.LevelUp(PlayerData.Attribute.Move, 3);
 	}
 
-	// FixedUpdate is called once per 0.02 sec time unit
+	// FixedUpdate is called once per physics tick
 	void FixedUpdate ()
 	{
-		if ( Input.GetKeyUp(KeyCode.UpArrow) || rigidbody2D.velocity.y < 0)
-			playerData.SetJumpable(true);
-
-		if ( Input.GetKeyDown(KeyCode.UpArrow) && IsGrounded() )
-			Jump();
-
-		if ( Input.GetKey(KeyCode.UpArrow) && playerData.CanJump() )
-			rigidbody2D.AddForce(Vector2.up * playerData.GetJUMP_FORCE());
-
-		if ( Input.GetKeyDown(KeyCode.D) && playerData.CanDash() )
-			DashRight();
-
-		if ( Input.GetKeyDown(KeyCode.A) && playerData.CanDash() )
-			DashLeft();
-
-		if ( Input.GetKey(KeyCode.LeftArrow) )
+		if (Input.GetKey(KeyCode.LeftArrow) && rigidbody2D.velocity.x > -playerData.GetMAX_SPEED())
 			rigidbody2D.AddForce(-Vector2.right * playerData.GetMOVE_SPEED());
+		//rigidbody2D.velocity = new Vector2 (-playerData.GetMOVE_SPEED(), rigidbody2D.velocity.y);
 
-		if ( Input.GetKey(KeyCode.RightArrow) )
+		if (Input.GetKey(KeyCode.RightArrow) && rigidbody2D.velocity.x < playerData.GetMAX_SPEED())
 			rigidbody2D.AddForce(Vector2.right * playerData.GetMOVE_SPEED());
+			//rigidbody2D.velocity = new Vector2 (playerData.GetMOVE_SPEED(), rigidbody2D.velocity.y);
 	}
 
 	// Stop rigidbody motion (for a dash)
@@ -91,14 +99,8 @@ public class Movement : MonoBehaviour {
 		RaycastHit2D result = Physics2D.Raycast(transform.position, -Vector2.up, playerData.PUSH_HEIGHT);
 		bool grounded = null != result.collider;
 		if (grounded)
-			playerData.SetJumpable(false);
+			playerData.SetJumpable(true);
 		return (grounded);
-	}
-
-	//Make the player jump
-	private void Jump()
-	{
-		rigidbody2D.AddForce(Vector2.up * playerData.GetJUMP_IMPULSE(), ForceMode2D.Impulse);
 	}
 
 }
