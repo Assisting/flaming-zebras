@@ -6,7 +6,7 @@ public class PlayerData : MonoBehaviour
 	//---Structs and Enums----------------------------------------------------------------------------------------------
 
 	//Structs and enums
-	public enum Attribute { Move, Jump, Dash, Money }; //giving readable names to pass-in values 0-4
+	public enum Attribute { Move, Jump, Dash, WeaponType, WeaponLevel, Money }; //giving readable names to pass-in values 0-5
 
 	private struct MoveLevel
 	{
@@ -37,10 +37,14 @@ public class PlayerData : MonoBehaviour
 	private float DASH_POWER; // speed at which the dash is performed (inverse to WAIT_TIME)
 	private float WAIT_TIME; // time after dash to wait before turning physics back on
 	private readonly int USEABLE = -1; // human-readable value for cooldowns that are complete
-	private float dashCoolTime;
+	private float DASH_COOL_TIME;
 	private float dashCooldown1; // 1st dash cooldown timestamp
 	private float dashCooldown2; // 2nd dash cooldown timestamp
 	private float dashWait; // timestamp to wait till dash completes
+
+	//Weapon
+	private Weapon.WeaponType CURRENT_WEAPON;
+	private int WEAPON_LEVEL;
 
 	//Money
 	private int moneyAmount; // The amount of money a player has
@@ -50,17 +54,18 @@ public class PlayerData : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		MOVE_SPEED = 10f;
-		MAX_SPEED = 6f;
+		LevelUp(Attribute.Move, 1);
 
 		JUMP_AVAILABLE = false;
 
-		DASH_POWER = 25f;
-		WAIT_TIME = 0.2f;
-		dashCoolTime = 5f;
+		LevelUp(Attribute.Dash, 1);
+		DASH_COOL_TIME = 5f;
 		dashCooldown1 = USEABLE;
 		dashCooldown2 = USEABLE;
 		dashWait = USEABLE;
+
+		LevelUp(Attribute.WeaponType, Weapon.WeaponType.None);
+		LevelUp(Attribute.WeaponLevel, 1);
 
 		moneyAmount = 500;
 	}
@@ -86,12 +91,34 @@ public class PlayerData : MonoBehaviour
 				return;
 			}
 
+			case Attribute.WeaponLevel :
+			{
+				WEAPON_LEVEL = level;
+				return;
+			}
+
 			case Attribute.Money :
 			{
 				ChangeMoney(level);
 				return;
 			}
+
+			default :
+			{
+				return;
+			}
 		}
+	}
+
+	//special LevelUp function for weapon types
+	public void LevelUp (Attribute attrib, Weapon.WeaponType weapon)
+	{
+		if (Attribute.WeaponType == attrib)
+		{
+			CURRENT_WEAPON = weapon;
+		}
+		else
+			return;
 	}
 
 	public bool CanJump()
@@ -111,12 +138,12 @@ public class PlayerData : MonoBehaviour
 
 	public void SetCooldown1()
 	{
-		dashCooldown1 = Time.time + dashCoolTime;
+		dashCooldown1 = Time.time + DASH_COOL_TIME;
 	}
 
 	public void SetCooldown2 ()
 	{
-		dashCooldown2 = Time.time + dashCoolTime;
+		dashCooldown2 = Time.time + DASH_COOL_TIME;
 	}
 
 	public void ClearWaitTimer ()
@@ -182,6 +209,16 @@ public class PlayerData : MonoBehaviour
 			SetCooldown1();
 		else
 			SetCooldown2();
+	}
+
+	public Weapon.WeaponType GetWeaponType()
+	{
+		return CURRENT_WEAPON;
+	}
+
+	public int GetWeaponLevel()
+	{
+		return WEAPON_LEVEL;
 	}
 	
 	// allows shops to see the amount of money a player has.
