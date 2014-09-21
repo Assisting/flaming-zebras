@@ -24,6 +24,12 @@ public class PlayerData : MonoBehaviour
 
 	//---Attribute Variables---------------------------------------------------------------------------------------------------
 
+	//Levels
+	private int MOVE_LEVEL;
+	private int JUMP_LEVEL;
+	private int DASH_LEVEL;
+	private int WEAPON_LEVEL;
+
 	//Moving
 	private float MOVE_SPEED; // the lateral speed of the players (as a force for air-control)
 	private float MAX_SPEED; // maximum lateral speed of the player
@@ -44,7 +50,6 @@ public class PlayerData : MonoBehaviour
 
 	//Weapon
 	private Weapon.WeaponType CURRENT_WEAPON;
-	private int WEAPON_LEVEL;
 
 	//Money
 	private int moneyAmount; // The amount of money a player has
@@ -79,15 +84,15 @@ public class PlayerData : MonoBehaviour
 		{
 			case Attribute.Move :
 			{
-				MOVE_SPEED = MoveLevel.moveSpeed[level-1];
-				MAX_SPEED = MoveLevel.maxSpeed[level-1];
+				MOVE_LEVEL = level;
+				UpdateMoveStats();
 				return;
 			}
 
 			case Attribute.Dash :
 			{
-				DASH_POWER = DashLevel.powerLevel[level-1];
-				WAIT_TIME = DashLevel.waitTime[level-1];
+				DASH_LEVEL = level;
+				UpdateDashLevel();
 				return;
 			}
 
@@ -119,6 +124,18 @@ public class PlayerData : MonoBehaviour
 		}
 		else
 			return;
+	}
+
+	private void UpdateMoveStats()
+	{
+		MOVE_SPEED = MoveLevel.moveSpeed[MOVE_LEVEL - 1];
+		MAX_SPEED = MoveLevel.maxSpeed[MOVE_LEVEL - 1];
+	}
+
+	private void UpdateDashLevel()
+	{
+		DASH_POWER = DashLevel.powerLevel[DASH_LEVEL - 1];
+		WAIT_TIME = DashLevel.waitTime[DASH_LEVEL - 1];
 	}
 
 	public bool CanJump()
@@ -216,15 +233,24 @@ public class PlayerData : MonoBehaviour
 		return CURRENT_WEAPON;
 	}
 
+	public int GetMoveLevel()
+	{
+		return MOVE_LEVEL;
+	}
+
+	public int GetJumpLevel()
+	{
+		return JUMP_LEVEL;
+	}
+
+	public int GetDashLevel()
+	{
+		return DASH_LEVEL;
+	}
+
 	public int GetWeaponLevel()
 	{
 		return WEAPON_LEVEL;
-	}
-
-	public int GetMoveLevel()
-	{
-		//Note, this is a dummy function until we get it working.
-		return 1;
 	}
 
 	public int GetDashLevel()
