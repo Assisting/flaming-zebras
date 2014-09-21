@@ -252,12 +252,6 @@ public class PlayerData : MonoBehaviour
 	{
 		return WEAPON_LEVEL;
 	}
-
-	public int GetDashLevel()
-	{
-		//Note, this is a dummy function until we get it working.
-		return 1;
-	}
 	
 	// allows shops to see the amount of money a player has.
 	public int GetMoney()
