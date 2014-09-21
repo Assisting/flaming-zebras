@@ -42,6 +42,11 @@ public class Shop : MonoBehaviour
 			ShopPrice=150;//Arbritary value for now.
 			ShopType="Move";
 		}
+		else if(this.gameObject.name=="DashShop")
+		{
+			ShopPrice=200;//Arbritary value for now.
+			ShopType="Dash";
+		}
 		else
 		{
 			ShopPrice=0;
@@ -119,9 +124,23 @@ public class Shop : MonoBehaviour
 		PlayerData MoneyInfo = Player.GetComponent<PlayerData> ();
 		if (ShopPrice <= MoneyInfo.GetMoney ()) 
 		{
-			MoneyInfo.ChangeMoney (-ShopPrice);
-			MoneyInfo.LevelUp(PlayerData.Attribute.Move, MoneyInfo.GetMoveLevel()+1);
-			print ("Buy Successful! "+Player.name+" has $"+MoneyInfo.GetMoney()+" after buying "+ShopType);
+			if(ShopType=="Move")
+			{
+				MoneyInfo.ChangeMoney (-ShopPrice);
+				MoneyInfo.LevelUp(PlayerData.Attribute.Move, MoneyInfo.GetMoveLevel()+1);
+				print ("Buy Successful! "+Player.name+" has $"+MoneyInfo.GetMoney()+" after buying "+ShopType);
+			}
+			else if(ShopType=="Dash")
+			{
+				MoneyInfo.ChangeMoney (-ShopPrice);
+				MoneyInfo.LevelUp(PlayerData.Attribute.Dash, MoneyInfo.GetDashLevel()+1);
+				print ("Buy Successful! "+Player.name+" has $"+MoneyInfo.GetMoney()+" after buying "+ShopType);
+			}
+			else
+			{
+				print ("Error,"+" Shop set to "+ShopType);
+			}
+			
 		}
 		else
 		{

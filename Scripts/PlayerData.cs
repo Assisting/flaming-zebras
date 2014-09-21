@@ -226,6 +226,12 @@ public class PlayerData : MonoBehaviour
 		//Note, this is a dummy function until we get it working.
 		return 1;
 	}
+
+	public int GetDashLevel()
+	{
+		//Note, this is a dummy function until we get it working.
+		return 1;
+	}
 	
 	// allows shops to see the amount of money a player has.
 	public int GetMoney()
