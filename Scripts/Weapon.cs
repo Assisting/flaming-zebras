@@ -58,7 +58,7 @@ public class Weapon : MonoBehaviour {
 
 	private void FireBullet()
 	{
-		if ( movement.IsMovingRight() )
+		if ( playerData.IsMovingRight() )
 		{
 			
 		}

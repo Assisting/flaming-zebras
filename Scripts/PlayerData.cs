@@ -16,8 +16,7 @@ public class PlayerData : MonoBehaviour
 
 	private struct DashLevel
 	{
-		public static float[] powerLevel = new float[3] { 25f, 50f, 100f };
-		public static float[] waitTime = new float[3] { 0.2f, 0.1f, 0.05f };
+		public static float[] dashSpeed = new float[3] { 10f, 15f, 20f };
 	}
 
 	//---Custom Classes-------------------------------------------------------------------------------------------------
@@ -33,6 +32,7 @@ public class PlayerData : MonoBehaviour
 	//Moving
 	private float MOVE_SPEED; // the lateral speed of the players (as a force for air-control)
 	private float MAX_SPEED; // maximum lateral speed of the player
+	private bool MOVING_RIGHT;
 
 	//Jumping
 	private readonly float JUMP_FORCE = 500f; // speed of player's jump
@@ -40,13 +40,12 @@ public class PlayerData : MonoBehaviour
 	private bool JUMP_AVAILABLE; // whether or not the player must wait to hit the ground before jumping again
 
 	//Dashing
-	private float DASH_POWER; // speed at which the dash is performed (inverse to WAIT_TIME)
-	private float WAIT_TIME; // time after dash to wait before turning physics back on
+	private float DASH_SPEED; // the maximum speed to move at while dashing
 	private readonly int USEABLE = -1; // human-readable value for cooldowns that are complete
-	private float DASH_COOL_TIME;
+	private float DASH_COOL_TIME = 5f;
 	private float dashCooldown1; // 1st dash cooldown timestamp
 	private float dashCooldown2; // 2nd dash cooldown timestamp
-	private float dashWait; // timestamp to wait till dash completes
+	private bool dashing; // Is the player currently in a dash?
 
 	//Weapon
 	private Weapon.WeaponType CURRENT_WEAPON;
@@ -61,13 +60,13 @@ public class PlayerData : MonoBehaviour
 	{
 		LevelUp(Attribute.Move, 1);
 
+		MOVING_RIGHT = true;
+
 		JUMP_AVAILABLE = false;
 
 		LevelUp(Attribute.Dash, 1);
-		DASH_COOL_TIME = 5f;
 		dashCooldown1 = USEABLE;
 		dashCooldown2 = USEABLE;
-		dashWait = USEABLE;
 
 		LevelUp(Attribute.WeaponType, Weapon.WeaponType.None);
 		LevelUp(Attribute.WeaponLevel, 1);
@@ -92,7 +91,7 @@ public class PlayerData : MonoBehaviour
 			case Attribute.Dash :
 			{
 				DASH_LEVEL = level;
-				UpdateDashLevel();
+				DASH_SPEED = DashLevel.dashSpeed[DASH_LEVEL - 1];
 				return;
 			}
 
@@ -132,12 +131,6 @@ public class PlayerData : MonoBehaviour
 		MAX_SPEED = MoveLevel.maxSpeed[MOVE_LEVEL - 1];
 	}
 
-	private void UpdateDashLevel()
-	{
-		DASH_POWER = DashLevel.powerLevel[DASH_LEVEL - 1];
-		WAIT_TIME = DashLevel.waitTime[DASH_LEVEL - 1];
-	}
-
 	public bool CanJump()
 	{
 		return JUMP_AVAILABLE;
@@ -148,11 +141,6 @@ public class PlayerData : MonoBehaviour
 		JUMP_AVAILABLE = setting;
 	}
 
-	public void SetWaitTimer ()
-	{
-		dashWait = Time.time + WAIT_TIME;
-	}
-
 	public void SetCooldown1()
 	{
 		dashCooldown1 = Time.time + DASH_COOL_TIME;
@@ -161,11 +149,6 @@ public class PlayerData : MonoBehaviour
 	public void SetCooldown2 ()
 	{
 		dashCooldown2 = Time.time + DASH_COOL_TIME;
-	}
-
-	public void ClearWaitTimer ()
-	{
-		dashWait = USEABLE;
 	}
 
 	public void ClearCooldown1 ()
@@ -188,19 +171,34 @@ public class PlayerData : MonoBehaviour
 		return MAX_SPEED;
 	}
 
+	public bool IsMovingRight()
+	{
+		return MOVING_RIGHT;
+	}
+
+	public void SetMovingRight(bool value)
+	{
+		MOVING_RIGHT = value;
+	}
+
 	public float GetJUMP_FORCE ()
 	{
 		return JUMP_FORCE;
 	}
 
-	public float GetDASH_POWER ()
+	public float GetDASH_SPEED ()
 	{
-		return DASH_POWER;
+		return DASH_SPEED;
 	}
 
-	public bool IsDashOver ()
+	public void SetDashing (bool value)
 	{
-		return USEABLE != dashWait && dashWait <= Time.time;
+		dashing = value;
+	}
+
+	public bool IsDashing ()
+	{
+		return dashing;
 	}
 	
 	// Does the player have an available dash?
