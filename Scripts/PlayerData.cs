@@ -35,9 +35,11 @@ public class PlayerData : MonoBehaviour
 	private bool MOVING_RIGHT;
 
 	//Jumping
-	private readonly float JUMP_FORCE = 500f; // speed of player's jump
-	public readonly float PUSH_HEIGHT = 0.4f; // abstract height above the ground where players can be considered "on the ground"
+	private readonly float JUMP_FORCE = 1000f; // speed of player's jump
+	public readonly float PUSH_HEIGHT = 0.4f; // abstract height above a collider where players can be considered "on the ground"
+	private bool GROUNDED; // Whether or not the player is on the ground
 	private bool JUMP_AVAILABLE; // whether or not the player must wait to hit the ground before jumping again
+	private int TIMES_JUMPED; // The number of times the player has air-jumped
 
 	//Dashing
 	private float DASH_SPEED; // the maximum speed to move at while dashing
@@ -62,7 +64,8 @@ public class PlayerData : MonoBehaviour
 
 		MOVING_RIGHT = true;
 
-		JUMP_AVAILABLE = false;
+		LevelUp(Attribute.Jump, 1);
+		JUMP_AVAILABLE = true;
 
 		LevelUp(Attribute.Dash, 1);
 		dashCooldown1 = USEABLE;
@@ -85,6 +88,12 @@ public class PlayerData : MonoBehaviour
 			{
 				MOVE_LEVEL = level;
 				UpdateMoveStats();
+				return;
+			}
+
+			case Attribute.Jump :
+			{
+				JUMP_LEVEL = level;
 				return;
 			}
 
@@ -139,6 +148,22 @@ public class PlayerData : MonoBehaviour
 	public void SetJumpable (bool setting)
 	{
 		JUMP_AVAILABLE = setting;
+	}
+
+	public bool IsGrounded ()
+	{
+		RaycastHit2D result = Physics2D.Raycast(transform.position, -Vector2.up, PUSH_HEIGHT);
+		return null != result.collider;
+	}
+
+	public void IncrementJumpCounter ()
+	{
+		TIMES_JUMPED ++;
+	}
+
+	public int TimesJumped ()
+	{
+		return TIMES_JUMPED;
 	}
 
 	public void SetCooldown1()

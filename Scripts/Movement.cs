@@ -17,8 +17,18 @@ public class Movement : MonoBehaviour {
 	void Update()
 	{
 		
-		if ( Input.GetKeyDown(KeyCode.UpArrow) && IsGrounded() && playerData.CanJump() )
-			rigidbody2D.AddForce( Vector2.up * playerData.GetJUMP_FORCE() );
+		if ( Input.GetKeyDown(KeyCode.UpArrow) && playerData.CanJump() )
+		{
+			if ( playerData.IsGrounded() )
+			{
+				rigidbody2D.AddForce( Vector2.up * playerData.GetJUMP_FORCE() );
+			}
+			else if (playerData.TimesJumped() < playerData.GetJumpLevel())
+			{
+				playerData.IncrementJumpCounter();
+				rigidbody2D.AddForce(Vector2.up * 15f, ForceMode2D.Impulse);
+			}
+		}
 
 		if ( Input.GetKeyDown(KeyCode.D) && playerData.CanDash() )
 			DashRight();
@@ -30,7 +40,6 @@ public class Movement : MonoBehaviour {
 		{
 			Vector2 currentVector = rigidbody2D.velocity;
 			currentVector.y = 0;
-			playerData.SetJumpable(false);
 			rigidbody2D.velocity = currentVector;
 		}
 	}
@@ -92,16 +101,5 @@ public class Movement : MonoBehaviour {
 	{
 		playerData.SetDashing(false);
 		rigidbody2D.isKinematic = false;
-	}
-
-	// is the player on the ground (and able to jump)?
-	// returns: true if player is close enough to the ground
-	private bool IsGrounded()
-	{
-		RaycastHit2D result = Physics2D.Raycast(transform.position, -Vector2.up, playerData.PUSH_HEIGHT);
-		bool grounded = null != result.collider;
-		if (grounded)
-			playerData.SetJumpable(true);
-		return (grounded);
 	}
 }
