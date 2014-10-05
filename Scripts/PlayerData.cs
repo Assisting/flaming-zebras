@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlayerData : MonoBehaviour
 {
-	//---Structs and Enums----------------------------------------------------------------------------------------------
+//-----Structs and Enums----------------------------------------------------------------------------------------------
 
 	//Structs and enums
 	public enum Attribute { Move, Jump, Dash, WeaponType, WeaponLevel, Money }; //giving readable names to pass-in values 0-5
@@ -16,12 +16,12 @@ public class PlayerData : MonoBehaviour
 
 	private struct DashLevel
 	{
-		public static float[] dashSpeed = new float[3] { 10f, 15f, 20f };
+		public static float[] dashSpeed = new float[3] { 15f, 20f, 25f };
 	}
 
-	//---Custom Classes-------------------------------------------------------------------------------------------------
+//-----Custom Classes-------------------------------------------------------------------------------------------------
 
-	//---Attribute Variables---------------------------------------------------------------------------------------------------
+//-----Attribute Variables---------------------------------------------------------------------------------------------------
 
 	//Levels
 	private int MOVE_LEVEL;
@@ -36,7 +36,6 @@ public class PlayerData : MonoBehaviour
 
 	//Jumping
 	private readonly float JUMP_FORCE = 1000f; // speed of player's jump
-	public readonly float PUSH_HEIGHT = 0.4f; // abstract height above a collider where players can be considered "on the ground"
 	private bool GROUNDED; // Whether or not the player is on the ground
 	private bool JUMP_AVAILABLE; // whether or not the player must wait to hit the ground before jumping again
 	private int TIMES_JUMPED; // The number of times the player has air-jumped
@@ -44,7 +43,7 @@ public class PlayerData : MonoBehaviour
 	//Dashing
 	private float DASH_SPEED; // the maximum speed to move at while dashing
 	private readonly int USEABLE = -1; // human-readable value for cooldowns that are complete
-	private float DASH_COOL_TIME = 5f;
+	private float DASH_COOL_TIME = 5f; // time to wait before using the same dash again
 	private float dashCooldown1; // 1st dash cooldown timestamp
 	private float dashCooldown2; // 2nd dash cooldown timestamp
 	private bool dashing; // Is the player currently in a dash?
@@ -55,7 +54,7 @@ public class PlayerData : MonoBehaviour
 	//Money
 	private int moneyAmount; // The amount of money a player has
 
-	//---Unity Functions------------------------------------------------------------------------------------------------
+//-----Unity Functions------------------------------------------------------------------------------------------------
 
 	// Use this for initialization
 	void Start ()
@@ -65,7 +64,9 @@ public class PlayerData : MonoBehaviour
 		MOVING_RIGHT = true;
 
 		LevelUp(Attribute.Jump, 1);
-		JUMP_AVAILABLE = true;
+		GROUNDED = false;
+		JUMP_AVAILABLE = false;
+		TIMES_JUMPED = 0;
 
 		LevelUp(Attribute.Dash, 1);
 		dashCooldown1 = USEABLE;
@@ -77,7 +78,7 @@ public class PlayerData : MonoBehaviour
 		moneyAmount = 1000;
 	}
 
-	//---Custom Functions-----------------------------------------------------------------------------------------------
+//-----Custom Functions-----------------------------------------------------------------------------------------------
 
 	// functions to automatically call-up and set player stats to pre-defined level ranges
 	public void LevelUp (Attribute attrib, int level)
@@ -134,11 +135,14 @@ public class PlayerData : MonoBehaviour
 			return;
 	}
 
+	//functional encapsulation for changes in a move level
 	private void UpdateMoveStats()
 	{
 		MOVE_SPEED = MoveLevel.moveSpeed[MOVE_LEVEL - 1];
 		MAX_SPEED = MoveLevel.maxSpeed[MOVE_LEVEL - 1];
 	}
+
+//-----Getters and Setters---------------------------------------------------------------------------------------------
 
 	public bool CanJump()
 	{
@@ -150,20 +154,26 @@ public class PlayerData : MonoBehaviour
 		JUMP_AVAILABLE = setting;
 	}
 
-	public bool IsGrounded ()
+	public void SetGrounded(bool value)
 	{
-		RaycastHit2D result = Physics2D.Raycast(transform.position, -Vector2.up, PUSH_HEIGHT);
-		return null != result.collider;
+		GROUNDED = value;
+	}
+
+	public bool IsGrounded()
+	{
+		return GROUNDED;
 	}
 
 	public void IncrementJumpCounter ()
 	{
 		TIMES_JUMPED ++;
+		if (TIMES_JUMPED >= JUMP_LEVEL)
+			SetJumpable(false);
 	}
 
-	public int TimesJumped ()
+	public void ResetJumpCounter ()
 	{
-		return TIMES_JUMPED;
+		TIMES_JUMPED = 0;
 	}
 
 	public void SetCooldown1()

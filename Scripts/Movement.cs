@@ -7,6 +7,10 @@ public class Movement : MonoBehaviour {
 
 	private Vector2 endPoint;
 
+	public Transform groundCheck;
+	float groundRadius = 0.07f; // abstract height above a collider where players can be considered "on the ground"
+	public LayerMask groundType;
+
 	// Use this for initialization
 	void Start ()
 	{
@@ -16,27 +20,29 @@ public class Movement : MonoBehaviour {
 	// Update is called once per frame (used for non-physics and detecting single presses of buttons)
 	void Update()
 	{
-		
-		if ( Input.GetKeyDown(KeyCode.UpArrow) && playerData.CanJump() )
+		//jump
+		if ( Input.GetButtonDown("Jump") && playerData.CanJump() )
 		{
-			if ( playerData.IsGrounded() )
+			playerData.IncrementJumpCounter();
+			if ( playerData.IsGrounded() ) //ground jump
 			{
+				playerData.SetGrounded(false);
 				rigidbody2D.AddForce( Vector2.up * playerData.GetJUMP_FORCE() );
 			}
-			else if (playerData.TimesJumped() < playerData.GetJumpLevel())
-			{
-				playerData.IncrementJumpCounter();
-				rigidbody2D.AddForce(Vector2.up * 15f, ForceMode2D.Impulse);
-			}
+			else //air jump
+				rigidbody2D.velocity = Vector2.up * 3f;
 		}
 
-		if ( Input.GetKeyDown(KeyCode.D) && playerData.CanDash() )
+		//dash right
+		if ( Input.GetButtonDown("RDash") && playerData.CanDash() )
 			DashRight();
 
-		if ( Input.GetKeyDown(KeyCode.A) && playerData.CanDash() )
+		//dash left
+		if ( Input.GetButtonDown("LDash") && playerData.CanDash() )
 			DashLeft();
 
-		if ( Input.GetKeyUp(KeyCode.UpArrow) && rigidbody2D.velocity.y >= 0 && playerData.CanJump() )
+		//let go of jump
+		if ( Input.GetButtonUp("Jump") && rigidbody2D.velocity.y >= 0 && playerData.CanJump() )
 		{
 			Vector2 currentVector = rigidbody2D.velocity;
 			currentVector.y = 0;
@@ -49,19 +55,21 @@ public class Movement : MonoBehaviour {
 	{
 		if ( playerData.IsDashing() )
 			continueDash();
-		else
+
+		GroundCheck();
+
+		//move left
+		if ( Input.GetButton("Left") && rigidbody2D.velocity.x > -playerData.GetMAX_SPEED() )
 		{
-			if ( Input.GetKey(KeyCode.LeftArrow) && rigidbody2D.velocity.x > -playerData.GetMAX_SPEED() )
-			{
-				playerData.SetMovingRight(false);
-				rigidbody2D.AddForce( -Vector2.right * playerData.GetMOVE_SPEED() );
-			}
-	
-			if ( Input.GetKey(KeyCode.RightArrow) && rigidbody2D.velocity.x < playerData.GetMAX_SPEED() )
-			{
-				playerData.SetMovingRight(true);
-				rigidbody2D.AddForce( Vector2.right * playerData.GetMOVE_SPEED() );
-			}
+			playerData.SetMovingRight(false);
+			rigidbody2D.AddForce( -Vector2.right * playerData.GetMOVE_SPEED() );
+		}
+
+		//move right
+		if ( Input.GetButton("Right") && rigidbody2D.velocity.x < playerData.GetMAX_SPEED() )
+		{
+			playerData.SetMovingRight(true);
+			rigidbody2D.AddForce( Vector2.right * playerData.GetMOVE_SPEED() );
 		}
 	}
 
@@ -90,6 +98,7 @@ public class Movement : MonoBehaviour {
 			StopDash();
 	}
 
+	//turns off physics so that an air-dash can begin
 	private void StartDash ()
 	{
 		playerData.RemoveDashMarker();
@@ -97,9 +106,22 @@ public class Movement : MonoBehaviour {
 		rigidbody2D.isKinematic = true;
 	}
 
+	//turns on physics for return to normality after a dash
 	private void StopDash ()
 	{
 		playerData.SetDashing(false);
 		rigidbody2D.isKinematic = false;
+	}
+
+	//run in FixedUpdate() to update grounded status, animation, current platform etc.
+	private void GroundCheck()
+	{
+		Collider2D floorType = Physics2D.Raycast(groundCheck.position, -Vector2.up, groundRadius, groundType).collider;
+		playerData.SetGrounded(floorType != null);
+		if ( playerData.IsGrounded() && rigidbody2D.velocity.y <= 0)
+		{
+			playerData.ResetJumpCounter();
+			playerData.SetJumpable(true);
+		}
 	}
 }
