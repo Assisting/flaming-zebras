@@ -74,7 +74,7 @@ public class PlayerData : MonoBehaviour
 		LevelUp(Attribute.WeaponType, Weapon.WeaponType.None);
 		LevelUp(Attribute.WeaponLevel, 1);
 
-		moneyAmount = 500;
+		moneyAmount = 1000;
 	}
 
 	//---Custom Functions-----------------------------------------------------------------------------------------------

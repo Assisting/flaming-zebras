@@ -47,6 +47,11 @@ public class Shop : MonoBehaviour
 			ShopPrice=200;//Arbritary value for now.
 			ShopType="Dash";
 		}
+		else if(this.gameObject.name=="JumpShop")
+		{
+			ShopPrice=500;//Arbritary value for now.
+			ShopType="Jump";
+		}
 		else
 		{
 			ShopPrice=0;
@@ -134,6 +139,12 @@ public class Shop : MonoBehaviour
 			{
 				MoneyInfo.ChangeMoney (-ShopPrice);
 				MoneyInfo.LevelUp(PlayerData.Attribute.Dash, MoneyInfo.GetDashLevel()+1);
+				print ("Buy Successful! "+Player.name+" has $"+MoneyInfo.GetMoney()+" after buying "+ShopType);
+			}
+			else if(ShopType=="Jump")
+			{
+				MoneyInfo.ChangeMoney (-ShopPrice);
+				MoneyInfo.LevelUp (PlayerData.Attribute.Move, MoneyInfo.GetMoveLevel()+1);
 				print ("Buy Successful! "+Player.name+" has $"+MoneyInfo.GetMoney()+" after buying "+ShopType);
 			}
 			else
