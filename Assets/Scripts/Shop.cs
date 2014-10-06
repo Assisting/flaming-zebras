@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Shop : MonoBehaviour
 {
+	//Note to self: Once Multiple players are implemented, change bluechar greenchar redchar.
+
 
 	//--Variables------------------------------------------------------------------------------------------------------
 
@@ -33,7 +35,7 @@ public class Shop : MonoBehaviour
 		IsPlayerYellowInShop = false;
 		IsPlayerRedInShop = false;
 
-		PlayerGreen = GameObject.Find ("Green_Char");
+		PlayerGreen = GameObject.Find ("Player");
 		PlayerBlue = GameObject.Find ("Blue_Char");
 		PlayerYellow = GameObject.Find ("Yellow_Char");
 		PlayerRed = GameObject.Find ("Red_Char");
@@ -84,7 +86,7 @@ public class Shop : MonoBehaviour
 	//Stuff that happens when player enters a shop.
 	void OnTriggerEnter2D(Collider2D Player)
 	{
-		if(Player.gameObject.name=="Green_Char")
+		if(Player.gameObject.name=="Player")
 		{
 			IsPlayerGreenInShop = true;
 		}
@@ -104,7 +106,7 @@ public class Shop : MonoBehaviour
 
 	void OnTriggerExit2D(Collider2D Player)
 	{
-		if(Player.gameObject.name=="Green_Char")
+		if(Player.gameObject.name=="Player")
 		{
 			IsPlayerGreenInShop = false;
 		}
