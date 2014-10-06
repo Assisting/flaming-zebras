@@ -149,9 +149,9 @@ public class PlayerData : MonoBehaviour
 		return JUMP_AVAILABLE;
 	}
 
-	public void SetJumpable (bool setting)
+	public void SetJumpable (bool value)
 	{
-		JUMP_AVAILABLE = setting;
+		JUMP_AVAILABLE = value;
 	}
 
 	public void SetGrounded(bool value)
@@ -168,7 +168,7 @@ public class PlayerData : MonoBehaviour
 	{
 		TIMES_JUMPED ++;
 		if (TIMES_JUMPED >= JUMP_LEVEL)
-			SetJumpable(false);
+			JUMP_AVAILABLE = false;
 	}
 
 	public void ResetJumpCounter ()
@@ -289,12 +289,12 @@ public class PlayerData : MonoBehaviour
 	// allows shops to see the amount of money a player has.
 	public int GetMoney()
 	{
-		return this.moneyAmount;
+		return moneyAmount;
 	}
 	
 	// subtracts or adds the amount of money specified to the player's moneyAmount.
 	public void ChangeMoney(int change)
 	{
-		moneyAmount = moneyAmount + change;
+		moneyAmount += change;
 	}
 }
