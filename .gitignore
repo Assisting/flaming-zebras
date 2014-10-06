@@ -6,3 +6,5 @@ Temp/
 Obj/
 UnityGenerated/
 Library/
+*.sln
+*.csproj

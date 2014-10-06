@@ -42,7 +42,7 @@ public class Movement : MonoBehaviour {
 			DashLeft();
 
 		//let go of jump
-		if ( Input.GetButtonUp("Jump") && rigidbody2D.velocity.y >= 0 && playerData.CanJump() )
+		if ( Input.GetButtonUp("Jump") && rigidbody2D.velocity.y >= 0)
 		{
 			Vector2 currentVector = rigidbody2D.velocity;
 			currentVector.y = 0;
