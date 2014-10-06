@@ -8,7 +8,7 @@ public class Movement : MonoBehaviour {
 	private Vector2 endPoint;
 
 	public Transform groundCheck;
-	float groundRadius = 0.07f; // abstract height above a collider where players can be considered "on the ground"
+	private float groundRadius = 0.07f; // abstract height above a collider where players can be considered "on the ground"
 	public LayerMask groundType;
 
 	// Use this for initialization
@@ -119,9 +119,6 @@ public class Movement : MonoBehaviour {
 		Collider2D floorType = Physics2D.Raycast(groundCheck.position, -Vector2.up, groundRadius, groundType).collider;
 		playerData.SetGrounded(floorType != null);
 		if ( playerData.IsGrounded() && rigidbody2D.velocity.y <= 0)
-		{
 			playerData.ResetJumpCounter();
-			playerData.SetJumpable(true);
-		}
 	}
 }

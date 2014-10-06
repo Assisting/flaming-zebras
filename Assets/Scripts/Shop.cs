@@ -146,7 +146,7 @@ public class Shop : MonoBehaviour
 			else if(ShopType=="Jump")
 			{
 				MoneyInfo.ChangeMoney (-ShopPrice);
-				MoneyInfo.LevelUp (PlayerData.Attribute.Move, MoneyInfo.GetMoveLevel()+1);
+				MoneyInfo.LevelUp (PlayerData.Attribute.Jump, MoneyInfo.GetJumpLevel()+1);
 				print ("Buy Successful! "+Player.name+" has $"+MoneyInfo.GetMoney()+" after buying "+ShopType);
 			}
 			else

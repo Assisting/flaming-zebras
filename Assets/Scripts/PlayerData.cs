@@ -66,7 +66,6 @@ public class PlayerData : MonoBehaviour
 		LevelUp(Attribute.Jump, 1);
 		GROUNDED = false;
 		JUMP_AVAILABLE = false;
-		TIMES_JUMPED = 0;
 
 		LevelUp(Attribute.Dash, 1);
 		dashCooldown1 = USEABLE;
@@ -149,11 +148,6 @@ public class PlayerData : MonoBehaviour
 		return JUMP_AVAILABLE;
 	}
 
-	public void SetJumpable (bool value)
-	{
-		JUMP_AVAILABLE = value;
-	}
-
 	public void SetGrounded(bool value)
 	{
 		GROUNDED = value;
@@ -168,12 +162,15 @@ public class PlayerData : MonoBehaviour
 	{
 		TIMES_JUMPED ++;
 		if (TIMES_JUMPED >= JUMP_LEVEL)
+		{
 			JUMP_AVAILABLE = false;
+		}
 	}
 
 	public void ResetJumpCounter ()
 	{
 		TIMES_JUMPED = 0;
+		JUMP_AVAILABLE = true;
 	}
 
 	public void SetCooldown1()
