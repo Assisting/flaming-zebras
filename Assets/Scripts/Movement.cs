@@ -7,9 +7,10 @@ public class Movement : MonoBehaviour {
 
 	private Vector2 endPoint;
 
-	public Transform groundCheck;
+	public Transform groundCheck; // location of object from which to raycast toward the ground
 	private float groundRadius = 0.07f; // abstract height above a collider where players can be considered "on the ground"
-	public LayerMask groundType;
+	public LayerMask groundType; // what is ground?
+	private float jumpLag; // small wait to avoid being grounded while lifting off
 
 	// Use this for initialization
 	void Start ()
@@ -26,6 +27,7 @@ public class Movement : MonoBehaviour {
 			playerData.IncrementJumpCounter();
 			if ( playerData.IsGrounded() ) //ground jump
 			{
+				jumpLag = Time.time + 0.02f;
 				playerData.SetGrounded(false);
 				rigidbody2D.AddForce( Vector2.up * playerData.GetJUMP_FORCE() );
 			}
@@ -118,7 +120,7 @@ public class Movement : MonoBehaviour {
 	{
 		Collider2D floorType = Physics2D.Raycast(groundCheck.position, -Vector2.up, groundRadius, groundType).collider;
 		playerData.SetGrounded(floorType != null);
-		if ( playerData.IsGrounded() && rigidbody2D.velocity.y <= 0)
+		if ( playerData.IsGrounded() && jumpLag < Time.time)
 			playerData.ResetJumpCounter();
 	}
 }
