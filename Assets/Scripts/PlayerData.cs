@@ -49,7 +49,7 @@ public class PlayerData : MonoBehaviour
 	private bool dashing; // Is the player currently in a dash?
 
 	//Weapon
-	private Weapon.WeaponType CURRENT_WEAPON;
+	private Weapon.WeaponType CURRENT_WEAPON; // name of currently equipped weapon
 
 	//Money
 	private int moneyAmount; // The amount of money a player has
@@ -148,16 +148,6 @@ public class PlayerData : MonoBehaviour
 		return JUMP_AVAILABLE;
 	}
 
-	public void SetGrounded(bool value)
-	{
-		GROUNDED = value;
-	}
-
-	public bool IsGrounded()
-	{
-		return GROUNDED;
-	}
-
 	public void IncrementJumpCounter ()
 	{
 		TIMES_JUMPED ++;
@@ -171,6 +161,16 @@ public class PlayerData : MonoBehaviour
 	{
 		TIMES_JUMPED = 0;
 		JUMP_AVAILABLE = true;
+	}
+
+	public void SetGrounded(bool value)
+	{
+		GROUNDED = value;
+	}
+
+	public bool IsGrounded()
+	{
+		return GROUNDED;
 	}
 
 	public void SetCooldown1()
