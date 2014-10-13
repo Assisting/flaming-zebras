@@ -1,8 +1,8 @@
 fileFormatVersion: 2
-guid: a54f2fc8c4d50e1458ca0b3dafda2c1e
+guid: 8634148919b61314b8869cd64918e6eb
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Bullet
+    21300000: P1Laser
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
