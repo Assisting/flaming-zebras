@@ -3,9 +3,8 @@ using System.Collections;
 
 public class PlayerData : MonoBehaviour
 {
-//-----Structs and Enums----------------------------------------------------------------------------------------------
+//-----Structs and Enums----------------------------------------------------------------------------------------------------
 
-	//Structs and enums
 	public enum Attribute { Move, Jump, Dash, WeaponType, WeaponLevel, Money }; //giving readable names to pass-in values 0-5
 
 	private struct MoveLevel
@@ -18,8 +17,6 @@ public class PlayerData : MonoBehaviour
 	{
 		public static float[] dashSpeed = new float[3] { 15f, 20f, 25f };
 	}
-
-//-----Custom Classes-------------------------------------------------------------------------------------------------
 
 //-----Attribute Variables---------------------------------------------------------------------------------------------------
 
@@ -54,7 +51,7 @@ public class PlayerData : MonoBehaviour
 	//Money
 	private int moneyAmount; // The amount of money a player has
 
-//-----Unity Functions------------------------------------------------------------------------------------------------
+//-----Unity Functions--------------------------------------------------------------------------------------------------------
 
 	// Use this for initialization
 	void Start ()
@@ -71,13 +68,13 @@ public class PlayerData : MonoBehaviour
 		dashCooldown1 = USEABLE;
 		dashCooldown2 = USEABLE;
 
-		LevelUp(Attribute.WeaponType, Weapon.WeaponType.None);
+		LevelUp(Attribute.WeaponType, Weapon.WeaponType.Bullet);
 		LevelUp(Attribute.WeaponLevel, 1);
 
 		moneyAmount = 1000;
 	}
 
-//-----Custom Functions-----------------------------------------------------------------------------------------------
+//-----Custom Functions------------------------------------------------------------------------------------------------------
 
 	// functions to automatically call-up and set player stats to pre-defined level ranges
 	public void LevelUp (Attribute attrib, int level)
@@ -141,7 +138,7 @@ public class PlayerData : MonoBehaviour
 		MAX_SPEED = MoveLevel.maxSpeed[MOVE_LEVEL - 1];
 	}
 
-//-----Getters and Setters---------------------------------------------------------------------------------------------
+//-----Getters and Setters---------------------------------------------------------------------------------------------------
 
 	public bool CanJump()
 	{

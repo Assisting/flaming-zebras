@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Movement : MonoBehaviour {
 
+//-----Attribute Variables---------------------------------------------------------------------------------------------------
+
 	private PlayerData playerData;
 
 	private Vector2 endPoint;
@@ -11,6 +13,8 @@ public class Movement : MonoBehaviour {
 	private float groundRadius = 0.07f; // abstract height above a collider where players can be considered "on the ground"
 	public LayerMask groundType; // what is ground?
 	private float jumpLag; // small wait to avoid being grounded while lifting off
+
+//-----Unity Functions--------------------------------------------------------------------------------------------------------
 
 	// Use this for initialization
 	void Start ()
@@ -84,6 +88,8 @@ public class Movement : MonoBehaviour {
 			rigidbody2D.AddForce( Vector2.right * playerData.GetMOVE_SPEED() );
 		}
 	}
+
+//-----Custom Functions------------------------------------------------------------------------------------------------------
 
 	// Set up the player to dash to the left
 	private void DashLeft()
