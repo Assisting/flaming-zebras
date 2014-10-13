@@ -10,7 +10,7 @@ public class PlayerData : MonoBehaviour
 
 	private struct MoveLevel
 	{
-		public static float[] moveSpeed = new float[3] { 10f, 12f, 14f };
+		public static float[] moveSpeed = new float[3] { 20f, 25f, 30f };
 		public static float[] maxSpeed = new float[3] { 8f, 10f, 12f };
 	}
 

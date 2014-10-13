@@ -50,6 +50,14 @@ public class Movement : MonoBehaviour {
 			currentVector.y = 0;
 			rigidbody2D.velocity = currentVector;
 		}
+
+		//allow stopping when not attempting motion
+		if ( Input.GetButtonUp("Right") )
+			collider2D.sharedMaterial.friction = 0.75f;
+
+		//allow stopping when not attempting motion
+		if ( Input.GetButtonUp("Left") )
+			collider2D.sharedMaterial.friction = 0.75f;
 	}
 
 	// FixedUpdate is called once per physics tick
@@ -64,6 +72,7 @@ public class Movement : MonoBehaviour {
 		if ( Input.GetButton("Left") && rigidbody2D.velocity.x > -playerData.GetMAX_SPEED() )
 		{
 			playerData.SetMovingRight(false);
+			collider2D.sharedMaterial.friction = 0f;
 			rigidbody2D.AddForce( -Vector2.right * playerData.GetMOVE_SPEED() );
 		}
 
@@ -71,6 +80,7 @@ public class Movement : MonoBehaviour {
 		if ( Input.GetButton("Right") && rigidbody2D.velocity.x < playerData.GetMAX_SPEED() )
 		{
 			playerData.SetMovingRight(true);
+			collider2D.sharedMaterial.friction = 0f;
 			rigidbody2D.AddForce( Vector2.right * playerData.GetMOVE_SPEED() );
 		}
 	}
@@ -105,14 +115,16 @@ public class Movement : MonoBehaviour {
 	{
 		playerData.RemoveDashMarker();
 		playerData.SetDashing(true);
-		rigidbody2D.isKinematic = true;
+		rigidbody2D.gravityScale = 0;
+		rigidbody2D.velocity = Vector2.zero;
 	}
 
 	//turns on physics for return to normality after a dash
 	private void StopDash ()
 	{
 		playerData.SetDashing(false);
-		rigidbody2D.isKinematic = false;
+		rigidbody2D.velocity = Vector2.zero;
+		rigidbody2D.gravityScale = 1;
 	}
 
 	//run in FixedUpdate() to update grounded status, animation, current platform etc.
@@ -122,5 +134,12 @@ public class Movement : MonoBehaviour {
 		playerData.SetGrounded(floorType != null);
 		if ( playerData.IsGrounded() && jumpLag < Time.time)
 			playerData.ResetJumpCounter();
+	}
+
+	//how to handle various collisions
+	void OnCollisionEnter2D (Collision2D other)
+	{
+		if (playerData.IsDashing() && other.gameObject.tag == "Wall")
+			StopDash();
 	}
 }
