@@ -5,7 +5,10 @@ public class Weapon : MonoBehaviour {
 
 //-----Structs and Enums----------------------------------------------------------------------------------------------------
 
-	public enum WeaponType { None, Bullet, Missle, Bomb, Laser };
+	public enum WeaponType { None, Bullet, Missle, Bomb, Laser, Melee };
+
+	public static float[] bulletReload = new float[3] { 0.4f, 1.8f, 0.8f };
+	public static int[] bulletClip = new int[3] { 1, 5, 12};
 
 //-----Attribute Variables---------------------------------------------------------------------------------------------------
 
@@ -13,29 +16,86 @@ public class Weapon : MonoBehaviour {
 	public Rigidbody2D bullet;
 
 	private PlayerData playerData;
-	private Movement movement;
 
-	private float BULLET_VELOCITY = 15f;
+	private float BULLET_VELOCITY = 15f; // speed of bullets in-game
+
+	private float RELOAD_WAIT = 0f; // time to wait in between clip regeneration
+	private float reloadTimer; // timestamp for clip regeneration
+	private int MAX_BULLETS;
+	private int BULLETS_FIRED = 0;
 
 //-----Unity Functions--------------------------------------------------------------------------------------------------------
+
+	void Awake ()
+	{
+		playerData = GetComponent<PlayerData>();
+	}
 
 	// Use this for initialization
 	void Start ()
 	{
-		playerData = GetComponent<PlayerData>();
-		movement = GetComponent<Movement>();
 	}
 
 	// Update is called once per frame
 	void Update ()
 	{
-		if ( Input.GetButton("Fire1") )
+		if (reloadTimer <= Time.time)
+			BULLETS_FIRED = 0;
+
+		if (Input.GetButton("Fire1"))
 			FireWeapon();
+	}
+
+//-----Custom Functions------------------------------------------------------------------------------------------------------
+
+	public void UpdateLevel()
+	{			
+		int wepLevel = playerData.GetWeaponLevel();
+	
+		switch ( playerData.GetWeaponType() )
+		{
+			case WeaponType.Bullet :
+			{
+				RELOAD_WAIT = bulletReload[wepLevel - 1];
+				MAX_BULLETS = bulletClip[wepLevel - 1];
+				return;
+			}
+
+			case WeaponType.Missle :
+			{
+				
+				return;
+			}
+				
+			case WeaponType.Bomb :
+			{
+				
+				return;
+			}
+
+			case WeaponType.Laser :
+			{
+				
+				return;
+			}
+
+			case WeaponType.Melee :
+			{
+				
+				return;
+			}
+		}
 	}
 
 	private void FireWeapon()
 	{
-		switch (playerData.GetWeaponType())
+		if (BULLETS_FIRED >= MAX_BULLETS)
+			return;
+			
+		BULLETS_FIRED ++;
+		reloadTimer = Time.time + RELOAD_WAIT;
+		
+		switch ( playerData.GetWeaponType() )
 		{
 			case WeaponType.Bullet :
 			{
@@ -60,19 +120,34 @@ public class Weapon : MonoBehaviour {
 				FireLaser();
 				return;
 			}
+
+			case WeaponType.Melee :
+			{
+				SwingMelee();
+				return;
+			}
 		}
 	}
 
-//-----Custom Functions------------------------------------------------------------------------------------------------------
-
 	private void FireBullet()
 	{
-
+		float rotateDegrees = 0f;
+		bool shotgun = 3 == playerData.GetWeaponLevel();
+	
 		Rigidbody2D newBullet = Instantiate (bullet, muzzle.position, muzzle.rotation) as Rigidbody2D;
+		if (shotgun)
+		{
+			rotateDegrees = Random.Range(-20f, 20f);
+			newBullet.transform.rotation = Quaternion.Euler(0f, 0f, rotateDegrees);
+		}
+
 		if ( playerData.IsMovingRight() )
-			newBullet.velocity = Vector2.right * BULLET_VELOCITY;
+			newBullet.velocity = newBullet.transform.right * BULLET_VELOCITY;
 		else
-			newBullet.velocity = -Vector2.right * BULLET_VELOCITY;
+			newBullet.velocity = -newBullet.transform.right * BULLET_VELOCITY;
+
+		if (shotgun)
+			FireWeapon();
 	}
 
 	private void FireMissle()
@@ -86,6 +161,11 @@ public class Weapon : MonoBehaviour {
 	}
 
 	private void FireLaser()
+	{
+		
+	}
+
+	private void SwingMelee()
 	{
 		
 	}

@@ -20,6 +20,9 @@ public class PlayerData : MonoBehaviour
 
 //-----Attribute Variables---------------------------------------------------------------------------------------------------
 
+	//Interfaces
+	private Weapon weapon;
+
 	//Levels
 	private int MOVE_LEVEL;
 	private int JUMP_LEVEL;
@@ -53,9 +56,14 @@ public class PlayerData : MonoBehaviour
 
 //-----Unity Functions--------------------------------------------------------------------------------------------------------
 
+	void Awake ()
+	{
+		weapon = GetComponent<Weapon>();
+	}
+
 	// Use this for initialization
 	void Start ()
-	{
+	{	
 		LevelUp(Attribute.Move, 1);
 
 		MOVING_RIGHT = true;
@@ -69,7 +77,7 @@ public class PlayerData : MonoBehaviour
 		dashCooldown2 = USEABLE;
 
 		LevelUp(Attribute.WeaponType, Weapon.WeaponType.Bullet);
-		LevelUp(Attribute.WeaponLevel, 1);
+		LevelUp(Attribute.WeaponLevel, 3);
 
 		moneyAmount = 1000;
 	}
@@ -104,6 +112,7 @@ public class PlayerData : MonoBehaviour
 			case Attribute.WeaponLevel :
 			{
 				WEAPON_LEVEL = level;
+				weapon.UpdateLevel();
 				return;
 			}
 
