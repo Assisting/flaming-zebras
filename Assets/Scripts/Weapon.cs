@@ -8,7 +8,7 @@ public class Weapon : MonoBehaviour {
 	public enum WeaponType { None, Bullet, Missle, Bomb, Laser, Melee };
 
 	public static float[] bulletReload = new float[3] { 0.4f, 1.8f, 0.8f };
-	public static int[] bulletClip = new int[3] { 1, 5, 12};
+	public static int[] bulletClip = new int[3] { 1, 5, 8};
 
 //-----Attribute Variables---------------------------------------------------------------------------------------------------
 
@@ -137,7 +137,7 @@ public class Weapon : MonoBehaviour {
 		Rigidbody2D newBullet = Instantiate (bullet, muzzle.position, muzzle.rotation) as Rigidbody2D;
 		if (shotgun)
 		{
-			rotateDegrees = Random.Range(-20f, 20f);
+			rotateDegrees = Random.Range(-10f, 10f);
 			newBullet.transform.rotation = Quaternion.Euler(0f, 0f, rotateDegrees);
 		}
 
