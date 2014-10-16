@@ -76,8 +76,8 @@ public class PlayerData : MonoBehaviour
 		dashCooldown1 = USEABLE;
 		dashCooldown2 = USEABLE;
 
-		LevelUp(Attribute.WeaponType, Weapon.WeaponType.Bullet);
-		LevelUp(Attribute.WeaponLevel, 3);
+		LevelUp(Attribute.WeaponType, Weapon.WeaponType.Laser);
+		LevelUp(Attribute.WeaponLevel, 1);
 
 		moneyAmount = 1000;
 	}

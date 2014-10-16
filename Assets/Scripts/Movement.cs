@@ -62,6 +62,9 @@ public class Movement : MonoBehaviour {
 		//allow stopping when not attempting motion
 		if ( Input.GetButtonUp("Left") )
 			collider2D.sharedMaterial.friction = 0.75f;
+
+		if ( rigidbody2D.velocity.x > 0 && !playerData.IsMovingRight() ) Flip();
+		if ( rigidbody2D.velocity.x < 0 && playerData.IsMovingRight() ) Flip();
 	}
 
 	// FixedUpdate is called once per physics tick
@@ -140,6 +143,14 @@ public class Movement : MonoBehaviour {
 		playerData.SetGrounded(floorType != null);
 		if ( playerData.IsGrounded() && jumpLag < Time.time)
 			playerData.ResetJumpCounter();
+	}
+
+	//flip player left/right for direction changes
+	void Flip () {
+		playerData.SetMovingRight( !playerData.IsMovingRight() );
+		Vector3 currentScale = transform.localScale;
+		currentScale.x *= -1;
+		transform.localScale = currentScale;
 	}
 
 	//how to handle various collisions

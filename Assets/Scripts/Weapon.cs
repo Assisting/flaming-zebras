@@ -7,17 +7,21 @@ public class Weapon : MonoBehaviour {
 
 	public enum WeaponType { None, Bullet, Missle, Bomb, Laser, Melee };
 
-	public static float[] bulletReload = new float[3] { 0.4f, 1.8f, 0.8f };
-	public static int[] bulletClip = new int[3] { 1, 5, 8};
+	public static float[] bulletReloads = new float[3] { 0.4f, 1.8f, 0.8f };
+	public static int[] bulletClips = new int[3] { 1, 5, 8};
+
+	public static float[] laserFades = new float[3] { 0.1f, 0.4f, 0.3f};
 
 //-----Attribute Variables---------------------------------------------------------------------------------------------------
 
 	public Transform muzzle;
 	public Rigidbody2D bullet;
+	public LineRenderer laser;
 
 	private PlayerData playerData;
 
 	private float BULLET_VELOCITY = 15f; // speed of bullets in-game
+	private float LASER_FADE;
 
 	private float RELOAD_WAIT = 0f; // time to wait in between clip regeneration
 	private float reloadTimer; // timestamp for clip regeneration
@@ -56,8 +60,8 @@ public class Weapon : MonoBehaviour {
 		{
 			case WeaponType.Bullet :
 			{
-				RELOAD_WAIT = bulletReload[wepLevel - 1];
-				MAX_BULLETS = bulletClip[wepLevel - 1];
+				RELOAD_WAIT = bulletReloads[wepLevel - 1];
+				MAX_BULLETS = bulletClips[wepLevel - 1];
 				return;
 			}
 
@@ -75,7 +79,9 @@ public class Weapon : MonoBehaviour {
 
 			case WeaponType.Laser :
 			{
-				
+				RELOAD_WAIT = 2.1f;
+				MAX_BULLETS = 1;
+				LASER_FADE = laserFades[wepLevel-1];
 				return;
 			}
 
@@ -162,7 +168,19 @@ public class Weapon : MonoBehaviour {
 
 	private void FireLaser()
 	{
-		
+		LineRenderer newLaser = Instantiate(laser) as LineRenderer;
+		Destroy(newLaser.gameObject, LASER_FADE);
+		newLaser.SetPosition(0, muzzle.position);
+		if ( playerData.IsMovingRight() )
+		{
+			RaycastHit2D hitPoint = Physics2D.Raycast(muzzle.position, Vector2.right);
+			newLaser.SetPosition( 1, new Vector3(muzzle.position.x + hitPoint.distance, muzzle.position.y, muzzle.position.z) );
+		}
+		else
+		{
+			RaycastHit2D hitPoint = Physics2D.Raycast(muzzle.position, -Vector2.right);
+			newLaser.SetPosition( 1, new Vector3(muzzle.position.x - hitPoint.distance, muzzle.position.y, muzzle.position.z) );
+		}
 	}
 
 	private void SwingMelee()
