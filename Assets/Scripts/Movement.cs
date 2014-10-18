@@ -7,95 +7,98 @@ public class Movement : MonoBehaviour {
 
 	private PlayerData playerData;
 
-	private Vector2 endPoint;
+	private Vector2 endPoint; //endpoint of any particular dash
 
 	public Transform groundCheck; // location of object from which to raycast toward the ground
-	private float groundRadius = 0.07f; // abstract height above a collider where players can be considered "on the ground"
 	public LayerMask groundType; // what is ground?
+
+	private float groundRadius = 0.07f; // abstract height above a collider where players can be considered "on the ground"
 	private float jumpLag; // small wait to avoid being grounded while lifting off
+	public bool wallLeft;
+	public bool wallRight;
 
 //-----Unity Functions--------------------------------------------------------------------------------------------------------
 
-	// Use this for initialization
-	void Start ()
+	void Awake()
 	{
 		playerData = GetComponent<PlayerData>();
+	}
+
+	// Use this for initialization
+	void Start ()
+	{	
 	}
 
 	// Update is called once per frame (used for non-physics and detecting single presses of buttons)
 	void Update()
 	{
-		//jump
-		if ( Input.GetButtonDown("Jump") && playerData.CanJump() )
+
+		if ( !playerData.IsDashing() ) //only bother checking for jumps if player isn't in a dash
 		{
-			playerData.IncrementJumpCounter();
-			if ( playerData.IsGrounded() ) //ground jump
+			//jump
+			if ( Input.GetButtonDown("Jump") && playerData.CanJump() )
 			{
-				jumpLag = Time.time + 0.02f;
-				playerData.SetGrounded(false);
-				rigidbody2D.AddForce( Vector2.up * playerData.GetJUMP_FORCE() );
+				playerData.IncrementJumpCounter();
+				if ( playerData.IsGrounded() ) //ground jump
+				{
+					jumpLag = Time.time + 0.02f; //wait one frame before allowing the ground to reset jump counter
+					playerData.SetGrounded(false);
+					rigidbody2D.AddForce( Vector2.up * playerData.GetJUMP_FORCE() );
+				}
+				else //air jump
+					rigidbody2D.velocity = Vector2.up * 3f;
 			}
-			else //air jump
-				rigidbody2D.velocity = Vector2.up * 3f;
+
+			//let go of jump
+			if ( Input.GetButtonUp("Jump") && rigidbody2D.velocity.y >= 0)
+			{
+				Vector2 currentVector = rigidbody2D.velocity;
+				currentVector.y = 0;
+				rigidbody2D.velocity = currentVector;
+			}
 		}
 
 		//dash right
-		if ( Input.GetButtonDown("RDash") && playerData.CanDash() )
+		if ( Input.GetButtonDown("RDash") && playerData.CanDash() && !wallRight)
 			DashRight();
 
 		//dash left
-		if ( Input.GetButtonDown("LDash") && playerData.CanDash() )
+		if ( Input.GetButtonDown("LDash") && playerData.CanDash() && !wallLeft)
 			DashLeft();
 
-		//let go of jump
-		if ( Input.GetButtonUp("Jump") && rigidbody2D.velocity.y >= 0)
-		{
-			Vector2 currentVector = rigidbody2D.velocity;
-			currentVector.y = 0;
-			rigidbody2D.velocity = currentVector;
-		}
-
-		//allow stopping when not attempting motion
-		if ( Input.GetButtonUp("Right") )
-			collider2D.sharedMaterial.friction = 0.75f;
-
-		//allow stopping when not attempting motion
-		if ( Input.GetButtonUp("Left") )
-			collider2D.sharedMaterial.friction = 0.75f;
-
-		if ( rigidbody2D.velocity.x > 0 && !playerData.IsMovingRight() ) Flip();
-		if ( rigidbody2D.velocity.x < 0 && playerData.IsMovingRight() ) Flip();
+		//if ( rigidbody2D.velocity.x > 0f && !playerData.IsMovingRight() ) Flip();
+		//if ( rigidbody2D.velocity.x < 0f && playerData.IsMovingRight() ) Flip();
 	}
 
 	// FixedUpdate is called once per physics tick
 	void FixedUpdate ()
 	{
+		GroundCheck();
+	
 		if ( playerData.IsDashing() )
 			continueDash();
-
-		GroundCheck();
-
-		//move left
-		if ( Input.GetButton("Left") && rigidbody2D.velocity.x > -playerData.GetMAX_SPEED() )
+		else //don't do any movement unless we are not dashing
 		{
-			playerData.SetMovingRight(false);
-			collider2D.sharedMaterial.friction = 0f;
-			rigidbody2D.AddForce( -Vector2.right * playerData.GetMOVE_SPEED() );
-		}
+			//move left
+			if ( Input.GetButton("Left") && !wallLeft && rigidbody2D.velocity.x > -playerData.GetMAX_SPEED() )
+			{
+				playerData.SetMovingRight(false);
+				rigidbody2D.AddForce( -Vector2.right * playerData.GetMOVE_SPEED() );
+			}
 
-		//move right
-		if ( Input.GetButton("Right") && rigidbody2D.velocity.x < playerData.GetMAX_SPEED() )
-		{
-			playerData.SetMovingRight(true);
-			collider2D.sharedMaterial.friction = 0f;
-			rigidbody2D.AddForce( Vector2.right * playerData.GetMOVE_SPEED() );
+			//move right
+			if ( Input.GetButton("Right") && !wallRight && rigidbody2D.velocity.x < playerData.GetMAX_SPEED() )
+			{
+				playerData.SetMovingRight(true);
+				rigidbody2D.AddForce( Vector2.right * playerData.GetMOVE_SPEED() );
+			}
 		}
 	}
 
 //-----Custom Functions------------------------------------------------------------------------------------------------------
 
 	// Set up the player to dash to the left
-	private void DashLeft()
+	public void DashLeft()
 	{
 		StartDash();
 		endPoint = new Vector2(transform.position.x - 5, transform.position.y);
@@ -120,7 +123,7 @@ public class Movement : MonoBehaviour {
 	}
 
 	//turns off physics so that an air-dash can begin
-	private void StartDash ()
+	public void StartDash ()
 	{
 		playerData.RemoveDashMarker();
 		playerData.SetDashing(true);
@@ -129,7 +132,7 @@ public class Movement : MonoBehaviour {
 	}
 
 	//turns on physics for return to normality after a dash
-	private void StopDash ()
+	public void StopDash ()
 	{
 		playerData.SetDashing(false);
 		rigidbody2D.velocity = Vector2.zero;
@@ -141,8 +144,11 @@ public class Movement : MonoBehaviour {
 	{
 		Collider2D floorType = Physics2D.Raycast(groundCheck.position, -Vector2.up, groundRadius, groundType).collider;
 		playerData.SetGrounded(floorType != null);
-		if ( playerData.IsGrounded() && jumpLag < Time.time)
-			playerData.ResetJumpCounter();
+		if ( playerData.IsGrounded())
+		{
+			if (jumpLag < Time.time)
+				playerData.ResetJumpCounter();
+		}
 	}
 
 	//flip player left/right for direction changes
@@ -151,12 +157,5 @@ public class Movement : MonoBehaviour {
 		Vector3 currentScale = transform.localScale;
 		currentScale.x *= -1;
 		transform.localScale = currentScale;
-	}
-
-	//how to handle various collisions
-	void OnCollisionEnter2D (Collision2D other)
-	{
-		if (playerData.IsDashing() && other.gameObject.tag == "Wall")
-			StopDash();
 	}
 }
