@@ -207,6 +207,12 @@ public class Shop : MonoBehaviour
 				MoneyInfo.LevelUp (PlayerData.Attribute.WeaponType, Weapon.WeaponType.Bomb);
 				print ("Buy Successful! " + Player.name + " has $" + MoneyInfo.GetMoney() + " after buying " + ShopType);
 			}
+			else if(ShopType=="Missile")
+			{
+				MoneyInfo.ChangeMoney (-ShopPrice);
+				MoneyInfo.LevelUp (PlayerData.Attribute.WeaponType, Weapon.WeaponType.Missile);
+				print ("Buy Successful! " + Player.name + " has $" + MoneyInfo.GetMoney() + " after buying " + ShopType);
+			}
 			else
 			{
 				print ("Error," + " Shop set to " + ShopType);

@@ -82,6 +82,15 @@ public class PlayerData : MonoBehaviour
 		moneyAmount = 1000;
 	}
 
+	void Update ()
+	{
+		if (rigidbody2D.velocity.x >= 0f)
+			MOVING_RIGHT = true;
+		else
+			MOVING_RIGHT = false;
+	}
+
+
 //-----Custom Functions------------------------------------------------------------------------------------------------------
 
 	// functions to automatically call-up and set player stats to pre-defined level ranges
@@ -212,11 +221,6 @@ public class PlayerData : MonoBehaviour
 	public bool IsMovingRight()
 	{
 		return MOVING_RIGHT;
-	}
-
-	public void SetMovingRight(bool value)
-	{
-		MOVING_RIGHT = value;
 	}
 
 	public float GetJUMP_FORCE ()
