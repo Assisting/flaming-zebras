@@ -65,9 +65,6 @@ public class Movement : MonoBehaviour {
 		//dash left
 		if ( Input.GetButtonDown("LDash") && playerData.CanDash() && !wallLeft)
 			DashLeft();
-
-		//if ( rigidbody2D.velocity.x > 0f && !playerData.IsMovingRight() ) Flip();
-		//if ( rigidbody2D.velocity.x < 0f && playerData.IsMovingRight() ) Flip();
 	}
 
 	// FixedUpdate is called once per physics tick
