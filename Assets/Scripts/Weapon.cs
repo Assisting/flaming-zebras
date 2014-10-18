@@ -14,7 +14,9 @@ public class Weapon : MonoBehaviour {
 
 //-----Attribute Variables---------------------------------------------------------------------------------------------------
 
-	public Transform muzzle;
+	public Transform leftMuzzle;
+	public Transform rightMuzzle;
+	private Transform muzzle;
 	public Rigidbody2D bullet;
 	public LineRenderer laser;
 
@@ -100,6 +102,11 @@ public class Weapon : MonoBehaviour {
 			
 		BULLETS_FIRED ++;
 		reloadTimer = Time.time + RELOAD_WAIT;
+
+		if ( playerData.IsMovingRight() )
+			muzzle = rightMuzzle;
+		else
+			muzzle = leftMuzzle;
 		
 		switch ( playerData.GetWeaponType() )
 		{
