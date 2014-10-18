@@ -76,7 +76,7 @@ public class PlayerData : MonoBehaviour
 		dashCooldown1 = USEABLE;
 		dashCooldown2 = USEABLE;
 
-		LevelUp(Attribute.WeaponType, Weapon.WeaponType.Melee);
+		LevelUp(Attribute.WeaponType, Weapon.WeaponType.Bullet);
 		LevelUp(Attribute.WeaponLevel, 1);
 
 		moneyAmount = 1000;
@@ -84,9 +84,9 @@ public class PlayerData : MonoBehaviour
 
 	void Update ()
 	{
-		if (rigidbody2D.velocity.x > 0f)
+		if (rigidbody2D.velocity.x >= 0f)
 			MOVING_RIGHT = true;
-		else if(rigidbody2D.velocity.x < 0f)
+		else
 			MOVING_RIGHT = false;
 	}
 
