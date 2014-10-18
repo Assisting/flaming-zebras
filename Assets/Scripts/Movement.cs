@@ -24,11 +24,6 @@ public class Movement : MonoBehaviour {
 		playerData = GetComponent<PlayerData>();
 	}
 
-	// Use this for initialization
-	void Start ()
-	{	
-	}
-
 	// Update is called once per frame (used for non-physics and detecting single presses of buttons)
 	void Update()
 	{
@@ -79,14 +74,12 @@ public class Movement : MonoBehaviour {
 			//move left
 			if ( Input.GetButton("Left") && !wallLeft && rigidbody2D.velocity.x > -playerData.GetMAX_SPEED() )
 			{
-				playerData.SetMovingRight(false);
 				rigidbody2D.AddForce( -Vector2.right * playerData.GetMOVE_SPEED() );
 			}
 
 			//move right
 			if ( Input.GetButton("Right") && !wallRight && rigidbody2D.velocity.x < playerData.GetMAX_SPEED() )
 			{
-				playerData.SetMovingRight(true);
 				rigidbody2D.AddForce( Vector2.right * playerData.GetMOVE_SPEED() );
 			}
 		}
@@ -146,13 +139,5 @@ public class Movement : MonoBehaviour {
 			if (jumpLag < Time.time)
 				playerData.ResetJumpCounter();
 		}
-	}
-
-	//flip player left/right for direction changes
-	void Flip () {
-		playerData.SetMovingRight( !playerData.IsMovingRight() );
-		Vector3 currentScale = transform.localScale;
-		currentScale.x *= -1;
-		transform.localScale = currentScale;
 	}
 }
