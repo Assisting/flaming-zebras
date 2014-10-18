@@ -30,15 +30,19 @@ public class Shop : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
+		//Sets inital settings for shop..
 		IsPlayerGreenInShop = false;
 		IsPlayerBlueInShop = false;
 		IsPlayerYellowInShop = false;
 		IsPlayerRedInShop = false;
 
+		//Grabs player's information for reference later...
 		PlayerGreen = GameObject.Find ("Player");
 		PlayerBlue = GameObject.Find ("Blue_Char");
 		PlayerYellow = GameObject.Find ("Yellow_Char");
 		PlayerRed = GameObject.Find ("Red_Char");
+
+		//Sets the shop type...
 		if(this.gameObject.name == "MoveShop")
 		{
 			ShopPrice=150;//Arbritary value for now.
@@ -53,6 +57,36 @@ public class Shop : MonoBehaviour
 		{
 			ShopPrice=500;//Arbritary value for now.
 			ShopType="Jump";
+		}
+		else if(this.gameObject.name == "LaserShop")
+		{
+			ShopPrice=200;//Arbritary value for now.
+			ShopType="Laser";
+		}
+		else if(this.gameObject.name == "MissileShop")
+		{
+			ShopPrice=250;//Arbritary value for now.
+			ShopType="Missile";
+		}
+		else if(this.gameObject.name == "GunShop")
+		{
+			ShopPrice=100;//Arbritary value for now.
+			ShopType="Gun";
+		}
+		else if(this.gameObject.name == "BombShop")
+		{
+			ShopPrice=100;//Arbritary value for now.
+			ShopType="Bomb";
+		}
+		else if(this.gameObject.name == "BombShop")
+		{
+			ShopPrice=100;//Arbritary value for now.
+			ShopType="Bomb";
+		}
+		else if(this.gameObject.name == "WUpgradeShop")
+		{
+			ShopPrice=400;//Arbritary value for now.
+			ShopType="WUpgrade";
 		}
 		else
 		{
@@ -147,6 +181,30 @@ public class Shop : MonoBehaviour
 			{
 				MoneyInfo.ChangeMoney (-ShopPrice);
 				MoneyInfo.LevelUp (PlayerData.Attribute.Jump, MoneyInfo.GetJumpLevel() + 1);
+				print ("Buy Successful! " + Player.name + " has $" + MoneyInfo.GetMoney() + " after buying " + ShopType);
+			}
+			else if(ShopType=="WUpgrade")
+			{
+				MoneyInfo.ChangeMoney (-ShopPrice);
+				MoneyInfo.LevelUp (PlayerData.Attribute.WeaponLevel, MoneyInfo.GetWeaponLevel() + 1);
+				print ("Buy Successful! " + Player.name + " has $" + MoneyInfo.GetMoney() + " after buying " + ShopType);
+			}
+			else if(ShopType=="Laser")
+			{
+				MoneyInfo.ChangeMoney (-ShopPrice);
+				MoneyInfo.LevelUp (PlayerData.Attribute.WeaponType, Weapon.WeaponType.Laser);
+				print ("Buy Successful! " + Player.name + " has $" + MoneyInfo.GetMoney() + " after buying " + ShopType);
+			}
+			else if(ShopType=="Gun")
+			{
+				MoneyInfo.ChangeMoney (-ShopPrice);
+				MoneyInfo.LevelUp (PlayerData.Attribute.WeaponType, Weapon.WeaponType.Bullet);
+				print ("Buy Successful! " + Player.name + " has $" + MoneyInfo.GetMoney() + " after buying " + ShopType);
+			}
+			else if(ShopType=="Bomb")
+			{
+				MoneyInfo.ChangeMoney (-ShopPrice);
+				MoneyInfo.LevelUp (PlayerData.Attribute.WeaponType, Weapon.WeaponType.Bomb);
 				print ("Buy Successful! " + Player.name + " has $" + MoneyInfo.GetMoney() + " after buying " + ShopType);
 			}
 			else
