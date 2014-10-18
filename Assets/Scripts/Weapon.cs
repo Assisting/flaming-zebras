@@ -17,17 +17,21 @@ public class Weapon : MonoBehaviour {
 	public Transform leftMuzzle;
 	public Transform rightMuzzle;
 	private Transform muzzle;
+	public LayerMask projectileTargets;
 	public Rigidbody2D bullet;
 	public LineRenderer laser;
 
 	private PlayerData playerData;
 
 	private float BULLET_VELOCITY = 15f; // speed of bullets in-game
-	private float LASER_FADE;
+	//private float BULLET_DAMAGE = 12f; //damage per bullet
+
+	private float LASER_FADE; //time for laser to disappear
+	//private float LASER_DAMAGE = 26f; //damage per laser burst
 
 	private float RELOAD_WAIT = 0f; // time to wait in between clip regeneration
 	private float reloadTimer; // timestamp for clip regeneration
-	private int MAX_BULLETS;
+	private int MAX_BULLETS; //leveled maximum of shots between reload-waits
 	private int BULLETS_FIRED = 0;
 
 //-----Unity Functions--------------------------------------------------------------------------------------------------------
@@ -178,16 +182,41 @@ public class Weapon : MonoBehaviour {
 		LineRenderer newLaser = Instantiate(laser) as LineRenderer;
 		Destroy(newLaser.gameObject, LASER_FADE);
 		newLaser.SetPosition(0, muzzle.position);
+		RaycastHit2D[] hitPoints;
+		
 		if ( playerData.IsMovingRight() )
-		{
-			RaycastHit2D hitPoint = Physics2D.Raycast(muzzle.position, Vector2.right);
-			newLaser.SetPosition( 1, new Vector3(muzzle.position.x + hitPoint.distance, muzzle.position.y, muzzle.position.z) );
-		}
+			hitPoints = Physics2D.RaycastAll(muzzle.position, Vector2.right, projectileTargets);
 		else
+			hitPoints = Physics2D.RaycastAll(muzzle.position, -Vector2.right, projectileTargets);
+
+		int i = 0;
+		switch ( playerData.GetWeaponLevel() )
 		{
-			RaycastHit2D hitPoint = Physics2D.Raycast(muzzle.position, -Vector2.right);
-			newLaser.SetPosition( 1, new Vector3(muzzle.position.x - hitPoint.distance, muzzle.position.y, muzzle.position.z) );
+			case 1 :
+			{
+				break;
+			}
+			case 2 :
+			{
+				break;
+			}
+			case 3 :
+			{
+				while (hitPoints[i].transform.tag != "Wall")
+				{
+					//TODO damage/burn players
+					i ++;
+				}
+				
+				break;
+			}
 		}
+
+		if ( playerData.IsMovingRight() ) //set laser to appropriate endpoint
+			newLaser.SetPosition( 1, new Vector3(muzzle.position.x + hitPoints[i].distance, muzzle.position.y, muzzle.position.z) );
+		else
+			newLaser.SetPosition( 1, new Vector3(muzzle.position.x - hitPoints[0].distance, muzzle.position.y, muzzle.position.z) );
+			
 	}
 
 	private void SwingMelee()

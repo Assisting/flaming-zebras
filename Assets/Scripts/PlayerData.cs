@@ -77,9 +77,17 @@ public class PlayerData : MonoBehaviour
 		dashCooldown2 = USEABLE;
 
 		LevelUp(Attribute.WeaponType, Weapon.WeaponType.Laser);
-		LevelUp(Attribute.WeaponLevel, 1);
+		LevelUp(Attribute.WeaponLevel, 3);
 
 		moneyAmount = 1000;
+	}
+
+	void Update ()
+	{
+		if (rigidbody2D.velocity.x >= 0f)
+			MOVING_RIGHT = true;
+		else
+			MOVING_RIGHT = false;
 	}
 
 //-----Custom Functions------------------------------------------------------------------------------------------------------
@@ -212,11 +220,6 @@ public class PlayerData : MonoBehaviour
 	public bool IsMovingRight()
 	{
 		return MOVING_RIGHT;
-	}
-
-	public void SetMovingRight(bool value)
-	{
-		MOVING_RIGHT = value;
 	}
 
 	public float GetJUMP_FORCE ()
