@@ -41,8 +41,8 @@ public class Weapon : MonoBehaviour {
 	void Awake ()
 	{
 		playerData = GetComponent<PlayerData>();
-		rightSword = transform.Find("RightSwordBox");
-		leftSword = transform.Find("LeftSwordBox");
+		rightMelee = transform.Find("RightSwordBox");
+		leftMelee = transform.Find("LeftSwordBox");
 	}
 
 	// Use this for initialization
@@ -226,8 +226,8 @@ public class Weapon : MonoBehaviour {
 	private void SwingMelee()
 	{
 		if ( playerData.IsMovingRight() )
-			rightSword.collider2D.enabled = true;
+			rightMelee.collider2D.enabled = true;
 		else
-			leftSword.collider2D.enabled = true;
+			leftMelee.collider2D.enabled = true;
 	}
 }
