@@ -5,7 +5,7 @@ public class Weapon : MonoBehaviour {
 
 //-----Structs and Enums----------------------------------------------------------------------------------------------------
 
-	public enum WeaponType { None, Bullet, Missle, Bomb, Laser, Melee };
+	public enum WeaponType { None, Bullet, Missile, Bomb, Laser, Melee };
 
 	public static float[] bulletReloads = new float[3] { 0.4f, 1.8f, 0.8f };
 	public static int[] bulletClips = new int[3] { 1, 5, 8};
@@ -71,7 +71,7 @@ public class Weapon : MonoBehaviour {
 				return;
 			}
 
-			case WeaponType.Missle :
+			case WeaponType.Missile :
 			{
 				
 				return;
@@ -120,9 +120,9 @@ public class Weapon : MonoBehaviour {
 				return;
 			}
 
-			case WeaponType.Missle :
+			case WeaponType.Missile :
 			{
-				FireMissle();
+				FireMissile();
 				return;
 			}
 				
@@ -167,7 +167,7 @@ public class Weapon : MonoBehaviour {
 			FireWeapon();
 	}
 
-	private void FireMissle()
+	private void FireMissile()
 	{
 		
 	}
