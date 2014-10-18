@@ -16,12 +16,14 @@ public class Weapon : MonoBehaviour {
 
 	public Transform leftMuzzle;
 	public Transform rightMuzzle;
-	private Transform muzzle;
 	public LayerMask projectileTargets;
 	public Rigidbody2D bullet;
 	public LineRenderer laser;
 
 	private PlayerData playerData;
+	private Transform rightMelee;
+	private Transform leftMelee;
+	private Transform muzzle;
 
 	private float BULLET_VELOCITY = 15f; // speed of bullets in-game
 	//private float BULLET_DAMAGE = 12f; //damage per bullet
@@ -39,6 +41,8 @@ public class Weapon : MonoBehaviour {
 	void Awake ()
 	{
 		playerData = GetComponent<PlayerData>();
+		rightSword = transform.Find("RightSwordBox");
+		leftSword = transform.Find("LeftSwordBox");
 	}
 
 	// Use this for initialization
@@ -93,7 +97,8 @@ public class Weapon : MonoBehaviour {
 
 			case WeaponType.Melee :
 			{
-				
+				RELOAD_WAIT = 0.6f;
+				MAX_BULLETS = 1;
 				return;
 			}
 		}
@@ -220,6 +225,9 @@ public class Weapon : MonoBehaviour {
 
 	private void SwingMelee()
 	{
-		
+		if ( playerData.IsMovingRight() )
+			rightSword.collider2D.enabled = true;
+		else
+			leftSword.collider2D.enabled = true;
 	}
 }

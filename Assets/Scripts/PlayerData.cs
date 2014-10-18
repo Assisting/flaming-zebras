@@ -84,9 +84,9 @@ public class PlayerData : MonoBehaviour
 
 	void Update ()
 	{
-		if (rigidbody2D.velocity.x >= 0f)
+		if (rigidbody2D.velocity.x > 0f)
 			MOVING_RIGHT = true;
-		else
+		else if (rigidbody2D.velocity.x < 0f)
 			MOVING_RIGHT = false;
 	}
 
