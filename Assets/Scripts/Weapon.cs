@@ -207,7 +207,6 @@ public class Weapon : MonoBehaviour {
 					//TODO damage/burn players
 					i ++;
 				}
-				
 				break;
 			}
 		}
@@ -215,7 +214,7 @@ public class Weapon : MonoBehaviour {
 		if ( playerData.IsMovingRight() ) //set laser to appropriate endpoint
 			newLaser.SetPosition( 1, new Vector3(muzzle.position.x + hitPoints[i].distance, muzzle.position.y, muzzle.position.z) );
 		else
-			newLaser.SetPosition( 1, new Vector3(muzzle.position.x - hitPoints[0].distance, muzzle.position.y, muzzle.position.z) );
+			newLaser.SetPosition( 1, new Vector3(muzzle.position.x - hitPoints[i].distance, muzzle.position.y, muzzle.position.z) );
 			
 	}
 
