@@ -1,8 +1,8 @@
 fileFormatVersion: 2
-guid: 4672de285aa5e5343b7346f03e3ba83f
+guid: b5faa88cbe14a714e98559c8530593f3
 TextureImporter:
   fileIDToRecycleName:
-    21300000: JumpShop
+    21300000: MissileShop
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -22,13 +22,13 @@ TextureImporter:
   grayScaleToAlpha: 0
   generateCubemap: 0
   seamlessCubemap: 0
-  textureFormat: -2
+  textureFormat: -1
   maxTextureSize: 1024
   textureSettings:
     filterMode: -1
-    aniso: 1
+    aniso: -1
     mipBias: -1
-    wrapMode: 1
+    wrapMode: -1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
