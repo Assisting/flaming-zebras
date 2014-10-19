@@ -25,6 +25,11 @@ public class Actor : MonoBehaviour {
 		LIFE += value;
 	}
 
+	public void Burn(int damage, float duration)
+	{
+		
+	}
+
 	public bool IsMovingRight()
 	{
 		return MOVING_RIGHT;

@@ -22,7 +22,7 @@ public class BombHandler : MonoBehaviour {
 		if (timer < Time.time)
 		{
 			Explode();
-			timer = Time.time + 3f;
+			Destroy(gameObject);
 		}
 	}
 

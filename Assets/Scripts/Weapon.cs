@@ -21,7 +21,7 @@ public class Weapon : MonoBehaviour {
 	public LayerMask projectileTargets;
 	public Rigidbody2D bullet;
 	public LineRenderer laser;
-	public GameObject bomb;
+	public Transform bomb;
 
 	private PlayerData playerData;
 	private Transform muzzle;
@@ -29,7 +29,7 @@ public class Weapon : MonoBehaviour {
 	private float BULLET_VELOCITY = 15f; // speed of bullets in-game
 
 	private float LASER_FADE; //time for laser to disappear
-	//private int LASER_DAMAGE = 26; //damage per laser burst
+	private int LASER_DAMAGE = 26; //damage per laser burst
 
 	private int MELEE_DAMAGE = 60;
 	
@@ -85,7 +85,8 @@ public class Weapon : MonoBehaviour {
 				
 			case WeaponType.Bomb :
 			{
-				
+				RELOAD_WAIT = 1f;
+				MAX_BULLETS = 1;
 				return;
 			}
 
@@ -186,6 +187,8 @@ public class Weapon : MonoBehaviour {
 
 	private void FireLaser()
 	{
+		int laserLevel = playerData.GetWeaponLevel();
+	
 		LineRenderer newLaser = Instantiate(laser) as LineRenderer;
 		Destroy(newLaser.gameObject, LASER_FADE);
 		newLaser.SetPosition(0, muzzle.position);
@@ -197,25 +200,15 @@ public class Weapon : MonoBehaviour {
 			hitTargets = Physics2D.RaycastAll(muzzle.position, -Vector2.right, projectileTargets);
 
 		int i = 0;
-		switch ( playerData.GetWeaponLevel() )
+		while (hitTargets[i].transform.tag != "Wall")
 		{
-			case 1 :
-			{
-				break;
-			}
-			case 2 :
-			{
-				break;
-			}
-			case 3 :
-			{
-				while (hitTargets[i].transform.tag != "Wall")
-				{
-					//TODO damage/burn players
-					i ++;
-				}
-				break;
-			}
+			PlayerData currentTarget = hitTargets[i].transform.GetComponent<PlayerData>();
+			currentTarget.LifeChange(-LASER_DAMAGE);
+			if (laserLevel > 1)
+				//currentTarget.Burn(LASER_BURN_DAMAGE, LASER_BURN_TIME);
+			if (laserLevel < 3)
+				break; //always stop at array cell 0 for level 1-2 lasers
+			i ++;
 		}
 
 		if ( playerData.IsMovingRight() ) //set laser to appropriate endpoint
