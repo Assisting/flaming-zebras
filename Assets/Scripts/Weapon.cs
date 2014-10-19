@@ -16,14 +16,14 @@ public class Weapon : MonoBehaviour {
 
 	public Transform leftMuzzle;
 	public Transform rightMuzzle;
+	public Transform rightMelee;
+	public Transform leftMelee;
 	public LayerMask projectileTargets;
 	public Rigidbody2D bullet;
 	public LineRenderer laser;
 	public GameObject bomb;
 
 	private PlayerData playerData;
-	private Transform rightMelee;
-	private Transform leftMelee;
 	private Transform muzzle;
 
 	private float BULLET_VELOCITY = 15f; // speed of bullets in-game
@@ -32,6 +32,8 @@ public class Weapon : MonoBehaviour {
 	private float LASER_FADE; //time for laser to disappear
 	//private int LASER_DAMAGE = 26; //damage per laser burst
 
+	private int MELEE_DAMAGE = 60;
+	
 	private float RELOAD_WAIT = 0f; // time to wait in between clip regeneration
 	private float reloadTimer; // timestamp for clip regeneration
 	private int MAX_BULLETS; //leveled maximum of shots between reload-waits
@@ -180,7 +182,7 @@ public class Weapon : MonoBehaviour {
 	
 	private void FireBomb()
 	{
-		GameObject newBomb = Instantiate(bomb, muzzle.position, muzzle.rotation) as GameObject;
+		Instantiate(bomb, muzzle.position, muzzle.rotation);
 	}
 
 	private void FireLaser()
@@ -226,9 +228,18 @@ public class Weapon : MonoBehaviour {
 
 	private void SwingMelee()
 	{
+		Vector2 cornerDistance = new Vector2(0.325f, 0.4f); //distance from center to upper right corner of melee hitbox
+		Vector2 rightCenter = rightMelee.position;
+		Vector2 leftCenter = leftMelee.position;
+		Collider2D[] hitTargets;
 		if ( playerData.IsMovingRight() )
-			rightMelee.collider2D.enabled = true;
+			hitTargets = Physics2D.OverlapAreaAll(rightCenter - cornerDistance, rightCenter + cornerDistance, projectileTargets);
 		else
-			leftMelee.collider2D.enabled = true;
+			hitTargets = Physics2D.OverlapAreaAll(leftCenter - cornerDistance, leftCenter + cornerDistance, projectileTargets);
+		for (int i = 0; i < hitTargets.Length; i ++)
+		{
+			if (hitTargets[i].tag != "Wall")
+				hitTargets[i].GetComponent<PlayerData>().LifeChange(-MELEE_DAMAGE);
+		}
 	}
 }

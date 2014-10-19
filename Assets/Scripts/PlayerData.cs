@@ -75,7 +75,7 @@ public class PlayerData : Actor
 		dashCooldown1 = USEABLE;
 		dashCooldown2 = USEABLE;
 
-		LevelUp(Attribute.WeaponType, Weapon.WeaponType.Bullet); //initialize weapons
+		LevelUp(Attribute.WeaponType, Weapon.WeaponType.Melee); //initialize weapons
 		LevelUp(Attribute.WeaponLevel, 1);
 
 		moneyAmount = 1000; //starting money total
