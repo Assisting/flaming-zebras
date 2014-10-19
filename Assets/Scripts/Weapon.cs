@@ -27,7 +27,6 @@ public class Weapon : MonoBehaviour {
 	private Transform muzzle;
 
 	private float BULLET_VELOCITY = 15f; // speed of bullets in-game
-	//private int BULLET_DAMAGE = 12; //damage per bullet
 
 	private float LASER_FADE; //time for laser to disappear
 	//private int LASER_DAMAGE = 26; //damage per laser burst
