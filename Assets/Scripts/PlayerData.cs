@@ -32,7 +32,7 @@ public class PlayerData : Actor
 	//Moving
 	private float MOVE_SPEED; // the lateral speed of the players (as a force for air-control)
 	private float MAX_SPEED; // maximum lateral speed of the player
-	private bool MOVING_RIGHT;
+	
 
 	//Jumping
 	private readonly float JUMP_FORCE = 1000f; // speed of player's jump
@@ -64,30 +64,23 @@ public class PlayerData : Actor
 	// Use this for initialization
 	void Start ()
 	{	
-		LevelUp(Attribute.Move, 1);
-
+		LevelUp(Attribute.Move, 1); //initialize moving
 		MOVING_RIGHT = true;
 
-		LevelUp(Attribute.Jump, 1);
+		LevelUp(Attribute.Jump, 1); //initialize jump system
 		GROUNDED = false;
 		JUMP_AVAILABLE = false;
 
-		LevelUp(Attribute.Dash, 1);
+		LevelUp(Attribute.Dash, 1); //initialize dashing
 		dashCooldown1 = USEABLE;
 		dashCooldown2 = USEABLE;
 
-		LevelUp(Attribute.WeaponType, Weapon.WeaponType.Bullet);
+		LevelUp(Attribute.WeaponType, Weapon.WeaponType.Bullet); //initialize weapons
 		LevelUp(Attribute.WeaponLevel, 1);
 
-		moneyAmount = 1000;
-	}
+		moneyAmount = 1000; //starting money total
 
-	void Update ()
-	{
-		if (rigidbody2D.velocity.x > 0f)
-			MOVING_RIGHT = true;
-		else if (rigidbody2D.velocity.x < 0f)
-			MOVING_RIGHT = false;
+		LifeChange(100); //starting life total
 	}
 
 
@@ -216,11 +209,6 @@ public class PlayerData : Actor
 	public float GetMAX_SPEED ()
 	{
 		return MAX_SPEED;
-	}
-
-	public bool IsMovingRight()
-	{
-		return MOVING_RIGHT;
 	}
 
 	public float GetJUMP_FORCE ()

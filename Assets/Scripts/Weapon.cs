@@ -27,10 +27,10 @@ public class Weapon : MonoBehaviour {
 	private Transform muzzle;
 
 	private float BULLET_VELOCITY = 15f; // speed of bullets in-game
-	//private float BULLET_DAMAGE = 12f; //damage per bullet
+	//private int BULLET_DAMAGE = 12; //damage per bullet
 
 	private float LASER_FADE; //time for laser to disappear
-	//private float LASER_DAMAGE = 26f; //damage per laser burst
+	//private int LASER_DAMAGE = 26; //damage per laser burst
 
 	private float RELOAD_WAIT = 0f; // time to wait in between clip regeneration
 	private float reloadTimer; // timestamp for clip regeneration
@@ -188,12 +188,12 @@ public class Weapon : MonoBehaviour {
 		LineRenderer newLaser = Instantiate(laser) as LineRenderer;
 		Destroy(newLaser.gameObject, LASER_FADE);
 		newLaser.SetPosition(0, muzzle.position);
-		RaycastHit2D[] hitPoints;
+		RaycastHit2D[] hitTargets;
 		
 		if ( playerData.IsMovingRight() )
-			hitPoints = Physics2D.RaycastAll(muzzle.position, Vector2.right, projectileTargets);
+			hitTargets = Physics2D.RaycastAll(muzzle.position, Vector2.right, projectileTargets);
 		else
-			hitPoints = Physics2D.RaycastAll(muzzle.position, -Vector2.right, projectileTargets);
+			hitTargets = Physics2D.RaycastAll(muzzle.position, -Vector2.right, projectileTargets);
 
 		int i = 0;
 		switch ( playerData.GetWeaponLevel() )
@@ -208,7 +208,7 @@ public class Weapon : MonoBehaviour {
 			}
 			case 3 :
 			{
-				while (hitPoints[i].transform.tag != "Wall")
+				while (hitTargets[i].transform.tag != "Wall")
 				{
 					//TODO damage/burn players
 					i ++;
@@ -218,9 +218,9 @@ public class Weapon : MonoBehaviour {
 		}
 
 		if ( playerData.IsMovingRight() ) //set laser to appropriate endpoint
-			newLaser.SetPosition( 1, new Vector3(muzzle.position.x + hitPoints[i].distance, muzzle.position.y, muzzle.position.z) );
+			newLaser.SetPosition( 1, new Vector3(muzzle.position.x + hitTargets[i].distance, muzzle.position.y, muzzle.position.z) );
 		else
-			newLaser.SetPosition( 1, new Vector3(muzzle.position.x - hitPoints[i].distance, muzzle.position.y, muzzle.position.z) );
+			newLaser.SetPosition( 1, new Vector3(muzzle.position.x - hitTargets[i].distance, muzzle.position.y, muzzle.position.z) );
 			
 	}
 
