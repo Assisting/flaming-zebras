@@ -30,6 +30,8 @@ public class Weapon : MonoBehaviour {
 
 	private float LASER_FADE; //time for laser to disappear
 	private int LASER_DAMAGE = 26; //damage per laser burst
+	private int LASER_BURN_DAMAGE = 2;
+	private float LASER_BURN_TIME = 4f;
 
 	private int MELEE_DAMAGE = 60;
 	
@@ -205,7 +207,7 @@ public class Weapon : MonoBehaviour {
 			PlayerData currentTarget = hitTargets[i].transform.GetComponent<PlayerData>();
 			currentTarget.LifeChange(-LASER_DAMAGE);
 			if (laserLevel > 1)
-				//currentTarget.Burn(LASER_BURN_DAMAGE, LASER_BURN_TIME);
+				currentTarget.Burn(LASER_BURN_DAMAGE, 0.5f, LASER_BURN_TIME);
 			if (laserLevel < 3)
 				break; //always stop at array cell 0 for level 1-2 lasers
 			i ++;
