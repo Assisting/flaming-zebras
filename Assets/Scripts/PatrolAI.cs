@@ -7,6 +7,7 @@ public class PatrolAI : MonoBehaviour {
 
 	public Transform wallSightStart, wallSightEnd;
 	public Transform dropSightStart, dropSightEnd;
+	public Transform playerSightStart, playerSightEnd;
 
 	public bool shouldITurn;
 
@@ -18,9 +19,9 @@ public class PatrolAI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+
 		bool impendingWall, impendingDrop;
-	
-		rigidbody2D.velocity = new Vector2 (speed, rigidbody2D.velocity.y);
 
 		// Let's make sure we don't smack into walls!
 		impendingWall = Physics2D.Linecast (wallSightStart.position, wallSightEnd.position);
@@ -35,6 +36,19 @@ public class PatrolAI : MonoBehaviour {
 		if (shouldITurn == true) {
 			transform.localScale = new Vector2(transform.localScale.x * -1, transform.localScale.y);
 			speed = speed * -1;
+		}
+
+		bool canSeePlayer;
+
+		// Get the player's layer for the raycast; 8 is currently the layer the player is on
+		int playerLayer = 1 << LayerMask.NameToLayer ("Player");
+
+		canSeePlayer = Physics2D.Linecast(playerSightStart.position, playerSightEnd.position, playerLayer);
+		if (canSeePlayer == true) {
+			rigidbody2D.velocity = new Vector2 ((speed * 2), rigidbody2D.velocity.y);
+		}
+		else {
+			rigidbody2D.velocity = new Vector2 (speed, rigidbody2D.velocity.y);
 		}
 	}
 }
