@@ -19,6 +19,7 @@ public class Weapon : MonoBehaviour {
 	public LayerMask projectileTargets;
 	public Rigidbody2D bullet;
 	public LineRenderer laser;
+	public GameObject bomb;
 
 	private PlayerData playerData;
 	private Transform rightMelee;
@@ -179,7 +180,7 @@ public class Weapon : MonoBehaviour {
 	
 	private void FireBomb()
 	{
-		
+		GameObject newBomb = Instantiate(bomb, muzzle.position, muzzle.rotation) as GameObject;
 	}
 
 	private void FireLaser()
