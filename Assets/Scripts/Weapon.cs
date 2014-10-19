@@ -22,6 +22,7 @@ public class Weapon : MonoBehaviour {
 	public Rigidbody2D bullet;
 	public LineRenderer laser;
 	public Transform bomb;
+	public Rigidbody2D missle;
 
 	private PlayerData playerData;
 	private Transform muzzle;
@@ -81,7 +82,8 @@ public class Weapon : MonoBehaviour {
 
 			case WeaponType.Missile :
 			{
-				
+				RELOAD_WAIT = 2.4f;
+				MAX_BULLETS = 1;
 				return;
 			}
 				
@@ -179,7 +181,7 @@ public class Weapon : MonoBehaviour {
 
 	private void FireMissile()
 	{
-		
+		Instantiate(missle, muzzle.position, muzzle.rotation);
 	}
 	
 	private void FireBomb()
