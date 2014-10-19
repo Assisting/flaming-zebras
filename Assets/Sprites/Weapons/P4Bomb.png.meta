@@ -6,6 +6,7 @@ TextureImporter:
     21300002: P4Bomb_0
     21300004: P4Bomb_1
     21300006: P4Bomb_2
+    21300008: P4Bomb_3
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -71,6 +72,16 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 32
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: P4Bomb_3
+      rect:
+        serializedVersion: 2
+        x: 48
         y: 0
         width: 16
         height: 16
