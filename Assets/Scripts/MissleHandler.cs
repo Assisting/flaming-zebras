@@ -4,22 +4,24 @@ using System.Collections;
 public class MissleHandler : MonoBehaviour {
 
 	public LayerMask targetTypes;
+	public Transform sensorPoint;
 
-	private int DAMAGE = 23;
-	private float MISSLE_SPEED = 9f;
-	private float DETECTION_RADIUS = 2f;
-	private float ROTATION_SPEED = 12f;
-	private float EXPLOSION_RADIUS =1.2f;
+	private int EXPLOSION_DAMAGE = 23;
+	private int IMPACT_DAMAGE = 12;
+	private float MISSLE_SPEED = 12.5f;
+	private float DETECTION_RADIUS = 2.5f;
+	private float ROTATION_SPEED = 300f;
+	private float EXPLOSION_RADIUS = 0.9f;
 
 	private float armingWait; //so the missle doesn't kill the firer
 
 	// Use this for initialization
 	void Start () {
-		armingWait = Time.time + 0.6f;
+		armingWait = Time.time + 0.4f;
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 
 		//fly
 		rigidbody2D.velocity = transform.right * MISSLE_SPEED;
@@ -29,12 +31,12 @@ public class MissleHandler : MonoBehaviour {
 			armingWait = -1f;
 
 			//rotate
-			Collider2D closestTarget = Physics2D.OverlapCircle(transform.position, DETECTION_RADIUS, targetTypes);
+			Collider2D closestTarget = Physics2D.OverlapCircle(sensorPoint.position, DETECTION_RADIUS, targetTypes);
 			if (closestTarget != null)
 			{
-				Vector2 vectorToTarget = transform.position - closestTarget.transform.position;
-				float angle = -Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg;
-				transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0f, 0f, angle), ROTATION_SPEED);
+				Vector2 targetDirection = closestTarget.transform.position - transform.position;
+				Quaternion targetRotation = Quaternion.FromToRotation(transform.right, targetDirection);
+    				transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, Time.deltaTime * ROTATION_SPEED);
 			}
 
 			//possibly explode
@@ -49,7 +51,7 @@ public class MissleHandler : MonoBehaviour {
 		{
 			for (int i = 0; i < targets.Length; i ++)
 			{
-				targets[i].gameObject.GetComponent<PlayerData>().LifeChange(-DAMAGE);
+				targets[i].gameObject.GetComponent<PlayerData>().LifeChange(-EXPLOSION_DAMAGE);
 			}
 			Destroy(gameObject);
 		}
@@ -63,7 +65,7 @@ public class MissleHandler : MonoBehaviour {
 				Explode();
 			else if (other.tag != "Wall")
 			{
-				other.GetComponent<PlayerData>().LifeChange(-DAMAGE);
+				other.GetComponent<PlayerData>().LifeChange(-IMPACT_DAMAGE);
 			}
 			Destroy(gameObject);
 		}

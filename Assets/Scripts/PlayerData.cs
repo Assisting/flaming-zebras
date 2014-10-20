@@ -35,7 +35,7 @@ public class PlayerData : Actor
 	
 
 	//Jumping
-	private readonly float JUMP_FORCE = 1000f; // speed of player's jump
+	private readonly float JUMP_FORCE = 875f; // speed of player's jump
 	private bool GROUNDED; // Whether or not the player is on the ground
 	private bool JUMP_AVAILABLE; // whether or not the player must wait to hit the ground before jumping again
 	private int TIMES_JUMPED; // The number of times the player has air-jumped
