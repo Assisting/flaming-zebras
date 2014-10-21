@@ -170,11 +170,6 @@ public class Weapon : MonoBehaviour {
 			newBullet.transform.rotation = Quaternion.Euler(0f, 0f, rotateDegrees);
 		}
 
-		if ( playerData.IsMovingRight() )
-			newBullet.velocity = newBullet.transform.right * BULLET_VELOCITY;
-		else
-			newBullet.velocity = -newBullet.transform.right * BULLET_VELOCITY;
-
 		if (shotgun) //shoot whole "clip" (shell)
 			FireWeapon();
 	}

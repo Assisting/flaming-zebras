@@ -7,12 +7,11 @@ public class BulletHandler : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+		rigidbody2D.velocity = transform.right;
 	}
 
 	// Bullet hits something
