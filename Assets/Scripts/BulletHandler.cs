@@ -15,6 +15,7 @@ public class BulletHandler : MonoBehaviour {
 	
 	}
 
+	// Bullet hits something
 	void OnTriggerEnter2D (Collider2D other) {
 		string tagHit = other.gameObject.tag;
 		if (tagHit == "Player" || tagHit == "Enemy")

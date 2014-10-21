@@ -164,7 +164,7 @@ public class Weapon : MonoBehaviour {
 		bool shotgun = 3 == playerData.GetWeaponLevel();
 	
 		Rigidbody2D newBullet = Instantiate (bullet, muzzle.position, muzzle.rotation) as Rigidbody2D;
-		if (shotgun)
+		if (shotgun) //spray bullets
 		{
 			rotateDegrees = Random.Range(-10f, 10f);
 			newBullet.transform.rotation = Quaternion.Euler(0f, 0f, rotateDegrees);
@@ -175,7 +175,7 @@ public class Weapon : MonoBehaviour {
 		else
 			newBullet.velocity = -newBullet.transform.right * BULLET_VELOCITY;
 
-		if (shotgun)
+		if (shotgun) //shoot whole "clip" (shell)
 			FireWeapon();
 	}
 
@@ -194,13 +194,14 @@ public class Weapon : MonoBehaviour {
 	private void FireLaser()
 	{
 		int laserLevel = playerData.GetWeaponLevel();
-	
+
+		//draw new laser
 		LineRenderer newLaser = Instantiate(laser) as LineRenderer;
 		Destroy(newLaser.gameObject, LASER_FADE);
 		newLaser.SetPosition(0, muzzle.position);
 		RaycastHit2D[] hitTargets;
 		
-		if ( playerData.IsMovingRight() )
+		if ( playerData.IsMovingRight() ) //find targets
 			hitTargets = Physics2D.RaycastAll(muzzle.position, Vector2.right, projectileTargets);
 		else
 			hitTargets = Physics2D.RaycastAll(muzzle.position, -Vector2.right, projectileTargets);
@@ -217,6 +218,7 @@ public class Weapon : MonoBehaviour {
 			i ++;
 		}
 
+		// set laser endpoint
 		if ( playerData.IsMovingRight() ) //set laser to appropriate endpoint
 			newLaser.SetPosition( 1, new Vector3(muzzle.position.x + hitTargets[i].distance, muzzle.position.y, muzzle.position.z) );
 		else
@@ -226,14 +228,18 @@ public class Weapon : MonoBehaviour {
 
 	private void SwingMelee()
 	{
-		Vector2 cornerDistance = new Vector2(0.325f, 0.4f); //distance from center to upper right corner of melee hitbox
+		Vector2 cornerDistance = new Vector2(0.325f, 0.4f); //distance from center to upper right corner of melee hitbox (for drawing overlap)
 		Vector2 rightCenter = rightMelee.position;
 		Vector2 leftCenter = leftMelee.position;
+
+		// get targets
 		Collider2D[] hitTargets;
 		if ( playerData.IsMovingRight() )
 			hitTargets = Physics2D.OverlapAreaAll(rightCenter - cornerDistance, rightCenter + cornerDistance, projectileTargets);
 		else
 			hitTargets = Physics2D.OverlapAreaAll(leftCenter - cornerDistance, leftCenter + cornerDistance, projectileTargets);
+
+		// do damage
 		for (int i = 0; i < hitTargets.Length; i ++)
 		{
 			if (hitTargets[i].tag != "Wall")

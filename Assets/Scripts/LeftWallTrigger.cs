@@ -21,6 +21,7 @@ public class LeftWallTrigger : MonoBehaviour {
 	
 	}
 
+	//stop player from moving or dashing towards a wall they are touching
 	void OnTriggerStay2D (Collider2D other)
 	{
 		if (other.gameObject.tag == "Wall")
@@ -32,6 +33,7 @@ public class LeftWallTrigger : MonoBehaviour {
 			
 	}
 
+	//allow movement and dashing agin on exiting wall collision
 	void OnTriggerExit2D (Collider2D other)
 	{
 		if (other.gameObject.tag == "Wall")

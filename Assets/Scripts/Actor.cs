@@ -53,6 +53,7 @@ public class Actor : MonoBehaviour {
 		LIFE += value;
 	}
 
+	// Do some Damage over Time (no knockback)
 	public void Burn(int damage, float tick, float duration)
 	{
 		BURN_DAMAGE = damage;
