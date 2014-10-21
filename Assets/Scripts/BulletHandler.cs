@@ -15,11 +15,12 @@ public class BulletHandler : MonoBehaviour {
 	
 	}
 
+	// Bullet hits something
 	void OnTriggerEnter2D (Collider2D other) {
 		string tagHit = other.gameObject.tag;
 		if (tagHit == "Player" || tagHit == "Enemy")
 		{
-			other.GetComponent<PlayerData>().LifeChange(-BULLET_DAMAGE);
+			other.GetComponent<Actor>().StunDamage(BULLET_DAMAGE);
 			Destroy(gameObject);
 		}
 		if (tagHit == "Wall")

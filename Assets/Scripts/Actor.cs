@@ -3,8 +3,10 @@ using System.Collections;
 
 public class Actor : MonoBehaviour {
 
-	public int LIFE = 0;
+	public int LIFE = 100;
 	protected bool MOVING_RIGHT;
+
+	protected float STUN_FORCE = 3f;
 
 	protected bool burning = false;
 	protected int BURN_DAMAGE;
@@ -38,12 +40,20 @@ public class Actor : MonoBehaviour {
 				burning = false;
 	}
 
+	// give damage while also doing a knock-back effect
+	public void StunDamage(int value)
+	{
+		rigidbody2D.AddForce(new Vector2(1f, 2f) * STUN_FORCE, ForceMode2D.Impulse);
+		LifeChange(-value);
+	}
+
 	// Alter life total by the given amount
 	public void LifeChange(int value)
 	{
 		LIFE += value;
 	}
 
+	// Do some Damage over Time (no knockback)
 	public void Burn(int damage, float tick, float duration)
 	{
 		BURN_DAMAGE = damage;

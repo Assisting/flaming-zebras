@@ -17,6 +17,8 @@ public class Movement : MonoBehaviour {
 	public bool wallLeft;
 	public bool wallRight;
 
+	private float playerXAxisMovement = 0f; // Added by Royce to implement movement on joystick
+
 //-----Unity Functions--------------------------------------------------------------------------------------------------------
 
 	void Awake()
@@ -31,7 +33,7 @@ public class Movement : MonoBehaviour {
 		if ( !playerData.IsDashing() ) //only bother checking for jumps if player isn't in a dash
 		{
 			//jump
-			if ( Input.GetButtonDown("Jump") && playerData.CanJump() )
+			if ( Input.GetButtonDown("P1Jump") && playerData.CanJump() )
 			{
 				playerData.IncrementJumpCounter();
 				if ( playerData.IsGrounded() ) //ground jump
@@ -45,7 +47,7 @@ public class Movement : MonoBehaviour {
 			}
 
 			//let go of jump
-			if ( Input.GetButtonUp("Jump") && rigidbody2D.velocity.y >= 0)
+			if ( Input.GetButtonUp("P1Jump") && rigidbody2D.velocity.y >= 0)
 			{
 				Vector2 currentVector = rigidbody2D.velocity;
 				currentVector.y = 0;
@@ -54,11 +56,11 @@ public class Movement : MonoBehaviour {
 		}
 
 		//dash right
-		if ( Input.GetButtonDown("RDash") && playerData.CanDash() && !wallRight)
+		if ( Input.GetButtonDown("P1RDash") && playerData.CanDash() && !wallRight)
 			DashRight();
 
 		//dash left
-		if ( Input.GetButtonDown("LDash") && playerData.CanDash() && !wallLeft)
+		if ( Input.GetButtonDown("P1LDash") && playerData.CanDash() && !wallLeft)
 			DashLeft();
 	}
 
@@ -72,16 +74,25 @@ public class Movement : MonoBehaviour {
 		else //don't do any movement unless we are not dashing
 		{
 			//move left
-			if ( Input.GetButton("Left") && !wallLeft && rigidbody2D.velocity.x > -playerData.GetMAX_SPEED() )
+			/*if (Input.GetButton("Left") && !wallLeft && rigidbody2D.velocity.x > -playerData.GetMAX_SPEED() )
 			{
 				rigidbody2D.AddForce( -Vector2.right * playerData.GetMOVE_SPEED() );
 			}
 
 			//move right
-			if ( Input.GetButton("Right") && !wallRight && rigidbody2D.velocity.x < playerData.GetMAX_SPEED() )
+			if (Input.GetButton("Right") && !wallRight && rigidbody2D.velocity.x < playerData.GetMAX_SPEED() )
 			{
 				rigidbody2D.AddForce( Vector2.right * playerData.GetMOVE_SPEED() );
-			}
+			}*/
+			if(!wallRight && (rigidbody2D.velocity.x < playerData.GetMAX_SPEED() ) && 
+			   (!wallLeft && (rigidbody2D.velocity.x > -playerData.GetMAX_SPEED() ) ) )
+				{
+					playerXAxisMovement = Input.GetAxis("P1Horizontal");
+					if(playerXAxisMovement > 0.7)
+						rigidbody2D.AddForce( Vector2.right * playerData.GetMOVE_SPEED() );
+					else if(playerXAxisMovement < -0.7)
+						rigidbody2D.AddForce( -Vector2.right * playerData.GetMOVE_SPEED() );
+				}
 		}
 	}
 

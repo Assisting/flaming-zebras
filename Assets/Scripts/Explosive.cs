@@ -22,15 +22,15 @@ public class Explosive : MonoBehaviour {
 	public void Explode()
 	{
 		//applies damage twice to inner people, they will therefore take both HIGH and LOW damage simultaneously
-		Collider2D[] targets = Physics2D.OverlapCircleAll(transform.position, CLOSE_RANGE, targetTypes);
+		Collider2D[] targets = Physics2D.OverlapCircleAll(transform.position, CLOSE_RANGE, targetTypes); //hit close targets
 		for (int i = 0; i < targets.Length; i ++)
 		{
-			targets[i].gameObject.GetComponent<PlayerData>().LifeChange(-HIGH_DAMAGE);
+			targets[i].gameObject.GetComponent<Actor>().StunDamage(HIGH_DAMAGE);
 		}
-		targets = Physics2D.OverlapCircleAll(transform.position, LONG_RANGE, targetTypes);
+		targets = Physics2D.OverlapCircleAll(transform.position, LONG_RANGE, targetTypes); //hit far targets
 		for (int i = 0; i < targets.Length; i ++)
 		{
-			targets[i].gameObject.GetComponent<PlayerData>().LifeChange(-LOW_DAMAGE);
+			targets[i].gameObject.GetComponent<Actor>().StunDamage(LOW_DAMAGE);
 		}
 		Destroy(gameObject);
 	}
