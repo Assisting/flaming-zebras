@@ -61,7 +61,7 @@ public class Weapon : MonoBehaviour {
 		if (reloadTimer <= Time.time)
 			BULLETS_FIRED = 0;
 
-		if (Input.GetButton("Fire1"))
+		if (Input.GetButton("P1Fire1"))
 			FireWeapon();
 	}
 
