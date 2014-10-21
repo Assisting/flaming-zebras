@@ -88,9 +88,9 @@ public class Movement : MonoBehaviour {
 			   (!wallLeft && (rigidbody2D.velocity.x > -playerData.GetMAX_SPEED() ) ) )
 				{
 					playerXAxisMovement = Input.GetAxis("P1Horizontal");
-					if(playerXAxisMovement > 0.5)
+					if(playerXAxisMovement > 0.7)
 						rigidbody2D.AddForce( Vector2.right * playerData.GetMOVE_SPEED() );
-					else if(playerXAxisMovement < -0.5)
+					else if(playerXAxisMovement < -0.7)
 						rigidbody2D.AddForce( -Vector2.right * playerData.GetMOVE_SPEED() );
 				}
 		}
