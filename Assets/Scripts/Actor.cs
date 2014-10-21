@@ -6,6 +6,8 @@ public class Actor : MonoBehaviour {
 	public int LIFE = 0;
 	protected bool MOVING_RIGHT;
 
+	protected float STUN_FORCE = 1f;
+
 	protected bool burning = false;
 	protected int BURN_DAMAGE;
 	protected float BURN_TICK;
@@ -36,6 +38,13 @@ public class Actor : MonoBehaviour {
 			}
 			if (burnDuration < Time.time)
 				burning = false;
+	}
+
+	// give damage while also doing a knock-back effect
+	public void StunDamage(int value)
+	{
+		rigidbody2D.AddForce(new Vector2(1f, 2f) * STUN_FORCE, ForceMode2D.Impulse);
+		LifeChange(-value);
 	}
 
 	// Alter life total by the given amount
