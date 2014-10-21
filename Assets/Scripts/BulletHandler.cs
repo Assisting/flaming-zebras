@@ -20,7 +20,7 @@ public class BulletHandler : MonoBehaviour {
 		string tagHit = other.gameObject.tag;
 		if (tagHit == "Player" || tagHit == "Enemy")
 		{
-			other.GetComponent<Actor>().StunDamage(-BULLET_DAMAGE);
+			other.GetComponent<Actor>().StunDamage(BULLET_DAMAGE);
 			Destroy(gameObject);
 		}
 		if (tagHit == "Wall")
