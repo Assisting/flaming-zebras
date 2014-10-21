@@ -35,7 +35,7 @@ public class PlayerData : Actor
 	
 
 	//Jumping
-	private readonly float JUMP_FORCE = 1000f; // speed of player's jump
+	private readonly float JUMP_FORCE = 875f; // speed of player's jump
 	private bool GROUNDED; // Whether or not the player is on the ground
 	private bool JUMP_AVAILABLE; // whether or not the player must wait to hit the ground before jumping again
 	private int TIMES_JUMPED; // The number of times the player has air-jumped
@@ -75,8 +75,8 @@ public class PlayerData : Actor
 		dashCooldown1 = USEABLE;
 		dashCooldown2 = USEABLE;
 
-		LevelUp(Attribute.WeaponType, Weapon.WeaponType.Laser); //initialize weapons
-		LevelUp(Attribute.WeaponLevel, 2);
+		LevelUp(Attribute.WeaponType, Weapon.WeaponType.Missile); //initialize weapons
+		LevelUp(Attribute.WeaponLevel, 1);
 
 		moneyAmount = 1000; //starting money total
 
