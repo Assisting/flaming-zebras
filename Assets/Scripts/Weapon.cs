@@ -182,6 +182,7 @@ public class Weapon : MonoBehaviour {
 	private void FireMissile()
 	{
 		Rigidbody2D newMissile = Instantiate(missle, muzzle.position, muzzle.rotation) as Rigidbody2D;
+		newMissile.GetComponent<MissleHandler>().SetLevel( playerData.GetWeaponLevel() );
 	}
 	
 	private void FireBomb()

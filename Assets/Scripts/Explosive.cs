@@ -10,6 +10,7 @@ public class Explosive : MonoBehaviour {
 	protected float LONG_RANGE;
 	protected int HIGH_DAMAGE;
 	protected int LOW_DAMAGE;
+	protected float armingWait; // so proximity explosives don't immediately try to kill the firer
 
 	// Called after instantiation to allow levelled logic/functionality
 	public void SetLevel(int value)
