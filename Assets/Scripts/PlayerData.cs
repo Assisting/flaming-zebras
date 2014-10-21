@@ -75,12 +75,12 @@ public class PlayerData : Actor
 		dashCooldown1 = USEABLE;
 		dashCooldown2 = USEABLE;
 
-		LevelUp(Attribute.WeaponType, Weapon.WeaponType.Bomb); //initialize weapons
-		LevelUp(Attribute.WeaponLevel, 3);
+		LevelUp(Attribute.WeaponType, Weapon.WeaponType.Bullet); //initialize weapons
+		LevelUp(Attribute.WeaponLevel, 1);
 
 		moneyAmount = 1000; //starting money total
 
-		LifeChange(100); //starting life total
+		LIFE = 100; //starting life total
 	}
 
 

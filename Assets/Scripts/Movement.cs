@@ -74,7 +74,7 @@ public class Movement : MonoBehaviour {
 		else //don't do any movement unless we are not dashing
 		{
 			//move left
-			/*if (Input.GetButton("Left") && !wallLeft && rigidbody2D.velocity.x > -playerData.GetMAX_SPEED() )
+			if (Input.GetButton("Left") && !wallLeft && rigidbody2D.velocity.x > -playerData.GetMAX_SPEED() )
 			{
 				rigidbody2D.AddForce( -Vector2.right * playerData.GetMOVE_SPEED() );
 			}
@@ -83,7 +83,7 @@ public class Movement : MonoBehaviour {
 			if (Input.GetButton("Right") && !wallRight && rigidbody2D.velocity.x < playerData.GetMAX_SPEED() )
 			{
 				rigidbody2D.AddForce( Vector2.right * playerData.GetMOVE_SPEED() );
-			}*/
+			}
 			if(!wallRight && (rigidbody2D.velocity.x < playerData.GetMAX_SPEED() ) && 
 			   (!wallLeft && (rigidbody2D.velocity.x > -playerData.GetMAX_SPEED() ) ) )
 				{

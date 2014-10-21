@@ -3,10 +3,10 @@ using System.Collections;
 
 public class Actor : MonoBehaviour {
 
-	public int LIFE = 0;
+	public int LIFE = 100;
 	protected bool MOVING_RIGHT;
 
-	protected float STUN_FORCE = 1f;
+	protected float STUN_FORCE = 3f;
 
 	protected bool burning = false;
 	protected int BURN_DAMAGE;
@@ -53,6 +53,7 @@ public class Actor : MonoBehaviour {
 		LIFE += value;
 	}
 
+	// Do some Damage over Time (no knockback)
 	public void Burn(int damage, float tick, float duration)
 	{
 		BURN_DAMAGE = damage;
