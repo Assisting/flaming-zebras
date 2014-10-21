@@ -11,11 +11,9 @@ public class MissleHandler : Explosive {
 	private float DETECTION_RADIUS = 2.5f;
 	private float ROTATION_SPEED = 300f;
 
-	private float armingWait; //so the missle doesn't immediately try to kill the firer
-
 	// Use this for initialization
 	void Start () {
-		armingWait = Time.time + 0.4f;
+		armingWait = Time.time + 0.3f;
 		LOW_DAMAGE = 8;
 		HIGH_DAMAGE = 15; //really 23
 		CLOSE_RANGE = 0.9f;
@@ -41,18 +39,18 @@ public class MissleHandler : Explosive {
 					if (level > 2) //level 3 (swarm)
 					{
 						Rigidbody2D newMissile1 = Instantiate(missile, transform.position, transform.rotation) as Rigidbody2D;
-						newMissile1.transform.localScale += new Vector3(0.5f, 0.5f, 0.5f); //half size
+						newMissile1.transform.localScale -= new Vector3(0.5f, 0.5f, 0.5f); //half size
 						newMissile1.GetComponent<MissleHandler>().SetLevel(2);
-						newMissile1.transform.rotation = Quaternion.Euler(0f, 0f, -20f); //counterclockwise
+						newMissile1.transform.rotation = Quaternion.Euler(0f, 0f, -15f); //counterclockwise
 						
 						Rigidbody2D newMissile2 = Instantiate(missile, transform.position, transform.rotation) as Rigidbody2D; //straight
-						newMissile2.transform.localScale += new Vector3(0.5f, 0.5f, 0.5f);
+						newMissile2.transform.localScale -= new Vector3(0.5f, 0.5f, 0.5f);
 						newMissile2.GetComponent<MissleHandler>().SetLevel(2);
 						
 						Rigidbody2D newMissile3 = Instantiate(missile, transform.position, transform.rotation) as Rigidbody2D;
-						newMissile3.transform.localScale += new Vector3(0.5f, 0.5f, 0.5f);
+						newMissile3.transform.localScale -= new Vector3(0.5f, 0.5f, 0.5f);
 						newMissile3.GetComponent<MissleHandler>().SetLevel(2);
-						newMissile3.transform.rotation = Quaternion.Euler(0f, 0f, 20f); //clockwise
+						newMissile3.transform.rotation = Quaternion.Euler(0f, 0f, 15f); //clockwise
 
 						Destroy(gameObject); //this level missle doesn't explode
 					}

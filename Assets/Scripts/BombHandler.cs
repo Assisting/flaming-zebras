@@ -9,6 +9,7 @@ public class BombHandler : Explosive {
 
 	// Use this for initialization
 	void Start () {
+		armingWait = Time.time + 0.8f;
 		timer = Time.time + 3f;
 		LOW_DAMAGE = 15;
 		HIGH_DAMAGE = 30; //really 45
@@ -30,25 +31,28 @@ public class BombHandler : Explosive {
 			}
 			case 2 : // proximity bomb (still explodes on timer)
 			{
-				Collider2D target = Physics2D.OverlapCircle(transform.position, CLOSE_RANGE, targetTypes);
-				if (target != null)
-					Explode();
+				if (armingWait <= Time.time)
+				{
+					Collider2D target = Physics2D.OverlapCircle(transform.position, CLOSE_RANGE, targetTypes);
+					if (target != null)
+						Explode();
+				}
 				goto case 1;
 			}
 			case 3 : // timed explosion and bomb spawn
 			{
 				if (timer < Time.time)
 				{
-					Transform newBomb1 = Instantiate(bomb, transform.position + new Vector3(0.5f, 0.5f, 0f), transform.rotation) as Transform;
-					newBomb1.transform.localScale += new Vector3(0.5f, 0.5f, 0.5f); //half size
+					Transform newBomb1 = Instantiate(bomb, transform.position + new Vector3(-0.5f, 0.43f, 0f), transform.rotation) as Transform;
+					newBomb1.transform.localScale -= new Vector3(0.5f, 0.5f, 0.5f); //half size
 					newBomb1.GetComponent<BombHandler>().SetLevel(1);
 					
-					Transform newBomb2 = Instantiate(bomb, transform.position + new Vector3(0f, 0.7f, 0f), transform.rotation) as Transform;
-					newBomb2.transform.localScale += new Vector3(0.5f, 0.5f, 0.5f); //half size
+					Transform newBomb2 = Instantiate(bomb, transform.position + new Vector3(0.5f, 0.43f, 0f), transform.rotation) as Transform;
+					newBomb2.transform.localScale -= new Vector3(0.5f, 0.5f, 0.5f); //half size
 					newBomb2.GetComponent<BombHandler>().SetLevel(1);
 					
-					Transform newBomb3 = Instantiate(bomb, transform.position + new Vector3(-0.5f, 0.5f, 0f), transform.rotation) as Transform;
-					newBomb3.transform.localScale += new Vector3(0.5f, 0.5f, 0.5f); //half size
+					Transform newBomb3 = Instantiate(bomb, transform.position + new Vector3(0f, -0.43f, 0f), transform.rotation) as Transform;
+					newBomb3.transform.localScale -= new Vector3(0.5f, 0.5f, 0.5f); //half size
 					newBomb3.GetComponent<BombHandler>().SetLevel(1);
 					
 					Explode();
