@@ -75,8 +75,8 @@ public class PlayerData : Actor
 		dashCooldown1 = USEABLE;
 		dashCooldown2 = USEABLE;
 
-		LevelUp(Attribute.WeaponType, Weapon.WeaponType.Bomb); //initialize weapons
-		LevelUp(Attribute.WeaponLevel, 3);
+		LevelUp (Attribute.WeaponLevel, 1);
+		LevelUp(Attribute.WeaponType, Weapon.WeaponType.Laser); //initialize weapons
 
 		moneyAmount = 1000; //starting money total
 
@@ -114,7 +114,7 @@ public class PlayerData : Actor
 			case Attribute.WeaponLevel :
 			{
 				WEAPON_LEVEL = level;
-				weapon.UpdateLevel();
+				weapon.UpdateWeapon();
 				return;
 			}
 
@@ -132,11 +132,12 @@ public class PlayerData : Actor
 	}
 
 	//special LevelUp function for weapon types
-	public void LevelUp (Attribute attrib, Weapon.WeaponType weapon)
+	public void LevelUp (Attribute attrib, Weapon.WeaponType newWeapon)
 	{
 		if (Attribute.WeaponType == attrib)
 		{
-			CURRENT_WEAPON = weapon;
+			CURRENT_WEAPON = newWeapon;
+			weapon.UpdateWeapon();
 		}
 		else
 			return;

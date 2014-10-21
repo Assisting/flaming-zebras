@@ -67,7 +67,7 @@ public class Weapon : MonoBehaviour {
 
 //-----Custom Functions------------------------------------------------------------------------------------------------------
 
-	public void UpdateLevel()
+	public void UpdateWeapon()
 	{			
 		int wepLevel = playerData.GetWeaponLevel();
 	
