@@ -101,7 +101,6 @@ public class Shop : MonoBehaviour
 	{
 		if (Input.GetButtonDown("P1Buy") && IsPlayerGreenInShop) 
 		{
-			Debug.Log ("B button pressed");
 			BuyObject (PlayerGreen);
 		}
 		else if (Input.GetButtonDown("P2Buy") && IsPlayerBlueInShop) 
