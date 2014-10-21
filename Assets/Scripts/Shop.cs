@@ -97,21 +97,22 @@ public class Shop : MonoBehaviour
 	}
 
 	// FixedUpdate is called once per time unit
-	void FixedUpdate ()
+	void Update ()
 	{
-		if (Input.GetKeyDown (KeyCode.B) && IsPlayerGreenInShop) 
+		if (Input.GetButtonDown("P1Buy") && IsPlayerGreenInShop) 
 		{
+			Debug.Log ("B button pressed");
 			BuyObject (PlayerGreen);
 		}
-		else if (Input.GetKeyDown (KeyCode.B) && IsPlayerBlueInShop) 
+		else if (Input.GetButtonDown("P2Buy") && IsPlayerBlueInShop) 
 		{
 			BuyObject (PlayerBlue);
 		}
-		else if (Input.GetKeyDown (KeyCode.B) && IsPlayerYellowInShop) 
+		else if (Input.GetButtonDown("P3Buy") && IsPlayerYellowInShop) 
 		{
 			BuyObject (PlayerYellow);
 		}
-		else if (Input.GetKeyDown (KeyCode.B) && IsPlayerRedInShop) 
+		else if (Input.GetButtonDown("P4Buy") && IsPlayerRedInShop) 
 		{
 			BuyObject (PlayerRed);
 		}
