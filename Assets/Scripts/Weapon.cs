@@ -181,12 +181,13 @@ public class Weapon : MonoBehaviour {
 
 	private void FireMissile()
 	{
-		Instantiate(missle, muzzle.position, muzzle.rotation);
+		Rigidbody2D newMissile = Instantiate(missle, muzzle.position, muzzle.rotation) as Rigidbody2D;
 	}
 	
 	private void FireBomb()
 	{
-		Instantiate(bomb, muzzle.position, muzzle.rotation);
+		Transform newBomb = Instantiate(bomb, muzzle.position, muzzle.rotation) as Transform;
+		newBomb.GetComponent<BombHandler>().SetLevel( playerData.GetWeaponLevel() );
 	}
 
 	private void FireLaser()
@@ -211,7 +212,7 @@ public class Weapon : MonoBehaviour {
 			if (laserLevel > 1)
 				currentTarget.Burn(LASER_BURN_DAMAGE, 0.5f, LASER_BURN_TIME);
 			if (laserLevel < 3)
-				break; //always stop at array cell 0 for level 1-2 lasers
+				break; //always stop at first object for level 1-2 lasers
 			i ++;
 		}
 
