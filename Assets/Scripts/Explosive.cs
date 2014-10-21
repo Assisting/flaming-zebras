@@ -25,12 +25,12 @@ public class Explosive : MonoBehaviour {
 		Collider2D[] targets = Physics2D.OverlapCircleAll(transform.position, CLOSE_RANGE, targetTypes);
 		for (int i = 0; i < targets.Length; i ++)
 		{
-			targets[i].gameObject.GetComponent<PlayerData>().StunDamage(-HIGH_DAMAGE);
+			targets[i].gameObject.GetComponent<Actor>().StunDamage(-HIGH_DAMAGE);
 		}
 		targets = Physics2D.OverlapCircleAll(transform.position, LONG_RANGE, targetTypes);
 		for (int i = 0; i < targets.Length; i ++)
 		{
-			targets[i].gameObject.GetComponent<PlayerData>().StunDamage(-LOW_DAMAGE);
+			targets[i].gameObject.GetComponent<Actor>().StunDamage(-LOW_DAMAGE);
 		}
 		Destroy(gameObject);
 	}

@@ -208,7 +208,7 @@ public class Weapon : MonoBehaviour {
 		int i = 0;
 		while (hitTargets[i].transform.tag != "Wall")
 		{
-			PlayerData currentTarget = hitTargets[i].transform.GetComponent<PlayerData>();
+			Actor currentTarget = hitTargets[i].transform.GetComponent<Actor>();
 			currentTarget.StunDamage(-LASER_DAMAGE);
 			if (laserLevel > 1)
 				currentTarget.Burn(LASER_BURN_DAMAGE, 0.5f, LASER_BURN_TIME);
@@ -237,7 +237,7 @@ public class Weapon : MonoBehaviour {
 		for (int i = 0; i < hitTargets.Length; i ++)
 		{
 			if (hitTargets[i].tag != "Wall")
-				hitTargets[i].GetComponent<PlayerData>().StunDamage(-MELEE_DAMAGE);
+				hitTargets[i].GetComponent<Actor>().StunDamage(-MELEE_DAMAGE);
 		}
 	}
 }

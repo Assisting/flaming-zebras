@@ -3,10 +3,10 @@ using System.Collections;
 
 public class Actor : MonoBehaviour {
 
-	public int LIFE = 0;
+	public int LIFE = 100;
 	protected bool MOVING_RIGHT;
 
-	protected float STUN_FORCE = 1f;
+	protected float STUN_FORCE = 3f;
 
 	protected bool burning = false;
 	protected int BURN_DAMAGE;
