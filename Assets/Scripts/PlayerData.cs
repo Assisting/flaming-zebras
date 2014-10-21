@@ -74,14 +74,9 @@ public class PlayerData : Actor
 		LevelUp(Attribute.Dash, 1); //initialize dashing
 		dashCooldown1 = USEABLE;
 		dashCooldown2 = USEABLE;
-
-<<<<<<< HEAD
+		
 		LevelUp (Attribute.WeaponLevel, 1);
 		LevelUp(Attribute.WeaponType, Weapon.WeaponType.Laser); //initialize weapons
-=======
-		LevelUp(Attribute.WeaponType, Weapon.WeaponType.Bullet); //initialize weapons
-		LevelUp(Attribute.WeaponLevel, 1);
->>>>>>> origin/master
 
 		moneyAmount = 1000; //starting money total
 
