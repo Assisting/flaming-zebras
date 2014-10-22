@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BulletHandler : MonoBehaviour {
+public class BulletHandler : Projectile {
 
 	private int BULLET_DAMAGE = 12; //damage per bullet
+	private float BULLET_VELOCITY = 15f; // speed of bullets in-game
 
 	// Use this for initialization
 	void Start () {
@@ -11,7 +12,7 @@ public class BulletHandler : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		rigidbody2D.velocity = transform.right;
+		rigidbody2D.velocity = transform.right * BULLET_VELOCITY;
 	}
 
 	// Bullet hits something

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Explosive : MonoBehaviour {
+public class Explosive : Projectile {
 
 	public LayerMask targetTypes;
 

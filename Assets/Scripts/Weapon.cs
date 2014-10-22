@@ -27,8 +27,6 @@ public class Weapon : MonoBehaviour {
 	private PlayerData playerData;
 	private Transform muzzle;
 
-	private float BULLET_VELOCITY = 15f; // speed of bullets in-game
-
 	private float LASER_FADE; //time for laser to disappear
 	private int LASER_DAMAGE = 26; //damage per laser burst
 	private int LASER_BURN_DAMAGE = 2;
@@ -164,26 +162,29 @@ public class Weapon : MonoBehaviour {
 		bool shotgun = 3 == playerData.GetWeaponLevel();
 	
 		Rigidbody2D newBullet = Instantiate (bullet, muzzle.position, muzzle.rotation) as Rigidbody2D;
+		newBullet.GetComponent<BulletHandler>().Origin(gameObject);
 		if (shotgun) //spray bullets
 		{
 			rotateDegrees = Random.Range(-10f, 10f);
 			newBullet.transform.rotation = Quaternion.Euler(0f, 0f, rotateDegrees);
-		}
-
-		if (shotgun) //shoot whole "clip" (shell)
-			FireWeapon();
+			FireWeapon(); //shoot whole "clip" (shell)
+		}			
 	}
 
 	private void FireMissile()
 	{
 		Rigidbody2D newMissile = Instantiate(missle, muzzle.position, muzzle.rotation) as Rigidbody2D;
-		newMissile.GetComponent<MissleHandler>().SetLevel( playerData.GetWeaponLevel() );
+		MissleHandler script = newMissile.GetComponent<MissleHandler>();
+		script.Origin(gameObject);
+		script.SetLevel( playerData.GetWeaponLevel() );
 	}
 	
 	private void FireBomb()
 	{
 		Transform newBomb = Instantiate(bomb, muzzle.position, muzzle.rotation) as Transform;
-		newBomb.GetComponent<BombHandler>().SetLevel( playerData.GetWeaponLevel() );
+		BombHandler script = newBomb.GetComponent<BombHandler>();
+		script.Origin(gameObject);
+		script.SetLevel( playerData.GetWeaponLevel() );
 	}
 
 	private void FireLaser()

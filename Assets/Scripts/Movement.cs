@@ -17,7 +17,7 @@ public class Movement : MonoBehaviour {
 	public bool wallLeft;
 	public bool wallRight;
 
-	private float playerXAxisMovement = 0f; // Added by Royce to implement movement on joystick
+	private float playerXAxis = 0f; // Value to store current thumbstick tilt
 
 //-----Unity Functions--------------------------------------------------------------------------------------------------------
 
@@ -73,26 +73,18 @@ public class Movement : MonoBehaviour {
 			continueDash();
 		else //don't do any movement unless we are not dashing
 		{
+			playerXAxis = Input.GetAxis("P1Horizontal");
 			//move left
-			/*if (Input.GetButton("Left") && !wallLeft && rigidbody2D.velocity.x > -playerData.GetMAX_SPEED() )
+			if (playerXAxis < -0.7f && !wallLeft && rigidbody2D.velocity.x > -playerData.GetMAX_SPEED() )
 			{
 				rigidbody2D.AddForce( -Vector2.right * playerData.GetMOVE_SPEED() );
 			}
 
 			//move right
-			if (Input.GetButton("Right") && !wallRight && rigidbody2D.velocity.x < playerData.GetMAX_SPEED() )
+			if (playerXAxis > 0.7f && !wallRight && rigidbody2D.velocity.x < playerData.GetMAX_SPEED() )
 			{
 				rigidbody2D.AddForce( Vector2.right * playerData.GetMOVE_SPEED() );
-			}*/
-			if(!wallRight && (rigidbody2D.velocity.x < playerData.GetMAX_SPEED() ) && 
-			   (!wallLeft && (rigidbody2D.velocity.x > -playerData.GetMAX_SPEED() ) ) )
-				{
-					playerXAxisMovement = Input.GetAxis("P1Horizontal");
-					if(playerXAxisMovement > 0.7)
-						rigidbody2D.AddForce( Vector2.right * playerData.GetMOVE_SPEED() );
-					else if(playerXAxisMovement < -0.7)
-						rigidbody2D.AddForce( -Vector2.right * playerData.GetMOVE_SPEED() );
-				}
+			}
 		}
 	}
 
