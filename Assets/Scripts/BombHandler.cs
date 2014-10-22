@@ -33,9 +33,7 @@ public class BombHandler : Explosive {
 			{
 				if (armingWait <= Time.time)
 				{
-					Collider2D target = Physics2D.OverlapCircle(transform.position, CLOSE_RANGE, targetTypes);
-					if (target != null)
-						Explode();
+					ExplodeCheck();
 				}
 				goto case 1;
 			}
@@ -43,17 +41,25 @@ public class BombHandler : Explosive {
 			{
 				if (timer < Time.time)
 				{
+					BombHandler script;
+
 					Transform newBomb1 = Instantiate(bomb, transform.position + new Vector3(-0.5f, 0.43f, 0f), transform.rotation) as Transform;
 					newBomb1.transform.localScale -= new Vector3(0.5f, 0.5f, 0.5f); //half size
-					newBomb1.GetComponent<BombHandler>().SetLevel(1);
+					script = newBomb1.GetComponent<BombHandler>();
+					script.Origin(ORIGIN);
+					script.SetLevel(1);
 					
 					Transform newBomb2 = Instantiate(bomb, transform.position + new Vector3(0.5f, 0.43f, 0f), transform.rotation) as Transform;
 					newBomb2.transform.localScale -= new Vector3(0.5f, 0.5f, 0.5f); //half size
-					newBomb2.GetComponent<BombHandler>().SetLevel(1);
+					script = newBomb2.GetComponent<BombHandler>();
+					script.Origin(ORIGIN);
+					script.SetLevel(1);
 					
 					Transform newBomb3 = Instantiate(bomb, transform.position + new Vector3(0f, -0.43f, 0f), transform.rotation) as Transform;
 					newBomb3.transform.localScale -= new Vector3(0.5f, 0.5f, 0.5f); //half size
-					newBomb3.GetComponent<BombHandler>().SetLevel(1);
+					script = newBomb3.GetComponent<BombHandler>();
+					script.Origin(ORIGIN);
+					script.SetLevel(1);
 					
 					Explode();
 				}

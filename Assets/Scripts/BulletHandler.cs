@@ -20,8 +20,11 @@ public class BulletHandler : Projectile {
 		string tagHit = other.gameObject.tag;
 		if (tagHit == "Player" || tagHit == "Enemy")
 		{
-			other.GetComponent<Actor>().StunDamage(BULLET_DAMAGE);
-			Destroy(gameObject);
+			if (ORIGIN != other.gameObject)
+			{
+				other.GetComponent<Actor>().StunDamage(BULLET_DAMAGE);
+				Destroy(gameObject);
+			}
 		}
 		if (tagHit == "Wall")
 			Destroy(gameObject);

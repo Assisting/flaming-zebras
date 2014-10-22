@@ -34,22 +34,30 @@ public class MissleHandler : Explosive {
 			if (level > 1) // possibly do special things
 			{
 				Collider2D closestTarget = Physics2D.OverlapCircle(sensorPoint.position, DETECTION_RADIUS, targetTypes);
-				if (closestTarget != null)
+				if (closestTarget != null && ORIGIN != closestTarget.gameObject)
 				{
 					if (level > 2) //level 3 (swarm)
 					{
+						MissleHandler script;
+					
 						Rigidbody2D newMissile1 = Instantiate(missile, transform.position, transform.rotation) as Rigidbody2D;
 						newMissile1.transform.localScale -= new Vector3(0.5f, 0.5f, 0.5f); //half size
-						newMissile1.GetComponent<MissleHandler>().SetLevel(2);
+						script = newMissile1.GetComponent<MissleHandler>();
+						script.Origin(ORIGIN);
+						script.SetLevel(2);
 						newMissile1.transform.rotation = Quaternion.Euler(0f, 0f, -15f); //counterclockwise
 						
 						Rigidbody2D newMissile2 = Instantiate(missile, transform.position, transform.rotation) as Rigidbody2D; //straight
 						newMissile2.transform.localScale -= new Vector3(0.5f, 0.5f, 0.5f);
-						newMissile2.GetComponent<MissleHandler>().SetLevel(2);
+						script = newMissile2.GetComponent<MissleHandler>();
+						script.Origin(ORIGIN);
+						script.SetLevel(2);
 						
 						Rigidbody2D newMissile3 = Instantiate(missile, transform.position, transform.rotation) as Rigidbody2D;
 						newMissile3.transform.localScale -= new Vector3(0.5f, 0.5f, 0.5f);
-						newMissile3.GetComponent<MissleHandler>().SetLevel(2);
+						script = newMissile3.GetComponent<MissleHandler>();
+						script.Origin(ORIGIN);
+						script.SetLevel(2);
 						newMissile3.transform.rotation = Quaternion.Euler(0f, 0f, 15f); //clockwise
 
 						Destroy(gameObject); //this level missle doesn't explode
@@ -64,9 +72,7 @@ public class MissleHandler : Explosive {
 			}
 
 			//possibly explode
-			Collider2D target = Physics2D.OverlapCircle(transform.position, CLOSE_RANGE, targetTypes);
-			if (target != null)
-				Explode();
+			ExplodeCheck();
 		}
 	}
 
