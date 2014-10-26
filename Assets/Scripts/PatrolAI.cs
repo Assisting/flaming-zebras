@@ -23,7 +23,7 @@ public class PatrolAI : MonoBehaviour {
 	void Start () {
 		speed = 1f;
 		shouldITurn = false;
-		shouldWalk = true;
+		shouldWalk = false;
 
 		// Get the player's layer for the raycast; 8 is currently the layer the player is on
 		playerLayer = 1 << LayerMask.NameToLayer ("Player");
@@ -56,11 +56,12 @@ public class PatrolAI : MonoBehaviour {
 		if (Time.time > eventTime) {
 			eventTime += RNG.Next(3, 8);
 			// Uncomment for debug output
-			//print (eventTime);
+			print (eventTime);
 			shouldWalk = !shouldWalk;
 			if(eventTime % 2 == 0) {
 				turnAround ();
 			}
+			print ("I'm going for a walk:" + shouldWalk);
 		}
 
 		canSeePlayer = Physics2D.Linecast(playerSightStart.position, playerSightEnd.position, playerLayer);
