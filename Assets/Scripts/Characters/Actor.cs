@@ -7,6 +7,7 @@ public class Actor : MonoBehaviour {
 	protected bool MOVING_RIGHT;
 
 	protected float STUN_FORCE = 3f;
+	protected bool stunned = false;
 
 	protected bool burning = false;
 	protected int BURN_DAMAGE;
@@ -48,6 +49,7 @@ public class Actor : MonoBehaviour {
 			rigidbody2D.AddForce(new Vector2(1f, 2f) * STUN_FORCE, ForceMode2D.Impulse);
 		else
 			rigidbody2D.AddForce(new Vector2(-1f, 2f) * STUN_FORCE, ForceMode2D.Impulse);
+		stunned = true;
 		LifeChange(-value);
 	}
 
@@ -70,5 +72,15 @@ public class Actor : MonoBehaviour {
 	public bool IsMovingRight()
 	{
 		return MOVING_RIGHT;
+	}
+
+	public bool isStunned()
+	{
+		return stunned;
+	}
+
+	public void setStunned(bool value)
+	{
+		stunned = value;
 	}
 }

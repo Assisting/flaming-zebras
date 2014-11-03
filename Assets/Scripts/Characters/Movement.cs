@@ -30,7 +30,7 @@ public class Movement : MonoBehaviour {
 	void Update()
 	{
 
-		if ( !playerData.IsDashing() ) //only bother checking for jumps if player isn't in a dash
+		if ( !playerData.IsDashing() && !playerData.isStunned()) //only bother checking for jumps if player isn't in a dash or stunned
 		{
 			//jump
 			if ( Input.GetButtonDown("P1Jump") && playerData.CanJump() )
@@ -75,13 +75,13 @@ public class Movement : MonoBehaviour {
 		{
 			playerXAxis = Input.GetAxis("P1Horizontal");
 			//move left
-			if (playerXAxis < -0.7f && !wallLeft && rigidbody2D.velocity.x > -playerData.GetMAX_SPEED() )
+			if (playerXAxis < -0.7f && !wallLeft && !playerData.isStunned() && rigidbody2D.velocity.x > -playerData.GetMAX_SPEED() )
 			{
 				rigidbody2D.AddForce( -Vector2.right * playerData.GetMOVE_SPEED() );
 			}
 
 			//move right
-			if (playerXAxis > 0.7f && !wallRight && rigidbody2D.velocity.x < playerData.GetMAX_SPEED() )
+			if (playerXAxis > 0.7f && !wallRight && !playerData.isStunned() && rigidbody2D.velocity.x < playerData.GetMAX_SPEED() )
 			{
 				rigidbody2D.AddForce( Vector2.right * playerData.GetMOVE_SPEED() );
 			}
@@ -141,6 +141,7 @@ public class Movement : MonoBehaviour {
 		{
 			if (jumpLag < Time.time)
 				playerData.ResetJumpCounter();
+				playerData.setStunned(false);
 		}
 	}
 }
