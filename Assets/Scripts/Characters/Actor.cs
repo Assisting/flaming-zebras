@@ -40,10 +40,14 @@ public class Actor : MonoBehaviour {
 				burning = false;
 	}
 
-	// give damage while also doing a knock-back effect
-	public void StunDamage(int value)
+	// give damage while also inducing a knock-back effect
+	public void StunDamage(int value, bool goRight)
 	{
-		rigidbody2D.AddForce(new Vector2(1f, 2f) * STUN_FORCE, ForceMode2D.Impulse);
+		rigidbody2D.velocity = Vector2.zero;
+		if (goRight)
+			rigidbody2D.AddForce(new Vector2(1f, 2f) * STUN_FORCE, ForceMode2D.Impulse);
+		else
+			rigidbody2D.AddForce(new Vector2(-1f, 2f) * STUN_FORCE, ForceMode2D.Impulse);
 		LifeChange(-value);
 	}
 

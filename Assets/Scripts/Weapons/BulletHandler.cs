@@ -22,7 +22,7 @@ public class BulletHandler : Projectile {
 		{
 			if (ORIGIN != other.gameObject)
 			{
-				other.GetComponent<Actor>().StunDamage(BULLET_DAMAGE);
+				other.GetComponent<Actor>().StunDamage(BULLET_DAMAGE, rigidbody2D.velocity.x > 0f);
 				Destroy(gameObject);
 			}
 		}
