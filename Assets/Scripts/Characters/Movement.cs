@@ -6,6 +6,7 @@ public class Movement : MonoBehaviour {
 //-----Attribute Variables---------------------------------------------------------------------------------------------------
 
 	private PlayerData playerData;
+	private KeyBindings keyBind;
 
 	private Vector2 endPoint; //endpoint of any particular dash
 
@@ -17,13 +18,15 @@ public class Movement : MonoBehaviour {
 	public bool wallLeft;
 	public bool wallRight;
 
-	private float playerXAxis = 0f; // Value to store current thumbstick tilt
+	private float playerXAxisValue = 0f; // Value to store current thumbstick tilt
+	
 
 //-----Unity Functions--------------------------------------------------------------------------------------------------------
 
 	void Awake()
 	{
 		playerData = GetComponent<PlayerData>();
+		keyBind = GetComponent<KeyBindings>();
 	}
 
 	// Update is called once per frame (used for non-physics and detecting single presses of buttons)
@@ -33,7 +36,7 @@ public class Movement : MonoBehaviour {
 		if ( !playerData.IsDashing() && !playerData.isStunned()) //only bother checking for jumps if player isn't in a dash or stunned
 		{
 			//jump
-			if ( Input.GetButtonDown("P1Jump") && playerData.CanJump() )
+			if ( Input.GetButtonDown( keyBind.JumpButton() ) && playerData.CanJump() )
 			{
 				playerData.IncrementJumpCounter();
 				if ( playerData.IsGrounded() ) //ground jump
@@ -47,7 +50,7 @@ public class Movement : MonoBehaviour {
 			}
 
 			//let go of jump
-			if ( Input.GetButtonUp("P1Jump") && rigidbody2D.velocity.y >= 0)
+			if ( Input.GetButtonUp( keyBind.JumpButton() ) && rigidbody2D.velocity.y >= 0)
 			{
 				Vector2 currentVector = rigidbody2D.velocity;
 				currentVector.y = 0;
@@ -56,11 +59,11 @@ public class Movement : MonoBehaviour {
 		}
 
 		//dash right
-		if ( Input.GetButtonDown("P1RDash") && playerData.CanDash() && !wallRight)
+		if ( Input.GetButtonDown( keyBind.RDashButton() ) && playerData.CanDash() && !wallRight)
 			DashRight();
 
 		//dash left
-		if ( Input.GetButtonDown("P1LDash") && playerData.CanDash() && !wallLeft)
+		if ( Input.GetButtonDown( keyBind.LDashButton() ) && playerData.CanDash() && !wallLeft)
 			DashLeft();
 	}
 
@@ -73,15 +76,15 @@ public class Movement : MonoBehaviour {
 			continueDash();
 		else //don't do any movement unless we are not dashing
 		{
-			playerXAxis = Input.GetAxis("P1Horizontal");
+			playerXAxisValue = Input.GetAxis( keyBind.playerXAxis() );
 			//move left
-			if (playerXAxis < -0.7f && !wallLeft && !playerData.isStunned() && rigidbody2D.velocity.x > -playerData.GetMAX_SPEED() )
+			if (playerXAxisValue < -0.7f && !wallLeft && !playerData.isStunned() && rigidbody2D.velocity.x > -playerData.GetMAX_SPEED() )
 			{
 				rigidbody2D.AddForce( -Vector2.right * playerData.GetMOVE_SPEED() );
 			}
 
 			//move right
-			if (playerXAxis > 0.7f && !wallRight && !playerData.isStunned() && rigidbody2D.velocity.x < playerData.GetMAX_SPEED() )
+			if (playerXAxisValue > 0.7f && !wallRight && !playerData.isStunned() && rigidbody2D.velocity.x < playerData.GetMAX_SPEED() )
 			{
 				rigidbody2D.AddForce( Vector2.right * playerData.GetMOVE_SPEED() );
 			}
