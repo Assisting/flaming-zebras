@@ -47,10 +47,9 @@ public class PlayerData : Actor
 
 	//Dashing
 	private float DASH_SPEED; // the maximum speed to move at while dashing
-	private readonly int USEABLE = -1; // human-readable value for cooldowns that are complete
-	private float DASH_COOL_TIME = 5f; // time to wait before using the same dash again
-	private float dashCooldown1; // 1st dash cooldown timestamp
-	private float dashCooldown2; // 2nd dash cooldown timestamp
+	float DASH_COOL_TIME = 5f; // time to wait before using the same dash again
+	private bool dash1Available = true; // 1st dash cooldown
+	private bool dash2Available = true; // 2nd dash cooldown
 	private bool dashing; // Is the player currently in a dash?
 
 	//Weapon
@@ -77,8 +76,6 @@ public class PlayerData : Actor
 		JUMP_AVAILABLE = false;
 
 		LevelUp(Attribute.Dash, 1); //initialize dashing
-		dashCooldown1 = USEABLE;
-		dashCooldown2 = USEABLE;
 		
 		LevelUp (Attribute.WeaponLevel, 1);
 		LevelUp(Attribute.WeaponType, Weapon.WeaponType.Bullet); //initialize weapons
@@ -89,6 +86,7 @@ public class PlayerData : Actor
 
 		PLAYERNUM++;
 
+		//for making four players quick
 		if (PLAYERNUM < 5)
 			Instantiate(Player, new Vector2(0f, 0f), transform.rotation);
 	}
@@ -177,9 +175,7 @@ public class PlayerData : Actor
 	{
 		TIMES_JUMPED ++;
 		if (TIMES_JUMPED >= JUMP_LEVEL)
-		{
 			JUMP_AVAILABLE = false;
-		}
 	}
 
 	public void ResetJumpCounter ()
@@ -198,24 +194,14 @@ public class PlayerData : Actor
 		return GROUNDED;
 	}
 
-	public void SetCooldown1()
+	private void ResetDash1 ()
 	{
-		dashCooldown1 = Time.time + DASH_COOL_TIME;
+		dash1Available = true;
 	}
 
-	public void SetCooldown2 ()
+	private void ResetDash2 ()
 	{
-		dashCooldown2 = Time.time + DASH_COOL_TIME;
-	}
-
-	public void ClearCooldown1 ()
-	{
-		dashCooldown1 = USEABLE;
-	}
-
-	public void ClearCooldown2 ()
-	{
-		dashCooldown2 = USEABLE;
+		dash2Available = true;
 	}
 
 	public float GetMOVE_SPEED ()
@@ -252,25 +238,24 @@ public class PlayerData : Actor
 	// returns: true if there is one or more dashes available
 	public bool CanDash()
 	{
-		if (USEABLE != dashCooldown1 && dashCooldown1 <= Time.time)
-			ClearCooldown1();
-		if (USEABLE != dashCooldown2 && dashCooldown2 <= Time.time)
-			ClearCooldown2();
-		return (USEABLE == dashCooldown2 || USEABLE == dashCooldown1);
+		return (dash2Available || dash1Available);
 	}
 
 	// sets one of the dash cooldowns before a dash.
 	// this function assumes that you have already checked to see if a dash is available.
 	// it will consume dashes from right to left (i.e. 2nd, then 1st)
-	public void RemoveDashMarker()
+	public void RemoveDash()
 	{
-		if (USEABLE != dashCooldown2)
-			if (USEABLE != dashCooldown1)
-				print("Dash Overconsumption");
-			else
-			SetCooldown1();
-		else
-			SetCooldown2();
+		if (dash2Available)
+		{
+			dash2Available = !dash2Available;
+			Invoke("ResetDash2", DASH_COOL_TIME);
+		}
+		else if (dash1Available)
+		{
+			dash1Available = !dash1Available;
+			Invoke("ResetDash1", DASH_COOL_TIME);
+		}
 	}
 
 	public Weapon.WeaponType GetWeaponType()

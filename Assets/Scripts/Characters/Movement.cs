@@ -122,7 +122,7 @@ public class Movement : MonoBehaviour {
 	//turns off physics so that an air-dash can begin
 	public void StartDash ()
 	{
-		playerData.RemoveDashMarker();
+		playerData.RemoveDash();
 		playerData.SetDashing(true);
 		rigidbody2D.gravityScale = 0;
 		rigidbody2D.velocity = Vector2.zero;
@@ -141,7 +141,7 @@ public class Movement : MonoBehaviour {
 	{
 		Collider2D leftFloorType = Physics2D.Raycast(leftGroundCheck.position, -Vector2.up, groundRadius, groundType).collider;
 		Collider2D rightFloorType = Physics2D.Raycast(rightGroundCheck.position, -Vector2.up, groundRadius, groundType).collider;
-		playerData.SetGrounded(leftFloorType != null && rightFloorType != null);
+		playerData.SetGrounded(leftFloorType != null || rightFloorType != null);
 		if ( playerData.IsGrounded())
 		{
 			if (jumpLag < Time.time)
