@@ -9,7 +9,6 @@ public class Actor : MonoBehaviour {
 	protected float STUN_FORCE = 3f;
 	protected bool stunned = false;
 
-	protected bool burning = false;
 	protected int BURN_DAMAGE;
 	protected float BURN_TICK;
 	protected float burnTicker;
@@ -27,18 +26,6 @@ public class Actor : MonoBehaviour {
 			MOVING_RIGHT = true;
 		else if (rigidbody2D.velocity.x < 0f)
 			MOVING_RIGHT = false;
-	}
-
-	void FixedUpdate ()
-	{
-		if (burning)
-			if (burnTicker < Time.time)
-			{
-				LifeChange(-BURN_DAMAGE);
-				burnTicker = Time.time + BURN_TICK;
-			}
-			if (burnDuration < Time.time)
-				burning = false;
 	}
 
 	// give damage while also inducing a knock-back effect
@@ -62,11 +49,23 @@ public class Actor : MonoBehaviour {
 	// Do some Damage over Time (no knockback)
 	public void Burn(int damage, float tick, float duration)
 	{
+		CancelInvoke("Extinguish");
 		BURN_DAMAGE = damage;
 		BURN_TICK = tick;
-		burnTicker = Time.time + tick;
-		burnDuration = Time.time + duration;
-		burning = true;
+		Invoke("Extinguish", duration);
+		//burning = true;
+	}
+
+	protected void Extinguish()
+	{
+		//burning = false;
+		CancelInvoke("BurnTick");
+	}
+
+	protected void BurnTick()
+	{
+		LifeChange(-BURN_DAMAGE);
+		Invoke("BurnTick", BURN_TICK);
 	}
 
 	public bool IsMovingRight()

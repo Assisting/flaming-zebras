@@ -10,7 +10,7 @@ public class Explosive : Projectile {
 	protected float LONG_RANGE;
 	protected int HIGH_DAMAGE;
 	protected int LOW_DAMAGE;
-	protected float armingWait; // so proximity explosives don't immediately try to kill the firer
+	protected bool armed = false;
 
 	// Called after instantiation to allow levelled logic/functionality
 	public void SetLevel(int value)
@@ -46,5 +46,11 @@ public class Explosive : Projectile {
 		Collider2D target = Physics2D.OverlapCircle(transform.position, CLOSE_RANGE, targetTypes);
 		if (target != null && ORIGIN != target.gameObject)
 			Explode();
+	}
+
+	//arm the explosive
+	protected void Arm()
+	{
+		armed = true;
 	}
 }

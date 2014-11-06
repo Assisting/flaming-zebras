@@ -36,7 +36,6 @@ public class Weapon : MonoBehaviour {
 	private int MELEE_DAMAGE = 60;
 	
 	private float RELOAD_WAIT = 0f; // time to wait in between clip regeneration
-	private float reloadTimer; // timestamp for clip regeneration
 	private int MAX_BULLETS; //leveled maximum of shots between reload-waits
 	private int BULLETS_FIRED = 0;
 
@@ -58,9 +57,6 @@ public class Weapon : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
-		if (reloadTimer <= Time.time)
-			BULLETS_FIRED = 0;
-
 		if ( Input.GetButton( keyBind.AttackButton() ) && !playerData.isStunned() )
 			FireWeapon();
 	}
@@ -117,7 +113,8 @@ public class Weapon : MonoBehaviour {
 			return;
 			
 		BULLETS_FIRED ++;
-		reloadTimer = Time.time + RELOAD_WAIT;
+		CancelInvoke("Reload");
+		Invoke("Reload", RELOAD_WAIT);
 
 		if ( playerData.IsMovingRight() )
 			muzzle = rightMuzzle;
@@ -156,6 +153,11 @@ public class Weapon : MonoBehaviour {
 				return;
 			}
 		}
+	}
+
+	private void Reload()
+	{
+		BULLETS_FIRED = 0;
 	}
 
 	private void FireBullet()

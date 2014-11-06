@@ -13,7 +13,7 @@ public class MissleHandler : Explosive {
 
 	// Use this for initialization
 	void Start () {
-		armingWait = Time.time + 0.3f;
+		Invoke("Arm", 0.3f);
 		LOW_DAMAGE = 8;
 		HIGH_DAMAGE = 15; //really 23
 		CLOSE_RANGE = 0.9f;
@@ -27,10 +27,8 @@ public class MissleHandler : Explosive {
 		rigidbody2D.velocity = transform.right * MISSLE_SPEED;
 
 		//armed functions
-		if (armingWait == -1f || armingWait <= Time.time)
+		if (armed)
 		{
-			armingWait = -1f; // make armed (in case it wasn't)
-
 			if (level > 1) // possibly do special things
 			{
 				Collider2D closestTarget = Physics2D.OverlapCircle(sensorPoint.position, DETECTION_RADIUS, targetTypes);
@@ -81,7 +79,7 @@ public class MissleHandler : Explosive {
 	{
 		if (other.tag == "Player" || other.tag == "Enemy" || other.tag == "Wall")
 		{
-			if (armingWait == -1f)
+			if (armed)
 				Explode();
 			else if (other.tag != "Wall")
 			{
