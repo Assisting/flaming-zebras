@@ -25,6 +25,7 @@ public class Weapon : MonoBehaviour {
 	public Rigidbody2D missle;
 
 	private PlayerData playerData;
+	private KeyBindings keyBind;
 	private Transform muzzle;
 
 	private float LASER_FADE; //time for laser to disappear
@@ -44,6 +45,7 @@ public class Weapon : MonoBehaviour {
 	void Awake ()
 	{
 		playerData = GetComponent<PlayerData>();
+		keyBind = GetComponent<KeyBindings>();
 		rightMelee = transform.Find("RightSwordBox");
 		leftMelee = transform.Find("LeftSwordBox");
 	}
@@ -59,7 +61,7 @@ public class Weapon : MonoBehaviour {
 		if (reloadTimer <= Time.time)
 			BULLETS_FIRED = 0;
 
-		if (Input.GetButton("P1Fire1"))
+		if ( Input.GetButton( keyBind.AttackButton() ) && !playerData.isStunned() )
 			FireWeapon();
 	}
 

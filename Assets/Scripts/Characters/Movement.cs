@@ -10,7 +10,8 @@ public class Movement : MonoBehaviour {
 
 	private Vector2 endPoint; //endpoint of any particular dash
 
-	public Transform groundCheck; // location of object from which to raycast toward the ground
+	public Transform leftGroundCheck; // location of object from which to raycast toward the ground
+	public Transform rightGroundCheck;
 	public LayerMask groundType; // what is ground?
 
 	private float groundRadius = 0.07f; // abstract height above a collider where players can be considered "on the ground"
@@ -138,13 +139,16 @@ public class Movement : MonoBehaviour {
 	//run in FixedUpdate() to update grounded status, animation, current platform etc.
 	private void GroundCheck()
 	{
-		Collider2D floorType = Physics2D.Raycast(groundCheck.position, -Vector2.up, groundRadius, groundType).collider;
-		playerData.SetGrounded(floorType != null);
+		Collider2D leftFloorType = Physics2D.Raycast(leftGroundCheck.position, -Vector2.up, groundRadius, groundType).collider;
+		Collider2D rightFloorType = Physics2D.Raycast(rightGroundCheck.position, -Vector2.up, groundRadius, groundType).collider;
+		playerData.SetGrounded(leftFloorType != null && rightFloorType != null);
 		if ( playerData.IsGrounded())
 		{
 			if (jumpLag < Time.time)
+			{
 				playerData.ResetJumpCounter();
 				playerData.setStunned(false);
+			}
 		}
 	}
 }

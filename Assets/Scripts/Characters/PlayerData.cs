@@ -20,6 +20,11 @@ public class PlayerData : Actor
 
 //-----Attribute Variables---------------------------------------------------------------------------------------------------
 
+	//Player Number
+	static int PLAYERNUM = 1;
+
+	public Rigidbody2D Player;
+
 	//Interfaces
 	private Weapon weapon;
 
@@ -81,6 +86,11 @@ public class PlayerData : Actor
 		moneyAmount = 1000; //starting money total
 
 		LIFE = 100; //starting life total
+
+		PLAYERNUM++;
+
+		if (PLAYERNUM < 5)
+			Instantiate(Player, new Vector2(0f, 0f), transform.rotation);
 	}
 
 
@@ -151,6 +161,12 @@ public class PlayerData : Actor
 	}
 
 //-----Getters and Setters---------------------------------------------------------------------------------------------------
+
+	//used to get player number during instantiation (DOES NOT WORK AT RUNTIME!!)
+	public int GetPlayerNum()
+	{
+		return PLAYERNUM;
+	}
 
 	public bool CanJump()
 	{
