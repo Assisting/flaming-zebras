@@ -8,10 +8,6 @@ public class BulletHandler : Projectile {
 
 	// Use this for initialization
 	void Start () {
-	}
-	
-	// Update is called once per frame
-	void Update () {
 		rigidbody2D.velocity = transform.right * BULLET_VELOCITY;
 	}
 

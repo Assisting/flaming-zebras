@@ -170,7 +170,7 @@ public class Weapon : MonoBehaviour {
 		if (shotgun) //spray bullets
 		{
 			rotateDegrees = Random.Range(-10f, 10f);
-			newBullet.transform.rotation = Quaternion.Euler(0f, 0f, rotateDegrees);
+			newBullet.transform.Rotate( new Vector3(0f, 0f, rotateDegrees) );
 			FireWeapon(); //shoot whole "clip" (shell)
 		}			
 	}

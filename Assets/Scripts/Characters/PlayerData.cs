@@ -77,8 +77,8 @@ public class PlayerData : Actor
 
 		LevelUp(Attribute.Dash, 1); //initialize dashing
 		
-		LevelUp (Attribute.WeaponLevel, 2);
-		LevelUp(Attribute.WeaponType, Weapon.WeaponType.Bomb); //initialize weapons
+		LevelUp (Attribute.WeaponLevel, 3);
+		LevelUp(Attribute.WeaponType, Weapon.WeaponType.Bullet); //initialize weapons
 
 		moneyAmount = 1000; //starting money total
 
@@ -87,8 +87,8 @@ public class PlayerData : Actor
 		PLAYERNUM++;
 
 		//for making four players quick
-		if (PLAYERNUM < 5)
-			Instantiate(Player, new Vector2(0f, 0f), transform.rotation);
+		//if (PLAYERNUM < 5)
+			//Instantiate(Player, new Vector2(0f, 0f), transform.rotation);
 	}
 
 
