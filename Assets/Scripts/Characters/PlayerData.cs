@@ -21,7 +21,7 @@ public class PlayerData : Actor
 //-----Attribute Variables---------------------------------------------------------------------------------------------------
 
 	//Player Number
-	static int PLAYERNUM = 1;
+	static int PLAYERNUM = 1; //assigning a new number to each player as they spawn
 
 	public Rigidbody2D Player;
 
