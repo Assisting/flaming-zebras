@@ -9,6 +9,7 @@ public class BombHandler : Explosive {
 
 	// Use this for initialization
 	void Start () {
+		Invoke("Arm", 0.4f);
 		LOW_DAMAGE = 15;
 		HIGH_DAMAGE = 30; //really 45
 		CLOSE_RANGE = 1f;
@@ -60,6 +61,7 @@ public class BombHandler : Explosive {
 
 	public void OnTriggerEnter2D(Collider2D other)
 	{
-		ExplodeCheck();
+		if (level == 2)
+			ExplodeCheck();
 	}	
 }
