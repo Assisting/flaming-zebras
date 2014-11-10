@@ -3,7 +3,7 @@ using System.Collections;
 
 public class DangerFloor : MonoBehaviour {
 
-	private float DAMAGE;
+	private int DAMAGE;
 
 	// Use this for initialization
 	void Start () {
