@@ -7,6 +7,7 @@ public class Movement : MonoBehaviour {
 
 	private PlayerData playerData;
 	private KeyBindings keyBind;
+	Animator anim;
 
 	private Vector2 endPoint; //endpoint of any particular dash
 
@@ -28,6 +29,11 @@ public class Movement : MonoBehaviour {
 	{
 		playerData = GetComponent<PlayerData>();
 		keyBind = GetComponent<KeyBindings>();
+	}
+
+	void Start()
+	{
+		anim = GetComponent<Animator>();
 	}
 
 	// Update is called once per frame (used for non-physics and detecting single presses of buttons)
@@ -57,6 +63,8 @@ public class Movement : MonoBehaviour {
 				currentVector.y = 0;
 				rigidbody2D.velocity = currentVector;
 			}
+
+			anim.SetFloat("MoveSpeed", rigidbody2D.velocity.x);
 		}
 
 		//dash right
@@ -79,15 +87,21 @@ public class Movement : MonoBehaviour {
 		{
 			playerXAxisValue = Input.GetAxis( keyBind.playerXAxis() );
 			//move left
-			if (playerXAxisValue < -0.7f && !wallLeft && !playerData.isStunned() && rigidbody2D.velocity.x > -playerData.GetMAX_SPEED() )
+			if (playerXAxisValue < -0.7f)
 			{
-				rigidbody2D.AddForce( -Vector2.right * playerData.GetMOVE_SPEED() );
+				if ( wallLeft || playerData.isStunned() || rigidbody2D.velocity.x >= -playerData.GetMAX_SPEED() )
+				{
+					rigidbody2D.AddForce( -Vector2.right * playerData.GetMOVE_SPEED() );
+				}
 			}
 
 			//move right
-			if (playerXAxisValue > 0.7f && !wallRight && !playerData.isStunned() && rigidbody2D.velocity.x < playerData.GetMAX_SPEED() )
+			else if (playerXAxisValue > 0.7f)
 			{
-				rigidbody2D.AddForce( Vector2.right * playerData.GetMOVE_SPEED() );
+				if ( wallRight || playerData.isStunned() || rigidbody2D.velocity.x <= playerData.GetMAX_SPEED() )
+				{
+					rigidbody2D.AddForce( Vector2.right * playerData.GetMOVE_SPEED() );
+				}
 			}
 		}
 	}

@@ -87,8 +87,8 @@ public class PlayerData : Actor
 		PLAYERNUM++;
 
 		//for making four players quick
-		if (PLAYERNUM < 5)
-			Instantiate(Player, new Vector2(0f, 0f), transform.rotation);
+		//if (PLAYERNUM < 5)
+			//Instantiate(Player, new Vector2(0f, 0f), transform.rotation);
 	}
 
 
