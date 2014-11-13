@@ -21,7 +21,7 @@ public class PlayerData : Actor
 //-----Attribute Variables---------------------------------------------------------------------------------------------------
 
 	//Player Number
-	static int PLAYERNUM = 1; //assigning a new number to each player as they spawn
+	public int PLAYERNUM = 1; //assigning a new number to each player as they spawn
 
 	public Rigidbody2D Player;
 
@@ -86,9 +86,18 @@ public class PlayerData : Actor
 
 		PLAYERNUM++;
 
-		//for making four players quick
-		if (PLAYERNUM < 5)
-			Instantiate(Player, new Vector2(0f, 0f), transform.rotation);
+		// for making four players quick
+		// Each time one of these functions is called, this script will run again, upon the new creation. 
+		// This means Player 1 is creating player 2, P2 makes P3, and P3 makes P4
+		if (PLAYERNUM == 2)
+			Instantiate(Player, new Vector2(-5f, 5f), transform.rotation);
+		if (PLAYERNUM == 3)
+			Instantiate(Player, new Vector2(5f, 5f), transform.rotation);
+		if (PLAYERNUM == 4)
+			Instantiate(Player, new Vector2(0f, 8f), transform.rotation);
+		// Once the instantiation is finished, set the PLAYERNUM back to what is needed to operate the correct player.
+		// since the controls are bound to that character via the PLAYERNUM
+		PLAYERNUM--;
 	}
 
 
