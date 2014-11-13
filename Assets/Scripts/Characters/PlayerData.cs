@@ -86,6 +86,7 @@ public class PlayerData : Actor
 
 		PLAYERNUM++;
 
+<<<<<<< HEAD
 		// for making four players quick
 		// Each time one of these functions is called, this script will run again, upon the new creation. 
 		// This means Player 1 is creating player 2, P2 makes P3, and P3 makes P4
@@ -98,6 +99,11 @@ public class PlayerData : Actor
 		// Once the instantiation is finished, set the PLAYERNUM back to what is needed to operate the correct player.
 		// since the controls are bound to that character via the PLAYERNUM
 		PLAYERNUM--;
+=======
+		//for making four players quick
+		//if (PLAYERNUM < 5)
+			//Instantiate(Player, new Vector2(0f, 0f), transform.rotation);
+>>>>>>> origin/master
 	}
 
 
