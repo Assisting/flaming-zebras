@@ -84,7 +84,7 @@ public class PlayerData : Actor
 
 		LIFE = 100; //starting life total
 
-		PLAYERNUM++;
+		/*PLAYERNUM++;
 		
 		// for making four players quick
 		// Each time one of these functions is called, this script will run again, upon the new creation. 
@@ -97,7 +97,7 @@ public class PlayerData : Actor
 			Instantiate(Player, new Vector2(0f, 8f), transform.rotation);
 		// Once the instantiation is finished, set the PLAYERNUM back to what is needed to operate the correct player.
 		// since the controls are bound to that character via the PLAYERNUM
-		PLAYERNUM--;
+		PLAYERNUM--;*/
 	}
 
 

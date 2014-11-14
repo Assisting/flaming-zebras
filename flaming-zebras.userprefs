@@ -4,11 +4,8 @@
     <Files>
       <File FileName="Assets\Scripts\Characters\PlayerData.cs" Line="142" Column="5" />
       <File FileName="Assets\Scripts\Characters\KeyBindings.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Camera1Shift.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Characters\Actor.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Characters\Movement.cs" Line="169" Column="1" />
-      <File FileName="Assets\P1PressTest.cs" Line="17" Column="1" />
-      <File FileName="Assets\ControllerSet.cs" Line="18" Column="1" />
+      <File FileName="Assets\Scripts\Characters\Movement.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
