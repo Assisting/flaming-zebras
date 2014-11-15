@@ -321,4 +321,12 @@ public class PlayerData : Actor
 						return 2;
 		else return 0;
 	}
+	public bool isDash1Available()
+	{
+		return dash1Available;
+	}
+	public bool isDash2Available()
+	{
+		return dash2Available;
+	}
 }

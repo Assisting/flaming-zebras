@@ -20,6 +20,6 @@ public class DashText : MonoBehaviour {
 	void setNumDashesText()
 	{
 		dashes = playerData.numDashesAvailable ();
-		playerDashes.text = "Dashes Available: " + dashes.ToString ();
+		playerDashes.text = "Dashes: ";
 	}
 }
