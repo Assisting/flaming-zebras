@@ -303,4 +303,22 @@ public class PlayerData : Actor
 	{
 		moneyAmount += change;
 	}
+
+	// ----------------------------
+	// For Royce's implementations of GUIs. 
+	public int getHealth()
+	{
+		return LIFE;
+	}
+
+	public int numDashesAvailable()
+	{
+		if (!dash1Available && !dash2Available)
+						return 0;
+		else if ((dash1Available || dash2Available) && !(dash1Available && dash2Available))
+						return 1;
+		else if (dash1Available && dash2Available)
+						return 2;
+		else return 0;
+	}
 }
