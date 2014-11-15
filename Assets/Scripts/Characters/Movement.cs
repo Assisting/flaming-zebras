@@ -89,7 +89,7 @@ public class Movement : MonoBehaviour {
 			//move left
 			if (playerXAxisValue < -0.7f)
 			{
-				if ( wallLeft || playerData.isStunned() || rigidbody2D.velocity.x >= -playerData.GetMAX_SPEED() )
+				if ( !wallLeft && !playerData.isStunned() && rigidbody2D.velocity.x >= -playerData.GetMAX_SPEED() )
 				{
 					rigidbody2D.AddForce( -Vector2.right * playerData.GetMOVE_SPEED() );
 				}
@@ -98,7 +98,7 @@ public class Movement : MonoBehaviour {
 			//move right
 			else if (playerXAxisValue > 0.7f)
 			{
-				if ( wallRight || playerData.isStunned() || rigidbody2D.velocity.x <= playerData.GetMAX_SPEED() )
+				if ( !wallRight && !playerData.isStunned() && rigidbody2D.velocity.x <= playerData.GetMAX_SPEED() )
 				{
 					rigidbody2D.AddForce( Vector2.right * playerData.GetMOVE_SPEED() );
 				}
