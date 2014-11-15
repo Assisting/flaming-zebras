@@ -329,4 +329,9 @@ public class PlayerData : Actor
 	{
 		return dash2Available;
 	}
+
+	public int getMoney()
+	{
+		return moneyAmount;
+	}
 }
