@@ -1,28 +1,28 @@
 fileFormatVersion: 2
-guid: df37c40f43e020a49982bdb58fb6c956
+guid: cd2f6a85f5dff6a43a3775586bb02bf9
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Jumpingp2
-    21300002: Jumpingp2_0
-    21300004: Jumpingp2_1
-    21300006: Jumpingp2_2
-    21300008: Jumpingp2_3
-    21300010: Jumpingp2_4
-    21300012: Jumpingp2_5
-    21300014: Jumpingp2_6
-    21300016: Jumpingp2_7
-    21300018: Jumpingp2_8
-    21300020: Jumpingp2_9
-    21300022: Jumpingp2_10
-    21300024: Jumpingp2_11
-    21300026: Jumpingp2_12
-    21300028: Jumpingp2_13
-    21300030: Jumpingp2_14
-    21300032: Jumpingp2_15
-    21300034: Jumpingp2_16
-    21300036: Jumpingp2_17
-    21300038: Jumpingp2_18
-    21300040: Jumpingp2_19
+    21300000: Jumpinngp2
+    21300002: Jumpinngp2_0
+    21300004: Jumpinngp2_1
+    21300006: Jumpinngp2_2
+    21300008: Jumpinngp2_3
+    21300010: Jumpinngp2_4
+    21300012: Jumpinngp2_5
+    21300014: Jumpinngp2_6
+    21300016: Jumpinngp2_7
+    21300018: Jumpinngp2_8
+    21300020: Jumpinngp2_9
+    21300022: Jumpinngp2_10
+    21300024: Jumpinngp2_11
+    21300026: Jumpinngp2_12
+    21300028: Jumpinngp2_13
+    21300030: Jumpinngp2_14
+    21300032: Jumpinngp2_15
+    21300034: Jumpinngp2_16
+    21300036: Jumpinngp2_17
+    21300038: Jumpinngp2_18
+    21300040: Jumpinngp2_19
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -64,7 +64,7 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: Jumpingp2_0
+    - name: Jumpinngp2_0
       rect:
         serializedVersion: 2
         x: 0
@@ -74,7 +74,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Jumpingp2_1
+    - name: Jumpinngp2_1
       rect:
         serializedVersion: 2
         x: 24
@@ -84,7 +84,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Jumpingp2_2
+    - name: Jumpinngp2_2
       rect:
         serializedVersion: 2
         x: 48
@@ -94,7 +94,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Jumpingp2_3
+    - name: Jumpinngp2_3
       rect:
         serializedVersion: 2
         x: 72
@@ -104,7 +104,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Jumpingp2_4
+    - name: Jumpinngp2_4
       rect:
         serializedVersion: 2
         x: 96
@@ -114,7 +114,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Jumpingp2_5
+    - name: Jumpinngp2_5
       rect:
         serializedVersion: 2
         x: 0
@@ -124,7 +124,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Jumpingp2_6
+    - name: Jumpinngp2_6
       rect:
         serializedVersion: 2
         x: 24
@@ -134,7 +134,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Jumpingp2_7
+    - name: Jumpinngp2_7
       rect:
         serializedVersion: 2
         x: 48
@@ -144,7 +144,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Jumpingp2_8
+    - name: Jumpinngp2_8
       rect:
         serializedVersion: 2
         x: 72
@@ -154,7 +154,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Jumpingp2_9
+    - name: Jumpinngp2_9
       rect:
         serializedVersion: 2
         x: 96
@@ -164,7 +164,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Jumpingp2_10
+    - name: Jumpinngp2_10
       rect:
         serializedVersion: 2
         x: 0
@@ -174,7 +174,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Jumpingp2_11
+    - name: Jumpinngp2_11
       rect:
         serializedVersion: 2
         x: 24
@@ -184,7 +184,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Jumpingp2_12
+    - name: Jumpinngp2_12
       rect:
         serializedVersion: 2
         x: 48
@@ -194,7 +194,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Jumpingp2_13
+    - name: Jumpinngp2_13
       rect:
         serializedVersion: 2
         x: 72
@@ -204,7 +204,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Jumpingp2_14
+    - name: Jumpinngp2_14
       rect:
         serializedVersion: 2
         x: 96
@@ -214,7 +214,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Jumpingp2_15
+    - name: Jumpinngp2_15
       rect:
         serializedVersion: 2
         x: 0
@@ -224,7 +224,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Jumpingp2_16
+    - name: Jumpinngp2_16
       rect:
         serializedVersion: 2
         x: 24
@@ -234,7 +234,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Jumpingp2_17
+    - name: Jumpinngp2_17
       rect:
         serializedVersion: 2
         x: 48
@@ -244,7 +244,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Jumpingp2_18
+    - name: Jumpinngp2_18
       rect:
         serializedVersion: 2
         x: 72
@@ -254,7 +254,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Jumpingp2_19
+    - name: Jumpinngp2_19
       rect:
         serializedVersion: 2
         x: 96
