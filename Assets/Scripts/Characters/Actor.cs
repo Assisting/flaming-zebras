@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class Actor : MonoBehaviour {
 
-	public int LIFE = 100;
+	public int MAXLIFE = 100;
+	public int CURLIFE = 100;
 	protected bool MOVING_RIGHT;
 
 	protected float STUN_FORCE = 3f;
@@ -43,7 +44,7 @@ public class Actor : MonoBehaviour {
 	// Alter life total by the given amount
 	public void LifeChange(int value)
 	{
-		LIFE += value;
+		CURLIFE += value;
 	}
 
 	// Do some Damage over Time (no knockback)

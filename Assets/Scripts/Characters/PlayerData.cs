@@ -82,7 +82,8 @@ public class PlayerData : Actor
 
 		moneyAmount = 1000; //starting money total
 
-		LIFE = 100; //starting life total
+		MAXLIFE = 100; //starting life total
+		CURLIFE = 100; // current for testing
 
 		/*PLAYERNUM++;
 		
@@ -308,7 +309,11 @@ public class PlayerData : Actor
 	// For Royce's implementations of GUIs. 
 	public int getHealth()
 	{
-		return LIFE;
+		return CURLIFE;
+	}
+	public int getMaxHealth()
+	{
+		return MAXLIFE;
 	}
 
 	public int numDashesAvailable()
