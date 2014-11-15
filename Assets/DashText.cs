@@ -5,7 +5,7 @@ public class DashText : MonoBehaviour {
 
 	public PlayerData playerData;
 	public GUIText playerDashes;
-	private int dashes;
+	//private int dashes;
 
 	// Use this for initialization
 	void Start () {
@@ -19,7 +19,7 @@ public class DashText : MonoBehaviour {
 
 	void setNumDashesText()
 	{
-		dashes = playerData.numDashesAvailable ();
+		//dashes = playerData.numDashesAvailable ();
 		playerDashes.text = "Dashes: ";
 	}
 }
