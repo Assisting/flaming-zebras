@@ -45,15 +45,7 @@ public class Movement : MonoBehaviour {
 			//jump
 			if ( Input.GetButtonDown( keyBind.JumpButton() ) && playerData.CanJump() )
 			{
-				playerData.IncrementJumpCounter();
-				if ( playerData.IsGrounded() ) //ground jump
-				{
-					jumpLag = Time.time + 0.02f; //wait one frame before allowing the ground to reset jump counter
-					playerData.SetGrounded(false);
-					rigidbody2D.AddForce( Vector2.up * playerData.GetJUMP_FORCE() );
-				}
-				else //air jump
-					rigidbody2D.velocity = Vector2.up * 3f;
+				anim.SetTrigger("Jump"); //calls vertical jump in animation
 			}
 
 			//let go of jump
@@ -65,6 +57,7 @@ public class Movement : MonoBehaviour {
 			}
 
 			anim.SetFloat("MoveSpeed", rigidbody2D.velocity.x);
+			anim.SetFloat("VertSpeed", rigidbody2D.velocity.y);
 		}
 
 		//dash right
@@ -107,6 +100,20 @@ public class Movement : MonoBehaviour {
 	}
 
 //-----Custom Functions------------------------------------------------------------------------------------------------------
+
+	//Called by the animator to make the character leave the ground
+	void JumpStuff()
+	{
+		playerData.IncrementJumpCounter();
+		if ( playerData.IsGrounded() ) //ground jump
+		{
+			jumpLag = Time.time + 0.02f; //wait one frame before allowing the ground to reset jump counter
+			playerData.SetGrounded(false);
+			rigidbody2D.AddForce( Vector2.up * playerData.GetJUMP_FORCE() );
+		}
+		else //air jump
+			rigidbody2D.velocity = Vector2.up * 3f;
+	}
 
 	// Set up the player to dash to the left
 	public void DashLeft()
