@@ -48,14 +48,6 @@ public class Movement : MonoBehaviour {
 				anim.SetTrigger("Jump"); //calls vertical jump in animation
 			}
 
-			//let go of jump
-			if ( Input.GetButtonUp( keyBind.JumpButton() ) && rigidbody2D.velocity.y >= 0)
-			{
-				Vector2 currentVector = rigidbody2D.velocity;
-				currentVector.y = 0;
-				rigidbody2D.velocity = currentVector;
-			}
-
 			anim.SetFloat("MoveSpeed", rigidbody2D.velocity.x);
 			anim.SetFloat("VertSpeed", rigidbody2D.velocity.y);
 		}
@@ -76,8 +68,16 @@ public class Movement : MonoBehaviour {
 	
 		if ( playerData.IsDashing() )
 			continueDash();
-		else //don't do any movement unless we are not dashing
+		else if( !playerData.isStunned() ) //don't do any movement unless we are not dashing (and aren't stunned)
 		{
+			//let go of jump
+			if ( !Input.GetButton( keyBind.JumpButton() ) && rigidbody2D.velocity.y >= 0f)
+			{
+				Vector2 currentVector = rigidbody2D.velocity;
+				currentVector.y = 0f;
+				rigidbody2D.velocity = currentVector;
+			}
+
 			playerXAxisValue = Input.GetAxis( keyBind.playerXAxis() );
 			//move left
 			if (playerXAxisValue < -0.7f)
