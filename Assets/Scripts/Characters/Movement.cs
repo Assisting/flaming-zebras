@@ -169,7 +169,13 @@ public class Movement : MonoBehaviour {
 			{
 				playerData.ResetJumpCounter();
 				playerData.setStunned(false);
+				anim.SetBool("Grounded", true);
 			}
 		}
+		else
+		{
+			anim.SetBool("Grounded", false);
+		}
+		
 	}
 }
