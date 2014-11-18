@@ -4,6 +4,7 @@ using System.Collections;
 public class MoneyText : MonoBehaviour {
 
 	public PlayerData playerData;
+	public KeyBindings keybind;
 	public GUIText playerMoney;
 	private int money;
 	
@@ -21,5 +22,9 @@ public class MoneyText : MonoBehaviour {
 	{
 		money = playerData.getMoney();
 		playerMoney.text = "Money: " + money.ToString ();
+		if (Input.GetButton (keybind.ShowMoneyButton()))
+						guiText.enabled = true;
+				else
+						guiText.enabled = false;
 	}
 }
