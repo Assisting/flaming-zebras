@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class BulletHandler : Projectile {
@@ -22,7 +22,7 @@ public class BulletHandler : Projectile {
 				Destroy(gameObject);
 			}
 		}
-		if (tagHit == "Wall")
+		if (tagHit == "Wall" || tagHit == "Platform")
 			Destroy(gameObject);
 	}
 }

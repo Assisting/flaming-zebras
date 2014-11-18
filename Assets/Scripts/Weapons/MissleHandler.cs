@@ -77,11 +77,11 @@ public class MissleHandler : Explosive {
 	// For missiles that hit walls, or something else before being armed
 	public void OnTriggerEnter2D (Collider2D other)
 	{
-		if (other.tag == "Player" || other.tag == "Enemy" || other.tag == "Wall")
+		if (other.tag == "Player" || other.tag == "Enemy" || other.tag == "Wall" || other.tag == "Platform")
 		{
 			if (armed)
 				Explode();
-			else if (other.tag != "Wall")
+			else if (other.tag != "Wall" && other.tag != "Platform")
 			{
 				other.GetComponent<PlayerData>().LifeChange(-IMPACT_DAMAGE);
 			}

@@ -1,17 +1,18 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
-public class Teleporter : MonoBehaviour {
+public class Teleporter : Usable{
 
-	public Transform shop; //the location of the shop teleporter
+	public Vector2 homeTeleport; //the location of the shop teleporter
 
 	// Use this for initialization
 	void Start () {
-		shop = GameObject.Find("HomeTeleport").transform;
+		homeTeleport = GameObject.Find("HomeTeleport").transform.position;
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
+	public override void Use(GameObject caller)
+	{
+		caller.GetComponent<PlayerData>().setLastTeleport(transform.position);
+		caller.transform.position = homeTeleport;
 	}
 }

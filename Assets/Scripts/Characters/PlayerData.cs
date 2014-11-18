@@ -58,6 +58,9 @@ public class PlayerData : Actor
 	//Money
 	private int moneyAmount; // The amount of money a player has
 
+	//Teleporting
+	private Vector2 lastTeleport; //the last teleporter that the player walked through
+
 //-----Unity Functions--------------------------------------------------------------------------------------------------------
 
 	void Awake ()
@@ -304,9 +307,7 @@ public class PlayerData : Actor
 	{
 		moneyAmount += change;
 	}
-
-	// ----------------------------
-	// For Royce's implementations of GUIs. 
+ 
 	public int getHealth()
 	{
 		return CURLIFE;
@@ -338,5 +339,15 @@ public class PlayerData : Actor
 	public int getMoney()
 	{
 		return moneyAmount;
+	}
+
+	public Vector2 getLastTeleport()
+	{
+		return lastTeleport;
+	}
+
+	public void setLastTeleport(Vector2 teleporter)
+	{
+		lastTeleport = teleporter;
 	}
 }
