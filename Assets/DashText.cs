@@ -3,7 +3,6 @@ using System.Collections;
 
 public class DashText : MonoBehaviour {
 
-	public PlayerData playerData;
 	public GUIText playerDashes;
 	//private int dashes;
 

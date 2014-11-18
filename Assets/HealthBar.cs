@@ -24,6 +24,6 @@ public class HealthBar : MonoBehaviour {
 		float lifeBar = ((float)curHealth / (float)maxHealth) * 100f;
 		if (lifeBar > 100f)
 						lifeBar = 100f;
-		guiTexture.pixelInset = new Rect (10f, 2f, lifeBar, 10);
+		guiTexture.pixelInset = new Rect (10f, -17f, lifeBar, 10);
 	}
 }

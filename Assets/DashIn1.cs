@@ -23,8 +23,8 @@ public class DashIn1 : MonoBehaviour {
 		}
 		else if (playerData.numDashesAvailable() == 1)
 		{
-			Dash1.guiTexture.enabled = false;
-			Dash2.guiTexture.enabled = true;
+			Dash1.guiTexture.enabled = true;
+			Dash2.guiTexture.enabled = false;
 		}
 		else
 		{
