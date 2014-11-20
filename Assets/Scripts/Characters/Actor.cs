@@ -5,6 +5,7 @@ public class Actor : MonoBehaviour {
 
 	public int MAXLIFE = 100;
 	public int CURLIFE = 100;
+	protected bool dead;
 	protected bool MOVING_RIGHT;
 
 	protected float STUN_FORCE = 3f;
@@ -45,6 +46,13 @@ public class Actor : MonoBehaviour {
 	public void LifeChange(int value)
 	{
 		CURLIFE += value;
+		if (CURLIFE > MAXLIFE)
+						CURLIFE = MAXLIFE;
+		if (CURLIFE < 0)
+		{
+			CURLIFE = 0; 
+			dead = true;
+		}
 	}
 
 	// Do some Damage over Time (no knockback)
