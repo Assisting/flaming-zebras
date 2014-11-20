@@ -276,6 +276,37 @@ public class PlayerData : Actor
 		return CURRENT_WEAPON;
 	}
 
+	public int GetAttributeLevel(Attribute attribute)
+	{
+		switch (attribute)
+		{
+			case Attribute.Move:
+			{
+				return MOVE_LEVEL;
+			}
+			case Attribute.Jump:
+			{
+				return JUMP_LEVEL;
+			}
+			case Attribute.Dash:
+			{
+				return DASH_LEVEL;
+			}
+			case Attribute.WeaponLevel:
+			{
+				return WEAPON_LEVEL;
+			}
+			case Attribute.Money:
+			{
+				return moneyAmount;
+			}
+			default:
+			{
+				return 0;
+			}
+		}
+	}
+
 	public int GetMoveLevel()
 	{
 		return MOVE_LEVEL;
@@ -334,11 +365,6 @@ public class PlayerData : Actor
 	public bool isDash2Available()
 	{
 		return dash2Available;
-	}
-
-	public int getMoney()
-	{
-		return moneyAmount;
 	}
 
 	public Vector2 getLastTeleport()

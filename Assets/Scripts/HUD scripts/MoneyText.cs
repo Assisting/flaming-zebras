@@ -20,7 +20,7 @@ public class MoneyText : MonoBehaviour {
 	
 	private void setMoneyText()
 	{
-		money = playerData.getMoney();
+		money = playerData.GetMoney();
 		playerMoney.text = "Money: " + money.ToString ();
 		if (Input.GetButton (keybind.ShowMoneyButton() ) )
 						guiText.enabled = true;
