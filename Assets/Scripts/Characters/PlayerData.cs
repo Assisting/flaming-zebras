@@ -9,7 +9,7 @@ public class PlayerData : Actor
 
 	private struct MoveLevel
 	{
-		public static float[] moveSpeed = new float[3] { 30f, 35f, 40f };
+		public static float[] moveSpeed = new float[3] { 20f, 25f, 30f };
 		public static float[] maxSpeed = new float[3] { 8f, 10f, 12f };
 	}
 
