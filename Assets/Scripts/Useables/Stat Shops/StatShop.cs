@@ -7,7 +7,7 @@ public class StatShop : Usable {
 
 	public override void Use(GameObject caller)
 	{
-		if (caller.tag == "player") //only acknowledge players
+		if (caller.tag == "Player") //only acknowledge players
 		{
 			PlayerData playerData = caller.GetComponent<PlayerData>();
 			int statLevel = playerData.GetAttributeLevel(stat);

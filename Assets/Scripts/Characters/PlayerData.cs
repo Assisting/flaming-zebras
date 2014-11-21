@@ -119,7 +119,7 @@ public class PlayerData : Actor
 			Collider2D[] usables = Physics2D.OverlapAreaAll(topLeft, bottomRight, usableLayer);
 			for (int i = 0; i < usables.Length; i ++)
 			{
-				usables[i].GetComponent<Usable>().Use(gameObject);
+				usables[i].SendMessage("Use", gameObject);
 			}
 		}
 	}

@@ -7,7 +7,7 @@ public class WeaponShop : Usable {
 
 	public override void Use(GameObject caller)
 	{
-		if (caller.tag == "player") //only acknowledge players
+		if (caller.tag == "Player") //only acknowledge players
 		{
 			caller.GetComponent<PlayerData>().LevelUp(PlayerData.Attribute.WeaponType, weapon);
 		}

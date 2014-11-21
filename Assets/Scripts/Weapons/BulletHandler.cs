@@ -9,6 +9,7 @@ public class BulletHandler : Projectile {
 	// Use this for initialization
 	void Start () {
 		rigidbody2D.velocity = transform.right * BULLET_VELOCITY;
+		Destroy(gameObject, 10);
 	}
 
 	// Bullet hits something
@@ -22,7 +23,7 @@ public class BulletHandler : Projectile {
 				Destroy(gameObject);
 			}
 		}
-		if (tagHit == "Wall" || tagHit == "Platform")
+		if (tagHit == "Platform")
 			Destroy(gameObject);
 	}
 }
