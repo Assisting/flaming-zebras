@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class UsableShop : Usable {
+public class WeaponShop : Usable {
 
-	private Weapon.WeaponType weapon;
+	protected Weapon.WeaponType weapon;
 
 	public override void Use(GameObject caller)
 	{

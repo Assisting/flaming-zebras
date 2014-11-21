@@ -3,7 +3,7 @@ using System.Collections;
 
 public class StatShop : Usable {
 
-	private PlayerData.Attribute stat;
+	protected PlayerData.Attribute stat;
 
 	public override void Use(GameObject caller)
 	{
