@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Teleporter : Usable{
 
-	public Vector2 homeTeleport; //the location of the shop teleporter
+	private Vector2 homeTeleport; //the location of the shop teleporter
 
 	// Use this for initialization
 	void Start () {

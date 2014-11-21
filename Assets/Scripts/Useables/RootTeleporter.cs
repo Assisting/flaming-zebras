@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class HomeTeleporter : Usable {
+public class RootTeleporter : Usable {
 
 	public override void Use(GameObject caller)
 	{
