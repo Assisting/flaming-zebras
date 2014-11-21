@@ -31,7 +31,7 @@ public class Actor : MonoBehaviour {
 	}
 
 	// give damage while also inducing a knock-back effect
-	public void StunDamage(int value, bool goRight)
+	public virtual void StunDamage(int value, bool goRight)
 	{
 		rigidbody2D.velocity = Vector2.zero;
 		if (goRight)
@@ -43,7 +43,7 @@ public class Actor : MonoBehaviour {
 	}
 
 	// Alter life total by the given amount
-	public void LifeChange(int value)
+	public virtual void LifeChange(int value)
 	{
 		CURLIFE += value;
 		if (CURLIFE > MAXLIFE)

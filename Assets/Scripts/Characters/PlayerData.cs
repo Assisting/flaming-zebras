@@ -38,10 +38,12 @@ public class PlayerData : Actor
 	private int DASH_LEVEL;
 	private int WEAPON_LEVEL;
 
+	//Invulnerability
+	private bool INVULNERABLE = false;
+
 	//Moving
 	private float MOVE_SPEED; // the lateral speed of the players (as a force for air-control)
 	private float MAX_SPEED; // maximum lateral speed of the player
-	
 
 	//Jumping
 	private readonly float JUMP_FORCE = 875f; // speed of player's jump
@@ -191,12 +193,43 @@ public class PlayerData : Actor
 		MAX_SPEED = MoveLevel.maxSpeed[MOVE_LEVEL - 1];
 	}
 
+	public override void StunDamage(int value, bool goRight)
+	{
+		if (CURRENT_WEAPON == Weapon.WeaponType.Melee && weapon.ShieldUp())
+		{
+			MakeInvuln(weapon.GetShieldTime());
+			weapon.DropShield();
+		}
+		else if (INVULNERABLE)
+			return;
+		else
+			base.StunDamage(value, goRight);
+	}
+
+	public override void LifeChange(int value)
+	{
+		if (!INVULNERABLE)
+			base.LifeChange(value);
+	}
+
+	public void MakeInvuln(float time)
+	{
+		CancelInvoke("StopInvuln");
+		INVULNERABLE = true;
+		Invoke("StopInvuln", time);
+	}
+
 //-----Getters and Setters---------------------------------------------------------------------------------------------------
 
 	//used to get player number during instantiation (DOES NOT WORK AT RUNTIME!!)
 	public int GetPlayerNum()
 	{
 		return PLAYERNUM;
+	}
+
+	public void StopInvuln()
+	{
+		INVULNERABLE = false;
 	}
 
 	public void SetMovingRight()

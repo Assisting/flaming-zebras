@@ -12,6 +12,10 @@ public class Weapon : MonoBehaviour {
 
 	public static float[] laserFades = new float[3] { 0.1f, 0.4f, 0.3f};
 
+	public static int[] swordDamage = new int[3] { 35, 55, 55};
+	public static float[] invulnTime = new float[3] { 2.0f, 2.0f, 2.0f};
+	public static float[] shieldRegen = new float[3] { 20f, 20f, 10f};
+
 //-----Attribute Variables---------------------------------------------------------------------------------------------------
 
 	public Transform leftMuzzle;
@@ -33,7 +37,10 @@ public class Weapon : MonoBehaviour {
 	private int LASER_BURN_DAMAGE = 2;
 	private float LASER_BURN_TIME = 4f;
 
-	private int MELEE_DAMAGE = 60;
+	private int MELEE_DAMAGE = 35;
+	private float SHIELD_TIME = 2.0f;
+	private float SHIELD_REGEN = 20f;
+	private bool SHIELD_ACTIVE = true;
 	
 	private float RELOAD_WAIT = 0f; // time to wait in between clip regeneration
 	private int MAX_BULLETS; //leveled maximum of shots between reload-waits
@@ -94,7 +101,7 @@ public class Weapon : MonoBehaviour {
 			{
 				RELOAD_WAIT = 2.1f;
 				MAX_BULLETS = 1;
-				LASER_FADE = laserFades[wepLevel-1];
+				LASER_FADE = laserFades[wepLevel - 1];
 				return;
 			}
 
@@ -102,6 +109,9 @@ public class Weapon : MonoBehaviour {
 			{
 				RELOAD_WAIT = 0.6f;
 				MAX_BULLETS = 1;
+				MELEE_DAMAGE = swordDamage[wepLevel - 1];
+				SHIELD_TIME = invulnTime[wepLevel - 1];
+				SHIELD_REGEN = shieldRegen[wepLevel - 1];
 				return;
 			}
 		}
@@ -158,6 +168,17 @@ public class Weapon : MonoBehaviour {
 	private void Reload()
 	{
 		BULLETS_FIRED = 0;
+	}
+
+	public void DropShield()
+	{
+		SHIELD_ACTIVE = false;
+		Invoke("RaiseShield", SHIELD_REGEN);
+	}
+
+	private void RaiseShield()
+	{
+		SHIELD_ACTIVE = true;
 	}
 
 	private void FireBullet()
@@ -245,5 +266,17 @@ public class Weapon : MonoBehaviour {
 			if (hitTargets[i].tag != "Wall")
 				hitTargets[i].GetComponent<Actor>().StunDamage(MELEE_DAMAGE, playerData.IsMovingRight());
 		}
+	}
+
+//-----Getters and Setters---------------------------------------------------------------------------------------------------------------------------
+
+	public bool ShieldUp()
+	{
+		return SHIELD_ACTIVE;
+	}
+
+	public float GetShieldTime()
+	{
+		return SHIELD_TIME;
 	}
 }
