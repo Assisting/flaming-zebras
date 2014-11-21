@@ -61,13 +61,12 @@ public class Actor : MonoBehaviour {
 		CancelInvoke("Extinguish");
 		BURN_DAMAGE = damage;
 		BURN_TICK = tick;
+		Invoke("BurnTick", BURN_TICK);
 		Invoke("Extinguish", duration);
-		//burning = true;
 	}
 
 	protected void Extinguish()
 	{
-		//burning = false;
 		CancelInvoke("BurnTick");
 	}
 
