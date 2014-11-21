@@ -111,12 +111,16 @@ public class PlayerData : Actor
 
 	void Update()
 	{
-		if (Input.GetButtonDown( keyBind.UseButton() ))
+		if (Input.GetButtonDown( keyBind.UseButton() )) //"USE" button
 		{
 			Vector2 hitboxSize = collider2D.bounds.extents;
 			Vector2 topLeft = transform.position + new Vector3(-hitboxSize.x, hitboxSize.y, 0f);
 			Vector2 bottomRight = transform.position + new Vector3(hitboxSize.x, -hitboxSize.y, 0f);
-			Collider2D[] useables = Physics2D.OverlapAreaAll(topLeft, bottomRight, usableLayer);
+			Collider2D[] usables = Physics2D.OverlapAreaAll(topLeft, bottomRight, usableLayer);
+			for (int i = 0; i < usables.Length; i ++)
+			{
+				usables[i].GetComponent<Usable>().Use(gameObject);
+			}
 		}
 	}
 
