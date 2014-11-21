@@ -25,8 +25,12 @@ public class PlayerData : Actor
 
 	public Rigidbody2D Player;
 
+	//LayerMask
+	public LayerMask usableLayer;
+
 	//Interfaces
 	private Weapon weapon;
+	private KeyBindings keyBind;
 
 	//Levels
 	private int MOVE_LEVEL;
@@ -66,6 +70,7 @@ public class PlayerData : Actor
 	void Awake ()
 	{
 		weapon = GetComponent<Weapon>();
+		keyBind = GetComponent<KeyBindings>();
 	}
 
 	// Use this for initialization
@@ -102,6 +107,17 @@ public class PlayerData : Actor
 		// Once the instantiation is finished, set the PLAYERNUM back to what is needed to operate the correct player.
 		// since the controls are bound to that character via the PLAYERNUM
 		PLAYERNUM--;*/
+	}
+
+	void Update()
+	{
+		if (Input.GetButtonDown( keyBind.UseButton() ))
+		{
+			Vector2 hitboxSize = collider2D.bounds.extents;
+			Vector2 topLeft = transform.position + new Vector3(-hitboxSize.x, hitboxSize.y, 0f);
+			Vector2 bottomRight = transform.position + new Vector3(hitboxSize.x, -hitboxSize.y, 0f);
+			Collider2D[] useables = Physics2D.OverlapAreaAll(topLeft, bottomRight, usableLayer);
+		}
 	}
 
 
