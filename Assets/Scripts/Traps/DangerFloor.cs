@@ -5,11 +5,6 @@ public class DangerFloor : MonoBehaviour {
 
 	private int DAMAGE;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-
 	public void OnTriggerEnter2D(Collider2D other)
 	{
 		if (other.tag != "Projectile") //projectiles are all that move that can't be hurt
