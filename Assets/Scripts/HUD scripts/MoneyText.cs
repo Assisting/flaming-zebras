@@ -21,10 +21,10 @@ public class MoneyText : MonoBehaviour {
 	private void setMoneyText()
 	{
 		money = playerData.GetMoney();
-		playerMoney.text = "Money: " + money.ToString ();
+
 		if (Input.GetButton (keybind.ShowMoneyButton() ) )
-						guiText.enabled = true;
+					playerMoney.text = "Money: " + money.ToString ();
 				else
-						guiText.enabled = false;
+					playerMoney.text = "Hold \"Y\" to see money";
 	}
 }

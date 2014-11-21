@@ -1,11 +1,6 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Useables\Weapon Type Shops\BombShop.cs">
-    <Files>
-      <File FileName="Assets\Scripts\Useables\Weapon Type Shops\BombShop.cs" Line="15" Column="4" />
-      <File FileName="Assets\Scripts\Useables\Weapon Type Shops\WeaponShop.cs" Line="14" Column="3" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

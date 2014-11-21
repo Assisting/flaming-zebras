@@ -44,7 +44,6 @@ public class WeaponShop : Usable {
 			}
 			}
 			ShopText.text = DisplayData;
-			Debug.Log("GAWDDANGIT");
 		}
 	}
 	void OnTriggerExit2D(Collider2D other)
