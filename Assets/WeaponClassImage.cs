@@ -3,7 +3,7 @@ using System.Collections;
 
 public class WeaponClassImage : MonoBehaviour {
 
-	public Weapon weaponType;
+	public PlayerData playerData;
 
 	// Use this for initialization
 	void Start () {
@@ -12,6 +12,7 @@ public class WeaponClassImage : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		switch (playerData.GetWeaponType())
+			case Weapon.WeaponType.Bomb;
 	}
 }
