@@ -9,5 +9,6 @@ public class DeadlyFloor : MonoBehaviour {
 		{
 			Actor script = other.GetComponent<Actor>();
 			script.LifeChange(-script.MAXLIFE);
+		}
 	}
 }
