@@ -199,6 +199,16 @@ public class PlayerData : Actor
 		return PLAYERNUM;
 	}
 
+	public void SetMovingRight()
+	{
+		MOVING_RIGHT = true;
+	}
+
+	public void SetMovingLeft()
+	{
+		MOVING_RIGHT = false;
+	}
+
 	public bool CanJump()
 	{
 		return JUMP_AVAILABLE;
@@ -339,6 +349,9 @@ public class PlayerData : Actor
 
 	public int GetDashLevel()
 	{
+
+
+
 		return DASH_LEVEL;
 	}
 

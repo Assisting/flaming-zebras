@@ -207,7 +207,7 @@ public class Weapon : MonoBehaviour {
 			hitTargets = Physics2D.RaycastAll(muzzle.position, -Vector2.right, projectileTargets);
 
 		int i = 0;
-		while (hitTargets[i].transform.tag != "Wall")
+		while (hitTargets[i].transform.tag != "Wall" && i < hitTargets.Length)
 		{
 			Actor currentTarget = hitTargets[i].transform.GetComponent<Actor>();
 			currentTarget.StunDamage(LASER_DAMAGE, playerData.IsMovingRight());
