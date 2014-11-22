@@ -382,9 +382,6 @@ public class PlayerData : Actor
 
 	public int GetDashLevel()
 	{
-
-
-
 		return DASH_LEVEL;
 	}
 

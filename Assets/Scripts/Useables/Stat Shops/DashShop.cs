@@ -6,10 +6,11 @@ public class DashShop : StatShop {
 	// Use this for initialization
 	void Start () {
 		stat = PlayerData.Attribute.Dash;
+		price = 50;
 		DisplayData = 
 			"Dash Shop: \n" +
-			"Increases Dash distance\n" +
-			"Price: ";
+			"Increases Dash speed\n" +
+				"Price: " + price.ToString();
 
 	}
 }
