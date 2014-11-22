@@ -6,6 +6,9 @@ public class MoveShop : StatShop {
 	// Use this for initialization
 	void Start () {
 		stat = PlayerData.Attribute.Move;
-		DisplayData = "Move... FASTAR";
+		DisplayData = 
+			"Move Shop\n" +
+			"Move... FASTAR\n" +
+			"Price: ";
 	}
 }

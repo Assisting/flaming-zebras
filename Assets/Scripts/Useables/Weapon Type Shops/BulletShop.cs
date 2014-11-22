@@ -6,6 +6,11 @@ public class BulletShop : WeaponShop {
 	// Use this for initialization
 	void Start () {
 		weapon = Weapon.WeaponType.Bullet;
-		DisplayData = "1: Pistol\n2: Machine Gun\n3: Shotgun";
+		DisplayData = 
+			"Bullet Shop\n" +
+			"1: Pistol\n" +
+			"2: Machine Gun\n" +
+			"3: Shotgun\n" +
+			"Price: ";
 	}
 }

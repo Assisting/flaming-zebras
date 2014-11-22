@@ -1,9 +1,12 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\HUD Scripts\HealthText.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Useables\Stat Shops\StatShop.cs">
     <Files>
-      <File FileName="Assets\Scripts\Characters\PlayerData.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\HUD Scripts\HealthText.cs" Line="7" Column="2" />
+      <File FileName="Assets\Scripts\Useables\Stat Shops\DashShop.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Useables\Stat Shops\JumpShop.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Useables\Stat Shops\MoveShop.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Useables\Stat Shops\StatShop.cs" Line="31" Column="73" />
+      <File FileName="Assets\Scripts\Useables\Stat Shops\WepLevelShop.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

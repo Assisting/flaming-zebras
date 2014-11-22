@@ -279,4 +279,10 @@ public class Weapon : MonoBehaviour {
 	{
 		return SHIELD_TIME;
 	}
+
+	public float GetReloadTime()
+	{
+		return RELOAD_WAIT;
+	}
+
 }
