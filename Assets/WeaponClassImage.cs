@@ -29,6 +29,26 @@ public class WeaponClassImage : MonoBehaviour {
 			guiTexture.texture = bullet;
 			break;
 		}
+		case Weapon.WeaponType.Laser:
+		{
+			guiTexture.texture = laser;
+			break;
+		}
+		case Weapon.WeaponType.Melee:
+		{
+			guiTexture.texture = sword;
+			break;
+		}
+		case Weapon.WeaponType.Missile:
+		{
+			guiTexture.texture = missile;
+			break;
+		}
+		case Weapon.WeaponType.None:
+		{
+			Debug.Log ("Now you fucked up. You have fucked Up now");
+			break;
+		}
 		}
 	}
 }
