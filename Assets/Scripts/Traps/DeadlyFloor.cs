@@ -5,10 +5,24 @@ public class DeadlyFloor : MonoBehaviour {
 
 	public void OnTriggerEnter2D(Collider2D other)
 	{
-		if (other.tag != "Projectile") //projectiles are all that move that can't be hurt
+		switch (other.tag)
 		{
-			Actor script = other.GetComponent<Actor>();
-			script.LifeChange(-script.MAXLIFE);
+			case "Player":
+			{
+				PlayerData script = other.GetComponent<PlayerData>();
+				script.LifeChange(-script.MAXLIFE);
+				break;
+			}
+			case "Enemy":
+			{
+				Actor script = other.GetComponent<Actor>();
+				script.LifeChange(-script.MAXLIFE);	
+				break;
+			}
+			default:
+			{
+				break;
+			}
 		}
 	}
 }

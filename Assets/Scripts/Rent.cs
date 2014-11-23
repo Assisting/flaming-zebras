@@ -8,9 +8,8 @@ public class Rent : MonoBehaviour {
 	private int RENT_COST = 20;
 	private float GRACE = 25f;
 
-	void Awake()
+	void Start()
 	{
-		this.patron = patron;
 		InvokeRepeating("RentPay", GRACE, 1f);
 	}
 

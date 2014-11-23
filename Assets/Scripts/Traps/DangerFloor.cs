@@ -3,13 +3,47 @@ using System.Collections;
 
 public class DangerFloor : MonoBehaviour {
 
-	private int DAMAGE;
+	private int DAMAGE = 12;
 
 	public void OnTriggerEnter2D(Collider2D other)
 	{
-		if (other.tag != "Projectile") //projectiles are all that move that can't be hurt
+		switch (other.tag)
 		{
-			other.GetComponent<Actor>().StunDamage(DAMAGE, other.transform.position.x - transform.position.x >= 0f); //move shorter distance to edge of spikes
+			case "Player":
+			{
+				other.GetComponent<PlayerData>().StunDamage(DAMAGE, FindRight(other));
+				break;
+			}
+			case "Enemy":
+			{
+				other.GetComponent<Actor>().StunDamage(DAMAGE, FindRight(other));	
+				break;
+			}
+			default:
+			{
+				break;
+			}
+		}
+	}
+
+	//returns true if we should stun to the right
+	private bool FindRight(Collider2D other)
+	{
+		int rotation = (int)transform.rotation.eulerAngles.z;
+		switch(rotation)
+		{
+			case (-90): //face right
+			{
+				return true;
+			}
+			case (90): //face left
+			{
+				return true;
+			}
+			default:
+			{
+				return other.transform.position.x - transform.position.x >= 0f; //move shorter distance to edge of spikes	
+			}
 		}
 	}
 }
