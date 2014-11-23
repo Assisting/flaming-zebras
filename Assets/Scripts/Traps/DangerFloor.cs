@@ -11,7 +11,10 @@ public class DangerFloor : MonoBehaviour {
 		{
 			case "Player":
 			{
-				other.GetComponent<PlayerData>().StunDamage(DAMAGE, FindRight(other));
+				PlayerData playerData = other.GetComponent<PlayerData>();
+				if ( playerData.IsDashing() )
+					other.GetComponent<Movement>().StopDash();
+				playerData.StunDamage(DAMAGE, FindRight(other));
 				break;
 			}
 			case "Enemy":
@@ -38,7 +41,7 @@ public class DangerFloor : MonoBehaviour {
 			}
 			case (90): //face left
 			{
-				return true;
+				return false;
 			}
 			default:
 			{
