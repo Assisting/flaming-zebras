@@ -89,4 +89,6 @@ public abstract class Shop : Usable {
 			}
 		}
 	}
+
+	public abstract int GetPrice(GameObject caller);
 }
