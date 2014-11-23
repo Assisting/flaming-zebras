@@ -12,6 +12,7 @@ public class KeyBindings : MonoBehaviour {
 	private string JUMP_BUTTON; //mapping for jump button
 	private string RDASH_BUTTON; //mapping for dash button (right)
 	private string LDASH_BUTTON; //mapping for dash button (left)
+	private string START_BUTTON;
 
 	//Interfaces
 	private PlayerData playerData;
@@ -30,6 +31,7 @@ public class KeyBindings : MonoBehaviour {
 				JUMP_BUTTON = "P1Jump";
 				RDASH_BUTTON = "P1RDash";
 				LDASH_BUTTON = "P1LDash";
+				START_BUTTON = "P1Start";
 				break;
 			}
 			case 2:
@@ -41,6 +43,7 @@ public class KeyBindings : MonoBehaviour {
 				JUMP_BUTTON = "P2Jump";
 				RDASH_BUTTON = "P2RDash";
 				LDASH_BUTTON = "P2LDash";
+				START_BUTTON = "P2Start";
 				break;
 			}
 			case 3:
@@ -52,6 +55,7 @@ public class KeyBindings : MonoBehaviour {
 				JUMP_BUTTON = "P3Jump";
 				RDASH_BUTTON = "P3RDash";
 				LDASH_BUTTON = "P3LDash";
+				START_BUTTON = "P3Start";
 				break;
 			}
 			case 4:
@@ -63,6 +67,7 @@ public class KeyBindings : MonoBehaviour {
 				JUMP_BUTTON = "P4Jump";
 				RDASH_BUTTON = "P4RDash";
 				LDASH_BUTTON = "P4LDash";
+				START_BUTTON = "P4Start";
 				break;
 			}
 		}
@@ -106,5 +111,10 @@ public class KeyBindings : MonoBehaviour {
 	public string LDashButton()
 	{
 		return LDASH_BUTTON;
+	}
+
+	public string StartButton()
+	{
+		return START_BUTTON;
 	}
 }
