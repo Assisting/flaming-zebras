@@ -18,7 +18,7 @@ public class Movement : MonoBehaviour {
 	public PhysicsMaterial2D groundPhysics;
 
 	private float groundRadius = 0.07f; // abstract height above a collider where players can be considered "on the ground"
-	private float jumpLag; // small wait to avoid being grounded while lifting off
+	private bool jumpLag = false; // small wait to avoid being grounded while lifting off
 	public bool wallLeft;
 	public bool wallRight;
 
@@ -109,7 +109,7 @@ public class Movement : MonoBehaviour {
 		playerData.IncrementJumpCounter();
 		if ( playerData.IsGrounded() ) //ground jump
 		{
-			jumpLag = Time.time + 0.02f; //wait one frame before allowing the ground to reset jump counter
+			SetJumpLag(); //wait one frame before allowing the ground to reset jump counter
 			playerData.SetGrounded(false);
 			rigidbody2D.AddForce( Vector2.up * playerData.GetJUMP_FORCE() );
 		}
@@ -179,6 +179,17 @@ public class Movement : MonoBehaviour {
 		}
 	}
 
+	public void SetJumpLag()
+	{
+		jumpLag = true;
+		Invoke("ClearJumpLag", 0.1f); //wait 3 physics frames
+	}
+
+	private void ClearJumpLag()
+	{
+		jumpLag = false;
+	}
+
 	//run in FixedUpdate() to update grounded status, animation, current platform etc.
 	private void GroundCheck()
 	{
@@ -187,7 +198,7 @@ public class Movement : MonoBehaviour {
 		playerData.SetGrounded(leftFloorType != null || rightFloorType != null);
 		if ( playerData.IsGrounded())
 		{
-			if (jumpLag < Time.time)
+			if (!jumpLag)
 			{
 				playerData.ResetJumpCounter();
 				playerData.setStunned(false);

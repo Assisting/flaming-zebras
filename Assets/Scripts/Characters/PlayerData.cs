@@ -31,6 +31,7 @@ public class PlayerData : Actor
 	//Interfaces
 	private Weapon weapon;
 	private KeyBindings keyBind;
+	private Movement movement;
 
 	//Levels
 	private int MOVE_LEVEL;
@@ -76,6 +77,7 @@ public class PlayerData : Actor
 	{
 		weapon = GetComponent<Weapon>();
 		keyBind = GetComponent<KeyBindings>();
+		movement = GetComponent<Movement>();
 	}
 
 	// Use this for initialization
@@ -202,11 +204,15 @@ public class PlayerData : Actor
 		{
 			MakeInvuln(weapon.GetShieldTime());
 			weapon.DropShield();
+			return;
 		}
 		else if (INVULNERABLE)
 			return;
 		else
+		{
+			movement.SetJumpLag();
 			base.StunDamage(value, goRight);
+		}	
 	}
 
 	public override void LifeChange(int value)
