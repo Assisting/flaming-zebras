@@ -32,7 +32,7 @@ public class DangerFloor : MonoBehaviour {
 		int rotation = (int)transform.rotation.eulerAngles.z;
 		switch(rotation)
 		{
-			case (-90): //face right
+			case (270): //face right
 			{
 				return true;
 			}
