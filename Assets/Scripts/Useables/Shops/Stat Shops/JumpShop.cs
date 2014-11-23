@@ -5,8 +5,8 @@ public class JumpShop : StatShop {
 
 	// Use this for initialization
 	void Start () {
-		stat = PlayerData.Attribute.Jump;
 		price = 100;
+		stat = PlayerData.Attribute.Jump;
 		DisplayData = 
 			"Jump Shop\n" +
 			"Level 1: No Air-Jump\n" +

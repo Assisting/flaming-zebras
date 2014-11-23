@@ -6,6 +6,7 @@ public class BulletShop : WeaponShop {
 	// Use this for initialization
 	void Start () {
 		//price = 150;
+		price = 75;
 		weapon = Weapon.WeaponType.Bullet;
 		DisplayData = 
 			"Bullet Shop\n" +

@@ -5,6 +5,7 @@ public class WepLevelShop : StatShop {
 
 	// Use this for initialization
 	void Start () {
+		price = 100;
 		stat = PlayerData.Attribute.WeaponLevel;
 		DisplayData = 
 			"Weapon Upgrade Shop\n" +

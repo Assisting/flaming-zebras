@@ -6,6 +6,7 @@ public class LaserShop : WeaponShop {
 	// Use this for initialization
 	void Start () {
 		//price = 250;
+		price = 75;
 		weapon = Weapon.WeaponType.Laser;
 		DisplayData = 
 			"Laser Shop\n" +

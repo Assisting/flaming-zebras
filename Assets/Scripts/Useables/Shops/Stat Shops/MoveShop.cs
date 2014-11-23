@@ -5,8 +5,8 @@ public class MoveShop : StatShop {
 
 	// Use this for initialization
 	void Start () {
+		price = 100;
 		stat = PlayerData.Attribute.Move;
-		price = 50;
 		DisplayData = 
 			"Move Shop\n" +
 			"Move... FASTAR\n" +
