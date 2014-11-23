@@ -16,7 +16,10 @@ public abstract class Shop : Usable {
 	protected string DisplayData;
 
 	protected int price;
+	protected int priceIncrement;
 
+	// detect if a player collides with the shop, meaning it will be able to interact with 
+	//    the player in oder to see its money, stats, and display their shop gui
 	void OnTriggerEnter2D(Collider2D other)
 	{
 		if(other.tag == "Player")
@@ -55,6 +58,8 @@ public abstract class Shop : Usable {
 			}
 		}
 	}
+
+	// Detect if a player leaves the shop, to turn off the gui
 	void OnTriggerExit2D(Collider2D other)
 	{
 		if(other.tag == "Player")
