@@ -161,16 +161,22 @@ public class Movement : MonoBehaviour {
 
 	private void AirPhysics()
 	{
-		collider2D.sharedMaterial = airPhysics;
-		collider2D.enabled = false;
-		collider2D.enabled = true; //because UNITY
+		if (collider2D.sharedMaterial != airPhysics)
+		{
+			collider2D.sharedMaterial = airPhysics;
+			collider2D.enabled = false;
+			collider2D.enabled = true; //because UNITY
+		}
 	}
 
 	private void GroundPhysics()
 	{
-		collider2D.sharedMaterial = groundPhysics;
-		collider2D.enabled = false;
-		collider2D.enabled = true; //because UNITY
+		if (collider2D.sharedMaterial != groundPhysics)
+		{
+			collider2D.sharedMaterial = groundPhysics;
+			collider2D.enabled = false;
+			collider2D.enabled = true; //because UNITY
+		}
 	}
 
 	//run in FixedUpdate() to update grounded status, animation, current platform etc.
