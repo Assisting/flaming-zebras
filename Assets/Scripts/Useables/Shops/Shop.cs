@@ -53,7 +53,6 @@ public abstract class Shop : Usable {
 					break;
 				}
 			}
-			
 		}
 	}
 	void OnTriggerExit2D(Collider2D other)
