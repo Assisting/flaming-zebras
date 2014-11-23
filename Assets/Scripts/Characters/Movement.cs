@@ -14,6 +14,8 @@ public class Movement : MonoBehaviour {
 	public Transform leftGroundCheck; // location of object from which to raycast toward the ground
 	public Transform rightGroundCheck;
 	public LayerMask groundType; // what is ground?
+	public PhysicsMaterial2D airPhysics;
+	public PhysicsMaterial2D groundPhysics;
 
 	private float groundRadius = 0.07f; // abstract height above a collider where players can be considered "on the ground"
 	private float jumpLag; // small wait to avoid being grounded while lifting off
@@ -157,6 +159,20 @@ public class Movement : MonoBehaviour {
 		rigidbody2D.gravityScale = 1;
 	}
 
+	private void AirPhysics()
+	{
+		collider2D.sharedMaterial = airPhysics;
+		collider2D.enabled = false;
+		collider2D.enabled = true; //because UNITY
+	}
+
+	private void GroundPhysics()
+	{
+		collider2D.sharedMaterial = groundPhysics;
+		collider2D.enabled = false;
+		collider2D.enabled = true; //because UNITY
+	}
+
 	//run in FixedUpdate() to update grounded status, animation, current platform etc.
 	private void GroundCheck()
 	{
@@ -170,11 +186,13 @@ public class Movement : MonoBehaviour {
 				playerData.ResetJumpCounter();
 				playerData.setStunned(false);
 				anim.SetBool("Grounded", true);
+				GroundPhysics();
 			}
 		}
 		else
 		{
 			anim.SetBool("Grounded", false);
+			AirPhysics();
 		}
 		
 	}

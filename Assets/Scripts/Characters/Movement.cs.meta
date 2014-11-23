@@ -2,7 +2,11 @@ fileFormatVersion: 2
 guid: 06c78d890a344f7468b6aca1c32e9c60
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - leftGroundCheck: {instanceID: 0}
+  - rightGroundCheck: {instanceID: 0}
+  - airPhysics: {fileID: 6200000, guid: 2f48212348d77a248b52be249b4a4a3b, type: 2}
+  - groundPhysics: {fileID: 6200000, guid: fc7565e0816116b4b99f5f38f04c459c, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
