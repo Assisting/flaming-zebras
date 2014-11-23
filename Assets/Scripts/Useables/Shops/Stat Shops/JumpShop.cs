@@ -5,7 +5,6 @@ public class JumpShop : StatShop {
 
 	// Use this for initialization
 	void Start () {
-		price = 100;
 		stat = PlayerData.Attribute.Jump;
 		DisplayData = 
 			"Jump Shop\n" +

@@ -6,6 +6,11 @@ public class WeaponShop : Shop {
 	protected Weapon.WeaponType weapon;
 	protected int BASE_PRICE = 25;
 
+	void Awake()
+	{
+		price = 75;
+	}
+
 	public override void Use(GameObject caller)
 	{
 		if (caller.tag == "Player") //only acknowledge players
@@ -15,9 +20,14 @@ public class WeaponShop : Shop {
 			{
 				PlayerData script = caller.GetComponent<PlayerData>();
 				script.LevelUp(PlayerData.Attribute.WeaponType, weapon);
-				playerData.ChangeMoney(-( BASE_PRICE + (price * script.GetWeaponSwaps()) ));
+				playerData.ChangeMoney(GetPrice(caller));
 				script.IncrementWeaponSwaps();
 			}
 		}
+	}
+
+	public override int GetPrice(GameObject caller)
+	{
+		return -( BASE_PRICE + (price * caller.GetComponent<PlayerData>().GetWeaponSwaps()) );
 	}
 }
