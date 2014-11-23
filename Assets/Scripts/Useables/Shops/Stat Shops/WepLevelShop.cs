@@ -15,12 +15,4 @@ public class WepLevelShop : StatShop {
 				"   in their shops\n" +
 				"Price: " + price.ToString();
 	}
-
-	void setPrice(int weaponLevel)
-	{
-		switch (weapLevel)
-		{
-		
-		}
-	}
 }

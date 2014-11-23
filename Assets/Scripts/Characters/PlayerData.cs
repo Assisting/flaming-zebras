@@ -47,9 +47,9 @@ public class PlayerData : Actor
 
 	//Jumping
 	private readonly float JUMP_FORCE = 875f; // speed of player's jump
-	private bool GROUNDED; // Whether or not the player is on the ground
-	private bool JUMP_AVAILABLE; // whether or not the player must wait to hit the ground before jumping again
-	private int TIMES_JUMPED; // The number of times the player has air-jumped
+	private bool grounded; // Whether or not the player is on the ground
+	private bool jumpAvailable; // whether or not the player must wait to hit the ground before jumping again
+	private int timesJumped; // The number of times the player has air-jumped
 
 	//Dashing
 	private float DASH_SPEED; // the maximum speed to move at while dashing
@@ -67,6 +67,9 @@ public class PlayerData : Actor
 	//Teleporting
 	private Vector2 lastTeleport; //the last teleporter that the player walked through
 
+	//Shopping
+	private int weaponSwaps = 0;
+
 //-----Unity Functions--------------------------------------------------------------------------------------------------------
 
 	void Awake ()
@@ -82,8 +85,8 @@ public class PlayerData : Actor
 		MOVING_RIGHT = true;
 
 		LevelUp(Attribute.Jump, 1); //initialize jump system
-		GROUNDED = false;
-		JUMP_AVAILABLE = false;
+		grounded = false;
+		jumpAvailable = false;
 
 		LevelUp(Attribute.Dash, 1); //initialize dashing
 		
@@ -244,30 +247,30 @@ public class PlayerData : Actor
 
 	public bool CanJump()
 	{
-		return JUMP_AVAILABLE;
+		return jumpAvailable;
 	}
 
 	public void IncrementJumpCounter ()
 	{
-		TIMES_JUMPED ++;
-		if (TIMES_JUMPED >= JUMP_LEVEL)
-			JUMP_AVAILABLE = false;
+		timesJumped ++;
+		if (timesJumped >= JUMP_LEVEL)
+			jumpAvailable = false;
 	}
 
 	public void ResetJumpCounter ()
 	{
-		TIMES_JUMPED = 0;
-		JUMP_AVAILABLE = true;
+		timesJumped = 0;
+		jumpAvailable = true;
 	}
 
 	public void SetGrounded(bool value)
 	{
-		GROUNDED = value;
+		grounded = value;
 	}
 
 	public bool IsGrounded()
 	{
-		return GROUNDED;
+		return grounded;
 	}
 
 	private void ResetDash1 ()
@@ -438,5 +441,15 @@ public class PlayerData : Actor
 	public void setLastTeleport(Vector2 teleporter)
 	{
 		lastTeleport = teleporter;
+	}
+
+	public void IncrementWeaponSwaps()
+	{
+		weaponSwaps++;
+	}
+
+	public int GetWeaponSwaps()
+	{
+		return weaponSwaps;
 	}
 }

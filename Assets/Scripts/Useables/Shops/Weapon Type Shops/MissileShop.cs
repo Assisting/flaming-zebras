@@ -5,7 +5,7 @@ public class MissileShop : WeaponShop {
 	
 	// Use this for initialization
 	void Start () {
-		price = 250;
+		//price = 250;
 		weapon = Weapon.WeaponType.Missile;
 		DisplayData = 
 			"Missile Shop\n" +

@@ -4,8 +4,12 @@ using System.Collections;
 public class StatShop : Shop {
 
 	protected PlayerData.Attribute stat;
+	protected float scalingFactor = 2.5f;
 
-	protected int weapLevel;
+	void Start()
+	{
+		price = 100;
+	}
 
 	public override void Use(GameObject caller)
 	{
@@ -16,8 +20,8 @@ public class StatShop : Shop {
 
 			if (playerData.GetMoney() >= price && statLevel < 3)
 			{
-				playerData.ChangeMoney(-(price));
 				playerData.LevelUp(stat, statLevel + 1);
+				playerData.ChangeMoney((int)-(price* Mathf.Pow(scalingFactor,statLevel-1)));
 			}
 		}
 	}
