@@ -218,7 +218,6 @@ public class Weapon : MonoBehaviour {
 
 		//draw new laser
 		LineRenderer newLaser = Instantiate(laser) as LineRenderer;
-		Destroy(newLaser.gameObject, LASER_FADE);
 		newLaser.SetPosition(0, muzzle.position);
 		RaycastHit2D[] hitTargets;
 		
@@ -228,14 +227,40 @@ public class Weapon : MonoBehaviour {
 			hitTargets = Physics2D.RaycastAll(muzzle.position, -Vector2.right, projectileTargets);
 
 		int i = 0;
-		while (hitTargets[i].transform.tag != "Wall" && i < hitTargets.Length)
+		foreach ( RaycastHit2D target in hitTargets)
 		{
-			Actor currentTarget = hitTargets[i].transform.GetComponent<Actor>();
-			currentTarget.StunDamage(LASER_DAMAGE, playerData.IsMovingRight());
-			if (laserLevel > 1)
-				currentTarget.Burn(LASER_BURN_DAMAGE, 0.5f, LASER_BURN_TIME);
-			if (laserLevel < 3)
-				break; //always stop at first object for level 1-2 lasers
+			print(target.transform.name);
+			Actor currentTarget = null;
+
+			switch (target.transform.tag)
+			{
+				case "Platform":
+				{
+					break;
+				}
+				case "Player":
+				{
+					currentTarget = target.transform.GetComponent<PlayerData>();
+					break;
+				}
+				case "Enemy":
+				{
+					currentTarget = target.transform.GetComponent<Actor>();
+					break;
+				}
+			}
+
+			if (currentTarget != null)
+			{
+				currentTarget.StunDamage(LASER_DAMAGE, playerData.IsMovingRight());
+				if (laserLevel > 1)
+					currentTarget.Burn(LASER_BURN_DAMAGE, 0.5f, LASER_BURN_TIME);
+				if (laserLevel < 3)
+					break; //always stop at first object for level 1-2 lasers
+			}
+			else
+				break;
+
 			i ++;
 		}
 
@@ -244,6 +269,8 @@ public class Weapon : MonoBehaviour {
 			newLaser.SetPosition( 1, new Vector3(muzzle.position.x + hitTargets[i].distance, muzzle.position.y, muzzle.position.z) );
 		else
 			newLaser.SetPosition( 1, new Vector3(muzzle.position.x - hitTargets[i].distance, muzzle.position.y, muzzle.position.z) );
+
+		Destroy(newLaser.gameObject, LASER_FADE);
 			
 	}
 
@@ -263,7 +290,7 @@ public class Weapon : MonoBehaviour {
 		// do damage
 		for (int i = 0; i < hitTargets.Length; i ++)
 		{
-			if (hitTargets[i].tag != "Wall")
+			if (hitTargets[i].tag != "Platform")
 				hitTargets[i].GetComponent<Actor>().StunDamage(MELEE_DAMAGE, playerData.IsMovingRight());
 		}
 	}
