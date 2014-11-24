@@ -14,16 +14,7 @@ public class Actor : MonoBehaviour {
 	protected int BURN_DAMAGE;
 	protected float BURN_TICK;
 	protected int POISON_DAMAGE;
-	protected float POISON_TICK;
-	//These aren't used anywhere, commenting them out to avoid unity complaining about them not being used -- Thor
-	//protected float burnTicker;
-	//protected float burnDuration;
-	
-
-	// Use this for initialization
-	void Start () {
-	
-	}
+	protected float POISON_TICK;	
 	
 	// Update is called once per frame
 	void Update () {
@@ -66,22 +57,20 @@ public class Actor : MonoBehaviour {
 	}
 
 	// Damage over time functions
-	private void StartDot(int damage, int damageType, float tick, float tickType, float duration, string dotTick, string endDot)
+	private void StartDot(string dotTick, float duration, string endDot)
 	{
 		CancelInvoke(endDot);
-		damageType = damage;
-		tickType = tick;
-		Invoke(dotTick, tickType);
+		Invoke(dotTick);
 		// -1 Signifies that other action must be taken before the dot wears off; like exiting the cloud of poison
 		if(-1.0f != duration){
 			Invoke(endDot, duration);
 		}
 	}
 
-	private void DotTick(int damageType, string tickType)
+	private void DotTick(int damageType, string tickType, float tickLength)
 	{
 		LifeChange (-damageType);
-		Invoke (tickType, damageType);
+		Invoke (tickType, tickLength);
 	}
 
 	private void EndDot(string tickType)
@@ -89,36 +78,18 @@ public class Actor : MonoBehaviour {
 		CancelInvoke (tickType);
 	}
 
-	/*public void Burn(int damage, float tick, float duration)
-	{
-		CancelInvoke("Extinguish");
-		BURN_DAMAGE = damage;
-		BURN_TICK = tick;
-		Invoke("BurnTick", BURN_TICK);
-		Invoke("Extinguish", duration);
-	}*/
-
 	//Burn Functions
 	public void Burn(int damage, float tick, float duration)
 	{
+		BURN_DAMAGE = damage;
+		BURN_TICK = tick;
 		StartDot (damage, BURN_DAMAGE, tick, BURN_TICK, duration, "BurnTick", "Extinguish");
 	}
 
-	/*protected void BurnTick()
-	{
-		LifeChange(-BURN_DAMAGE);
-		Invoke("BurnTick", BURN_TICK);
-	}*/
-
 	protected void BurnTick()
 	{
-		DotTick (BURN_DAMAGE, "BurnTick");
+		DotTick (BURN_DAMAGE, "BurnTick", BURN_TICK);
 	}
-
-	/*protected void Extinguish()
-	{
-		CancelInvoke("BurnTick");
-	}*/
 	
 	protected void Extinguish()
 	{
@@ -128,12 +99,14 @@ public class Actor : MonoBehaviour {
 	//Poison Functions
 	public void Poison(int damage, float tick, float duration)
 	{
-		StartDot (damage, POISON_DAMAGE, tick, POISON_TICK, duration, "PoisonTick", "Squelch");
+		POISON_DAMAGE = damage;
+		POISON_TICK = tick;
+		StartDot ("PoisonTick", duration, "Squelch");
 	}
 
 	protected void PoisonTick()
 	{
-		DotTick (POISON_DAMAGE, "PoisonTick");
+		DotTick (POISON_DAMAGE, "PoisonTick", POISON_TICK);
 	}
 
 	public void LeavePoison(float delay){
