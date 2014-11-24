@@ -19,8 +19,8 @@ public class WeaponShop : Shop {
 			if (playerData.GetMoney() >= price && weapon != playerData.GetWeaponType())
 			{
 				PlayerData script = caller.GetComponent<PlayerData>();
-				script.LevelUp(PlayerData.Attribute.WeaponType, weapon);
 				playerData.ChangeMoney(-GetPrice(caller));
+				script.LevelUp(PlayerData.Attribute.WeaponType, weapon);
 				script.IncrementWeaponSwaps();
 			}
 		}
