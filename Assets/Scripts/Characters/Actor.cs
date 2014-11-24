@@ -60,7 +60,7 @@ public class Actor : MonoBehaviour {
 	private void StartDot(string dotTick, float duration, string endDot)
 	{
 		CancelInvoke(endDot);
-		Invoke(dotTick);
+		Invoke(dotTick, 0.0f);
 		// -1 Signifies that other action must be taken before the dot wears off; like exiting the cloud of poison
 		if(-1.0f != duration){
 			Invoke(endDot, duration);
@@ -83,7 +83,7 @@ public class Actor : MonoBehaviour {
 	{
 		BURN_DAMAGE = damage;
 		BURN_TICK = tick;
-		StartDot (damage, BURN_DAMAGE, tick, BURN_TICK, duration, "BurnTick", "Extinguish");
+		StartDot ( "BurnTick", duration, "Extinguish");
 	}
 
 	protected void BurnTick()
