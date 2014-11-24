@@ -137,6 +137,7 @@ public class Actor : MonoBehaviour {
 	}
 
 	public void LeavePoison(float delay){
+		//Here -1 signifies instant removal
 		if(-1.0f == delay) {
 			Squelch ();
 		} else {
