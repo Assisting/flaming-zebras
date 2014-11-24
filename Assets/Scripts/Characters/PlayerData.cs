@@ -23,6 +23,7 @@ public class PlayerData : Actor
 	//Player Number
 	public int PLAYERNUM = 1; //assigning a new number to each player as they spawn
 
+	//TEST - spawning
 	public Rigidbody2D Player;
 
 	//LayerMask
@@ -31,6 +32,7 @@ public class PlayerData : Actor
 	//Interfaces
 	private Weapon weapon;
 	private KeyBindings keyBind;
+	private Movement movement;
 
 	//Levels
 	private int MOVE_LEVEL;
@@ -38,8 +40,10 @@ public class PlayerData : Actor
 	private int DASH_LEVEL;
 	private int WEAPON_LEVEL;
 
-	//Invulnerability
+	//Combat
 	private bool INVULNERABLE = false;
+	private float LAST_HIT_COOLDOWN = 10f;
+	private GameObject lastHit;
 
 	//Moving
 	private float MOVE_SPEED; // the lateral speed of the players (as a force for air-control)
@@ -69,6 +73,7 @@ public class PlayerData : Actor
 
 	//Shopping
 	private int weaponSwaps = 0;
+	
 
 //-----Unity Functions--------------------------------------------------------------------------------------------------------
 
@@ -76,6 +81,7 @@ public class PlayerData : Actor
 	{
 		weapon = GetComponent<Weapon>();
 		keyBind = GetComponent<KeyBindings>();
+		movement = GetComponent<Movement>();
 	}
 
 	// Use this for initialization
@@ -116,6 +122,9 @@ public class PlayerData : Actor
 
 	void Update()
 	{
+		if (CURLIFE <= 0)
+			Die();
+		
 		if (Input.GetButtonDown( keyBind.UseButton() )) //"USE" button
 		{
 			Vector2 hitboxSize = collider2D.bounds.extents;
@@ -202,11 +211,15 @@ public class PlayerData : Actor
 		{
 			MakeInvuln(weapon.GetShieldTime());
 			weapon.DropShield();
+			return;
 		}
 		else if (INVULNERABLE)
 			return;
 		else
+		{
+			movement.SetJumpLag();
 			base.StunDamage(value, goRight);
+		}
 	}
 
 	public override void LifeChange(int value)
@@ -220,6 +233,19 @@ public class PlayerData : Actor
 		CancelInvoke("StopInvuln");
 		INVULNERABLE = true;
 		Invoke("StopInvuln", time);
+	}
+
+	private void Die()
+	{
+		if (lastHit != null) //give player money
+		{
+			
+		}
+		else //just lose money
+		{
+			
+		}
+		transform.position = GameObject.Find("RootTeleporter").transform.position; //get healed
 	}
 
 //-----Getters and Setters---------------------------------------------------------------------------------------------------
@@ -451,5 +477,16 @@ public class PlayerData : Actor
 	public int GetWeaponSwaps()
 	{
 		return weaponSwaps;
+	}
+
+	public void SetLastHit(GameObject hitter)
+	{
+		lastHit = hitter;
+		Invoke("ResetLastHit", LAST_HIT_COOLDOWN);
+	}
+
+	public void ResetLastHit()
+	{
+		lastHit = null;
 	}
 }

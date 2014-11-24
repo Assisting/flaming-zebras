@@ -28,6 +28,8 @@ public class Actor : MonoBehaviour {
 			MOVING_RIGHT = true;
 		else if (rigidbody2D.velocity.x < 0f)
 			MOVING_RIGHT = false;
+		if (CURLIFE <= 0)
+			Die();
 	}
 
 	// give damage while also inducing a knock-back effect
@@ -53,6 +55,11 @@ public class Actor : MonoBehaviour {
 			CURLIFE = 0; 
 			dead = true;
 		}
+	}
+
+	private void Die()
+	{
+		Destroy(gameObject);
 	}
 
 	// Do some Damage over Time (no knockback)

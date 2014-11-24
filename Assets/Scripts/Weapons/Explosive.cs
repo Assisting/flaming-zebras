@@ -31,7 +31,10 @@ public class Explosive : Projectile {
 			{
 				targetDirection = targets[i].transform.position - transform.position;
 				goRight = targetDirection.x >= 0f;
-				targets[i].GetComponent<Actor>().StunDamage(HIGH_DAMAGE, goRight);
+				if (targets[i].tag == "Player")
+					targets[i].GetComponent<PlayerData>().StunDamage(HIGH_DAMAGE, goRight);
+				else
+					targets[i].GetComponent<Actor>().StunDamage(HIGH_DAMAGE, goRight);
 			}
 		}
 		targets = Physics2D.OverlapCircleAll(transform.position, LONG_RANGE, targetTypes); //hit far targets
@@ -41,7 +44,10 @@ public class Explosive : Projectile {
 			{
 				targetDirection = targets[i].transform.position - transform.position;
 				goRight = targetDirection.x >= 0f;
-				targets[i].GetComponent<Actor>().StunDamage(LOW_DAMAGE, goRight);
+				if (targets[i].tag == "Player")
+					targets[i].GetComponent<PlayerData>().StunDamage(LOW_DAMAGE, goRight);
+				else
+					targets[i].GetComponent<Actor>().StunDamage(LOW_DAMAGE, goRight);
 			}
 		}
 		Destroy(gameObject);
