@@ -9,7 +9,8 @@ public class PoisonGas : MonoBehaviour {
 	{
 		if (other.tag == "Player")
 		{
-			//TODO start poison
+			Actor playerScript = other.transform.root.gameObject.GetComponent<Actor>();
+			playerScript.Poison(GAS_DAMAGE, 0.5f, -1.0f);
 		}
 	}
 
@@ -17,7 +18,8 @@ public class PoisonGas : MonoBehaviour {
 	{
 		if (other.tag == "Player")
 		{
-			//TODO stop poison
+			Actor playerScript = other.transform.root.gameObject.GetComponent<Actor>();
+			playerScript.LeavePoison(3.0f);
 		}
 	}
 }
