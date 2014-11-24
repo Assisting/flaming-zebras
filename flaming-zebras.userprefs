@@ -1,8 +1,12 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Useables\Shops\Shop.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Characters\PlayerData.cs">
     <Files>
-      <File FileName="Assets\Scripts\Useables\Shops\Shop.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Useables\Shops\Shop.cs" Line="95" Column="1" />
+      <File FileName="Assets\Scripts\Useables\Shops\Weapon Type Shops\WeaponShop.cs" Line="34" Column="1" />
+      <File FileName="Assets\Scripts\Useables\Shops\Weapon Type Shops\SwordShop.cs" Line="19" Column="1" />
+      <File FileName="Assets\Scripts\Useables\Usable.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Characters\PlayerData.cs" Line="127" Column="47" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
