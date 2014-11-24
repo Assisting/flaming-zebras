@@ -13,6 +13,6 @@ public class WepLevelShop : StatShop {
 				"   bonuses for higher\n" +
 				"   levels, as outlined\n" +
 				"   in their shops\n" +
-				"Price: " + price.ToString();
+				"Price: ";
 	}
 }

@@ -13,7 +13,6 @@ public class BombShop : WeaponShop {
 			"Level 1: Timer\n" +
 			"Level 2: Proximity\n" +
 			"Level 3: Cluster\n" +
-				"Price: " + price.ToString();
-
-		}
+				"Price: ";
+	}
 }

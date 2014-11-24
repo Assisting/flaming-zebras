@@ -13,6 +13,6 @@ public class LaserShop : WeaponShop {
 			"1: Single target Laser\n" +
 			"2: Burning DOT\n" +
 			"3: Unstoppable Penetration\n" +
-				"Price: " + price.ToString();
+				"Price: ";
 	}
 }

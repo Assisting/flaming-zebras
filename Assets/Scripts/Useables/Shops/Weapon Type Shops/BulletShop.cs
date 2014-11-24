@@ -13,6 +13,6 @@ public class BulletShop : WeaponShop {
 			"1: Pistol\n" +
 			"2: Machine Gun\n" +
 			"3: Shotgun\n" +
-				"Price: " + price.ToString();
+				"Price: ";
 	}
 }

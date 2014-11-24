@@ -13,6 +13,6 @@ public class SwordShop : WeaponShop {
 			"1: Sword+Shield\n" +
 			"2: +Damage\n" +
 			"3: Low Shield Cooldown\n" +
-			"Price: " + price.ToString();
+			"Price: ";
 	}
 }

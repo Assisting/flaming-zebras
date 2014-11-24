@@ -11,6 +11,6 @@ public class JumpShop : StatShop {
 			"Level 1: No Air-Jump\n" +
 			"Level 2: 1 Air-Jump\n" +
 			"Level 3: 2 Air-Jumps\n" +
-				"Price: " + price.ToString();
+				"Price: ";
 	}
 }

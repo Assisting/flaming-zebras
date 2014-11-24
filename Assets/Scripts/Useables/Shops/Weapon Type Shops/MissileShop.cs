@@ -13,6 +13,6 @@ public class MissileShop : WeaponShop {
 			"1: Unguided\n" +
 			"2: Guided\n" +
 			"3: Swarm\n" +
-				"Price: " + price.ToString();
+				"Price: ";
 	}
 }

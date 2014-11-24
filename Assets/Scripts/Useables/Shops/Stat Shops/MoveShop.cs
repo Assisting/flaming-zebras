@@ -9,6 +9,6 @@ public class MoveShop : StatShop {
 		DisplayData = 
 			"Move Shop\n" +
 			"Move... FASTAR\n" +
-				"Price: " + price.ToString();
+				"Price: ";
 	}
 }

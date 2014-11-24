@@ -17,7 +17,7 @@ public abstract class Shop : Usable {
 
 	protected int price;
 
-	void OnTriggerEnter2D(Collider2D other)
+	void OnTriggerStay2D(Collider2D other)
 	{
 		if(other.tag == "Player")
 		{
@@ -28,28 +28,28 @@ public abstract class Shop : Usable {
 				{
 					ShopTextP1.gameObject.layer = LayerMask.NameToLayer( "Player1GUI" );
 					backgroundP1.gameObject.layer = LayerMask.NameToLayer( "Player1GUI" );
-					ShopTextP1.text = DisplayData;
+					ShopTextP1.text = DisplayData + GetPrice(other.gameObject).ToString();
 					break;
 				}
 				case 2 :
 				{
 					ShopTextP2.gameObject.layer = LayerMask.NameToLayer( "Player2GUI" );
 					backgroundP2.gameObject.layer = LayerMask.NameToLayer( "Player2GUI" );
-					ShopTextP2.text = DisplayData;
+					ShopTextP2.text = DisplayData + GetPrice(other.gameObject).ToString();
 					break;
 				}
 				case 3 :
 				{
 					ShopTextP3.gameObject.layer = LayerMask.NameToLayer( "Player3GUI" );
 					backgroundP3.gameObject.layer = LayerMask.NameToLayer( "Player3GUI" );
-					ShopTextP3.text = DisplayData;
+					ShopTextP3.text = DisplayData + GetPrice(other.gameObject).ToString();
 					break;
 				}
 				case 4 :
 				{
 					ShopTextP4.gameObject.layer = LayerMask.NameToLayer( "Player4GUI" );
 					backgroundP4.gameObject.layer = LayerMask.NameToLayer( "Player4GUI" );
-					ShopTextP4.text = DisplayData;
+					ShopTextP4.text = DisplayData + GetPrice(other.gameObject).ToString();
 					break;
 				}
 			}

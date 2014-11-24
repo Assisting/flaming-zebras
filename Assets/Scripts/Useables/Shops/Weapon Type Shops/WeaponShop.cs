@@ -20,7 +20,7 @@ public class WeaponShop : Shop {
 			{
 				PlayerData script = caller.GetComponent<PlayerData>();
 				script.LevelUp(PlayerData.Attribute.WeaponType, weapon);
-				playerData.ChangeMoney(GetPrice(caller));
+				playerData.ChangeMoney(-GetPrice(caller));
 				script.IncrementWeaponSwaps();
 			}
 		}
@@ -28,6 +28,6 @@ public class WeaponShop : Shop {
 
 	public override int GetPrice(GameObject caller)
 	{
-		return -( BASE_PRICE + (price * caller.GetComponent<PlayerData>().GetWeaponSwaps()) );
+		return  BASE_PRICE + (price * caller.GetComponent<PlayerData>().GetWeaponSwaps());
 	}
 }

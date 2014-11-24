@@ -21,7 +21,7 @@ public class StatShop : Shop {
 			if (playerData.GetMoney() >= price && statLevel < 3)
 			{
 				playerData.LevelUp(stat, statLevel + 1);
-				playerData.ChangeMoney(GetPrice(caller));
+				playerData.ChangeMoney(-GetPrice(caller));
 			}
 		}
 	}
@@ -29,6 +29,6 @@ public class StatShop : Shop {
 	public override int GetPrice(GameObject caller)
 	{
 		PlayerData script = caller.GetComponent<PlayerData>();
-		return -(int)(price * Mathf.Pow(scalingFactor, script.GetAttributeLevel(stat) - 1));
+		return (int)(price * Mathf.Pow(scalingFactor, script.GetAttributeLevel(stat) - 1));
 	}
 }

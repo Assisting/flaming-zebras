@@ -9,7 +9,7 @@ public class DashShop : StatShop {
 		DisplayData = 
 			"Dash Shop: \n" +
 			"Increases Dash speed\n" +
-				"Price: " + price.ToString();
+				"Price: ";
 
 	}
 }
