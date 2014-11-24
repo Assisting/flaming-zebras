@@ -97,7 +97,7 @@ public class PlayerData : Actor
 		LevelUp(Attribute.Dash, 1); //initialize dashing
 		
 		LevelUp (Attribute.WeaponLevel, 1);
-		LevelUp(Attribute.WeaponType, Weapon.WeaponType.Bomb); //initialize weapons
+		LevelUp(Attribute.WeaponType, Weapon.WeaponType.Melee); //initialize weapons
 
 		moneyAmount = 1000; //starting money total
 
