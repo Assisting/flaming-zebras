@@ -6,6 +6,12 @@ public class Chest : Usable
 
 	protected int treasureAmount;
 	private bool treasureTaken = false;
+	private Animator anim;
+
+	void Awake()
+	{
+		anim = GetComponent<Animator>();
+	}
 
 	public override void Use(GameObject caller)
 	{
@@ -13,6 +19,7 @@ public class Chest : Usable
 		{
 			caller.GetComponent<PlayerData>().ChangeMoney(treasureAmount);
 			treasureTaken = true;
+			anim.SetTrigger("Opened");
 			Destroy (gameObject, .5f);
 		}
 	}
