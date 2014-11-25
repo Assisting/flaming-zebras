@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PoisonGas : MonoBehaviour {
 
-	private int GAS_DAMAGE = 4;
+	private int GAS_DAMAGE = 20;
 
 	void OnTriggerEnter2D (Collider2D other)
 	{
