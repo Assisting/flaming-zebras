@@ -9,6 +9,6 @@ public class LevelGenerate : MonoBehaviour {
 	void Awake()
 	{
 		Application.LoadLevelAdditive("nameHere");
-		GameObject[] caveLevelsFindGameObjectsWithTag("CaveLevel"); 
+		GameObject newLevel = GameObject.FindWithTag("CaveLevel"); 
 	}
 }
