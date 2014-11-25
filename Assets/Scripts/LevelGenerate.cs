@@ -5,9 +5,7 @@ public class LevelGenerate : MonoBehaviour {
 
 	void Awake()
 	{
-		for (int i = 0; i < 2; i++)
-		{
-			Application.LoadLevelAdditive("TeleRoom");
-		}
+		Application.LoadLevelAdditive("nameHere");
+		GameObject.Find("sameName");
 	}
 }
