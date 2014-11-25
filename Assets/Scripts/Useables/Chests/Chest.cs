@@ -9,7 +9,7 @@ public class Chest : Usable
 
 	public override void Use(GameObject caller)
 	{
-		if (caller.tag == "PlayerData" && !treasureTaken)
+		if (caller.tag == "Player" && !treasureTaken)
 		{
 			caller.GetComponent<PlayerData>().ChangeMoney(treasureAmount);
 			treasureTaken = true;
