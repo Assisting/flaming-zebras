@@ -15,7 +15,9 @@ public class Actor : MonoBehaviour {
 	protected float BURN_TICK;
 	protected int POISON_DAMAGE;
 	protected float POISON_TICK;	
-	
+
+	private delegate void DotDelegate ();
+
 	// Update is called once per frame
 	void Update () {
 		if (rigidbody2D.velocity.x > 0f)
@@ -57,10 +59,10 @@ public class Actor : MonoBehaviour {
 	}
 
 	// Damage over time functions
-	private void StartDot(string dotTick, float duration, string endDot)
+	private void StartDot(DotDelegate dotTick, string endDot, float duration)
 	{
 		CancelInvoke(endDot);
-		Invoke(dotTick, 0.0f);
+		dotTick ();
 		// -1 Signifies that other action must be taken before the dot wears off; like exiting the cloud of poison
 		if(-1.0f != duration){
 			Invoke(endDot, duration);
@@ -83,7 +85,7 @@ public class Actor : MonoBehaviour {
 	{
 		BURN_DAMAGE = damage;
 		BURN_TICK = tick;
-		StartDot ( "BurnTick", duration, "Extinguish");
+		StartDot ( BurnTick, "Extinguish", duration);
 	}
 
 	protected void BurnTick()
@@ -101,7 +103,7 @@ public class Actor : MonoBehaviour {
 	{
 		POISON_DAMAGE = damage;
 		POISON_TICK = tick;
-		StartDot ("PoisonTick", duration, "Squelch");
+		StartDot (PoisonTick, "Squelch", duration);
 	}
 
 	protected void PoisonTick()

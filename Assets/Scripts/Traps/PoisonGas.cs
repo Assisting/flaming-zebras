@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PoisonGas : MonoBehaviour {
 
-	private int GAS_DAMAGE = 20;
+	private int GAS_DAMAGE = 6;
 
 	void OnTriggerEnter2D (Collider2D other)
 	{
@@ -19,7 +19,7 @@ public class PoisonGas : MonoBehaviour {
 		if (other.tag == "Player")
 		{
 			Actor playerScript = other.transform.root.gameObject.GetComponent<Actor>();
-			playerScript.LeavePoison(3.0f);
+			playerScript.LeavePoison(2.0f);
 		}
 	}
 }
