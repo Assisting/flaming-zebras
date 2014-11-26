@@ -12,15 +12,6 @@ public class LeftWallTrigger : MonoBehaviour {
 		movement = transform.parent.GetComponent<Movement>();
 	}
 
-	// Use this for initialization
-	void Start () {
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
 	//stop player from moving or dashing towards a wall they are touching
 	void OnTriggerStay2D (Collider2D other)
 	{
