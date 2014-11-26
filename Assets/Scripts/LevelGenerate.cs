@@ -4,7 +4,8 @@ using System.Collections.Generic;
 
 public class LevelGenerate : MonoBehaviour {
 
-	public GameObject player;
+	public GameObject player1;
+	public GameObject player2;
 
 	private float HORIZONTAL_SEPARATION = 50f;
 	private float VERTICAL_SEPARATION = 35f;
@@ -32,18 +33,19 @@ public class LevelGenerate : MonoBehaviour {
 
 		Application.LoadLevelAdditive("storeRoom");
 		Application.LoadLevelAdditive("originRoom");
-		Invoke("Other", 1f);
+		StartCoroutine(Other());
 	}
 
-	void Other()
+	IEnumerator Other()
 	{
+		yield return new WaitForSeconds(0.5f);
 		GameObject room = GameObject.Find("storeRoom");
+		room.tag = "CaveLevel";
 		room.transform.position += Vector3.up*VERTICAL_SEPARATION;
-		Instantiate(player, new Vector3(0f, 0f, 0f), room.transform.rotation);
-		GameObject newPlayer = GameObject.FindWithTag("Player");
-		newPlayer.transform.position = room.transform.position;
+		
 		Door[] totallyNotDoors = room.GetComponentsInChildren<Door>();
 		room = GameObject.Find("originRoom");
+		room.tag = "CaveLevel";
 		foreach(Door door in totallyNotDoors)
 		{
 			Teleporter[] teleporter = room.GetComponentsInChildren<Teleporter>();
@@ -62,15 +64,21 @@ public class LevelGenerate : MonoBehaviour {
 		Door currentDoor;
 		doors.TryGetValue("WestDoor", out currentDoor);
 		
-		StartCoroutine(Generate(currentDoor, room.transform.position, "WestDoor"));
+		yield return StartCoroutine(Generate(currentDoor, room.transform.position, "WestDoor")); //start recursive generation
+
+		Instantiate(player1, new Vector3(0f, 0f, 0f), room.transform.rotation);
+		GameObject newPlayer = GameObject.FindWithTag("Player");
+		newPlayer.transform.position = room.transform.position;
+
+		Instantiate(player2, new Vector3(0f, 0f, 0f), room.transform.rotation);
+		newPlayer = GameObject.FindWithTag("Player");
+		newPlayer.transform.position = room.transform.position;
 	}
 
 	IEnumerator Generate(Door pastDoor, Vector3 pastPosition, string pastSide)
 	{
-		if (numRooms >= 3) yield break;
-		numRooms ++;
 		Application.LoadLevelAdditive( roomList.Dequeue() );
-		yield return new WaitForSeconds(1f);
+		yield return new WaitForSeconds(0.5f);
 		GameObject newLevel = GameObject.FindWithTag("UnplacedLevel");
 		newLevel.tag = "CaveLevel";
 
@@ -112,19 +120,28 @@ public class LevelGenerate : MonoBehaviour {
 			}
 		}
 		newLevel.transform.position = pastPosition;
-		//doorStorage.pairExit = pastDoor.thisExit;
-		//pastDoor.pairExit = doorStorage.thisExit;
+		doorStorage.pairExit = pastDoor.thisExit;
+		pastDoor.pairExit = doorStorage.thisExit;
 
 		doors.TryGetValue("WestDoor", out doorStorage);
-		if (doorStorage != null)
-			StartCoroutine(Generate(doorStorage, pastPosition, "WestDoor"));
+		if (doorStorage != null && pastSide != "EastDoor")
+		{
+			//StartCoroutine(Generate(doorStorage, pastPosition, "WestDoor"));
+			yield return StartCoroutine(Generate(doorStorage, pastPosition, "WestDoor"));
+		}
 
 		doors.TryGetValue("SouthDoor", out doorStorage);
-		if (doorStorage != null)
-			StartCoroutine(Generate(doorStorage, pastPosition, "SouthDoor"));
+		if (doorStorage != null && pastSide != "NorthDoor")
+		{
+			//StartCoroutine(Generate(doorStorage, pastPosition, "SouthDoor"));
+			yield return StartCoroutine(Generate(doorStorage, pastPosition, "SouthDoor"));	
+		}
 
 		doors.TryGetValue("NorthDoor", out doorStorage);
-		if (doorStorage != null)
-			StartCoroutine(Generate(doorStorage, pastPosition, "NorthDoor"));
+		if (doorStorage != null && pastSide != "SouthDoor")
+		{
+			//StartCoroutine(Generate(doorStorage, pastPosition, "NorthDoor"));
+			yield return StartCoroutine(Generate(doorStorage, pastPosition, "NorthDoor"));	
+		}
 	}
 }

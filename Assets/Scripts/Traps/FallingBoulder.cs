@@ -8,7 +8,7 @@ public class FallingBoulder : Trap {
 	void OnDestroy()
 	{
 		
-		Instantiate(breakingBoulder, transform.position, transform.rotation);
+		//Instantiate(breakingBoulder, transform.position, transform.rotation);
 	}
 
 	public override void Activate()

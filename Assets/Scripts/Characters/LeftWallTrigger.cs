@@ -30,6 +30,11 @@ public class LeftWallTrigger : MonoBehaviour {
 			if ( playerData.IsDashing() )
 				movement.StopDash();
 		}
+		if (other.tag == "Ramp")
+		{
+			if ( playerData.IsDashing() )
+				movement.StopDash();
+		}
 			
 	}
 
