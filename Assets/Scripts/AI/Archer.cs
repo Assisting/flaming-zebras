@@ -9,6 +9,8 @@ public class Archer : Enemy {
 	public Transform Muzzle;
 	public Rigidbody2D bullet;
 
+	GameObject[] players;
+
 	void Start () {
 		MOVING_RIGHT = true;
 		ATTACK_DELAY = 2f;
@@ -33,6 +35,9 @@ public class Archer : Enemy {
 		
 		playerLayer = 1 << LayerMask.NameToLayer ("Player");
 		groundLayer = 1 << LayerMask.NameToLayer ("Ground");
+
+		// Sorry, but sometimes the hackiest solution really is just the best.
+		players = GameObject.FindGameObjectsWithTag("Player");
 	}
 	
 	void FixedUpdate () {
@@ -41,6 +46,7 @@ public class Archer : Enemy {
 	
 	// Branch
 	void testCanSeePlayer() {
+		turnToNearest();
 		if(sightCheck()) {
 			Do = attack;
 		}
@@ -69,5 +75,33 @@ public class Archer : Enemy {
 	// Terminal
 	void nothing() {
 		Do = testCanSeePlayer;
+	}
+
+	void turnToNearest() {
+		GameObject nearestPlayer = null;
+		float distanceToNearestPlayer = Mathf.Infinity;
+		Vector3 myPosition = transform.position;
+		foreach(GameObject player in players) {
+			Vector3 diff = player.transform.position - myPosition;
+			float curDistance = diff.sqrMagnitude;
+			if(curDistance < distanceToNearestPlayer) {
+				distanceToNearestPlayer = curDistance;
+				nearestPlayer = player;
+			}
+		}
+
+		float deltaX = this.transform.position.x - nearestPlayer.transform.position.x;
+
+		// Currently facing left, nearest player is to the right.
+		if(deltaX < 0 && MOVING_RIGHT == false) {
+			Muzzle.eulerAngles = new Vector3(0,0,180);
+			turnAround ();
+		}
+
+		// Currently facing right, nearest player is left.
+		if(deltaX > 0 && MOVING_RIGHT == true) {
+			Muzzle.eulerAngles = new Vector3(0,0,180);
+			turnAround ();
+		}
 	}
 }

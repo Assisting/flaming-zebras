@@ -90,7 +90,7 @@ public class Enemy : Actor
 	public void turnAround() {
 		transform.localScale = new Vector2(transform.localScale.x * -1, transform.localScale.y);
 		SPEED = SPEED * -1;
-		MOVING_RIGHT = (SPEED >= 0);
+		MOVING_RIGHT = (!MOVING_RIGHT);
 	}
 
 }
