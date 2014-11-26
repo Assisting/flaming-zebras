@@ -14,14 +14,19 @@ public class BulletHandler : Projectile {
 
 	// Bullet hits something
 	void OnTriggerEnter2D (Collider2D other) {
-		string tagHit = other.gameObject.tag;
-		if (tagHit == "Player" || tagHit == "Enemy")
+		string tagHit = other.tag;
+		if (tagHit == "Player")
 		{
 			if (ORIGIN != other.gameObject)
 			{
-				other.GetComponent<Actor>().StunDamage(BULLET_DAMAGE, rigidbody2D.velocity.x > 0f);
+				other.GetComponent<PlayerData>().StunDamage(BULLET_DAMAGE, rigidbody2D.velocity.x > 0f);
 				Destroy(gameObject);
 			}
+		}
+		if (tagHit == "Enemy")
+		{
+			other.GetComponent<Actor>().StunDamage(BULLET_DAMAGE, rigidbody2D.velocity.x > 0f);
+			Destroy(gameObject);
 		}
 		if (tagHit == "Platform")
 			Destroy(gameObject);

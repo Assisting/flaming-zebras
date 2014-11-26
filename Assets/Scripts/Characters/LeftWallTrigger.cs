@@ -32,7 +32,7 @@ public class LeftWallTrigger : MonoBehaviour {
 	//allow movement and dashing agin on exiting wall collision
 	void OnTriggerExit2D (Collider2D other)
 	{
-		if (other.tag == "Platform" || other.tag == "Player")
+		if (other.tag == "Platform" || other.tag == "Player" || other.tag == "Enemy")
 			movement.wallLeft = false;
 	}
 }
