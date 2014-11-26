@@ -25,7 +25,7 @@ public class RightWallTrigger : MonoBehaviour {
 	//stop player from moving or dashing towards a wall they are touching
 	void OnTriggerStay2D (Collider2D other)
 	{
-		if (other.gameObject.tag == "Platform" || other.gameObject.tag == "Player")
+		if (other.tag == "Platform" || other.tag == "Player" || other.tag == "Enemy")
 		{
 			movement.wallRight = true;
 			if ( playerData.IsDashing() )

@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Door : MonoBehaviour {
 
+	//this class controls the portals between level tiles
+
 	public Transform pairExit;
 	public Transform thisExit;
 

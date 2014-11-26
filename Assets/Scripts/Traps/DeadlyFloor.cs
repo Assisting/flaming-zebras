@@ -3,6 +3,8 @@ using System.Collections;
 
 public class DeadlyFloor : MonoBehaviour {
 
+	//spikes that KILL you
+
 	public void OnTriggerEnter2D(Collider2D other)
 	{
 		switch (other.tag)

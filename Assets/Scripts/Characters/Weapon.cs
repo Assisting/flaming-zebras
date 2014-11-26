@@ -222,9 +222,9 @@ public class Weapon : MonoBehaviour {
 		RaycastHit2D[] hitTargets;
 		
 		if ( playerData.IsMovingRight() ) //find targets
-			hitTargets = Physics2D.RaycastAll(muzzle.position, Vector2.right, projectileTargets);
+			hitTargets = Physics2D.RaycastAll(muzzle.position, Vector2.right, Mathf.Infinity, projectileTargets);
 		else
-			hitTargets = Physics2D.RaycastAll(muzzle.position, -Vector2.right, projectileTargets);
+			hitTargets = Physics2D.RaycastAll(muzzle.position, -Vector2.right, Mathf.Infinity, projectileTargets);
 
 		int i = 0;
 		foreach ( RaycastHit2D target in hitTargets)

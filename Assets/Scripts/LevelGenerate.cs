@@ -75,15 +75,16 @@ public class LevelGenerate : MonoBehaviour {
 		newPlayer.transform.position = room.transform.position;
 	}
 
+	// recursive generation function, spawns levels from a predefined list currently
 	IEnumerator Generate(Door pastDoor, Vector3 pastPosition, string pastSide)
 	{
-		Application.LoadLevelAdditive( roomList.Dequeue() );
-		yield return new WaitForSeconds(0.5f);
-		GameObject newLevel = GameObject.FindWithTag("UnplacedLevel");
+		Application.LoadLevelAdditive( roomList.Dequeue() ); //spawn next level
+		yield return new WaitForSeconds(0.5f); //wait for it to happen
+		GameObject newLevel = GameObject.FindWithTag("UnplacedLevel"); //get the level that just spawned
 		newLevel.tag = "CaveLevel";
 
 		Dictionary<string, Door> doors = new Dictionary<string, Door>();
-		Door[] totallyNotDoors = newLevel.GetComponentsInChildren<Door>();
+		Door[] totallyNotDoors = newLevel.GetComponentsInChildren<Door>(); //list of easily indexed doors
 
 		foreach (Door door in totallyNotDoors)
 		{
@@ -92,7 +93,7 @@ public class LevelGenerate : MonoBehaviour {
 
 		Door doorStorage = null;
 
-		switch (pastSide)
+		switch (pastSide) //for setting up direction of door linking and layout positioning
 		{
 			case "NorthDoor":
 			{
@@ -123,6 +124,8 @@ public class LevelGenerate : MonoBehaviour {
 		doorStorage.pairExit = pastDoor.thisExit;
 		pastDoor.pairExit = doorStorage.thisExit;
 
+
+		//wait until the chain is done before recursing down new branches
 		doors.TryGetValue("WestDoor", out doorStorage);
 		if (doorStorage != null && pastSide != "EastDoor")
 		{

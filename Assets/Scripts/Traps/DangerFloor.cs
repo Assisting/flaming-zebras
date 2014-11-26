@@ -3,6 +3,8 @@ using System.Collections;
 
 public class DangerFloor : MonoBehaviour {
 
+	//spikes that hurt you
+
 	private int DAMAGE = 12;
 
 	public void OnTriggerEnter2D(Collider2D other)
