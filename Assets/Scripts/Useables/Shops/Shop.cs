@@ -49,7 +49,8 @@ public abstract class Shop : Usable {
 		GameObject[] GUIs = GameObject.FindGameObjectsWithTag("ShopTag");
 		foreach (GameObject GUI in GUIs)
 		{
-			shopGUIs.Add(GUI.transform.parent.GetComponent<PlayerData>().GetPlayerNum(), GUI.guiText);
+			int playerNum = GUI.transform.parent.parent.Find("Player").GetComponent<PlayerData>().GetPlayerNum();
+			shopGUIs.Add(playerNum, GUI.guiText);
 		}
 	}
 

@@ -12,7 +12,7 @@ public class LevelGenerate : MonoBehaviour {
 
 	private int numRooms;
 
-	Queue<string> roomList;
+	Queue<string> roomList; //alpha pregenerated room list
 
 	void Awake()
 	{
@@ -74,10 +74,10 @@ public class LevelGenerate : MonoBehaviour {
 		newPlayer = GameObject.FindWithTag("Player");
 		newPlayer.transform.position = room.transform.position;
 
-		GameObject[] shops = GameObject.FindGameObjectsWithTag("Shop");
+		GameObject[] shops = GameObject.FindGameObjectsWithTag("Shop"); //initialize price GUIs
 		foreach (GameObject shop in shops)
 		{
-			shop.GetComponent<Shop>().GetGUIs(); //initialize price GUIs
+			shop.GetComponent<Shop>().GetGUIs();
 		}
 	}
 

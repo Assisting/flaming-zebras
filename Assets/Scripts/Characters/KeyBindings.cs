@@ -20,7 +20,11 @@ public class KeyBindings : MonoBehaviour {
 	void Awake()
 	{
 		playerData = GetComponent<PlayerData>();
-		switch ( playerData.GetPlayerNum() )
+	}
+
+	// Use this for initialization
+	void Start () {
+switch ( playerData.GetPlayerNum() )
 		{
 			case 1:
 			{
@@ -71,11 +75,6 @@ public class KeyBindings : MonoBehaviour {
 				break;
 			}
 		}
-	}
-
-	// Use this for initialization
-	void Start () {
-
 	}
 
 	public string AttackButton()
