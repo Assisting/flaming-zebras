@@ -12,7 +12,7 @@ public class Door : MonoBehaviour {
 	{
 		if (other.tag == "Player")
 		{
-			other.GetComponent<PlayerData>().StopDash();
+			other.GetComponent<Movement>().StopDash();
 			other.transform.position = pairExit.position;
 		}
 	}
