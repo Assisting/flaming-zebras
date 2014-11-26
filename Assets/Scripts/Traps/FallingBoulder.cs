@@ -5,14 +5,6 @@ public class FallingBoulder : Trap {
 
 	//falling boulder trap kills you by flattening
 
-	public Transform breakingBoulder;
-
-	void OnDestroy()
-	{
-		
-		//Instantiate(breakingBoulder, transform.position, transform.rotation); broken right now
-	}
-
 	public override void Activate()
 	{
 		rigidbody2D.isKinematic = false;
