@@ -4,12 +4,6 @@ using System.Collections;
 public class FallingBoulder : Trap {
 
 	public Transform breakingBoulder;
-	private Animator anim;
-
-	void Awake()
-	{
-		anim = GetComponent<Animator>();
-	}
 
 	void OnDestroy()
 	{
