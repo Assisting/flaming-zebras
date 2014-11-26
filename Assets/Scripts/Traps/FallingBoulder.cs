@@ -3,6 +3,20 @@ using System.Collections;
 
 public class FallingBoulder : Trap {
 
+	public Transform breakingBoulder;
+	private Animator anim;
+
+	void Awake()
+	{
+		anim = GetComponent<Animator>();
+	}
+
+	void OnDestroy()
+	{
+		
+		Instantiate(breakingBoulder, transform.position, transform.rotation);
+	}
+
 	public override void Activate()
 	{
 		rigidbody2D.isKinematic = false;
