@@ -1,8 +1,8 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Traps\PoisonGas.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Characters\Actor.cs">
     <Files>
-      <File FileName="Assets\Scripts\Characters\Actor.cs" Line="106" Column="46" />
+      <File FileName="Assets\Scripts\Characters\Actor.cs" Line="19" Column="14" />
       <File FileName="Assets\Scripts\Traps\PoisonGas.cs" Line="22" Column="32" />
       <File FileName="Assets\Scripts\Characters\Weapon.cs" Line="257" Column="24" />
     </Files>
