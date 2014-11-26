@@ -31,8 +31,8 @@ public class LevelGenerate : MonoBehaviour {
 		roomList.Enqueue("caveRoom10");
 		roomList.Enqueue("caveRoom4");
 
-		Application.LoadLevelAdditive("storeRoom");
-		Application.LoadLevelAdditive("originRoom");
+		Application.LoadLevelAdditive("storeRoom"); //spawn store
+		Application.LoadLevelAdditive("originRoom"); //spawn first room
 		StartCoroutine(Other());
 	}
 
@@ -43,7 +43,7 @@ public class LevelGenerate : MonoBehaviour {
 		room.tag = "CaveLevel";
 		room.transform.position += Vector3.up*VERTICAL_SEPARATION;
 		
-		Door[] totallyNotDoors = room.GetComponentsInChildren<Door>();
+		Door[] totallyNotDoors = room.GetComponentsInChildren<Door>(); //map store doors to the origin teleporter
 		room = GameObject.Find("originRoom");
 		room.tag = "CaveLevel";
 		foreach(Door door in totallyNotDoors)
@@ -66,13 +66,19 @@ public class LevelGenerate : MonoBehaviour {
 		
 		yield return StartCoroutine(Generate(currentDoor, room.transform.position, "WestDoor")); //start recursive generation
 
-		Instantiate(player1, new Vector3(0f, 0f, 0f), room.transform.rotation);
+		Instantiate(player1, new Vector3(0f, 0f, 0f), room.transform.rotation); //spawn player 1
 		GameObject newPlayer = GameObject.FindWithTag("Player");
 		newPlayer.transform.position = room.transform.position;
 
-		Instantiate(player2, new Vector3(0f, 0f, 0f), room.transform.rotation);
+		Instantiate(player2, new Vector3(0f, 0f, 0f), room.transform.rotation); //spawn player 2
 		newPlayer = GameObject.FindWithTag("Player");
 		newPlayer.transform.position = room.transform.position;
+
+		GameObject[] shops = GameObject.FindGameObjectsWithTag("Shop");
+		foreach (GameObject shop in shops)
+		{
+			shop.GetComponent<Shop>().GetGUIs(); //initialize price GUIs
+		}
 	}
 
 	// recursive generation function, spawns levels from a predefined list currently

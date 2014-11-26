@@ -1,57 +1,31 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public abstract class Shop : Usable {
 
-	public GUIText ShopTextP1;
-	public GUIText ShopTextP2;
-	public GUIText ShopTextP3;
-	public GUIText ShopTextP4;
-
-	public GUITexture backgroundP1;
-	public GUITexture backgroundP2;
-	public GUITexture backgroundP3;
-	public GUITexture backgroundP4;
+	private Dictionary<int, GUIText> shopGUIs;
 
 	protected string DisplayData;
 
 	protected int price;
 
+	public virtual void Start(){}
+
 	void OnTriggerStay2D(Collider2D other)
 	{
 		if(other.tag == "Player")
 		{
+
 			int playerNum = other.GetComponent<PlayerData>().GetPlayerNum();
-			switch (playerNum)
+			GUIText guiStorage;
+			string playersLayer = "Player" + playerNum + "GUI";
+			
+			shopGUIs.TryGetValue(playerNum, out guiStorage);
+			if (guiStorage != null)
 			{
-				case 1 :
-				{
-					ShopTextP1.gameObject.layer = LayerMask.NameToLayer( "Player1GUI" );
-					backgroundP1.gameObject.layer = LayerMask.NameToLayer( "Player1GUI" );
-					ShopTextP1.text = DisplayData + GetPrice(other.gameObject).ToString();
-					break;
-				}
-				case 2 :
-				{
-					ShopTextP2.gameObject.layer = LayerMask.NameToLayer( "Player2GUI" );
-					backgroundP2.gameObject.layer = LayerMask.NameToLayer( "Player2GUI" );
-					ShopTextP2.text = DisplayData + GetPrice(other.gameObject).ToString();
-					break;
-				}
-				case 3 :
-				{
-					ShopTextP3.gameObject.layer = LayerMask.NameToLayer( "Player3GUI" );
-					backgroundP3.gameObject.layer = LayerMask.NameToLayer( "Player3GUI" );
-					ShopTextP3.text = DisplayData + GetPrice(other.gameObject).ToString();
-					break;
-				}
-				case 4 :
-				{
-					ShopTextP4.gameObject.layer = LayerMask.NameToLayer( "Player4GUI" );
-					backgroundP4.gameObject.layer = LayerMask.NameToLayer( "Player4GUI" );
-					ShopTextP4.text = DisplayData + GetPrice(other.gameObject).ToString();
-					break;
-				}
+				guiStorage.text = DisplayData + GetPrice(other.gameObject).ToString();
+				guiStorage.gameObject.layer = LayerMask.NameToLayer (playersLayer);
 			}
 		}
 	}
@@ -60,33 +34,22 @@ public abstract class Shop : Usable {
 		if(other.tag == "Player")
 		{
 			int playerNum = other.GetComponent<PlayerData>().GetPlayerNum();
-			switch (playerNum)
+			GUIText guiStorage;
+			shopGUIs.TryGetValue(playerNum, out guiStorage);
+			if (guiStorage != null)
 			{
-				case 1 :
-				{
-					ShopTextP1.gameObject.layer = LayerMask.NameToLayer ("NoGUI");
-					backgroundP1.gameObject.layer = LayerMask.NameToLayer( "NoGUI" );
-					break;
-				}
-				case 2 :
-				{
-					ShopTextP2.gameObject.layer = LayerMask.NameToLayer ("NoGUI");
-					backgroundP2.gameObject.layer = LayerMask.NameToLayer( "NoGUI" );
-					break;
-				}
-				case 3 :
-				{
-					ShopTextP3.gameObject.layer = LayerMask.NameToLayer ("NoGUI");
-					backgroundP3.gameObject.layer = LayerMask.NameToLayer( "NoGUI" );
-					break;
-				}
-				case 4 :
-				{
-					ShopTextP4.gameObject.layer = LayerMask.NameToLayer ("NoGUI");
-					backgroundP4.gameObject.layer = LayerMask.NameToLayer( "NoGUI" );
-					break;
-				}
+				guiStorage.gameObject.layer = LayerMask.NameToLayer ("NoGUI");
 			}
+		}
+	}
+
+	public void GetGUIs()
+	{
+		shopGUIs = new Dictionary<int, GUIText>();
+		GameObject[] GUIs = GameObject.FindGameObjectsWithTag("ShopTag");
+		foreach (GameObject GUI in GUIs)
+		{
+			shopGUIs.Add(GUI.transform.parent.GetComponent<PlayerData>().GetPlayerNum(), GUI.guiText);
 		}
 	}
 

@@ -21,7 +21,8 @@ public class PlayerData : Actor
 //-----Attribute Variables---------------------------------------------------------------------------------------------------
 
 	//Player Number
-	public int PLAYERNUM = 1; //assigning a new number to each player as they spawn
+	static int NUMPLAYERS = 1; //global notification of number of players
+	private int PLAYERNUM = 0; //the number of the current player (local)
 
 	//TEST - spawning
 	public Rigidbody2D Player;
@@ -87,6 +88,9 @@ public class PlayerData : Actor
 	// Use this for initialization
 	void Start ()
 	{	
+		PLAYERNUM = NUMPLAYERS;
+		NUMPLAYERS ++;
+	
 		LevelUp(Attribute.Move, 1); //initialize moving
 		MOVING_RIGHT = true;
 

@@ -4,7 +4,8 @@ using System.Collections;
 public class WepLevelShop : StatShop {
 
 	// Use this for initialization
-	void Start () {
+	public override void Start () {
+		base.Start();
 		stat = PlayerData.Attribute.WeaponLevel;
 		DisplayData = 
 			"Weapon Upgrade Shop\n" +

@@ -4,7 +4,8 @@ using System.Collections;
 public class JumpShop : StatShop {
 
 	// Use this for initialization
-	void Start () {
+	public override void Start () {
+		base.Start();
 		stat = PlayerData.Attribute.Jump;
 		DisplayData = 
 			"Jump Shop\n" +

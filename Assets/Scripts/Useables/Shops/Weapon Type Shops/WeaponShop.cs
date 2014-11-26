@@ -6,8 +6,9 @@ public class WeaponShop : Shop {
 	protected Weapon.WeaponType weapon;
 	protected int BASE_PRICE = 25;
 
-	void Awake()
+	public override void Start()
 	{
+		base.Start();
 		price = 75;
 	}
 

@@ -6,8 +6,9 @@ public class StatShop : Shop {
 	protected PlayerData.Attribute stat;
 	protected float scalingFactor = 2.5f;
 
-	void Awake()
+	public override void Start()
 	{
+		base.Start();
 		price = 100;
 	}
 

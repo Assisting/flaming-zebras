@@ -4,8 +4,8 @@ using System.Collections;
 public class MissileShop : WeaponShop {
 	
 	// Use this for initialization
-	void Start () {
-		//price = 250;
+	public override void Start () {
+		base.Start();
 		weapon = Weapon.WeaponType.Missile;
 		DisplayData = 
 			"Missile Shop\n" +
