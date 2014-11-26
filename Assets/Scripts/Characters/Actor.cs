@@ -24,7 +24,7 @@ public class Actor : MonoBehaviour {
 			MOVING_RIGHT = true;
 		else if (rigidbody2D.velocity.x < 0f)
 			MOVING_RIGHT = false;
-		if (CURLIFE <= 0)
+		if (dead)
 			Die();
 	}
 
@@ -46,7 +46,7 @@ public class Actor : MonoBehaviour {
 		CURLIFE += value;
 		if (CURLIFE > MAXLIFE)
 						CURLIFE = MAXLIFE;
-		if (CURLIFE < 0)
+		if (CURLIFE <= 0)
 		{
 			CURLIFE = 0; 
 			dead = true;
@@ -63,7 +63,8 @@ public class Actor : MonoBehaviour {
 	{
 		CancelInvoke(endDot);
 		dotTick ();
-		// -1 Signifies that other action must be taken before the dot wears off; like exiting the cloud of poison
+		// -1 Signifies that other action must be taken before the dot wears off; 
+		//    like exiting the cloud of poison
 		if(-1.0f != duration){
 			Invoke(endDot, duration);
 		}
@@ -98,7 +99,8 @@ public class Actor : MonoBehaviour {
 		EndDot ("BurnTick");
 	}
 
-	//Poison Functions
+	// Poison Functions
+	// Squelch turns off poison
 	public void Poison(int damage, float tick, float duration)
 	{
 		POISON_DAMAGE = damage;
