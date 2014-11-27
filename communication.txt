@@ -1,0 +1,87 @@
+I'm probably missing a bunch,but here's what I got without a controller to mess around with and run into problems on my own
+
+Weapons
+	Damage number
+	
+Sword
+	Shield cooldown
+	Shield duration
+	Shield particle
+
+All Actors
+	Is damage being taken
+	
+Character
+	State
+		DoTs
+			Remaining duration of DoT
+		Hitstun
+		Shop tele cooldown
+
+Enemies
+	Archer/Met
+		Invuln or not
+
+Traps
+	Darts
+		Windup time communicated
+		
+General
+	Where am I?
+		Minimap
+		
+		
+Priority
+Damage taken
+Shield particle
+
+Mid Priority
+Cooldowns/durations
+dart windup
+
+Low
+Minimap
+Damage number
+
+Suggested implementations
+Durations/cooldowns
+	Ideal:
+		League of legends buff icons - http://media-titanium.cursecdn.com/attachments/44/856/screen11.png
+			Icons floating over the skill bar in the middle
+				Alternative - At the right side of the skillbar we have summoner spells with numbers
+			The far left floating icon is ready to go
+			The two to the right are durations that are ticking down, the brighter side represents the remaining duration the darker the used up duration
+				Abilities in the ability bar immediately above health and mana display this as well
+				Dark is on cooldown
+				Lit up is ready to go.
+				When an ability is returning, they get the clock hand effect as well as a number like the summoner spells
+					Slightly different paradigm, also tinted blue when on cooldown
+					
+				Overall: I think we can have everything just use the buff icon paradigm rather than the abilities paradigm; dark section and bright section with clock hands.
+				
+				Ex. Shop tele has the hand move one direction as it comes back, fire and poison have a hand that moves the other direction as they wear off
+				
+	Quick and easy for now: Like the summoner spells in the image, but without changing the icon colour/shade or clock hands
+		Just display relevant icons (always shop tele, shield cooldown, shield duration, burn, poison based on situation)
+			Have a number count down, for shield and shop tele have the icon remain like the far left icon in the image to show available, have fire/poison disappear when their timer runs out.
+			
+			Ideally we spawn icons in a bar dynamically beside each other, for a proof of concept we can have fixed locations for each type but it is not a scalable implementation as we add to the game so it would be a good idea not to invest time and energy too heavily into that implementation.
+
+Is damage being taken/hitstun
+	Flashing sprite while taking damage and/or in hitstun (rock doesn't go into hitstun) ala castlevania http://www.letsplaysnes.com/play-super-castlevania-iv-online/?play=true
+
+	
+Archer invuln or not
+	Don't know what the sprite will be like, but something like eyes open/closed is pretty simple, no?
+	
+Darts
+	Sound
+		Ch-k-ch-k-*fire*
+			3 is a magic number, don't question it
+			
+Shield particle
+	Little transparent orb around the player like in sonic http://sonic2.ocremix.org/graphics/Sonic2%28InvincibilityTheme%29.gif
+	
+Damage Number
+	In the bottom right corner of the weapon icon, in red
+		Red means hurt, it's a convention - following conventions are good.
