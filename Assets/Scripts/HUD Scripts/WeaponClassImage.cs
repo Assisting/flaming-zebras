@@ -9,6 +9,7 @@ public class WeaponClassImage : MonoBehaviour {
 	public Texture2D missile;
 	public Texture2D sword;
 	public Texture2D laser;
+	public Texture2D none;
 
 	// Use this for initialization
 	void Start () {
@@ -46,7 +47,7 @@ public class WeaponClassImage : MonoBehaviour {
 		}
 		case Weapon.WeaponType.None:
 		{
-			Debug.Log ("Now you fucked up. You have fucked Up now");
+			guiTexture.texture = none;
 			break;
 		}
 		}

@@ -12,8 +12,12 @@ public class Door : MonoBehaviour {
 	{
 		if (other.tag == "Player")
 		{
-			other.GetComponent<Movement>().StopDash();
-			other.transform.position = pairExit.position;
+			if(other.GetComponent<PlayerData>().GetWeaponType() != Weapon.WeaponType.None)
+			{
+				other.GetComponent<Movement>().StopDash();
+				other.transform.position = pairExit.position;
+			}
+			
 		}
 	}
 }

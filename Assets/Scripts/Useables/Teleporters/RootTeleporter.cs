@@ -8,8 +8,12 @@ public class RootTeleporter : Usable {
 	public override void Use(GameObject caller)
 	{
 		PlayerData playerData = caller.GetComponent<PlayerData>();
-		caller.transform.position = playerData.getLastTeleport();
-		playerData.SetTeleportCooldown();
-		caller.GetComponent<PlayerData>().MakeInvuln(teleInvulnTime);
+		print(playerData.GetWeaponType());
+		if (playerData.GetWeaponType() != Weapon.WeaponType.None)
+		{
+			caller.transform.position = playerData.getLastTeleport();
+			playerData.SetTeleportCooldown();
+			caller.GetComponent<PlayerData>().MakeInvuln(teleInvulnTime);
+		}	
 	}
 }
