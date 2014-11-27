@@ -73,12 +73,6 @@ public class LevelGenerate : MonoBehaviour {
 		Instantiate(player2, new Vector3(0f, 0f, 0f), room.transform.rotation); //spawn player 2
 		newPlayer = GameObject.FindWithTag("Player");
 		newPlayer.transform.position = room.transform.position;
-
-		GameObject[] shops = GameObject.FindGameObjectsWithTag("Shop"); //initialize price GUIs
-		foreach (GameObject shop in shops)
-		{
-			shop.GetComponent<Shop>().GetGUIs();
-		}
 	}
 
 	// recursive generation function, spawns levels from a predefined list currently

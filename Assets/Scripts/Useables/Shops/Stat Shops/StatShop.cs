@@ -19,7 +19,7 @@ public class StatShop : Shop {
 			PlayerData playerData = caller.GetComponent<PlayerData>();
 			int statLevel = playerData.GetAttributeLevel(stat);
 			
-			if (playerData.GetMoney() >= price && statLevel < 3)
+			if (playerData.GetMoney() >= GetPrice(caller) && statLevel < 3)
 			{
 				playerData.ChangeMoney(-GetPrice(caller));
 				playerData.LevelUp(stat, statLevel + 1);

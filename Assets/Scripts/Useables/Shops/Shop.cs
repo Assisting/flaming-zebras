@@ -10,7 +10,14 @@ public abstract class Shop : Usable {
 
 	protected int price;
 
-	public virtual void Start(){}
+	public virtual void Start()
+	{
+		GameObject[] shops = GameObject.FindGameObjectsWithTag("Shop"); //initialize price GUIs
+		foreach (GameObject shop in shops)
+		{
+			shop.GetComponent<Shop>().GetGUIs();
+		}
+	}
 
 	void OnTriggerStay2D(Collider2D other)
 	{

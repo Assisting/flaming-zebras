@@ -22,7 +22,7 @@ public class PlayerData : Actor
 
 	//Player Number
 	public static int NUMPLAYERS = 1; //global notification of number of players
-	public int PLAYERNUM = 0; //the number of the current player (local)
+	private int PLAYERNUM = 0; //the number of the current player (local)
 
 	//TEST - spawning
 	public Rigidbody2D Player;

@@ -6,7 +6,7 @@ public class Actor : MonoBehaviour {
 	public int MAXLIFE = 100;
 	public int CURLIFE = 100;
 	protected bool dead;
-	protected bool MOVING_RIGHT;
+	public bool MOVING_RIGHT;
 
 	protected float STUN_FORCE = 3f;
 	protected bool stunned = false;

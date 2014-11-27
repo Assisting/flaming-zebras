@@ -17,7 +17,7 @@ public class WeaponShop : Shop {
 		if (caller.tag == "Player") //only acknowledge players
 		{
 			PlayerData playerData = caller.GetComponent<PlayerData>();
-			if (playerData.GetMoney() >= price && weapon != playerData.GetWeaponType())
+			if (playerData.GetMoney() >= GetPrice(caller) && weapon != playerData.GetWeaponType())
 			{
 				PlayerData script = caller.GetComponent<PlayerData>();
 				playerData.ChangeMoney(-GetPrice(caller));

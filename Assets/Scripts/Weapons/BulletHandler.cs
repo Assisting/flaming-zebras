@@ -9,7 +9,7 @@ public class BulletHandler : Projectile {
 	// Use this for initialization
 	void Start () {
 		rigidbody2D.velocity = transform.right * BULLET_VELOCITY;
-		Destroy(gameObject, 10);
+		Destroy(gameObject, 6);
 	}
 
 	// Bullet hits something
