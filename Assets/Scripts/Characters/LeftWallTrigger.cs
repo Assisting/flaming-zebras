@@ -25,8 +25,7 @@ public class LeftWallTrigger : MonoBehaviour {
 		{
 			if ( playerData.IsDashing() )
 				movement.StopDash();
-		}
-			
+		}	
 	}
 
 	//allow movement and dashing agin on exiting wall collision

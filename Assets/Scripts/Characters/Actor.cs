@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Actor : MonoBehaviour {
 
+//-----Attributes------------------------------------------------------------------------------------------------------------------------------------
+
 	public int MAXLIFE = 100;
 	public int CURLIFE = 100;
 	protected bool dead;
@@ -18,15 +20,21 @@ public class Actor : MonoBehaviour {
 
 	private delegate void DotDelegate ();
 
+//-----Unity Functions-------------------------------------------------------------------------------------------------------------------------------
+
 	// Update is called once per frame
 	void Update () {
 		if (rigidbody2D.velocity.x > 0f)
 			MOVING_RIGHT = true;
 		else if (rigidbody2D.velocity.x < 0f)
 			MOVING_RIGHT = false;
+		if (CURLIFE > MAXLIFE)
+			CURLIFE = MAXLIFE; //its MAX life
 		if (dead)
 			Die();
 	}
+
+//-----Custom Functions------------------------------------------------------------------------------------------------------------------------------
 
 	// give damage while also inducing a knock-back effect
 	public virtual void StunDamage(int value, bool goRight)
@@ -127,6 +135,8 @@ public class Actor : MonoBehaviour {
 		EndDot ("PoisonTick");
 	}
 
+//-----Getters and Setters---------------------------------------------------------------------------------------------------------------------------
+
 	//Movement Functions
 	public bool IsMovingRight()
 	{
@@ -141,5 +151,15 @@ public class Actor : MonoBehaviour {
 	public void setStunned(bool value)
 	{
 		stunned = value;
+	}
+
+	public int GetMaxLife()
+	{
+		return MAXLIFE;
+	}
+
+	public int GetCurLife()
+	{
+		return CURLIFE;
 	}
 }

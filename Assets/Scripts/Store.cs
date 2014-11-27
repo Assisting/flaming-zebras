@@ -4,19 +4,7 @@ using System.Collections.Generic;
 
 public class Store : MonoBehaviour {
 
-	private Dictionary<GameObject, Rent> rents;
 
-	void Start()
-	{
-		rents = new Dictionary<GameObject, Rent>();
-	}
-
-//	void onTriggerStay2D (Collider2D other)
-//	{
-//		if (other.tag == "Player")
-//		{
-//			PlayerData script = other.GetComponent<PlayerData>();
-//			script.CURLIFE = script.MAXLIFE; //full heal
 //			Rent newRent = new Rent();
 //			newRent.SetPatron(other.gameObject);
 //			rents.Add(other.gameObject, newRent);

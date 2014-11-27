@@ -190,6 +190,16 @@ public class Movement : MonoBehaviour {
 		jumpLag = false;
 	}
 
+	//teleport the player to the shop,  heal them fully, and start a rent countdown
+	public void TeleportHome(Vector3 returnPosition)
+	{
+		playerData.SetTeleportCooldown();
+		Vector2 rootTeleport = GameObject.Find("RootTeleporter").transform.position;
+		playerData.SetLastTeleport(returnPosition);
+		transform.position = rootTeleport;
+		playerData.LifeChange(playerData.GetMaxLife()); //full heal
+	}
+
 	//run in FixedUpdate() to update grounded status, animation, current platform etc.
 	private void GroundCheck()
 	{

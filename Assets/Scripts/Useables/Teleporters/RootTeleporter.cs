@@ -7,16 +7,9 @@ public class RootTeleporter : Usable {
 
 	public override void Use(GameObject caller)
 	{
-		caller.transform.position = caller.GetComponent<PlayerData>().getLastTeleport();
+		PlayerData playerData = caller.GetComponent<PlayerData>();
+		caller.transform.position = playerData.getLastTeleport();
+		playerData.SetTeleportCooldown();
 		caller.GetComponent<PlayerData>().MakeInvuln(teleInvulnTime);
-	}
-
-	void onTriggerEnter2D (Collider2D other)
-	{
-		if (other.tag == "Player")
-		{
-			PlayerData script = other.GetComponent<PlayerData>();
-			script.CURLIFE = script.MAXLIFE; //full heal
-		}
 	}
 }

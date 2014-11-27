@@ -43,8 +43,8 @@ public class PlayerData : Actor
 
 	//Combat
 	private bool INVULNERABLE = false;
-	private float LAST_HIT_COOLDOWN = 10f;
-	private GameObject lastHit;
+	private float LAST_HIT_COOLDOWN = 10f; //Time it takes for "last hit" to bleed off
+	private GameObject lastHit; //player that last hit you
 
 	//Moving
 	private float MOVE_SPEED; // the lateral speed of the players (as a force for air-control)
@@ -70,10 +70,12 @@ public class PlayerData : Actor
 	private int moneyAmount; // The amount of money a player has
 
 	//Teleporting
+	private float TELEPORT_COOLDOWN = 50f; //time to wait between "recalls"
+	private bool canTeleport = true; //whether or not the player is allowed to recall
 	private Vector2 lastTeleport; //the last teleporter that the player walked through
 
 	//Shopping
-	private int weaponSwaps = 0;
+	private int weaponSwaps = 0; //weapon swaps become progressively more expensive
 	
 
 //-----Unity Functions--------------------------------------------------------------------------------------------------------
@@ -231,7 +233,7 @@ public class PlayerData : Actor
 
 	public override void LifeChange(int value)
 	{
-		if (!INVULNERABLE)
+		if ( (!INVULNERABLE && value < 0) || value >= 0)
 			base.LifeChange(value);
 	}
 
@@ -244,6 +246,7 @@ public class PlayerData : Actor
 
 	private void Die()
 	{
+		movement.TeleportHome(new Vector3(0f, 0f, 0f)); //go to shop, leave to origin level
 		if (lastHit != null) //give player money
 		{
 			
@@ -252,7 +255,6 @@ public class PlayerData : Actor
 		{
 			
 		}
-		transform.position = GameObject.Find("RootTeleporter").transform.position; //get healed
 	}
 
 //-----Getters and Setters---------------------------------------------------------------------------------------------------
@@ -318,6 +320,7 @@ public class PlayerData : Actor
 	public float GetMOVE_SPEED ()
 	{
 		return MOVE_SPEED;
+
 	}
 
 	public float GetMAX_SPEED ()
@@ -470,7 +473,7 @@ public class PlayerData : Actor
 		return lastTeleport;
 	}
 
-	public void setLastTeleport(Vector2 teleporter)
+	public void SetLastTeleport(Vector2 teleporter)
 	{
 		lastTeleport = teleporter;
 	}
@@ -489,6 +492,23 @@ public class PlayerData : Actor
 	{
 		lastHit = hitter;
 		Invoke("ResetLastHit", LAST_HIT_COOLDOWN);
+	}
+
+	public void SetTeleportCooldown()
+	{
+		CancelInvoke("MakeTeleportable");
+		canTeleport = false;
+		Invoke("MakeTeleportable", TELEPORT_COOLDOWN);
+	}
+
+	private void MakeTeleportable()
+	{
+		canTeleport = true;
+	}
+
+	public bool CanTeleport()
+	{
+		return canTeleport;
 	}
 
 	public void ResetLastHit()
