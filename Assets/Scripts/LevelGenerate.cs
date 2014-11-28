@@ -68,6 +68,7 @@ public class LevelGenerate : MonoBehaviour {
 		yield return StartCoroutine(Generate(currentDoor, room.transform.position, "WestDoor")); //start recursive generation
 
 		Instantiate(player1, new Vector3(0f, 0f, 0f), room.transform.rotation); //spawn player 1
+		yield return new WaitForSeconds(0.05f);
 		Instantiate(player2, new Vector3(0f, 0f, 0f), room.transform.rotation); //spawn player 2
 
 		GameObject[] newPlayers = GameObject.FindGameObjectsWithTag("Player");
@@ -81,7 +82,7 @@ public class LevelGenerate : MonoBehaviour {
 	IEnumerator Generate(Door pastDoor, Vector3 pastPosition, string pastSide)
 	{
 		Application.LoadLevelAdditive( roomList.Dequeue() ); //spawn next level
-		yield return new WaitForSeconds(0.5f); //wait for it to happen
+		yield return new WaitForSeconds(0.1f); //wait for it to happen
 		GameObject newLevel = GameObject.FindWithTag("UnplacedLevel"); //get the level that just spawned
 		newLevel.tag = "CaveLevel";
 
