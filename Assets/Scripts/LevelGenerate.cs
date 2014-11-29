@@ -4,10 +4,10 @@ using System.Collections.Generic;
 
 public class LevelGenerate : MonoBehaviour {
 
-	public GameObject player1;
+	public GameObject player1; //prefabs of players to spwan
 	public GameObject player2;
 
-	private float HORIZONTAL_SEPARATION = 50f;
+	private float HORIZONTAL_SEPARATION = 50f; //the distances between rooms
 	private float VERTICAL_SEPARATION = 35f;
 
 	private int numRooms;
@@ -33,7 +33,7 @@ public class LevelGenerate : MonoBehaviour {
 
 		Application.LoadLevelAdditive("storeRoom"); //spawn store
 		Application.LoadLevelAdditive("originRoom"); //spawn first room
-		StartCoroutine(Other());
+		StartCoroutine(Other()); //so we can wait in code
 	}
 
 	IEnumerator Other()
@@ -41,8 +41,8 @@ public class LevelGenerate : MonoBehaviour {
 		yield return new WaitForSeconds(0.5f);
 		GameObject room = GameObject.Find("storeRoom");
 		room.tag = "CaveLevel";
-		room.transform.position += Vector3.up*VERTICAL_SEPARATION;
-		GameObject storeRoom = room;
+		room.transform.position += Vector3.up*VERTICAL_SEPARATION; //put store in place
+		GameObject storeRoom = room; //store for later
 		
 		Door[] totallyNotDoors = room.GetComponentsInChildren<Door>(); //map store doors to the origin teleporter
 		room = GameObject.Find("originRoom");
@@ -59,7 +59,7 @@ public class LevelGenerate : MonoBehaviour {
 
 		foreach (Door door in totallyNotDoors)
 		{
-			doors.Add(door.name, door);
+			doors.Add(door.name, door); //populate list of oridin doors (for recursion)
 		}
 
 		Door currentDoor;
@@ -84,7 +84,7 @@ public class LevelGenerate : MonoBehaviour {
 		Application.LoadLevelAdditive( roomList.Dequeue() ); //spawn next level
 		yield return new WaitForSeconds(0.1f); //wait for it to happen
 		GameObject newLevel = GameObject.FindWithTag("UnplacedLevel"); //get the level that just spawned
-		newLevel.tag = "CaveLevel";
+		newLevel.tag = "CaveLevel"; //only one level tagged unplaced at a time
 
 		Dictionary<string, Door> doors = new Dictionary<string, Door>();
 		Door[] totallyNotDoors = newLevel.GetComponentsInChildren<Door>(); //list of easily indexed doors
@@ -132,21 +132,18 @@ public class LevelGenerate : MonoBehaviour {
 		doors.TryGetValue("WestDoor", out doorStorage);
 		if (doorStorage != null && pastSide != "EastDoor")
 		{
-			//StartCoroutine(Generate(doorStorage, pastPosition, "WestDoor"));
 			yield return StartCoroutine(Generate(doorStorage, pastPosition, "WestDoor"));
 		}
 
 		doors.TryGetValue("SouthDoor", out doorStorage);
 		if (doorStorage != null && pastSide != "NorthDoor")
 		{
-			//StartCoroutine(Generate(doorStorage, pastPosition, "SouthDoor"));
 			yield return StartCoroutine(Generate(doorStorage, pastPosition, "SouthDoor"));	
 		}
 
 		doors.TryGetValue("NorthDoor", out doorStorage);
 		if (doorStorage != null && pastSide != "SouthDoor")
 		{
-			//StartCoroutine(Generate(doorStorage, pastPosition, "NorthDoor"));
 			yield return StartCoroutine(Generate(doorStorage, pastPosition, "NorthDoor"));	
 		}
 	}

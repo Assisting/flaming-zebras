@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public abstract class Shop : Usable {
 
-	private Dictionary<int, GUIText> shopGUIs;
+	static Dictionary<int, GUIText> shopGUIs; //one Gui list for all shops
 
 	protected string DisplayData;
 
@@ -12,10 +12,13 @@ public abstract class Shop : Usable {
 
 	public virtual void Start()
 	{
-		GameObject[] shops = GameObject.FindGameObjectsWithTag("Shop"); //initialize price GUIs
-		foreach (GameObject shop in shops)
+		if (null == shopGUIs) //first shop in makes the dictionary
 		{
-			shop.GetComponent<Shop>().GetGUIs();
+			GameObject[] shops = GameObject.FindGameObjectsWithTag("Shop"); //initialize price GUIs
+			foreach (GameObject shop in shops)
+			{
+				shop.GetComponent<Shop>().GetGUIs(); //populate dictionary with the four available GUIs (index by playerNum)
+			}
 		}
 	}
 
@@ -28,10 +31,10 @@ public abstract class Shop : Usable {
 			GUIText guiStorage;
 			string playersLayer = "Player" + playerNum + "GUI";
 			
-			shopGUIs.TryGetValue(playerNum, out guiStorage);
-			if (guiStorage != null)
+			shopGUIs.TryGetValue(playerNum, out guiStorage); //try to get player's shoptext
+			if (guiStorage != null) //if player record exists
 			{
-				guiStorage.text = DisplayData + GetPrice(other.gameObject).ToString();
+				guiStorage.text = DisplayData + GetPrice(other.gameObject).ToString(); //set layer and text
 				guiStorage.gameObject.layer = LayerMask.NameToLayer (playersLayer);
 			}
 		}
@@ -42,10 +45,10 @@ public abstract class Shop : Usable {
 		{
 			int playerNum = other.GetComponent<PlayerData>().GetPlayerNum();
 			GUIText guiStorage;
-			shopGUIs.TryGetValue(playerNum, out guiStorage);
-			if (guiStorage != null)
+			shopGUIs.TryGetValue(playerNum, out guiStorage); //try to get player's shoptext
+			if (guiStorage != null) //if player record exists
 			{
-				guiStorage.gameObject.layer = LayerMask.NameToLayer ("NoGUI");
+				guiStorage.gameObject.layer = LayerMask.NameToLayer ("NoGUI"); //GUI disappears
 			}
 		}
 	}
@@ -53,11 +56,11 @@ public abstract class Shop : Usable {
 	public void GetGUIs()
 	{
 		shopGUIs = new Dictionary<int, GUIText>();
-		GameObject[] GUIs = GameObject.FindGameObjectsWithTag("ShopTag");
+		GameObject[] GUIs = GameObject.FindGameObjectsWithTag("ShopTag"); //find all the shop texts
 		foreach (GameObject GUI in GUIs)
 		{
-			int playerNum = GUI.transform.parent.parent.Find("Player").GetComponent<PlayerData>().GetPlayerNum();
-			shopGUIs.Add(playerNum, GUI.guiText);
+			int playerNum = GUI.transform.parent.parent.Find("Player").GetComponent<PlayerData>().GetPlayerNum(); //get related playernum
+			shopGUIs.Add(playerNum, GUI.guiText); //store in the global dictionary
 		}
 	}
 
