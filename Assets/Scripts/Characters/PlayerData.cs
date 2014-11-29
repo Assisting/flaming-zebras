@@ -22,7 +22,7 @@ public class PlayerData : Actor
 
 	//Player Number
 
-	public static int NUMPLAYERS; //global notification of number of players
+	public static int NUMPLAYERS = 0; //global notification of number of players
 	private int PLAYERNUM = 0; //the number of the current player (local)
 
 
@@ -90,10 +90,8 @@ public class PlayerData : Actor
 		movement = GetComponent<Movement>();
 
 		//set player Number (must be awake for keybinding)
-		if (NUMPLAYERS == 0)
-			NUMPLAYERS = 1;
-		PLAYERNUM = NUMPLAYERS;
 		NUMPLAYERS ++;
+		PLAYERNUM = NUMPLAYERS;
 	}
 
 	// Use this for initialization
