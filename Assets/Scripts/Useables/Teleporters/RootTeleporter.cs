@@ -8,8 +8,7 @@ public class RootTeleporter : Usable {
 	public override void Use(GameObject caller)
 	{
 		PlayerData playerData = caller.GetComponent<PlayerData>();
-		print(playerData.GetWeaponType());
-		if (playerData.GetWeaponType() != Weapon.WeaponType.None)
+		if (playerData.GetWeaponType() != Weapon.WeaponType.None) //TODO why doesn't this work
 		{
 			caller.transform.position = playerData.getLastTeleport();
 			playerData.SetTeleportCooldown();

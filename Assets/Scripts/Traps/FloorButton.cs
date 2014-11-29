@@ -13,7 +13,8 @@ public class FloorButton : MonoBehaviour {
 		{
 			foreach (GameObject trigger in triggers)
 			{
-				trigger.SendMessage("Activate");
+				if (trigger != null)
+					trigger.SendMessage("Activate");
 			}
 		}
 	}
