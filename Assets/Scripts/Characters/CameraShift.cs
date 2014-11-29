@@ -19,18 +19,19 @@ public class CameraShift : MonoBehaviour {
 		{
 			case 2: //If there are 3 players total
 			{
+				print("2 players");
 				switch (playerData.GetPlayerNum ()) 
 				{
 					case 1:
 					{
-						Debug.Log ("numplayers == 2 and Playernum == 1");
+						print("Player 1");
 						//set camera for player 1
 						camera.rect = new Rect (0f, .5f, 0.498f, .5f);
 						break;
 					}
 					case 2:
 					{
-			
+						print("Player 2");
 						//set camera for player 2
 						camera.rect = new Rect (0f, 0f, 1f, 0.498f);
 						break;
@@ -40,23 +41,26 @@ public class CameraShift : MonoBehaviour {
 			}
 			case 3: //If there are 3 players total
 			{
+				print("3 players");
 				switch (playerData.GetPlayerNum ()) 
 				{
 				case 1:
 				{
+					print("Player 1");
 					//set camera for player 1
 					camera.rect = new Rect (0f, .5f, .498f, .5f);
 					break;
 				}
 				case 2:
 				{
-					Debug.Log ("numplayers == 3 and Playernum == 2");
+					print("Player 2");
 					//set camera for player 2
 					camera.rect = new Rect (0.502f, .5f, 1f, 1f);
 					break;
 				}
 				case 3:
 				{
+					print("Player 3");
 					//set camera for player 3
 					camera.rect = new Rect (0f, 0f, 1f, 0.5f);
 					break;
@@ -66,29 +70,33 @@ public class CameraShift : MonoBehaviour {
 			}
 			case 4: //If there are 4 players total
 			{
-
+				print("4 players");
 				switch (playerData.GetPlayerNum ()) 
 				{
 					case 1:
 					{
+						print("Player 1");
 						// set camera for player 1
 						camera.rect = new Rect (0f, .5f, .498f, .5f);
 						break;
 					}
 					case 2:
 					{
+						print("Player 2");
 						// set camera for player 2
 						camera.rect = new Rect (0.502f, .5f, 1f, 1f);
 						break;
 					}
 					case 3:
 					{
+						print("Player 3");
 						// set camera for player 3
 						camera.rect = new Rect (-0.002f, 0f, .5f, .498f);
 						break;
 					}
 					case 4:
 					{
+						print("Player 3");
 						// set camera for player 4
 						camera.rect = new Rect (0.502f, 0f, .5f, .498f);
 						break;
