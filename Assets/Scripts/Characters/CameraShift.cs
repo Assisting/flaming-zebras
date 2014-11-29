@@ -26,7 +26,7 @@ public class CameraShift : MonoBehaviour {
 					{
 						print("Player 1");
 						//set camera for player 1
-						camera.rect = new Rect (0f, .5f, 0.498f, .5f);
+						camera.rect = new Rect (0f, 0.5f, 0.498f, 1f);
 						break;
 					}
 					case 2:
@@ -48,14 +48,14 @@ public class CameraShift : MonoBehaviour {
 				{
 					print("Player 1");
 					//set camera for player 1
-					camera.rect = new Rect (0f, .5f, .498f, .5f);
+					camera.rect = new Rect (0f, 0.5f, 0.498f, 0.5f);
 					break;
 				}
 				case 2:
 				{
 					print("Player 2");
 					//set camera for player 2
-					camera.rect = new Rect (0.502f, .5f, 1f, 1f);
+					camera.rect = new Rect (0.502f, 0.5f, 1f, 1f);
 					break;
 				}
 				case 3:
@@ -77,28 +77,28 @@ public class CameraShift : MonoBehaviour {
 					{
 						print("Player 1");
 						// set camera for player 1
-						camera.rect = new Rect (0f, .5f, .498f, .5f);
+						camera.rect = new Rect (0f, 0.5f, 0.498f, 0.5f);
 						break;
 					}
 					case 2:
 					{
 						print("Player 2");
 						// set camera for player 2
-						camera.rect = new Rect (0.502f, .5f, 1f, 1f);
+						camera.rect = new Rect (0.502f, 0.5f, 1f, 1f);
 						break;
 					}
 					case 3:
 					{
 						print("Player 3");
 						// set camera for player 3
-						camera.rect = new Rect (-0.002f, 0f, .5f, .498f);
+						camera.rect = new Rect (-0.002f, 0f, 0.5f, 0.498f);
 						break;
 					}
 					case 4:
 					{
 						print("Player 3");
 						// set camera for player 4
-						camera.rect = new Rect (0.502f, 0f, .5f, .498f);
+						camera.rect = new Rect (0.502f, 0f, 0.5f, 0.498f);
 						break;
 					}
 				}
