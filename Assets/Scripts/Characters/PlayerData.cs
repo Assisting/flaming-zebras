@@ -22,7 +22,7 @@ public class PlayerData : Actor
 
 	//Player Number
 	public static int NUMPLAYERS = 1; //global notification of number of players
-	private int PLAYERNUM = 0; //the number of the current player (local)
+	public int PLAYERNUM = 0; //the number of the current player (local) (I made it public so I could look at it)
 
 	//TEST - spawning
 	public Rigidbody2D Player;
@@ -262,6 +262,11 @@ public class PlayerData : Actor
 	public int GetPlayerNum()
 	{
 		return PLAYERNUM;
+	}
+
+	public int GetNumPlayers()
+	{
+		return NUMPLAYERS;
 	}
 
 	public void StopInvuln()
