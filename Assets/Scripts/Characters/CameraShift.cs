@@ -17,7 +17,7 @@ public class CameraShift : MonoBehaviour {
 		
 		switch (PlayerData.NUMPLAYERS) 
 		{
-			case 2: //If there are 3 players total
+			case 2: //If there are 2 players total
 			{
 				print("2 players");
 				switch (playerData.GetPlayerNum ()) 
@@ -26,7 +26,7 @@ public class CameraShift : MonoBehaviour {
 					{
 						print("Player 1");
 						//set camera for player 1
-						camera.rect = new Rect (0f, 0.5f, 0.498f, 1f);
+						camera.rect = new Rect (0f, 0.5f, 1f, 0.5f);
 						break;
 					}
 					case 2:
