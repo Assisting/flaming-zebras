@@ -21,8 +21,10 @@ public class PlayerData : Actor
 //-----Attribute Variables---------------------------------------------------------------------------------------------------
 
 	//Player Number
-	public static int NUMPLAYERS = 1; //global notification of number of players
-	public int PLAYERNUM = 0; //the number of the current player (local) (I made it public so I could look at it)
+
+	public static int NUMPLAYERS; //global notification of number of players
+	private int PLAYERNUM = 0; //the number of the current player (local)
+
 
 	//TEST - spawning
 	public Rigidbody2D Player;
@@ -88,6 +90,8 @@ public class PlayerData : Actor
 		movement = GetComponent<Movement>();
 
 		//set player Number (must be awake for keybinding)
+		if (NUMPLAYERS == 0)
+			NUMPLAYERS = 1;
 		PLAYERNUM = NUMPLAYERS;
 		NUMPLAYERS ++;
 	}
