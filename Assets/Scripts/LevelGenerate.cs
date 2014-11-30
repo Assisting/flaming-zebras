@@ -67,9 +67,9 @@ public class LevelGenerate : MonoBehaviour {
 		
 		yield return StartCoroutine(Generate(currentDoor, room.transform.position, "WestDoor")); //start recursive generation
 
-		Instantiate(player1, new Vector3(0f, 0f, 0f), room.transform.rotation); //spawn player 1
+		Instantiate(player2, new Vector3(0f, 0f, 0f), room.transform.rotation); //spawn player 1
 		yield return new WaitForSeconds(0.05f);
-		Instantiate(player2, new Vector3(0f, 0f, 0f), room.transform.rotation); //spawn player 2
+		Instantiate(player1, new Vector3(0f, 0f, 0f), room.transform.rotation); //spawn player 2
 
 		GameObject[] newPlayers = GameObject.FindGameObjectsWithTag("Player");
 		foreach (GameObject player in newPlayers)
@@ -78,6 +78,10 @@ public class LevelGenerate : MonoBehaviour {
 			player.transform.Find("Camera").GetComponent<CameraShift>().UpdateViewport(); //separate players into correct number of quadrants
 			player.AddComponent("Rent");
 		}
+
+		GameObject shop = GameObject.FindWithTag("Shop"); //find a shop
+		shop.GetComponent<Shop>().GetGUIs(); //populate dictionary with the four available GUIs (index by playerNum)
+
 	}
 
 	// recursive generation function, spawns levels from a predefined list currently

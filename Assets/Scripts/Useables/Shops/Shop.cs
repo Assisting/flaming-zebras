@@ -14,11 +14,7 @@ public abstract class Shop : Usable {
 	{
 		if (null == shopGUIs) //first shop in makes the dictionary
 		{
-			GameObject[] shops = GameObject.FindGameObjectsWithTag("Shop"); //initialize price GUIs
-			foreach (GameObject shop in shops)
-			{
-				shop.GetComponent<Shop>().GetGUIs(); //populate dictionary with the four available GUIs (index by playerNum)
-			}
+			shopGUIs = new Dictionary<int, GUIText>();
 		}
 	}
 
@@ -55,7 +51,6 @@ public abstract class Shop : Usable {
 
 	public void GetGUIs()
 	{
-		shopGUIs = new Dictionary<int, GUIText>();
 		GameObject[] GUIs = GameObject.FindGameObjectsWithTag("ShopTag"); //find all the shop texts
 		foreach (GameObject GUI in GUIs)
 		{

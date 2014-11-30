@@ -16,7 +16,7 @@ public class HudCenter : MonoBehaviour {
 	public StatusIcons stats;
 
 	// Use this for initialization
-	void Awake() {
+	void Start() {
 		dashes.playerData = player.GetComponent<PlayerData>();
 		moneyText.playerData = player.GetComponent<PlayerData>();
 		moneyText.keybind = key.GetComponent<KeyBindings>();
@@ -35,15 +35,10 @@ public class HudCenter : MonoBehaviour {
 		{
 			int playerNum = player.GetComponent<PlayerData>().GetPlayerNum(); //get the player info to set it to
 			string playersLayer = "Player" + playerNum + "GUI";
-			if(gui.name == "shop") // because, as we mentioned, this gets dealt with elsewhere
+			if(gui.name != "Shop") // because, as we mentioned, this gets dealt with elsewhere
 			{
 				gui.gameObject.layer = LayerMask.NameToLayer (playersLayer); // and do the setting of the thing. 
 			}
 		}
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
 	}
 }
