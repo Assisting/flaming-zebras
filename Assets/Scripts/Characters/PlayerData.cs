@@ -72,7 +72,7 @@ public class PlayerData : Actor
 	private int moneyAmount; // The amount of money a player has
 	private float PKLOSS = 0.3f; //the fraction of money to lose after being killed by a player
 	private float EKLOSS = 0.2f; //the fraction of money to lose when killed by the environment
-	private float KILLTAX = 0.8f; //the fraction of money lost that goes to the player that killed you
+	//private float KILLTAX = 0.8f; //the fraction of money lost that goes to the player that killed you
 
 	//Teleporting
 	private float TELEPORT_COOLDOWN = 50f; //time to wait between "recalls"
@@ -254,14 +254,14 @@ public class PlayerData : Actor
 		movement.TeleportHome(new Vector3(0f, 0f, 0f)); //go to shop, leave to origin level
 		if (lastHit != null) //give player money
 		{
-			int lostMoney = moneyAmount/PKLOSS;
+			int lostMoney = (int)(moneyAmount/PKLOSS);
 			lastHit.GetComponent<PlayerData>().ChangeMoney(lostMoney);
 			moneyAmount -= (lostMoney);
 			lastHit = null;
 		}
 		else //just lose money
 		{
-			moneyAmount -= (moneyAmount/EKLOSS);
+			moneyAmount -= (int)(moneyAmount/EKLOSS);
 		}
 	}
 

@@ -8,7 +8,7 @@ public class RunGame : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Invoke("LastShop", ADVENTURETIME)
+		Invoke("LastShop", ADVENTURETIME);
 		Invoke("EndGame", GAMETIME);
 	}
 	
@@ -19,7 +19,7 @@ public class RunGame : MonoBehaviour {
 
 	private void LastShop()
 	{
-		GameObject[] players = FindGameObjectsWithTag("Player");
+		GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
 		foreach (GameObject player in players)
 		{
 			player.GetComponent<Movement>().TeleportHome(new Vector3(0f, 0f, 0f)); //everyone goes to the shop before the fight
@@ -30,13 +30,13 @@ public class RunGame : MonoBehaviour {
 	{
 		int highestMoney = 0;
 		GameObject bestPlayer = null;
-		GameObject[] players = FindGameObjectsWithTag("Player");
+		GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
 		foreach (GameObject player in players)
 		{
 			if (player.GetComponent<PlayerData>().GetMoney() > highestMoney) //find best player
 				bestPlayer = player;
 		}
 		print("Congratulations " + bestPlayer.name + "! you won with a total of " + highestMoney + " gold."); //print ending message
-		Time.timescale = 0f;//stop game
+		Time.timeScale = 0f;//stop game
 	}
 }
