@@ -12,6 +12,7 @@ public class Rent : MonoBehaviour {
 	void Start()
 	{
 		playerData = GetComponent<PlayerData>();
+		playerData.MakeInvuln(Mathf.Infinity);
 		InvokeRepeating("RentPay", GRACE, TICKTIME);
 	}
 
@@ -29,6 +30,7 @@ public class Rent : MonoBehaviour {
 
 	public void StopPay()
 	{
+		playerData.StopInvuln();
 		CancelInvoke("RentPay");
 		Destroy(this);
 	}
