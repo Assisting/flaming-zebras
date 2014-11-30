@@ -24,9 +24,10 @@ public class Rent : MonoBehaviour {
 		{
 			transform.position = new Vector3(0f, 0f, 0f);
 			playerData.SetTeleportCooldown();
-			StopPay();
+			playerData.MakeInvuln(RootTeleporter.teleInvulnTime);
 			if (playerData.GetWeaponType() == Weapon.WeaponType.None)
 				playerData.LevelUp(PlayerData.Attribute.WeaponType, Weapon.WeaponType.RUBBER_CHICKEN);
+			StopPay();
 		}
 	}
 

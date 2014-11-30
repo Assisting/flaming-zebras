@@ -3,7 +3,7 @@ using System.Collections;
 
 public class RootTeleporter : Usable {
 
-	private float teleInvulnTime = 2f;
+	public static float teleInvulnTime = 2f;
 
 	public override void Use(GameObject caller)
 	{
