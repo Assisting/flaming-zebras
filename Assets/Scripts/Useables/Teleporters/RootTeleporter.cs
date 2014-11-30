@@ -13,7 +13,7 @@ public class RootTeleporter : Usable {
 			caller.transform.position = playerData.getLastTeleport();
 			playerData.SetTeleportCooldown();
 			caller.GetComponent<PlayerData>().MakeInvuln(teleInvulnTime);
-			Rents.RemoveRent(caller);
+			caller.GetComponent<Rent>().StopPay();
 		}	
 	}
 }

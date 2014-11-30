@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Rent : MonoBehaviour {
 
-	private GameObject patron;
+	private PlayerData playerData;
 
 	public static int RENT_COST = 10;
 	public static float GRACE = 20f;
@@ -11,21 +11,25 @@ public class Rent : MonoBehaviour {
 
 	void Start()
 	{
+		playerData = GetComponent<PlayerData>();
 		InvokeRepeating("RentPay", GRACE, TICKTIME);
-	}
-
-	public Rent(GameObject newPatron)
-	{
-		patron = newPatron;
 	}
 
 	private void RentPay()
 	{
-		patron.GetComponent<PlayerData>().ChangeMoney(-RENT_COST);
+		if (playerData.GetMoney() >= RENT_COST)
+			playerData.ChangeMoney(-RENT_COST);
+		else
+		{
+			transform.position = new Vector3(0f, 0f, 0f);
+			playerData.SetTeleportCooldown();
+			StopPay();
+		}
 	}
 
 	public void StopPay()
 	{
 		CancelInvoke("RentPay");
+		Destroy(this);
 	}
 }
