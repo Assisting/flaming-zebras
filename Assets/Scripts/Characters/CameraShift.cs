@@ -8,6 +8,23 @@ public class CameraShift : MonoBehaviour {
 	void Start()
 	{
 		playerData = transform.parent.GetComponent<PlayerData>();
+
+		// Here, we need to set the player's cameras all to see the correct layers, via the cullingMask. 
+		int playerNum = playerData.GetComponent<PlayerData>().GetPlayerNum(); //get the player info to set it to
+		string playersLayer = "Player" + playerNum + "GUI";
+
+		camera.cullingMask = 
+			(1 << LayerMask.NameToLayer ("Default")) |
+				(1 << LayerMask.NameToLayer ("TransparentFX")) |
+				(1 << LayerMask.NameToLayer ("Ignore Raycast")) |
+				(1 << LayerMask.NameToLayer ("Water")) |
+				(1 << LayerMask.NameToLayer ("UI")) |
+				(1 << LayerMask.NameToLayer ("Player")) |
+				(1 << LayerMask.NameToLayer ("Ground")) |
+				(1 << LayerMask.NameToLayer ("Enemies")) |
+				(1 << LayerMask.NameToLayer (playersLayer)) |
+				(1 << LayerMask.NameToLayer ("Useable"));
+
 	}
 
 	// set the cameras for all the players based on the number of players and playerNum
