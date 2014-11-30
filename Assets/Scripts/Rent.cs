@@ -5,12 +5,13 @@ public class Rent : MonoBehaviour {
 
 	private GameObject patron;
 
-	private int RENT_COST = 20;
-	private float GRACE = 25f;
+	private int RENT_COST = 10;
+	private float GRACE = 2f;
+	private float TICKTIME = 1f;
 
 	void Start()
 	{
-		InvokeRepeating("RentPay", GRACE, 1f);
+		InvokeRepeating("RentPay", GRACE, TICKTIME);
 	}
 
 	public void SetPatron(GameObject patron)

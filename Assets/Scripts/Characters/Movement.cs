@@ -198,17 +198,18 @@ public class Movement : MonoBehaviour {
 		playerData.SetLastTeleport(returnPosition);
 		transform.position = rootTeleport;
 		playerData.LifeChange(playerData.GetMaxLife()); //full heal
+		//TODO rent
 	}
 
 	//run in FixedUpdate() to update grounded status, animation, current platform etc.
 	private void GroundCheck()
 	{
-		Collider2D leftFloorType = Physics2D.Raycast(leftGroundCheck.position, -Vector2.up, groundRadius, groundType).collider;
+		Collider2D leftFloorType = Physics2D.Raycast(leftGroundCheck.position, -Vector2.up, groundRadius, groundType).collider; //check both floor nodes
 		Collider2D rightFloorType = Physics2D.Raycast(rightGroundCheck.position, -Vector2.up, groundRadius, groundType).collider;
-		playerData.SetGrounded(leftFloorType != null || rightFloorType != null);
+		playerData.SetGrounded(leftFloorType != null || rightFloorType != null); //if either finds ground, we are grounded
 		if ( playerData.IsGrounded())
 		{
-			if (!jumpLag)
+			if (!jumpLag) //to avoid being grounded again on the jumping frame
 			{
 				playerData.ResetJumpCounter();
 				playerData.setStunned(false);
