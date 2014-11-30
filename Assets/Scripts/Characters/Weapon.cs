@@ -305,7 +305,8 @@ public class Weapon : MonoBehaviour {
 
 	public bool ShieldUp()
 	{
-		return SHIELD_ACTIVE;
+		return (playerData.GetWeaponType() == WeaponType.Melee && SHIELD_ACTIVE);
+
 	}
 
 	public float GetShieldTime()

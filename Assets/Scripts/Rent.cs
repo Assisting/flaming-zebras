@@ -30,7 +30,6 @@ public class Rent : MonoBehaviour {
 
 	public void StopPay()
 	{
-		playerData.StopInvuln();
 		CancelInvoke("RentPay");
 		Destroy(this);
 	}
