@@ -254,14 +254,14 @@ public class PlayerData : Actor
 		movement.TeleportHome(new Vector3(0f, 0f, 0f)); //go to shop, leave to origin level
 		if (lastHit != null) //give player money
 		{
-			int lostMoney = (int)(moneyAmount/PKLOSS);
+			int lostMoney = (int)(moneyAmount*PKLOSS);
 			lastHit.GetComponent<PlayerData>().ChangeMoney(lostMoney);
 			moneyAmount -= (lostMoney);
 			lastHit = null;
 		}
 		else //just lose money
 		{
-			moneyAmount -= (int)(moneyAmount/EKLOSS);
+			moneyAmount -= (int)(moneyAmount*EKLOSS);
 		}
 	}
 
