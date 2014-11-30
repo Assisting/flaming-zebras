@@ -37,7 +37,7 @@ public class HudCenter : MonoBehaviour {
 			}
 		}
 		// exact same thing as before, except done with the guiTextures. 
-		GUITexture[] allTextures = GetComponentsInChildren<GUIText>(); // first get a collection of all the gui elements
+		GUITexture[] allTextures = GetComponentsInChildren<GUITexture>(); // first get a collection of all the gui elements
 		foreach (GUITexture texture in allTextures)
 		{
 			int playerNum = player.GetComponent<PlayerData>().GetPlayerNum(); //get the player info to set it to
