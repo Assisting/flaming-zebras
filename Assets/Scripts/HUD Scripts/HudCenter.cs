@@ -3,6 +3,7 @@ using System.Collections;
 
 public class HudCenter : MonoBehaviour {
 
+	public Weapon weapon;
 	public PlayerData player;
 	public KeyBindings key;
 	public DashIn1 dashes;
@@ -25,6 +26,7 @@ public class HudCenter : MonoBehaviour {
 		weaponClass.playerData = player.GetComponent<PlayerData> ();
 		start.key = key.GetComponent<KeyBindings>();
 		stats.playerData = player.GetComponent<PlayerData> ();
+		stats.weapon = weapon.GetComponent<Weapon>();
 
 		// we want to make sure every element of the player's hud (except for shop, that's dealt with elsewhere)
 		//   is rendering to the correct layer. 

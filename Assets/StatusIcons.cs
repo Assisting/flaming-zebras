@@ -4,6 +4,7 @@ using System.Collections;
 public class StatusIcons : MonoBehaviour {
 
 	public PlayerData playerData;
+	public Weapon weapon;
 	public GUITexture fire;
 	public GUITexture poison;
 	public GUITexture invuln;
@@ -28,9 +29,9 @@ public class StatusIcons : MonoBehaviour {
 		else 
 			poison.gameObject.SetActive(false);
 
-		/*if (playerData.isInvuln())
+		if (playerData.IsInvuln() || weapon.ShieldUp())
 			invuln.gameObject.SetActive(true);
 		else 
-			invuln.gameObject.SetActive(false);*/
+			invuln.gameObject.SetActive(false);
 	}
 }
