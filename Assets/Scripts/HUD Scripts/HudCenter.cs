@@ -12,6 +12,7 @@ public class HudCenter : MonoBehaviour {
 	public HealthBar healthBar;
 	public WeaponClassImage weaponClass;
 	public ControlsHUD start;
+	public StatusIcons stats;
 
 	// Use this for initialization
 	void Awake() {
@@ -23,6 +24,7 @@ public class HudCenter : MonoBehaviour {
 		healthBar.playerData = player.GetComponent<PlayerData> ();
 		weaponClass.playerData = player.GetComponent<PlayerData> ();
 		start.key = key.GetComponent<KeyBindings>();
+		stats.playerData = player.GetComponent<PlayerData> ();
 
 		// we want to make sure every element of the player's hud (except for shop, that's dealt with elsewhere)
 		//   is rendering to the correct layer. 
