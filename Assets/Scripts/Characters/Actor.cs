@@ -15,8 +15,10 @@ public class Actor : MonoBehaviour {
 
 	protected int BURN_DAMAGE;
 	protected float BURN_TICK;
+	protected bool BURNING;
 	protected int POISON_DAMAGE;
-	protected float POISON_TICK;	
+	protected float POISON_TICK;
+	protected bool POISONED;
 
 	private delegate void DotDelegate ();
 
@@ -67,9 +69,12 @@ public class Actor : MonoBehaviour {
 	}
 
 	// Damage over time functions
-	private void StartDot(DotDelegate dotTick, string endDot, float duration)
+	private void StartDot(DotDelegate dotTick, string endDot, float duration, bool ticking)
 	{
-		CancelInvoke(endDot);
+		if(ticking){
+			CancelInvoke(endDot);
+			return;
+		}
 		dotTick ();
 		// -1 Signifies that other action must be taken before the dot wears off; 
 		//    like exiting the cloud of poison
@@ -94,17 +99,19 @@ public class Actor : MonoBehaviour {
 	{
 		BURN_DAMAGE = damage;
 		BURN_TICK = tick;
-		StartDot ( BurnTick, "Extinguish", duration);
+		StartDot ( BurnTick, "Extinguish", duration, BURNING);
 	}
 
 	protected void BurnTick()
 	{
 		DotTick (BURN_DAMAGE, "BurnTick", BURN_TICK);
+		BURNING = true;
 	}
 	
 	protected void Extinguish()
 	{
 		EndDot ("BurnTick");
+		BURNING = false;
 	}
 
 	// Poison Functions
@@ -113,12 +120,13 @@ public class Actor : MonoBehaviour {
 	{
 		POISON_DAMAGE = damage;
 		POISON_TICK = tick;
-		StartDot (PoisonTick, "Squelch", duration);
+		StartDot (PoisonTick, "Squelch", duration, POISONED);
 	}
 
 	protected void PoisonTick()
 	{
 		DotTick (POISON_DAMAGE, "PoisonTick", POISON_TICK);
+		POISONED = true;
 	}
 
 	public void LeavePoison(float delay){
@@ -133,6 +141,7 @@ public class Actor : MonoBehaviour {
 	public void Squelch()
 	{
 		EndDot ("PoisonTick");
+		POISONED = false;
 	}
 
 //-----Getters and Setters---------------------------------------------------------------------------------------------------------------------------
