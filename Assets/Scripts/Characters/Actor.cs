@@ -113,6 +113,10 @@ public class Actor : MonoBehaviour {
 		EndDot ("BurnTick");
 		BURNING = false;
 	}
+	
+	public bool isBurning(){
+		return BURNING;
+	}
 
 	// Poison Functions
 	// Squelch turns off poison
@@ -142,6 +146,10 @@ public class Actor : MonoBehaviour {
 	{
 		EndDot ("PoisonTick");
 		POISONED = false;
+	}
+	
+	public bool isPoisoned(){
+		return POISONED;
 	}
 
 //-----Getters and Setters---------------------------------------------------------------------------------------------------------------------------

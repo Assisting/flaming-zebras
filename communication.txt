@@ -17,6 +17,9 @@ Character
 			Remaining duration of DoT
 		Hitstun
 		Shop tele cooldown
+		Shop rent
+			How long until it triggers?
+			Is it active?
 
 Enemies
 	Archer/Met
