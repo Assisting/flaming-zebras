@@ -23,7 +23,8 @@ public class CameraShift : MonoBehaviour {
 				(1 << LayerMask.NameToLayer ("Ground")) |
 				(1 << LayerMask.NameToLayer ("Enemies")) |
 				(1 << LayerMask.NameToLayer (playersLayer)) |
-				(1 << LayerMask.NameToLayer ("Useable"));
+				(1 << LayerMask.NameToLayer ("Useable")) |
+				(1 << LayerMask.NameToLayer ("Level"));
 
 	}
 
