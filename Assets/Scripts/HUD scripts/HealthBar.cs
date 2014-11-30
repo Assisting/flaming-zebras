@@ -4,6 +4,10 @@ using System.Collections;
 public class HealthBar : MonoBehaviour {
 
 	public PlayerData playerData;
+	public Texture2D poisonBar;
+	public Texture2D burnBar;
+	public Texture2D invulnBar;
+	public Texture2D HealthyBar;
 	private int curHealth;
 	private int maxHealth;
 	
@@ -26,4 +30,18 @@ public class HealthBar : MonoBehaviour {
 						lifeBar = 100f;
 		guiTexture.pixelInset = new Rect (10f, -17f, lifeBar, 10);
 	}
+
+	void SetColor()
+	{
+		if (playerData.isPoisoned())
+		{
+
+		}
+	}
 }
+
+
+
+
+
+
