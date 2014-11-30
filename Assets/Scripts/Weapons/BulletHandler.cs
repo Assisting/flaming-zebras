@@ -19,7 +19,9 @@ public class BulletHandler : Projectile {
 		{
 			if (ORIGIN != other.gameObject)
 			{
-				other.GetComponent<PlayerData>().StunDamage(BULLET_DAMAGE, rigidbody2D.velocity.x > 0f);
+				PlayerData target = other.GetComponent<PlayerData>();
+				target.SetLastHit(ORIGIN);
+				target.StunDamage(BULLET_DAMAGE, rigidbody2D.velocity.x > 0f);
 				Destroy(gameObject);
 			}
 		}

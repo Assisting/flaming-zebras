@@ -1,32 +1,31 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 
 public class Rent : MonoBehaviour {
 
-	public static Dictionary<int, Rent> rents;
+	private GameObject patron;
 
 	public static int RENT_COST = 10;
-	public static float GRACE = 2f;
+	public static float GRACE = 20f;
 	public static float TICKTIME = 1f;
 
-	public static void AddRent(GameObject player)
+	void Start()
 	{
-		
+		InvokeRepeating("RentPay", GRACE, TICKTIME);
 	}
 
-//	void Start()
-//	{
-//		InvokeRepeating("RentPay", GRACE, TICKTIME);
-//	}
+	public Rent(GameObject newPatron)
+	{
+		patron = newPatron;
+	}
 
-//	private void RentPay()
-//	{
-//		patron.GetComponent<PlayerData>().ChangeMoney(-RENT_COST);
-//	}
+	private void RentPay()
+	{
+		patron.GetComponent<PlayerData>().ChangeMoney(-RENT_COST);
+	}
 
-//	public void StopPay()
-//	{
-//		CancelInvoke("RentPay");
-//	}
+	public void StopPay()
+	{
+		CancelInvoke("RentPay");
+	}
 }

@@ -241,6 +241,7 @@ public class Weapon : MonoBehaviour {
 				case "Player":
 				{
 					currentTarget = target.transform.GetComponent<PlayerData>();
+					((PlayerData)currentTarget).SetLastHit(gameObject);
 					break;
 				}
 				case "Enemy":
@@ -288,10 +289,15 @@ public class Weapon : MonoBehaviour {
 			hitTargets = Physics2D.OverlapAreaAll(leftCenter - cornerDistance, leftCenter + cornerDistance, projectileTargets);
 
 		// do damage
-		for (int i = 0; i < hitTargets.Length; i ++)
+		foreach (Collider2D hitTarget in hitTargets)
 		{
-			if (hitTargets[i].tag != "Platform")
-				hitTargets[i].GetComponent<Actor>().StunDamage(MELEE_DAMAGE, playerData.IsMovingRight());
+			if (hitTarget.tag != "Platform")
+			{
+				Actor target = hitTarget.GetComponent<Actor>();
+				if (hitTarget.tag == "Player")
+					((PlayerData)target).SetLastHit(gameObject);
+				target.StunDamage(MELEE_DAMAGE, playerData.IsMovingRight());
+			}
 		}
 	}
 

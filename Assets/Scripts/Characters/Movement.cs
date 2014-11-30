@@ -198,7 +198,7 @@ public class Movement : MonoBehaviour {
 		playerData.SetLastTeleport(returnPosition);
 		transform.position = rootTeleport;
 		playerData.LifeChange(playerData.GetMaxLife()); //full heal
-		//TODO rent
+		Rents.AddRent(gameObject);
 	}
 
 	//run in FixedUpdate() to update grounded status, animation, current platform etc.

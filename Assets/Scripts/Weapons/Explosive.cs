@@ -32,7 +32,11 @@ public class Explosive : Projectile {
 				targetDirection = targets[i].transform.position - transform.position;
 				goRight = targetDirection.x >= 0f;
 				if (targets[i].tag == "Player")
-					targets[i].GetComponent<PlayerData>().StunDamage(HIGH_DAMAGE, goRight);
+				{
+					PlayerData target = targets[i].GetComponent<PlayerData>();
+					target.SetLastHit(ORIGIN);
+					target.StunDamage(HIGH_DAMAGE, goRight);
+				}
 				else
 					targets[i].GetComponent<Actor>().StunDamage(HIGH_DAMAGE, goRight);
 			}
@@ -45,7 +49,11 @@ public class Explosive : Projectile {
 				targetDirection = targets[i].transform.position - transform.position;
 				goRight = targetDirection.x >= 0f;
 				if (targets[i].tag == "Player")
-					targets[i].GetComponent<PlayerData>().StunDamage(LOW_DAMAGE, goRight);
+				{
+					PlayerData target = targets[i].GetComponent<PlayerData>();
+					target.SetLastHit(ORIGIN);
+					target.StunDamage(LOW_DAMAGE, goRight);
+				}
 				else
 					targets[i].GetComponent<Actor>().StunDamage(LOW_DAMAGE, goRight);
 			}
