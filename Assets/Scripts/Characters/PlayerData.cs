@@ -282,6 +282,11 @@ public class PlayerData : Actor
 		INVULNERABLE = false;
 	}
 
+	public bool IsInvuln()
+	{
+		return INVULNERABLE;
+	}
+
 	public void SetMovingRight()
 	{
 		MOVING_RIGHT = true;
