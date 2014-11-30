@@ -82,20 +82,20 @@ public class Movement : MonoBehaviour {
 			
 			playerXAxisValue = Input.GetAxis( keyBind.playerXAxis() );
 			//move left
-			if (playerXAxisValue < -0.7f)
+			if (playerXAxisValue < -0.05f)
 			{
 				if ( !wallLeft && !playerData.isStunned() && rigidbody2D.velocity.x >= -playerData.GetMAX_SPEED() )
 				{
-					rigidbody2D.AddForce( -Vector2.right * playerData.GetMOVE_SPEED() );
+					rigidbody2D.AddForce( Vector2.right * playerData.GetMOVE_SPEED() * playerXAxisValue );
 				}
 			}
 
 			//move right
-			else if (playerXAxisValue > 0.7f)
+			else if (playerXAxisValue > 0.05f)
 			{
 				if ( !wallRight && !playerData.isStunned() && rigidbody2D.velocity.x <= playerData.GetMAX_SPEED() )
 				{
-					rigidbody2D.AddForce( Vector2.right * playerData.GetMOVE_SPEED() );
+					rigidbody2D.AddForce( Vector2.right * playerData.GetMOVE_SPEED() * playerXAxisValue );
 				}
 			}
 		}

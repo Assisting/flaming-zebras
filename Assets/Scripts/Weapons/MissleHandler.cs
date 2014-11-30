@@ -44,7 +44,7 @@ public class MissleHandler : Explosive {
 						script = newMissile1.GetComponent<MissleHandler>();
 						script.Origin(ORIGIN);
 						script.SetLevel(2);
-						newMissile1.transform.rotation = Quaternion.Euler(0f, 0f, -15f); //counterclockwise
+						newMissile1.transform.Rotate(new Vector3(0f, 0f, -15f)); //counterclockwise
 						
 						Rigidbody2D newMissile2 = Instantiate(missile, transform.position, transform.rotation) as Rigidbody2D; //straight
 						newMissile2.transform.localScale -= new Vector3(0.5f, 0.5f, 0.5f);
@@ -57,7 +57,7 @@ public class MissleHandler : Explosive {
 						script = newMissile3.GetComponent<MissleHandler>();
 						script.Origin(ORIGIN);
 						script.SetLevel(2);
-						newMissile3.transform.rotation = Quaternion.Euler(0f, 0f, 15f); //clockwise
+						newMissile3.transform.Rotate(new Vector3(0f, 0f, 15f)); //clockwise
 
 						Destroy(gameObject); //this level missle doesn't explode
 					}
