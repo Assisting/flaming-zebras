@@ -3,18 +3,27 @@ using System.Collections;
 
 public class RunGame : MonoBehaviour {
 
-	private float ADVENTURETIME = 540f; //time till final fight starts
-	private float GAMETIME = 300f; //game time in seconds
+	private int FINALFIGHT = 50; //length of the final fight in seconds
+	private int GAMETIME = 300; //game time in seconds
+	private int secondsPassed = 0;
 
 	// Use this for initialization
 	void Start () {
-		Invoke("LastShop", ADVENTURETIME);
-		Invoke("EndGame", GAMETIME);
+		InvokeRepeating("GameTick", 1, 1); //game time goes up every second
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	private void GameTick()
+	{
+		secondsPassed++;
+		if (SecondsRemaining() == FINALFIGHT)
+			LastShop();
+		if (SecondsRemaining() == 0)
+			EndGame();
+	}
+
+	public int SecondsRemaining()
+	{
+		return GAMETIME - secondsPassed;
 	}
 
 	private void LastShop()
