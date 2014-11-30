@@ -5,7 +5,7 @@ public class Weapon : MonoBehaviour {
 
 //-----Structs and Enums----------------------------------------------------------------------------------------------------
 
-	public enum WeaponType { None, Bullet, Missile, Bomb, Laser, Melee };
+	public enum WeaponType { None, Bullet, Missile, Bomb, Laser, Melee, RUBBER_CHICKEN};
 
 	public static float[] bulletReloads = new float[3] { 0.4f, 1.8f, 0.8f };
 	public static int[] bulletClips = new int[3] { 1, 5, 8};
@@ -15,6 +15,8 @@ public class Weapon : MonoBehaviour {
 	public static int[] swordDamage = new int[3] { 35, 55, 55};
 	public static float[] invulnTime = new float[3] { 2.0f, 2.0f, 2.0f};
 	public static float[] shieldRegen = new float[3] { 20f, 20f, 10f};
+
+	public static float[] chickenSpeed = new float[3] {0.6f, 0.3f, 0.15f};
 
 //-----Attribute Variables---------------------------------------------------------------------------------------------------
 
@@ -54,11 +56,6 @@ public class Weapon : MonoBehaviour {
 		keyBind = GetComponent<KeyBindings>();
 		rightMelee = transform.Find("RightSwordBox");
 		leftMelee = transform.Find("LeftSwordBox");
-	}
-
-	// Use this for initialization
-	void Start ()
-	{
 	}
 
 	// Update is called once per frame
@@ -114,6 +111,14 @@ public class Weapon : MonoBehaviour {
 				SHIELD_REGEN = shieldRegen[wepLevel - 1];
 				return;
 			}
+
+			case WeaponType.RUBBER_CHICKEN :
+			{
+				RELOAD_WAIT = chickenSpeed[wepLevel - 1];
+				MAX_BULLETS = 1;
+				MELEE_DAMAGE = 10;
+				return;
+			}
 		}
 	}
 
@@ -160,6 +165,11 @@ public class Weapon : MonoBehaviour {
 			case WeaponType.Melee :
 			{
 				SwingMelee();
+				return;
+			}
+			case WeaponType.RUBBER_CHICKEN :
+			{
+				Baawwk();
 				return;
 			}
 		}
@@ -297,6 +307,32 @@ public class Weapon : MonoBehaviour {
 				if (hitTarget.tag == "Player")
 					((PlayerData)target).SetLastHit(gameObject);
 				target.StunDamage(MELEE_DAMAGE, playerData.IsMovingRight());
+			}
+		}
+	}
+
+	private void Baawwk()
+	{
+		Vector2 cornerDistance = new Vector2(0.325f, 0.4f); //distance from center to upper right corner of melee hitbox (for drawing overlap)
+		Vector2 rightCenter = rightMelee.position;
+		Vector2 leftCenter = leftMelee.position;
+
+		// get targets
+		Collider2D[] hitTargets;
+		if ( playerData.IsMovingRight() )
+			hitTargets = Physics2D.OverlapAreaAll(rightCenter - cornerDistance, rightCenter + cornerDistance, projectileTargets);
+		else
+			hitTargets = Physics2D.OverlapAreaAll(leftCenter - cornerDistance, leftCenter + cornerDistance, projectileTargets);
+
+		// do damage
+		foreach (Collider2D hitTarget in hitTargets)
+		{
+			if (hitTarget.tag != "Platform")
+			{
+				Actor target = hitTarget.GetComponent<Actor>();
+				if (hitTarget.tag == "Player")
+					((PlayerData)target).SetLastHit(gameObject);
+				target.LifeChange(-MELEE_DAMAGE);
 			}
 		}
 	}
