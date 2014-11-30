@@ -26,25 +26,14 @@ public class HudCenter : MonoBehaviour {
 
 		// we want to make sure every element of the player's hud (except for shop, that's dealt with elsewhere)
 		//   is rendering to the correct layer. 
-		GUIText[] allText = GetComponentsInChildren<GUIText>(); // first get a collection of all the gui elements
-		foreach (GUIText text in allText)
+		Transform[] allGUI = GetComponentsInChildren<Transform>(); // first get a collection of all the gui elements
+		foreach (Transform gui in allGUI)
 		{
 			int playerNum = player.GetComponent<PlayerData>().GetPlayerNum(); //get the player info to set it to
 			string playersLayer = "Player" + playerNum + "GUI";
-			if(text.name == "shop") // because, as we mentioned, this gets dealt with elsewhere
+			if(gui.name == "shop") // because, as we mentioned, this gets dealt with elsewhere
 			{
-				text.gameObject.layer = LayerMask.NameToLayer (playersLayer); // and do the setting of the thing. 
-			}
-		}
-		// exact same thing as before, except done with the guiTextures. 
-		GUITexture[] allTextures = GetComponentsInChildren<GUITexture>(); // first get a collection of all the gui elements
-		foreach (GUITexture texture in allTextures)
-		{
-			int playerNum = player.GetComponent<PlayerData>().GetPlayerNum(); //get the player info to set it to
-			string playersLayer = "Player" + playerNum + "GUI";
-			if(texture.name == "shop") // because, as we mentioned, this gets dealt with elsewhere
-			{
-				texture.gameObject.layer = LayerMask.NameToLayer (playersLayer); // and do the setting of the thing. 
+				gui.gameObject.layer = LayerMask.NameToLayer (playersLayer); // and do the setting of the thing. 
 			}
 		}
 	}
