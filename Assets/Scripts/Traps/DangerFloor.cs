@@ -16,12 +16,12 @@ public class DangerFloor : MonoBehaviour {
 				PlayerData playerData = other.GetComponent<PlayerData>();
 				if ( playerData.IsDashing() )
 					other.GetComponent<Movement>().StopDash();
-				playerData.StunDamage(DAMAGE, FindRight(other));
+				playerData.LifeChange(-DAMAGE);
 				break;
 			}
 			case "Enemy":
 			{
-				other.GetComponent<Actor>().StunDamage(DAMAGE, FindRight(other));	
+				other.GetComponent<Actor>().LifeChange(-DAMAGE);
 				break;
 			}
 			default:
@@ -31,7 +31,7 @@ public class DangerFloor : MonoBehaviour {
 		}
 	}
 
-	//returns true if we should stun to the right
+	//returns true if we should stun to the right (not used with stunless spikes)
 	private bool FindRight(Collider2D other)
 	{
 		int rotation = (int)transform.rotation.eulerAngles.z;
