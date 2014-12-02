@@ -252,10 +252,13 @@ public class PlayerData : Actor
 	protected override void Die()
 	{
 		movement.TeleportHome(new Vector3(0f, 0f, 0f)); //go to shop, leave to origin level
+		movement.StopDash();
+		Squelch();
+		Extinguish();
 		if (lastHit != null) //give player money
 		{
 			int lostMoney = (int)(moneyAmount*PKLOSS);
-			lastHit.GetComponent<PlayerData>().ChangeMoney(lostMoney);
+			lastHit.GetComponent<PlayerData>().ChangeMoney(lostMoney + GetBounty());
 			moneyAmount -= (lostMoney);
 			lastHit = null;
 		}
@@ -263,6 +266,15 @@ public class PlayerData : Actor
 		{
 			moneyAmount -= (int)(moneyAmount*EKLOSS);
 		}
+	}
+
+	private int GetBounty()
+	{
+		int bounty = 0;
+		bounty += WEAPON_LEVEL * 35;
+		int otherlevels = 0;
+		otherlevels += JUMP_LEVEL + MOVE_LEVEL + DASH_LEVEL;
+		bounty += otherlevels * 20;
 	}
 
 //-----Getters and Setters---------------------------------------------------------------------------------------------------
