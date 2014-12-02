@@ -24,12 +24,6 @@ public class Charge : Enemy {
 		// How much more damage does a charge attack do to the player?
 		CHARGE_ATTACK_DAMAGE_MODIFIER = 1.5f;
 
-		// How much health, proportional to the player, should this enemy have?
-		float lifeScaleFactor = 0.4f;
-
-		MAXLIFE = (int)((float)MAXLIFE * lifeScaleFactor);
-		CURLIFE = MAXLIFE;
-
 		Do = testCanSeePlayer;
 
 		LAST_ATTACK_TIME = Time.time;

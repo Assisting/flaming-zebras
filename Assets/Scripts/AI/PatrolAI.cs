@@ -14,12 +14,6 @@ public class PatrolAI : Enemy {
 		// These will all require much, much tweaking.
 		SPEED = 0.9f;
 		ATTACK_DAMAGE = 4;
-
-		// How much health, proportional to the player, should this enemy have?
-		float lifeScaleFactor = 0.2f;
-		
-		MAXLIFE = (int)((float)MAXLIFE * lifeScaleFactor);
-		CURLIFE = MAXLIFE;
 		
 		Do = testCanSeePlayer;
 		

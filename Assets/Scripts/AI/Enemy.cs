@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public abstract class Enemy : Actor
+public abstract class Enemy : MonoBehaviour
 {
 	public Transform eye, sight, range, charge, wall, ground, hindsight;
 	public bool canISeePlayer, amICloseToGold, shouldIRandomWalk, playerInRange, inChargeRange;
@@ -9,6 +9,8 @@ public abstract class Enemy : Actor
 
 	// This is gonna require a looooot of tweaking
 	float FAR_FROM_GOLD = 1f;
+
+	public bool MOVING_RIGHT;
 
 	public int ATTACK_DAMAGE;
 	public float ATTACK_DELAY;

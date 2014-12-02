@@ -19,12 +19,6 @@ public class Archer : Enemy {
 		SPEED = 0.9f;
 		ATTACK_DAMAGE = 4;
 		
-		// How much health, proportional to the player, should this enemy have?
-		float lifeScaleFactor = 0.3f;
-		
-		MAXLIFE = (int)((float)MAXLIFE * lifeScaleFactor);
-		CURLIFE = MAXLIFE;
-		
 		Do = testCanSeePlayer;
 		
 		LAST_ATTACK_TIME = Time.time;
