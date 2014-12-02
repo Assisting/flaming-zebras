@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class FallingBoulder : Trap {
+public class FallingBoulder : Trap{
 
 	//falling boulder trap kills you by flattening
 
@@ -10,14 +10,15 @@ public class FallingBoulder : Trap {
 		rigidbody2D.isKinematic = false;
 	}
 
-	void OnTriggerEnter2D(Collider2D other)
+	void OnTriggerStay2D(Collider2D other)
 	{
 		if (!rigidbody2D.isKinematic)
 		{
 			if (other.tag == "Player")
 			{
 				PlayerData script = other.GetComponent<PlayerData>();
-				script.LifeChange(-script.MAXLIFE);
+				if (script.IsGrounded())
+					script.LifeChange(-script.MAXLIFE);
 			}
 			else if (other.tag == "Enemy")
 			{

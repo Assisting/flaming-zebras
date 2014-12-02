@@ -1,14 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BoulderBreak : MonoBehaviour {
+public class BoulderBreak : Actor {
 
-	void Awake()
+	Animator anim;
+
+	void Start()
 	{
-		Destroy(gameObject, 1.5f);
+		anim = GetComponent<Animator>();
 	}
 
-	void Break()
+	protected override void Die()
+	{
+		gameObject.collider2D.enabled = false;
+		anim.SetTrigger("Die");
+	}
+
+	private void Break()
 	{
 		Destroy(gameObject);
 	}

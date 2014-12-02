@@ -249,7 +249,7 @@ public class PlayerData : Actor
 		Invoke("StopInvuln", time);
 	}
 
-	private void Die()
+	protected override void Die()
 	{
 		movement.TeleportHome(new Vector3(0f, 0f, 0f)); //go to shop, leave to origin level
 		if (lastHit != null) //give player money

@@ -97,7 +97,7 @@ public class Actor : MonoBehaviour {
 		}
 	}
 
-	private void Die()
+	protected virtual void Die()
 	{
 		Destroy(gameObject);
 	}
