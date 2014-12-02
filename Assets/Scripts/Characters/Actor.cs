@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class Actor : MonoBehaviour {
+public abstract class Actor : MonoBehaviour {
 
 //-----Attributes------------------------------------------------------------------------------------------------------------------------------------
 

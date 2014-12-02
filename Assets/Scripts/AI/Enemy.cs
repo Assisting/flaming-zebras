@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class Enemy : Actor
+public abstract class Enemy : Actor
 {
 	public Transform eye, sight, range, charge, wall, ground;
 	public bool canISeePlayer, amICloseToGold, shouldIRandomWalk, playerInRange, inChargeRange;
