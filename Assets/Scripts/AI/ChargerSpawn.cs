@@ -22,6 +22,8 @@ public class ChargerSpawn : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
-		spawn ();
+		if(other.gameObject.tag == "Player") {
+			spawn ();
+		}
 	}
 }
