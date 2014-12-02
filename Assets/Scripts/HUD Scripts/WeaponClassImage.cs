@@ -10,6 +10,7 @@ public class WeaponClassImage : MonoBehaviour {
 	public Texture2D sword;
 	public Texture2D laser;
 	public Texture2D none;
+	public Texture2D chicken;
 
 	// Use this for initialization
 	void Start () {
@@ -38,6 +39,11 @@ public class WeaponClassImage : MonoBehaviour {
 		case Weapon.WeaponType.Melee:
 		{
 			guiTexture.texture = sword;
+			break;
+		}
+		case Weapon.WeaponType.RUBBER_CHICKEN:
+		{
+			guiTexture.texture = chicken;
 			break;
 		}
 		case Weapon.WeaponType.Missile:

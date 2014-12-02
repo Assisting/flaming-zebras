@@ -2,7 +2,15 @@ fileFormatVersion: 2
 guid: 4f3a3e17dbe11714b9b283dfb58795f1
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - playerData: {instanceID: 0}
+  - bomb: {instanceID: 0}
+  - bullet: {instanceID: 0}
+  - missile: {instanceID: 0}
+  - sword: {instanceID: 0}
+  - laser: {instanceID: 0}
+  - none: {instanceID: 0}
+  - chicken: {fileID: 2800000, guid: a4aa2113891ac8d418676162b0c7f7cb, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
