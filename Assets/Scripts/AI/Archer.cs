@@ -88,7 +88,7 @@ public class Archer : Enemy {
 
 		// Currently facing left, nearest player is to the right.
 		if(deltaX < 0 && MOVING_RIGHT == false) {
-			Muzzle.eulerAngles = new Vector3(0,0,180);
+			Muzzle.eulerAngles = new Vector3(0,0,0);
 			turnAround ();
 		}
 
