@@ -12,6 +12,9 @@ public class Actor : MonoBehaviour {
 
 	protected float STUN_FORCE = 3f;
 	protected bool stunned = false;
+	private bool flash = false;
+	private int flashCount = 5;
+	private bool visible = true;
 
 	protected int BURN_DAMAGE;
 	protected float BURN_TICK;
@@ -36,6 +39,25 @@ public class Actor : MonoBehaviour {
 			Die();
 	}
 
+	void FixedUpdate () 
+	{
+		if(flash)
+		{
+			if(0 == flashCount)
+			{
+				visible = !visible;
+				//Flip the boolean to enable/disable accordingly
+				gameObject.GetComponent<Animator>().enabled = visible;
+				gameObject.GetComponent<SpriteRenderer>().enabled = visible;
+				//Flash every 5th physics frame
+				flashCount = 5;
+			} else
+			{
+				flashCount--;
+			}
+		}
+	}
+
 //-----Custom Functions------------------------------------------------------------------------------------------------------------------------------
 
 	// give damage while also inducing a knock-back effect
@@ -55,11 +77,23 @@ public class Actor : MonoBehaviour {
 	{
 		CURLIFE += value;
 		if (CURLIFE > MAXLIFE)
-						CURLIFE = MAXLIFE;
+		{
+			CURLIFE = MAXLIFE;
+		}
+						
 		if (CURLIFE <= 0)
 		{
 			CURLIFE = 0; 
 			dead = true;
+		}
+
+		if (0 >= value)
+		{
+			//Start flashing to indicate damage is taken
+			flash = true;
+			//Duration of flashing state
+			CancelInvoke("EndFlashing");
+			Invoke ("EndFlashing", 1.0f);
 		}
 	}
 
@@ -68,6 +102,17 @@ public class Actor : MonoBehaviour {
 		Destroy(gameObject);
 	}
 
+	private void EndFlashing(){
+		flash = false;
+		flashCount = 5;
+		if (!visible) 
+		{
+			visible = true;
+			gameObject.GetComponent<Animator>().enabled = visible;
+			gameObject.GetComponent<SpriteRenderer>().enabled = visible;		
+		}
+	}
+	
 	// Damage over time functions
 	private void StartDot(DotDelegate dotTick, string endDot, float duration, bool ticking)
 	{
