@@ -1,12 +1,10 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Characters\Camera1Shift.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\HUD Scripts\HudCenter.cs">
     <Files>
-      <File FileName="Assets\Scripts\Characters\Weapon.cs" Line="227" Column="88" />
-      <File FileName="Assets\Scripts\Characters\Actor.cs" Line="102" Column="21" />
-      <File FileName="Assets\Scripts\HUD Scripts\HudCenter.cs" Line="36" Column="1" />
-      <File FileName="Assets\Scripts\Characters\Camera1Shift.cs" Line="6" Column="31" />
-      <File FileName="Assets\Scripts\Characters\PlayerData.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Characters\Actor.cs" Line="48" Column="5" />
+      <File FileName="Assets\Scripts\Characters\PlayerData.cs" Line="538" Column="1" />
+      <File FileName="Assets\Scripts\HUD Scripts\HudCenter.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
