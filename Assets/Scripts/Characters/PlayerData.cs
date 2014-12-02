@@ -275,6 +275,7 @@ public class PlayerData : Actor
 		int otherlevels = 0;
 		otherlevels += JUMP_LEVEL + MOVE_LEVEL + DASH_LEVEL;
 		bounty += otherlevels * 20;
+		return bounty;
 	}
 
 //-----Getters and Setters---------------------------------------------------------------------------------------------------
