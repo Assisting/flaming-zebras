@@ -5,24 +5,23 @@ public class ChargerSpawn : MonoBehaviour {
 	
 	public Rigidbody2D charger;
 	
-	public float startTime;
-	
 	// Use this for initialization
 	void Start () {
-		startTime = Time.time + 1f;
-		
-		
+		//Invoke ("spawn", 1);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if(Time.time > startTime) {
-			
-			Rigidbody2D newCharger = Instantiate(charger, this.transform.position, this.transform.rotation) as Rigidbody2D;
-			
-			Destroy(gameObject);
-		}
 		
+	}
+	
+	void spawn() {
+		Rigidbody2D newCharger = Instantiate(charger, this.transform.position, this.transform.rotation) as Rigidbody2D;
 		
+		Destroy(gameObject);
+	}
+
+	void OnTriggerEnter2D(Collider2D other) {
+		spawn ();
 	}
 }
