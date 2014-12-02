@@ -125,7 +125,7 @@ public class PatrolAI : Enemy {
 	// Terminal
 	void approach() {
 		if(!doINeedToTurn()) {
-			rigidbody2D.velocity = new Vector2 (SPEED*1.2f, rigidbody2D.velocity.y);
+			rigidbody2D.velocity = new Vector2 (SPEED*1.5f, rigidbody2D.velocity.y);
 		}
 		else {
 			turnAround();

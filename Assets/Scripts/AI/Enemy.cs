@@ -3,7 +3,7 @@ using System.Collections;
 
 public abstract class Enemy : Actor
 {
-	public Transform eye, sight, range, charge, wall, ground;
+	public Transform eye, sight, range, charge, wall, ground, hindsight;
 	public bool canISeePlayer, amICloseToGold, shouldIRandomWalk, playerInRange, inChargeRange;
 	public int playerLayer, groundLayer;
 
@@ -75,8 +75,14 @@ public abstract class Enemy : Actor
 	
 	// Test
 	public bool sightCheck() {
+		bool behindMe = Physics2D.Linecast (eye.position, hindsight.position, playerLayer);
+
+		if(behindMe == true) {
+			turnAround();
+		}
+
 		canISeePlayer = Physics2D.Linecast (eye.position, sight.position, playerLayer);
-		
+
 		return canISeePlayer;
 	}
 	
