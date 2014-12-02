@@ -47,7 +47,7 @@ public class Actor : MonoBehaviour {
 			{
 				visible = !visible;
 				//Flip the boolean to enable/disable accordingly
-				//gameObject.GetComponent<Animator>().enabled = visible;
+				gameObject.GetComponent<Animator>().enabled = visible;
 				gameObject.GetComponent<SpriteRenderer>().enabled = visible;
 				//Flash every 5th physics frame
 				flashCount = 5;
@@ -108,7 +108,7 @@ public class Actor : MonoBehaviour {
 		if (!visible) 
 		{
 			visible = true;
-			//gameObject.GetComponent<Animator>().enabled = visible;
+			gameObject.GetComponent<Animator>().enabled = visible;
 			gameObject.GetComponent<SpriteRenderer>().enabled = visible;		
 		}
 	}
