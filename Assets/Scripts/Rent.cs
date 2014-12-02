@@ -6,7 +6,7 @@ public class Rent : MonoBehaviour {
 	private PlayerData playerData;
 
 	public static int RENT_COST = 10;
-	public static float GRACE = 20f;
+	public static float GRACE = 20f; // time in seconds before it starts taking your money
 	public static float TICKTIME = 1f;
 
 	void Start()

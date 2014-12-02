@@ -44,7 +44,7 @@ public class CameraShift : MonoBehaviour {
 					{
 						print("Player 1");
 						//set camera for player 1
-						camera.rect = new Rect (0f, 0.5f, 1f, 0.5f);
+						camera.rect = new Rect (0f, 0.502f, 1f, 0.5f);
 						break;
 					}
 					case 2:
@@ -80,7 +80,7 @@ public class CameraShift : MonoBehaviour {
 				{
 					print("Player 3");
 					//set camera for player 3
-					camera.rect = new Rect (0f, 0f, 1f, 0.5f);
+					camera.rect = new Rect (0f, 0f, 1f, 0.498f);
 					break;
 				}
 				}

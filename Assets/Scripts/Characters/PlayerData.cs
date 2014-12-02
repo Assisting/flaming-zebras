@@ -113,7 +113,7 @@ public class PlayerData : Actor
 		LevelUp (Attribute.WeaponLevel, 1);
 		LevelUp(Attribute.WeaponType, Weapon.WeaponType.None); //initialize weapons
 
-		moneyAmount = 1000; //starting money total
+		moneyAmount = 25; //starting money total
 
 		MAXLIFE = 100; //starting life total
 		CURLIFE = 100; // current for testing
