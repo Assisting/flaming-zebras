@@ -235,4 +235,14 @@ public class Actor : MonoBehaviour {
 	{
 		return CURLIFE;
 	}
+
+	public void StopInvuln()
+	{
+		INVULNERABLE = false;
+	}
+
+	public bool IsInvuln()
+	{
+		return INVULNERABLE;
+	}
 }

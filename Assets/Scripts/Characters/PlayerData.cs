@@ -295,16 +295,6 @@ public class PlayerData : Actor
 		return NUMPLAYERS;
 	}
 
-	public void StopInvuln()
-	{
-		INVULNERABLE = false;
-	}
-
-	public bool IsInvuln()
-	{
-		return INVULNERABLE;
-	}
-
 	public void SetMovingRight()
 	{
 		MOVING_RIGHT = true;
