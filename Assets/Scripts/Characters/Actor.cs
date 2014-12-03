@@ -10,13 +10,13 @@ public class Actor : MonoBehaviour {
 	protected bool dead;
 	public bool MOVING_RIGHT;
 
-	public float STUN_FORCE = 3f;
+	protected float STUN_FORCE = 3f;
 	protected bool stunned = false;
 	private bool flash = false;
 	private int flashCount = 5;
 	private bool visible = true;
 
-	public bool INVULNERABLE = false;
+	protected bool INVULNERABLE = false;
 
 	protected int BURN_DAMAGE;
 	protected float BURN_TICK;
@@ -124,19 +124,16 @@ public class Actor : MonoBehaviour {
 	// Damage over time functions
 	private void StartDot(DotDelegate dotTick, string endDot, float duration, bool ticking)
 	{
-		if(ticking)
-		{
+		if(ticking){
 			CancelInvoke(endDot);
+			return;
 		}
-		else 
-		{
-			dotTick ();
-		}
+		dotTick ();
 		// -1 Signifies that other action must be taken before the dot wears off; 
 		//    like exiting the cloud of poison
-		//if(-1.0f != duration){
+		if(-1.0f != duration){
 			Invoke(endDot, duration);
-		//}
+		}
 	}
 
 	private void DotTick(int damageType, string tickType, float tickLength)
@@ -190,8 +187,8 @@ public class Actor : MonoBehaviour {
 	}
 
 	public void LeavePoison(float delay){
-		//Here <0 signifies instant removal
-		if( 0f > delay) {
+		//Here -1 signifies instant removal
+		if(-1.0f == delay) {
 			Squelch ();
 		} else {
 			Invoke("Squelch", delay);
@@ -216,6 +213,11 @@ public class Actor : MonoBehaviour {
 		return MOVING_RIGHT;
 	}
 
+	public bool isInvuln()
+	{
+		return INVULNERABLE;
+	}
+
 	public bool isStunned()
 	{
 		return stunned;
@@ -224,6 +226,16 @@ public class Actor : MonoBehaviour {
 	public void setStunned(bool value)
 	{
 		stunned = value;
+	}
+
+	public void setStunForce(float force)
+	{
+		STUN_FORCE = force;
+	}
+
+	public void setInvuln(bool newInvuln)
+	{
+		INVULNERABLE = newInvuln;
 	}
 
 	public int GetMaxLife()
