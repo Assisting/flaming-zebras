@@ -42,8 +42,13 @@ public class RunGame : MonoBehaviour {
 		GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
 		foreach (GameObject player in players)
 		{
-			if (player.GetComponent<PlayerData>().GetMoney() > highestMoney) //find best player
+			int thisMoney = player.GetComponent<PlayerData>().GetMoney();
+			if ( thisMoney > highestMoney) //find best player
+			{
 				bestPlayer = player;
+				highestMoney = thisMoney;
+			}
+				
 		}
 		print("Congratulations " + bestPlayer.name + "! you won with a total of " + highestMoney + " gold."); //print ending message
 		Time.timeScale = 0f;//stop game
