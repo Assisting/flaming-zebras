@@ -3,8 +3,10 @@ using System.Collections;
 
 public class RunGame : MonoBehaviour {
 
-	private int FINALFIGHT = 90; //length of the final fight in seconds
-	private int GAMETIME = 500; //game time in seconds
+	public GUITexture winner;
+
+	private int FINALFIGHT = 9; //length of the final fight in seconds
+	private int GAMETIME = 50; //game time in seconds
 	private int secondsPassed = 0;
 
 	private int bestPlayerNum = -1;
@@ -52,6 +54,8 @@ public class RunGame : MonoBehaviour {
 			}	
 		}
 		bestPlayerNum = bestPlayer.GetComponent<PlayerData>().GetPlayerNum();
+		string playersLayer = "Player" + bestPlayerNum + "GUI";
+		winner.gameObject.layer = LayerMask.NameToLayer (playersLayer);
 		print("Congratulations " + bestPlayer.name + "! you won with a total of " + highestMoney + " gold."); //print ending message
 		Time.timeScale = 0f;//stop game
 	}
