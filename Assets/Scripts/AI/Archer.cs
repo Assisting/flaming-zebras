@@ -106,9 +106,11 @@ public class Archer : Enemy {
 		GameObject nearestPlayer = null;
 		float distanceToNearestPlayer = Mathf.Infinity;
 		Vector3 myPosition = transform.position;
+
+
 		foreach(GameObject player in players) {
 			Vector3 diff = player.transform.position - myPosition;
-			float curDistance = diff.sqrMagnitude;
+			float curDistance = diff.magnitude;
 			if(curDistance < distanceToNearestPlayer) {
 				distanceToNearestPlayer = curDistance;
 				nearestPlayer = player;
