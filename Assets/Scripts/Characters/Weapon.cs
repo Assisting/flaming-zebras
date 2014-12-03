@@ -7,7 +7,7 @@ public class Weapon : MonoBehaviour {
 
 	public enum WeaponType { None, Bullet, Missile, Bomb, Laser, Melee, RUBBER_CHICKEN};
 
-	public static float[] bulletReloads = new float[3] { 0.4f, 1.8f, 0.8f };
+	public static float[] bulletReloads = new float[3] { 0.7f, 1.8f, 0.9f };
 	public static int[] bulletClips = new int[3] { 1, 5, 8};
 
 	public static float[] laserFades = new float[3] { 0.1f, 0.4f, 0.3f};

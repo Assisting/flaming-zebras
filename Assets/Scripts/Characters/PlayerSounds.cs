@@ -41,12 +41,12 @@ public class PlayerSounds : MonoBehaviour {
 
 	public void PlayBullet()
 	{
-		audio.PlayOneShot(bullet);
+		audio.PlayOneShot(bullet, 0.6f);
 	}
 
 	public void PlayMissile()
 	{
-		audio.PlayOneShot(missile);
+		audio.PlayOneShot(missile, 0.65f);
 	}
 
 	public void PlayHurt()

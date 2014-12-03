@@ -11,6 +11,8 @@ public class MissleHandler : Explosive {
 	private float DETECTION_RADIUS = 2.5f;
 	private float ROTATION_SPEED = 300f;
 
+	bool exploding = false;
+
 	// Use this for initialization
 	void Start () {
 		Invoke("Arm", 0.3f);
@@ -25,7 +27,8 @@ public class MissleHandler : Explosive {
 	void FixedUpdate () {
 
 		//fly
-		rigidbody2D.velocity = transform.right * MISSLE_SPEED;
+		if (!exploding)
+			rigidbody2D.velocity = transform.right * MISSLE_SPEED;
 
 		//armed functions
 		if (armed)
@@ -69,9 +72,6 @@ public class MissleHandler : Explosive {
 					}
 				}
 			}
-
-			//possibly explode
-			ExplodeCheck();
 		}
 	}
 
@@ -81,12 +81,16 @@ public class MissleHandler : Explosive {
 		if (other.tag == "Player" || other.tag == "Enemy" || other.tag == "Platform")
 		{
 			if (armed)
+			{
+				exploding = true;
+				rigidbody2D.velocity = Vector2.zero;
 				Explode();
+			}
 			else if (other.tag != "Platform")
 			{
 				other.GetComponent<PlayerData>().LifeChange(-IMPACT_DAMAGE);
+				Destroy(gameObject);
 			}
-			Destroy(gameObject);
 		}
 	}
 }

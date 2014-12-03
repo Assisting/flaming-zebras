@@ -58,7 +58,8 @@ public class Explosive : Projectile {
 					targets[i].GetComponent<Actor>().StunDamage(LOW_DAMAGE, goRight);
 			}
 		}
-		Destroy(gameObject);
+		GetComponent<Animator>().SetTrigger("Explode");
+		audio.Play();
 	}
 
 	// shared code for checking proximity explosives
@@ -76,5 +77,10 @@ public class Explosive : Projectile {
 	protected void Arm()
 	{
 		armed = true;
+	}
+
+	void Die()
+	{
+		Destroy(gameObject);
 	}
 }
