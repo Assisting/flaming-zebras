@@ -36,6 +36,7 @@ public class PlayerData : Actor
 	private Weapon weapon;
 	private KeyBindings keyBind;
 	private Movement movement;
+	private PlayerSounds playerSounds;
 
 	//Levels
 	private int MOVE_LEVEL;
@@ -91,6 +92,7 @@ public class PlayerData : Actor
 		weapon = GetComponent<Weapon>();
 		keyBind = GetComponent<KeyBindings>();
 		movement = GetComponent<Movement>();
+		playerSounds = GetComponent<PlayerSounds>();
 
 		//set player Number (must be awake for keybinding)
 		NUMPLAYERS ++;
@@ -233,13 +235,17 @@ public class PlayerData : Actor
 		{
 			movement.SetJumpLag();
 			base.StunDamage(value, goRight);
+			playerSounds.PlayHurt();
 		}
 	}
 
 	public override void LifeChange(int value)
 	{
 		if ( (!INVULNERABLE && value < 0) || value >= 0)
+		{
 			base.LifeChange(value);
+			playerSounds.PlayHurt();
+		}
 	}
 
 	public void MakeInvuln(float time)

@@ -23,6 +23,7 @@ public class StatShop : Shop {
 			{
 				playerData.ChangeMoney(-GetPrice(caller));
 				playerData.LevelUp(stat, statLevel + 1);
+				audio.Play();
 			}
 		}
 	}

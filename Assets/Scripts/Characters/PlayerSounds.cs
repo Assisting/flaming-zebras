@@ -10,39 +10,45 @@ public class PlayerSounds : MonoBehaviour {
 	public AudioClip laser;
 	public AudioClip bullet;
 	public AudioClip missile;
+	public AudioClip hurt;
 
-	private void PlayJump()
+	public void PlayJump()
 	{
 		audio.PlayOneShot(jump, 0.85f);
 	}
 
-	private void PlayLanding()
+	public void PlayLanding()
 	{
 		audio.PlayOneShot(landing);
 	}
 
-	private void PlayDash()
+	public void PlayDash()
 	{
 		audio.PlayOneShot(dash);
 	}
 
-	private void PlayMelee()
+	public void PlayMelee()
 	{
 		audio.PlayOneShot(melee);
 	}
 
-	private void PlayLaser()
+	public void PlayLaser()
 	{
 		audio.PlayOneShot(laser);
 	}
 
-	private void PlayBullet()
+	public void PlayBullet()
 	{
 		audio.PlayOneShot(bullet);
 	}
 
-	private void PlayMissile()
+	public void PlayMissile()
 	{
 		audio.PlayOneShot(missile);
+	}
+
+	public void PlayHurt()
+	{
+		audio.PlayOneShot(hurt);
 	}
 }

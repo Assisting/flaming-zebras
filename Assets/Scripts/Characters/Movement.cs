@@ -7,6 +7,7 @@ public class Movement : MonoBehaviour {
 
 	private PlayerData playerData;
 	private KeyBindings keyBind;
+	private PlayerSounds playerSounds;
 	Animator anim;
 
 	private Vector2 endPoint; //endpoint of any particular dash
@@ -31,6 +32,7 @@ public class Movement : MonoBehaviour {
 	{
 		playerData = GetComponent<PlayerData>();
 		keyBind = GetComponent<KeyBindings>();
+		playerSounds = GetComponent<PlayerSounds>();
 	}
 
 	void Start()
@@ -122,6 +124,7 @@ public class Movement : MonoBehaviour {
 	{
 		StartDash();
 		endPoint = new Vector2(transform.position.x - 5, transform.position.y);
+		playerSounds.PlayDash();
 	}
 
 	// Set up the player to dash to the right
@@ -129,6 +132,7 @@ public class Movement : MonoBehaviour {
 	{
 		StartDash();
 		endPoint = new Vector2(transform.position.x + 5, transform.position.y);
+		playerSounds.PlayDash();
 	}
 
 	// Used to move the player through a dash each frame

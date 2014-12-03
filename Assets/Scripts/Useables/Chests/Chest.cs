@@ -20,6 +20,7 @@ public class Chest : Usable
 			caller.GetComponent<PlayerData>().ChangeMoney(treasureAmount);
 			treasureTaken = true;
 			anim.SetTrigger("Opened");
+			audio.Play();
 			Destroy (gameObject, .5f);
 		}
 	}

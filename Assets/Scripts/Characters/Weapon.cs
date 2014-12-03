@@ -33,6 +33,7 @@ public class Weapon : MonoBehaviour {
 	private PlayerData playerData;
 	private KeyBindings keyBind;
 	private Transform muzzle;
+	private PlayerSounds playerSounds;
 
 	private float LASER_FADE; //time for laser to disappear
 	private int LASER_DAMAGE = 26; //damage per laser burst
@@ -54,6 +55,7 @@ public class Weapon : MonoBehaviour {
 	{
 		playerData = GetComponent<PlayerData>();
 		keyBind = GetComponent<KeyBindings>();
+		playerSounds = GetComponent<PlayerSounds>();
 		rightMelee = transform.Find("RightSwordBox");
 		leftMelee = transform.Find("LeftSwordBox");
 	}
@@ -203,7 +205,8 @@ public class Weapon : MonoBehaviour {
 			rotateDegrees = Random.Range(-10f, 10f);
 			newBullet.transform.Rotate( new Vector3(0f, 0f, rotateDegrees) );
 			FireWeapon(); //shoot whole "clip" (shell)
-		}			
+		}
+		playerSounds.PlayBullet();		
 	}
 
 	private void FireMissile()
@@ -212,6 +215,7 @@ public class Weapon : MonoBehaviour {
 		MissleHandler script = newMissile.GetComponent<MissleHandler>();
 		script.Origin(gameObject);
 		script.SetLevel( playerData.GetWeaponLevel() );
+		playerSounds.PlayMissile();
 	}
 	
 	private void FireBomb()
@@ -220,6 +224,7 @@ public class Weapon : MonoBehaviour {
 		BombHandler script = newBomb.GetComponent<BombHandler>();
 		script.Origin(gameObject);
 		script.SetLevel( playerData.GetWeaponLevel() );
+		playerSounds.PlayBullet();
 	}
 
 	private void FireLaser()
@@ -239,7 +244,6 @@ public class Weapon : MonoBehaviour {
 		int i = 0;
 		foreach ( RaycastHit2D target in hitTargets)
 		{
-			print(target.transform.name);
 			Actor currentTarget = null;
 
 			switch (target.transform.tag)
@@ -280,7 +284,7 @@ public class Weapon : MonoBehaviour {
 			newLaser.SetPosition( 1, new Vector3(muzzle.position.x + hitTargets[i].distance, muzzle.position.y, muzzle.position.z) );
 		else
 			newLaser.SetPosition( 1, new Vector3(muzzle.position.x - hitTargets[i].distance, muzzle.position.y, muzzle.position.z) );
-
+		playerSounds.PlayLaser();
 		Destroy(newLaser.gameObject, LASER_FADE);
 			
 	}
@@ -309,6 +313,8 @@ public class Weapon : MonoBehaviour {
 				target.StunDamage(MELEE_DAMAGE, playerData.IsMovingRight());
 			}
 		}
+
+		playerSounds.PlayMelee();
 	}
 
 	private void Baawwk()

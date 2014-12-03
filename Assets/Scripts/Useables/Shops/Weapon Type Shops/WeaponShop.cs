@@ -23,6 +23,7 @@ public class WeaponShop : Shop {
 				playerData.ChangeMoney(-GetPrice(caller));
 				script.LevelUp(PlayerData.Attribute.WeaponType, weapon);
 				script.IncrementWeaponSwaps();
+				audio.Play();
 			}
 		}
 	}
