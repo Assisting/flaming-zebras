@@ -82,6 +82,8 @@ public class LevelGenerate : MonoBehaviour {
 		Instantiate(player2, new Vector3(0f, 0f, 0f), room.transform.rotation); //spawn player 2
 		yield return new WaitForSeconds(0.05f);
 		Instantiate(player3, new Vector3(0f, 0f, 0f), room.transform.rotation); //spawn player 3
+		yield return new WaitForSeconds(0.05f);
+		Instantiate(player4, new Vector3(0f, 0f, 0f), room.transform.rotation); //spawn player 3
 
 		GameObject[] newPlayers = GameObject.FindGameObjectsWithTag("Player");
 		foreach (GameObject player in newPlayers)
