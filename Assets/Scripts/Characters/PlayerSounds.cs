@@ -3,7 +3,6 @@ using System.Collections;
 
 public class PlayerSounds : MonoBehaviour {
 
-	public AudioClip walk;
 	public AudioClip jump;
 	public AudioClip landing;
 	public AudioClip dash;
@@ -11,16 +10,10 @@ public class PlayerSounds : MonoBehaviour {
 	public AudioClip laser;
 	public AudioClip bullet;
 	public AudioClip missile;
-	
-	private void PlayWalk()
-	{
-		print("Walk");
-		audio.PlayOneShot(walk, 0.6f);
-	}
 
 	private void PlayJump()
 	{
-		print("Jump");
+		print("Jump", 0.85f);
 		audio.PlayOneShot(jump);
 	}
 
