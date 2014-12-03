@@ -10,13 +10,13 @@ public class Actor : MonoBehaviour {
 	protected bool dead;
 	public bool MOVING_RIGHT;
 
-	protected float STUN_FORCE = 3f;
+	public float STUN_FORCE = 3f;
 	protected bool stunned = false;
 	private bool flash = false;
 	private int flashCount = 5;
 	private bool visible = true;
 
-	protected bool INVULNERABLE = false;
+	public bool INVULNERABLE = false;
 
 	protected int BURN_DAMAGE;
 	protected float BURN_TICK;

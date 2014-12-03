@@ -6,15 +6,32 @@ public class Archer : Enemy {
 	public delegate void MyDelegate();
 	public MyDelegate Do;
 
+	private Animator animator;
+	private Actor actor;
+
 	public Transform Muzzle;
 	public Rigidbody2D bullet;
+
+	private int attackCount;
+
+	int DELAY_BEFORE_FIRE;
+	int DELAY_BETWEEN_ATTACKS;
 
 	GameObject[] players;
 
 	void Start () {
+		attackCount = 0;
+		actor = GetComponent<Actor>();
+		animator = GetComponent<Animator>();
+		actor.INVULNERABLE = true;
+		actor.STUN_FORCE = 0f;
+
 		MOVING_RIGHT = true;
-		ATTACK_DELAY = 2f;
-		
+		ATTACK_DELAY = 0.8f;
+
+		DELAY_BEFORE_FIRE = 0.5f;
+		DELAY_BETWEEN_ATTACKS = 5f;
+
 		// These will all require much, much tweaking.
 		SPEED = 0.9f;
 		ATTACK_DAMAGE = 4;
@@ -51,17 +68,31 @@ public class Archer : Enemy {
 
 	// Terminal
 	void attack() {
-		if(LAST_ATTACK_TIME + ATTACK_DELAY <= Time.time) {
-			print ("Attack!");
+		if((Time.time > LAST_ATTACK_TIME + DELAY_BETWEEN_ATTACKS) || actor.INVULNERABLE == false) {
 
-			Rigidbody2D newBullet = Instantiate (bullet, Muzzle.position, Muzzle.rotation) as Rigidbody2D;
-			newBullet.GetComponent<BulletHandler>().Origin(gameObject);
-			LAST_ATTACK_TIME = Time.time;
-			Do = testCanSeePlayer;
+			if(actor.INVULNERABLE == true) {
+				LAST_ATTACK_TIME = Time.time + DELAY_BEFORE_FIRE;
+			}
+
+			actor.INVULNERABLE = false;
+			animator.SetBool ("up", true);
+
+			if(attackCount < 3) {
+				if(LAST_ATTACK_TIME + ATTACK_DELAY <= Time.time) {
+					Rigidbody2D newBullet = Instantiate (bullet, Muzzle.position, Muzzle.rotation) as Rigidbody2D;
+					newBullet.GetComponent<BulletHandler>().Origin(gameObject);
+					LAST_ATTACK_TIME = Time.time;
+					attackCount += 1;
+				}
+			}
+			else {
+				actor.INVULNERABLE = true;
+				animator.SetBool ("up", false);
+				attackCount = 0;
+				Do = testCanSeePlayer;
+			}
 		}
-		
-		// Escape if neccesary
-		if(LAST_ATTACK_TIME + 5f <= Time.time) {
+		else {
 			Do = testCanSeePlayer;
 		}
 	}
