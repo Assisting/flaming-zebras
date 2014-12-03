@@ -114,7 +114,7 @@ public class CameraShift : MonoBehaviour {
 					}
 					case 4:
 					{
-						print("Player 3");
+						print("Player 4");
 						// set camera for player 4
 						camera.rect = new Rect (0.502f, 0f, 0.5f, 0.498f);
 						break;
