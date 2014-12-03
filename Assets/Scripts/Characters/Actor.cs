@@ -236,6 +236,13 @@ public class Actor : MonoBehaviour {
 		return CURLIFE;
 	}
 
+	public void MakeInvuln(float time)
+	{
+		CancelInvoke("StopInvuln");
+		INVULNERABLE = true;
+		Invoke("StopInvuln", time);
+	}
+
 	public void StopInvuln()
 	{
 		INVULNERABLE = false;
