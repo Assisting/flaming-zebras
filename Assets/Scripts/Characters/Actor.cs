@@ -124,16 +124,19 @@ public class Actor : MonoBehaviour {
 	// Damage over time functions
 	private void StartDot(DotDelegate dotTick, string endDot, float duration, bool ticking)
 	{
-		if(ticking){
+		if(ticking)
+		{
 			CancelInvoke(endDot);
-			return;
 		}
-		dotTick ();
+		else 
+		{
+			dotTick ();
+		}
 		// -1 Signifies that other action must be taken before the dot wears off; 
 		//    like exiting the cloud of poison
-		if(-1.0f != duration){
+		//if(-1.0f != duration){
 			Invoke(endDot, duration);
-		}
+		//}
 	}
 
 	private void DotTick(int damageType, string tickType, float tickLength)
@@ -187,8 +190,8 @@ public class Actor : MonoBehaviour {
 	}
 
 	public void LeavePoison(float delay){
-		//Here -1 signifies instant removal
-		if(-1.0f == delay) {
+		//Here <0 signifies instant removal
+		if( 0f > delay) {
 			Squelch ();
 		} else {
 			Invoke("Squelch", delay);

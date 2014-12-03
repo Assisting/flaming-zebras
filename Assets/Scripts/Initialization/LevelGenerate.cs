@@ -32,8 +32,7 @@ public class LevelGenerate : MonoBehaviour {
 		roomList.Enqueue("caveRoom18");
 		roomList.Enqueue("caveRoom15");
 		roomList.Enqueue("caveRoom20");
-		//roomList.Enqueue("caveRoom19");
-		roomList.Enqueue("caveRoom10");
+		roomList.Enqueue("caveRoom19");
 		roomList.Enqueue("caveRoom13");
 		roomList.Enqueue("caveRoom9");
 		roomList.Enqueue("caveRoom8");
@@ -90,6 +89,11 @@ public class LevelGenerate : MonoBehaviour {
 		{
 			player.transform.position = storeRoom.transform.position; //move all players to shop
 			player.transform.Find("Camera").GetComponent<CameraShift>().UpdateViewport(); //separate players into correct number of quadrants
+		}
+
+		yield return new WaitForSeconds(40f);
+		foreach (GameObject player in newPlayers)
+		{
 			player.AddComponent("Rent");
 		}
 
