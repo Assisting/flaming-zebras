@@ -68,7 +68,7 @@ public class Archer : Enemy {
 
 	// Terminal
 	void attack() {
-		if((Time.time > LAST_ATTACK_TIME + DELAY_BETWEEN_ATTACKS) || actor.INVULNERABLE == false) {
+		if((Time.time > LAST_ATTACK_TIME + DELAY_BETWEEN_ATTACKS) || actor.isInvuln() == false) {
 
 			if(actor.isInvuln() == true) {
 				LAST_ATTACK_TIME = Time.time + DELAY_BEFORE_FIRE;
