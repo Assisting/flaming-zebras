@@ -12,12 +12,12 @@ public class PatrolSpawn : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+
 	}
 	
 	void spawn() {
 		Rigidbody2D newPatrol = Instantiate(patrol, this.transform.position, this.transform.rotation) as Rigidbody2D;
-		
+
 		Destroy(gameObject);
 	}
 
