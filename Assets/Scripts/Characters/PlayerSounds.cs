@@ -13,13 +13,11 @@ public class PlayerSounds : MonoBehaviour {
 
 	private void PlayJump()
 	{
-		print("Jump", 0.85f);
-		audio.PlayOneShot(jump);
+		audio.PlayOneShot(jump, 0.85f);
 	}
 
 	private void PlayLanding()
 	{
-		print("Land");
 		audio.PlayOneShot(landing);
 	}
 
