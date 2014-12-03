@@ -3,8 +3,8 @@ using System.Collections;
 
 public class RunGame : MonoBehaviour {
 
-	private int FINALFIGHT = 50; //length of the final fight in seconds
-	private int GAMETIME = 300; //game time in seconds
+	private int FINALFIGHT = 90; //length of the final fight in seconds
+	private int GAMETIME = 500; //game time in seconds
 	private int secondsPassed = 0;
 
 	// Use this for initialization
