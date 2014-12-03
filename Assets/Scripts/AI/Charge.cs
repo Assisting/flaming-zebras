@@ -9,7 +9,6 @@ public class Charge : Enemy {
 	public float CHARGE_ATTACK_SPEED_MODIFIER;
 	public float CHARGE_ATTACK_DAMAGE_MODIFIER;
 
-
 	void Start () {
 		MOVING_RIGHT = true;
 		ATTACK_DELAY = 1f;
