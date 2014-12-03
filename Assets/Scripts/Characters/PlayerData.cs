@@ -45,7 +45,6 @@ public class PlayerData : Actor
 	private int WEAPON_LEVEL;
 
 	//Combat
-	private bool INVULNERABLE = false;
 	private float LAST_HIT_COOLDOWN = 10f; //Time it takes for "last hit" to bleed off
 	private GameObject lastHit; //player that last hit you
 
