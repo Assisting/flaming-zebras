@@ -14,8 +14,8 @@ public class Archer : Enemy {
 
 	private int attackCount;
 
-	int DELAY_BEFORE_FIRE;
-	int DELAY_BETWEEN_ATTACKS;
+	float DELAY_BEFORE_FIRE;
+	float DELAY_BETWEEN_ATTACKS;
 
 	GameObject[] players;
 
