@@ -10,6 +10,7 @@ public class Teleporter : Usable{
 
 		if (playerData.CanTeleport())
 		{
+			audio.Play();
 			playerData.SetTeleportCooldown();
 			movement.TeleportHome(transform.position);
 		}

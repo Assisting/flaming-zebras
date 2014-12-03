@@ -10,6 +10,7 @@ public class RootTeleporter : Usable {
 		PlayerData playerData = caller.GetComponent<PlayerData>();
 		if (playerData.GetWeaponType() != Weapon.WeaponType.None)
 		{
+			audio.Play();
 			caller.transform.position = playerData.getLastTeleport();
 			playerData.SetTeleportCooldown();
 			caller.GetComponent<PlayerData>().MakeInvuln(teleInvulnTime);

@@ -186,6 +186,7 @@ public class Weapon : MonoBehaviour {
 	{
 		SHIELD_ACTIVE = false;
 		Invoke("RaiseShield", SHIELD_REGEN);
+		playerSounds.PlayShield();
 	}
 
 	private void RaiseShield()

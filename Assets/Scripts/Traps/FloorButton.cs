@@ -11,6 +11,7 @@ public class FloorButton : MonoBehaviour {
 	{
 		if (other.tag == "Player") //only players push buttons
 		{
+			audio.Play();
 			foreach (GameObject trigger in triggers)
 			{
 				if (trigger != null)

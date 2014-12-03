@@ -7,6 +7,7 @@ public class PlayerSounds : MonoBehaviour {
 	public AudioClip landing;
 	public AudioClip dash;
 	public AudioClip melee;
+	public AudioClip shield;
 	public AudioClip laser;
 	public AudioClip bullet;
 	public AudioClip missile;
@@ -32,6 +33,11 @@ public class PlayerSounds : MonoBehaviour {
 	public void PlayMelee()
 	{
 		audio.PlayOneShot(melee);
+	}
+
+	public void PlayShield()
+	{
+		audio.PlayOneShot(shield);
 	}
 
 	public void PlayLaser()
