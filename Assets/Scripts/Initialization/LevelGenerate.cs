@@ -7,6 +7,7 @@ public class LevelGenerate : MonoBehaviour {
 	public GameObject player1; //prefabs of players to spwan
 	public GameObject player2;
 	public GameObject player3;
+	public GameObject player4;
 
 	private float HORIZONTAL_SEPARATION = 50f; //the distances between rooms
 	private float VERTICAL_SEPARATION = 35f;
