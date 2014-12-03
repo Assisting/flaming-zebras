@@ -90,6 +90,11 @@ public class LevelGenerate : MonoBehaviour {
 		{
 			player.transform.position = storeRoom.transform.position; //move all players to shop
 			player.transform.Find("Camera").GetComponent<CameraShift>().UpdateViewport(); //separate players into correct number of quadrants
+		}
+
+		yield return new WaitForSeconds(40f);
+		foreach (GameObject player in newPlayers)
+		{
 			player.AddComponent("Rent");
 		}
 
