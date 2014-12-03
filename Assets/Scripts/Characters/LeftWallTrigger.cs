@@ -18,6 +18,8 @@ public class LeftWallTrigger : MonoBehaviour {
 		if (other.tag == "Platform" || other.tag == "Player" || other.tag == "Enemy")
 		{
 			movement.wallLeft = true;
+			CancelInvoke("ClearTrigger");
+			Invoke("ClearTrigger", 0.25f);
 			if ( playerData.IsDashing() )
 				movement.StopDash();
 		}
@@ -29,9 +31,8 @@ public class LeftWallTrigger : MonoBehaviour {
 	}
 
 	//allow movement and dashing agin on exiting wall collision
-	void OnTriggerExit2D (Collider2D other)
+	void ClearTrigger()
 	{
-		if (other.tag == "Platform" || other.tag == "Player" || other.tag == "Enemy")
-			movement.wallLeft = false;
+		movement.wallLeft = false;
 	}
 }
