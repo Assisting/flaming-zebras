@@ -21,9 +21,17 @@ public class LevelGenerate : MonoBehaviour {
 		roomList.Enqueue("caveRoom2");
 		roomList.Enqueue("caveRoom3");
 		roomList.Enqueue("caveRoom12");
+		roomList.Enqueue("TeleRoom");
 		roomList.Enqueue("caveRoom11");
 		roomList.Enqueue("caveRoom14");
+		roomList.Enqueue("caveRoom5");
 		roomList.Enqueue("TeleRoom");
+		roomList.Enqueue("caveRoom17");
+		roomList.Enqueue("caveRoom18");
+		roomList.Enqueue("caveRoom15");
+		roomList.Enqueue("caveRoom20");
+		//roomList.Enqueue("caveRoom19");
+		roomList.Enqueue("caveRoom10");
 		roomList.Enqueue("caveRoom13");
 		roomList.Enqueue("caveRoom9");
 		roomList.Enqueue("caveRoom8");
