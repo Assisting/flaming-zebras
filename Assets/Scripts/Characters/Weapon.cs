@@ -341,6 +341,17 @@ public class Weapon : MonoBehaviour {
 				target.LifeChange(-MELEE_DAMAGE);
 			}
 		}
+
+		ChickenSound();
+	}
+
+	private void ChickenSound()
+	{
+		float probability = Random.Range(0f, 1f);
+		if (probability < 0.2f)
+			playerSounds.PlayChicken1();
+		else
+			playerSounds.PlayChicken2();
 	}
 
 //-----Getters and Setters---------------------------------------------------------------------------------------------------------------------------

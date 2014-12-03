@@ -11,6 +11,8 @@ public class PlayerSounds : MonoBehaviour {
 	public AudioClip bullet;
 	public AudioClip missile;
 	public AudioClip hurt;
+	public AudioClip chicken1;
+	public AudioClip chicken2;
 
 	public void PlayJump()
 	{
@@ -50,5 +52,15 @@ public class PlayerSounds : MonoBehaviour {
 	public void PlayHurt()
 	{
 		audio.PlayOneShot(hurt);
+	}
+
+	public void PlayChicken1()
+	{
+		audio.PlayOneShot(chicken1);
+	}
+
+	public void PlayChicken2()
+	{
+		audio.PlayOneShot(chicken2);
 	}
 }
