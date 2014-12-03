@@ -72,7 +72,7 @@ TextureImporter:
         width: 24
         height: 28
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Jumpingp3L_1
       rect:
@@ -82,7 +82,7 @@ TextureImporter:
         width: 24
         height: 28
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Jumpingp3L_2
       rect:
@@ -92,7 +92,7 @@ TextureImporter:
         width: 24
         height: 28
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Jumpingp3L_3
       rect:
@@ -102,7 +102,7 @@ TextureImporter:
         width: 24
         height: 28
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Jumpingp3L_4
       rect:
@@ -112,7 +112,7 @@ TextureImporter:
         width: 24
         height: 28
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Jumpingp3L_5
       rect:
@@ -122,7 +122,7 @@ TextureImporter:
         width: 24
         height: 28
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Jumpingp3L_6
       rect:
@@ -132,7 +132,7 @@ TextureImporter:
         width: 24
         height: 28
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Jumpingp3L_7
       rect:
@@ -142,7 +142,7 @@ TextureImporter:
         width: 24
         height: 28
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Jumpingp3L_8
       rect:
@@ -152,7 +152,7 @@ TextureImporter:
         width: 24
         height: 28
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Jumpingp3L_9
       rect:
@@ -162,7 +162,7 @@ TextureImporter:
         width: 24
         height: 28
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Jumpingp3L_10
       rect:
@@ -172,7 +172,7 @@ TextureImporter:
         width: 24
         height: 28
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Jumpingp3L_11
       rect:
@@ -182,7 +182,7 @@ TextureImporter:
         width: 24
         height: 28
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Jumpingp3L_12
       rect:
@@ -192,7 +192,7 @@ TextureImporter:
         width: 24
         height: 28
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Jumpingp3L_13
       rect:
@@ -202,7 +202,7 @@ TextureImporter:
         width: 24
         height: 28
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Jumpingp3L_14
       rect:
@@ -212,7 +212,7 @@ TextureImporter:
         width: 24
         height: 28
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Jumpingp3L_15
       rect:
@@ -222,7 +222,7 @@ TextureImporter:
         width: 24
         height: 28
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Jumpingp3L_16
       rect:
@@ -232,7 +232,7 @@ TextureImporter:
         width: 24
         height: 28
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Jumpingp3L_17
       rect:
@@ -242,7 +242,7 @@ TextureImporter:
         width: 24
         height: 28
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Jumpingp3L_18
       rect:
@@ -252,17 +252,7 @@ TextureImporter:
         width: 24
         height: 28
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Jumpingp3L_19
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 16
-        width: 24
-        height: 28
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
