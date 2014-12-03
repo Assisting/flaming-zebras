@@ -57,7 +57,7 @@ public class PlayerSounds : MonoBehaviour {
 
 	public void PlayHurt()
 	{
-		audio.PlayOneShot(hurt);
+		audio.PlayOneShot(hurt, 0.8f);
 	}
 
 	public void PlayChicken1()
