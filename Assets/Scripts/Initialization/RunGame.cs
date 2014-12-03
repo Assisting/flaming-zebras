@@ -5,8 +5,8 @@ public class RunGame : MonoBehaviour {
 
 	public GUITexture winner;
 
-	private int FINALFIGHT = 9; //length of the final fight in seconds
-	private int GAMETIME = 50; //game time in seconds
+	private int FINALFIGHT = 90; //length of the final fight in seconds
+	private int GAMETIME = 500; //game time in seconds
 	private int secondsPassed = 0;
 
 	private int bestPlayerNum = -1;
