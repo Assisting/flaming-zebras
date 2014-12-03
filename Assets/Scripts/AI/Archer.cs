@@ -23,8 +23,8 @@ public class Archer : Enemy {
 		attackCount = 0;
 		actor = GetComponent<Actor>();
 		animator = GetComponent<Animator>();
-		actor.setInvuln(true);
-		actor.setStunForce(0f);
+		actor.INVULNERABLE = true;
+		actor.STUN_FORCE = 0f;
 
 		MOVING_RIGHT = true;
 		ATTACK_DELAY = 0.8f;
@@ -70,11 +70,11 @@ public class Archer : Enemy {
 	void attack() {
 		if((Time.time > LAST_ATTACK_TIME + DELAY_BETWEEN_ATTACKS) || actor.isInvuln() == false) {
 
-			if(actor.isInvuln() == true) {
+			if(actor.INVULNERABLE == true) {
 				LAST_ATTACK_TIME = Time.time + DELAY_BEFORE_FIRE;
 			}
 
-			actor.setInvuln(false);
+			actor.INVULNERABLE = false;
 			animator.SetBool ("up", true);
 
 			if(attackCount < 3) {
@@ -86,7 +86,7 @@ public class Archer : Enemy {
 				}
 			}
 			else {
-				actor.setInvuln(true);
+				actor.INVULNERABLE = true;
 				animator.SetBool ("up", false);
 				attackCount = 0;
 				Do = testCanSeePlayer;
