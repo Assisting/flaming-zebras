@@ -16,6 +16,8 @@ public class Actor : MonoBehaviour {
 	private int flashCount = 5;
 	private bool visible = true;
 
+	protected bool INVULNERABLE = false;
+
 	protected int BURN_DAMAGE;
 	protected float BURN_TICK;
 	protected bool BURNING;
@@ -63,37 +65,43 @@ public class Actor : MonoBehaviour {
 	// give damage while also inducing a knock-back effect
 	public virtual void StunDamage(int value, bool goRight)
 	{
-		rigidbody2D.velocity = Vector2.zero;
-		if (goRight)
-			rigidbody2D.AddForce(new Vector2(1f, 2f) * STUN_FORCE, ForceMode2D.Impulse);
-		else
-			rigidbody2D.AddForce(new Vector2(-1f, 2f) * STUN_FORCE, ForceMode2D.Impulse);
-		stunned = true;
-		LifeChange(-value);
+		if (!INVULNERABLE)
+		{
+			rigidbody2D.velocity = Vector2.zero;
+			if (goRight)
+				rigidbody2D.AddForce(new Vector2(1f, 2f) * STUN_FORCE, ForceMode2D.Impulse);
+			else
+				rigidbody2D.AddForce(new Vector2(-1f, 2f) * STUN_FORCE, ForceMode2D.Impulse);
+			stunned = true;
+			LifeChange(-value);
+		}
 	}
 
 	// Alter life total by the given amount
 	public virtual void LifeChange(int value)
 	{
-		CURLIFE += value;
-		if (CURLIFE > MAXLIFE)
+		if (!INVULNERABLE)
 		{
-			CURLIFE = MAXLIFE;
-		}
+			CURLIFE += value;
+			if (CURLIFE > MAXLIFE)
+			{
+				CURLIFE = MAXLIFE;
+			}
 						
-		if (CURLIFE <= 0)
-		{
-			CURLIFE = 0; 
-			dead = true;
-		}
+			if (CURLIFE <= 0)
+			{
+				CURLIFE = 0; 
+				dead = true;
+			}
 
-		if (0 >= value)
-		{
-			//Start flashing to indicate damage is taken
-			flash = true;
-			//Duration of flashing state
-			CancelInvoke("EndFlashing");
-			Invoke ("EndFlashing", 1.0f);
+			if (0 >= value)
+			{
+				//Start flashing to indicate damage is taken
+				flash = true;
+				//Duration of flashing state
+				CancelInvoke("EndFlashing");
+				Invoke ("EndFlashing", 1.0f);
+			}
 		}
 	}
 
