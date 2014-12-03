@@ -10,13 +10,13 @@ public class Actor : MonoBehaviour {
 	protected bool dead;
 	public bool MOVING_RIGHT;
 
-	public float STUN_FORCE = 3f;
+	protected float STUN_FORCE = 3f;
 	protected bool stunned = false;
 	private bool flash = false;
 	private int flashCount = 5;
 	private bool visible = true;
 
-	public bool INVULNERABLE = false;
+	protected bool INVULNERABLE = false;
 
 	protected int BURN_DAMAGE;
 	protected float BURN_TICK;
@@ -241,6 +241,16 @@ public class Actor : MonoBehaviour {
 		CancelInvoke("StopInvuln");
 		INVULNERABLE = true;
 		Invoke("StopInvuln", time);
+	}
+
+	public void setInvuln(bool invuln) 
+	{
+		INVULNERABLE = invuln;
+	}
+
+	public void setStunForce(float newForce)
+	{
+		STUN_FORCE = newForce;
 	}
 
 	public void StopInvuln()
