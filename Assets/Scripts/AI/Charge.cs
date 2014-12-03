@@ -177,6 +177,7 @@ public class Charge : Enemy {
 
 	// Terminal
 	void standStill() {
+		animator.SetBool ("walking", false);
 		rigidbody2D.velocity = new Vector2 (0, rigidbody2D.velocity.y);
 
 		Do = testCanSeePlayer;

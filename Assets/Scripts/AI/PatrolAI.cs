@@ -6,8 +6,12 @@ public class PatrolAI : Enemy {
 	public delegate void MyDelegate();
 	public MyDelegate Do;
 
+	private Animator animator;
+
 	// Use this for initialization
 	void Start () {
+		animator = GetComponent<Animator>();
+
 		MOVING_RIGHT = true;
 		ATTACK_DELAY = 1f;
 		
@@ -74,13 +78,13 @@ public class PatrolAI : Enemy {
 
 	// Terminal
 	void attack() {
-		
+		animator.SetBool ("attacking", true);
 		if(!doINeedToTurn()) {
 			rigidbody2D.velocity = new Vector2 (SPEED, rigidbody2D.velocity.y);
 		}
 		else {
 			// This should literally never happen
-			print ("Somehow I am registering a player in attack range but can't get to them");
+
 			
 			turnAround();
 			rigidbody2D.velocity = new Vector2 (SPEED, rigidbody2D.velocity.y);
@@ -88,17 +92,19 @@ public class PatrolAI : Enemy {
 		}
 		if(LAST_ATTACK_TIME + ATTACK_DELAY <= Time.time) {
 			if(playerInCollider == true) {
-				print ("Attack!");
+
 				// The negation is just due to the differences in LifeChange and StunDamage.
 				playerCollider.gameObject.GetComponent<Actor>().LifeChange(ATTACK_DAMAGE * -1);
 				LAST_ATTACK_TIME = Time.time;
 				Do = testCanSeePlayer;
+				animator.SetBool ("attacking", false);
 			}	
 		}
 		
 		// Escape if neccesary
 		if(LAST_ATTACK_TIME + 5f <= Time.time) {
 			Do = testCanSeePlayer;
+			animator.SetBool ("attacking", false);
 		}
 	}
 
@@ -106,10 +112,12 @@ public class PatrolAI : Enemy {
 	void atLedge() {
 		bool shouldIPause = (Random.value > 0.05f);
 		if(shouldIPause == true) {
+			animator.SetBool("walking", false);
 			rigidbody2D.velocity = new Vector2 (0, rigidbody2D.velocity.y);
 		}
 		else {
 			turnAround();
+			animator.SetBool("walking", true);
 			rigidbody2D.velocity = new Vector2 (SPEED, rigidbody2D.velocity.y);
 		}
 
@@ -118,6 +126,7 @@ public class PatrolAI : Enemy {
 
 	// Terminal
 	void approach() {
+		animator.SetBool ("walking", true);
 		if(!doINeedToTurn()) {
 			rigidbody2D.velocity = new Vector2 (SPEED*1.5f, rigidbody2D.velocity.y);
 		}
@@ -131,6 +140,7 @@ public class PatrolAI : Enemy {
 
 	// Terminal
 	void continuePatrol() {
+		animator.SetBool ("walking", true);
 		if(!doINeedToTurn()) {
 			rigidbody2D.velocity = new Vector2 (SPEED, rigidbody2D.velocity.y);
 		}
