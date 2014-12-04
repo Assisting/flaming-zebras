@@ -6,5 +6,6 @@ public class LowChest : Chest {
 	// Use this for initialization
 	void Start () {
 		treasureAmount = 25;
+		treasureCooldown = 120f;
 	}
 }

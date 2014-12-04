@@ -10,6 +10,7 @@ public class Chest : Usable
 	private Animator anim;
 	private GameObject opener = null;
 	private float TREASURE_WAIT = 2f;
+	protected float treasureCooldown;
 
 	void Awake()
 	{
@@ -32,10 +33,26 @@ public class Chest : Usable
 		{
 			opener.GetComponent<PlayerData>().ChangeMoney(treasureAmount);
 			treasureTaken = true;
-			anim.SetTrigger("Opened");
+			anim.SetBool("Opened", true);
 			audio.Play();
-			Destroy (gameObject, .5f);
+			//Destroy (gameObject, .5f);
+			Opened ();
 		}
+	}
+
+	private void Opened()
+	{
+		gameObject.renderer.enabled = false;
+		gameObject.collider2D.enabled = false;
+		Invoke ("Refill", treasureCooldown);
+	}
+
+	private void Refill()
+	{
+		treasureTaken = false;
+		anim.SetBool("Opened", false);
+		gameObject.renderer.enabled = true;
+		gameObject.collider2D.enabled = true;
 	}
 
 	void OnTriggerExit2D (Collider2D other)
