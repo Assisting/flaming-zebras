@@ -44,6 +44,7 @@ public class Chest : Usable
 	{
 		gameObject.renderer.enabled = false;
 		gameObject.collider2D.enabled = false;
+		opener = null;
 		Invoke ("Refill", treasureCooldown);
 	}
 
