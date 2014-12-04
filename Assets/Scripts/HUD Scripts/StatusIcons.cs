@@ -8,6 +8,7 @@ public class StatusIcons : MonoBehaviour {
 	public GUITexture fire;
 	public GUITexture poison;
 	public GUITexture invuln;
+	public GUITexture poisonBlind;
 
 
 	// Use this for initialization
@@ -15,6 +16,7 @@ public class StatusIcons : MonoBehaviour {
 		fire.gameObject.SetActive(false);
 		poison.gameObject.SetActive(false);
 		invuln.gameObject.SetActive(false);
+		poisonBlind.gameObject.SetActive (false);
 	}
 	
 	// Update is called once per frame
@@ -25,10 +27,15 @@ public class StatusIcons : MonoBehaviour {
 			fire.gameObject.SetActive(false);
 
 		if (playerData.isPoisoned())
+		{
 			poison.gameObject.SetActive(true);
+			poisonBlind.gameObject.SetActive (true);
+		}
 		else 
+		{
 			poison.gameObject.SetActive(false);
-
+			poisonBlind.gameObject.SetActive (false);
+		}
 		if (playerData.IsInvuln() || weapon.ShieldUp())
 			invuln.gameObject.SetActive(true);
 		else 
