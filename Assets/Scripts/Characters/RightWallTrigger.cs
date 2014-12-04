@@ -19,7 +19,7 @@ public class RightWallTrigger : MonoBehaviour {
 		{
 			movement.wallRight = true;
 			CancelInvoke("ClearTrigger");
-			Invoke("ClearTrigger", 0.06f);
+			Invoke("ClearTrigger", 0.25f);
 			if ( playerData.IsDashing() )
 				movement.StopDash();
 		}
