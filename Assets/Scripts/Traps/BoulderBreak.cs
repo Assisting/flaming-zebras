@@ -12,7 +12,11 @@ public class BoulderBreak : Actor {
 
 	protected override void Die()
 	{
-		gameObject.collider2D.enabled = false;
+		Collider2D[] colliders = gameObject.GetComponents<Collider2D> ();
+		foreach (Collider2D collider in colliders)
+		{
+			collider.enabled = false;
+		}
 		anim.SetTrigger("Die");
 	}
 
