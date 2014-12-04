@@ -15,7 +15,7 @@ public class FloorButton : MonoBehaviour {
 			foreach (GameObject trigger in triggers)
 			{
 				if (trigger != null)
-					trigger.SendMessage("Activate");
+					trigger.GetComponent<Trap>().Activate(other.gameObject);
 			}
 		}
 	}

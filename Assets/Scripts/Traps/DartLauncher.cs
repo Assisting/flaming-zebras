@@ -3,23 +3,26 @@ using System.Collections;
 
 public class DartLauncher : Trap {
 
-	public Rigidbody2D dart;
+	public GameObject dart;
 	public Transform muzzle;
 	private bool firing;
+	private GameObject activator;
 
-	public override void Activate()
+	public override void Activate(GameObject user)
 	{
 		if (!firing)
 		{
 			firing = true;
 			audio.Play();
+			activator = user;
 			Invoke("Shoot", audio.clip.length);
 		}
 	}
 
 	private void Shoot()
 	{
-		Instantiate(dart, muzzle.position, muzzle.rotation);
+		GameObject newDart = Instantiate(dart, muzzle.position, muzzle.rotation) as GameObject;
+		newDart.GetComponent<DartHandler>().Origin(activator);
 		firing = false;
 	}
 }

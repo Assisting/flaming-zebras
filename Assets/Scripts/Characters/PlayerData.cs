@@ -254,13 +254,6 @@ public class PlayerData : Actor
 		}
 	}
 
-	public void MakeInvuln(float time)
-	{
-		CancelInvoke("StopInvuln");
-		INVULNERABLE = true;
-		Invoke("StopInvuln", time);
-	}
-
 	protected override void Die()
 	{
 		movement.TeleportHome(new Vector3(0f, 0f, 0f)); //go to shop, leave to origin level
