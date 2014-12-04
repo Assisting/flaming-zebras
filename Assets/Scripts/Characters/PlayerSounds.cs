@@ -16,6 +16,7 @@ public class PlayerSounds : MonoBehaviour {
 	public AudioClip hurt;
 	public AudioClip chicken1;
 	public AudioClip chicken2;
+	public AudioClip rent;
 
 	public void PlayJump()
 	{
@@ -80,5 +81,10 @@ public class PlayerSounds : MonoBehaviour {
 	public void PlayChicken2()
 	{
 		audio.PlayOneShot(chicken2);
+	}
+
+	public void PlayRent()
+	{
+		audio.PlayOneShot(rent, 0.8f);
 	}
 }

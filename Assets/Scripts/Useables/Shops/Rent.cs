@@ -8,6 +8,7 @@ public class Rent : MonoBehaviour {
 	public static int RENT_COST = 10;
 	public static float GRACE = 20f; // time in seconds before it starts taking your money
 	public static float TICKTIME = 1f;
+	private bool paying = true;
 
 	void Start()
 	{
@@ -18,15 +19,27 @@ public class Rent : MonoBehaviour {
 
 	private void RentPay()
 	{
-		if (playerData.GetMoney() >= RENT_COST) //if we have enough to pay rent
-			playerData.ChangeMoney(-RENT_COST); //pay
+		if (paying)
+		{
+			if (playerData.GetMoney() >= RENT_COST) //if we have enough to pay rent
+			{
+				playerData.ChangeMoney(-RENT_COST); //pay
+				playerData.gameObject.GetComponent<PlayerSounds>().PlayRent();
+			}	
+			else
+				KickOut();
+		}
 		else
-			KickOut();
+		{
+			Destroy(this);
+		}
+		
 	}
 
 	public void StopPay()
 	{
 		CancelInvoke("RentPay");
+		paying = false;
 		Destroy(this);
 	}
 

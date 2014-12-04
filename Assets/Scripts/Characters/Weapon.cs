@@ -166,8 +166,7 @@ public class Weapon : MonoBehaviour {
 			{
 				if (laserShooting)
 					return;
-				else
-					laserShooting = true;
+				laserShooting = true;
 				playerSounds.PlayLaserCharge();
 				Invoke("FireLaser", LASER_CHARGE);
 				return;
@@ -275,7 +274,7 @@ public class Weapon : MonoBehaviour {
 				}
 			}
 
-			if (currentTarget != null)
+			if (currentTarget != null && currentTarget.gameObject != gameObject)
 			{
 				currentTarget.StunDamage(LASER_DAMAGE, playerData.IsMovingRight());
 				if (laserLevel > 1)

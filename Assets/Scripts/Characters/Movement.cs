@@ -202,6 +202,7 @@ public class Movement : MonoBehaviour {
 		playerData.SetLastTeleport(returnPosition);
 		transform.position = rootTeleport;
 		playerData.LifeChange(playerData.GetMaxLife()); //full heal
+		playerData.DelayUse(1.5f); //so b spam doesn't send you back out
 		gameObject.AddComponent("Rent");
 	}
 

@@ -78,6 +78,7 @@ public class PlayerData : Actor
 	private float TELEPORT_COOLDOWN = 50f; //time to wait between "recalls"
 	private bool canTeleport = true; //whether or not the player is allowed to recall
 	private Vector2 lastTeleport; //the last teleporter that the player walked through
+	private bool canUse = true; //to prevent b spam on teleporters
 
 	//Shopping
 	private int weaponSwaps = 0; //weapon swaps become progressively more expensive
@@ -140,7 +141,7 @@ public class PlayerData : Actor
 		if (CURLIFE <= 0)
 			Die();
 		
-		if (Input.GetButtonDown( keyBind.UseButton() )) //"USE" button
+		if (Input.GetButtonDown( keyBind.UseButton() ) && CanUse()) //"USE" button
 		{
 			Vector2 hitboxSize = collider2D.bounds.extents;
 			Vector2 topLeft = transform.position + new Vector3(-hitboxSize.x, hitboxSize.y, 0f);
@@ -542,6 +543,22 @@ public class PlayerData : Actor
 	public bool CanTeleport()
 	{
 		return canTeleport;
+	}
+
+	public void DelayUse(float time)
+	{
+		canUse = false;
+		Invoke("ResetUse", time);
+	}
+
+	public void ResetUse()
+	{
+		canUse = true;
+	}
+
+	public bool CanUse()
+	{
+		return canUse;
 	}
 
 	public void ResetLastHit()
