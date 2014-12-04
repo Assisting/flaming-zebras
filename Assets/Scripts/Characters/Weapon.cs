@@ -13,6 +13,7 @@ public class Weapon : MonoBehaviour {
 	public static float[] laserFades = new float[3] { 0.1f, 0.4f, 0.3f};
 
 	public static int[] swordDamage = new int[3] { 35, 55, 55};
+	public static float[] swordSpeed = new float[3] { 0.6f, 0.5f, 0.45f };
 	public static float[] invulnTime = new float[3] { 2.0f, 2.0f, 2.0f};
 	public static float[] shieldRegen = new float[3] { 20f, 20f, 10f};
 
@@ -106,7 +107,7 @@ public class Weapon : MonoBehaviour {
 
 			case WeaponType.Melee :
 			{
-				RELOAD_WAIT = 0.6f;
+				RELOAD_WAIT = swordSpeed[wepLevel - 1];
 				MAX_BULLETS = 1;
 				MELEE_DAMAGE = swordDamage[wepLevel - 1];
 				SHIELD_TIME = invulnTime[wepLevel - 1];
