@@ -31,6 +31,61 @@ SPEECH RECORD 2 - Group A
  - What the f*** is happening (during final battle)?
 
 
+SPEECH RECORD 3 - GROUP B
+ - Which one am I?
+ - Where do we go?
+ - How do I get money? (start area)
+ - <generally stuck behind a fallen rock, unaware it can be damaged>
+ - <door confusion>
+ - How to get out of the shop?
+ - Is this the only level, or what? (Origin area)
+ - Run away! Ah!
+ - Does this door not work?
+ - Does the chicken do damage?
+ - How do I get back to the shop?
+ - What is that thing (boulder)? Do I beat it?
+ - Oh, it's a turret.
+ - I now have a gun.
+ - Where is everyone?
+   - I don't know
+   - I'm lost
+   - Oh, I see someone.
+ - I think I ventured too far
+ - How do you open these (chests)?
+ - What's the level up thing?
+   - (After explanation) Oh, so that's how it works
+ - Why is dash so important again?
+ - I want to go back into the shop.
+ - How do you get to the shop?
+ - Come here, so I can nunchuk you! <laughter>
+ - <Trying doors> Is that... No... Is that...? No... Is that... No...
+ - Where is everybody?
+ - Oh, I won!
+
+SPEECH RECOD 4 - GROUP B
+ - I want your money
+ - You bugger, you stole my chest!
+ - Get off my head!
+ - Oh! Double Kill!
+ - I'm just gonna say, I have no money.
+ - How much do you have?
+   - 259.
+   - Just sayin', we should team up against him.
+ - Is this called spawn camping?
+ - I prematurely fired.
+ - Is this one of those chests?
+ - Aliens! Oh, he's pushing me!
+ - Stop going off the edge!
+ - Where is Santa Claus?
+ - Why won't it let me jump? (Stuck on turret collision box)
+ - Stop it santa!
+ - I like how it teleports you back to where you teleported in.
+ - I was trying to teleport to the shop when we got moved there, and I teleported out before I could upgrade my weapons.
+ - <Tracking issues on missiles>
+ - Look at that cash!
+ - I've got 3 (gold), but I've got a weapon
+ - Comon, open door!
+
 (Answers in order)
 CODY EDE - CME527
 Yes, though he didn't know what the weapons were except by trial and error
@@ -176,3 +231,118 @@ Traps minimal without players
 NPCs a threat if not avoided
 
 Player fighting definitely significant
+
+CONNOR NETTLETON-GOODING - CWN973
+ - Not, had teleporting issues
+   - Upgrades were decent for weapons, didn't bother with dash, jump, et al.
+     - Laser/Gun primary weapons used
+
+ - More damage; range worthless due to lack of flat areas.
+   - Guns < knives
+   - Couldn't turn around to shoot when being pushed
+
+ - Other player's positions would have been good
+   - Suggests indicators above doors
+
+ - Not really.
+   - Could use a warning before finale
+   - Issues with looting, ended up on emptied branches and got screwed
+   - Payout of chests not obvious
+
+ - Yes
+
+ - Not much; didn't show up until the finales, except Shane "would drop from the sky and kill me".
+
+ - Not really; did minimal damage
+   - Spent time stuck on skeleton, turret
+
+ - Committed suicide on spikes to prevent Shane from getting his gold
+
+ - Moderately annoying; got stuck a lot on spikes and the turret
+
+ - Players, yes, traps and NPCs not so much because they did negligible damage.
+
+Comments: Spawn camping sucked / Damage screwed momentum / Got stuck on stationary turrets / Immediately left shop too many times by accident
+
+LEEJAY SCHMIDT - LJS302
+ - 1st time yes, didn't completely understand how to get money.
+
+ - Rocket was awesome
+
+ - KNowing beforehand what thing will look like before you start would be good
+
+ - No, confusing at times, a map would be very helpful
+
+ - For the most part yes, definitely once you know the game more (early play it's short)
+
+ - When I was getting shot at, a big one.
+
+ - Never found many (found 1 turret)
+
+ - No difference noticed
+
+ - Not at all (likely not exploring)
+
+ - Yes, jst because of fear of damage
+
+ - Chest opening mechanic should be laid out
+
+SHANE WILLIAMSON (He's in CMPT 306)
+ - Able to upgrades
+
+ - Definitely; upgrades are a HUGE improvement
+   - Like the fact that currency is hidden
+   - HUD not intrusive
+
+ - Not dragged on while "in the mix"
+
+ - Fun to explore
+   - Fun to nab chests/obstacles
+
+ - Other players significant/positive impact
+   - land in same room/enjoyable
+
+ - Aliens could lock you in one direction
+
+ - Not good, but wants to use them against players
+   - Awesome idea
+
+ - Traps weren't huge outside combat
+   - Was a factor
+
+ - Sources of damage worth avoidance?
+   - YES
+   - Definitely "chunk" you
+   - Depending on health, maybe not much worry
+
+ - Standing on head tough to move
+
+MARINA SCHMIDT - MTS299
+ - No, no clue
+   - Upgrades confusing; how to buy?
+     - Outside of shop clear
+
+ - No idea
+
+ - Shop unclear; didn't understand how to dash
+
+ - Losing, game felt like it dragged
+
+ - A lot
+   - Once I fell behind, couldn't fight
+     - couldn't get away to do anything else
+
+ - NPCs didn't effect me at all
+   - Target practice; kind of fun
+     - Kill something at least, simple
+
+ - Traps didn't affect PvP
+   - Other players completely avoided pre-emptively
+
+ - Traps easy to avoid in non-PvP
+
+ - Stationary traps worth avoiding
+   - NPCs not
+
+ - Teleports kinda confusing
+   - Being ported to shop without money on death felt pointless.
