@@ -36,7 +36,7 @@ public class MissleHandler : Explosive {
 			if (level > 1) // possibly do special things
 			{
 				Collider2D[] closestTargets = Physics2D.OverlapCircleAll(sensorPoint.position, DETECTION_RADIUS, targetTypes);
-				Collider2D closestTarget;
+				Collider2D closestTarget = null;
 				for (int i = 0; closestTargets[i].tag != "Player"; i++)
 				{
 					closestTarget = closestTargets[i];
