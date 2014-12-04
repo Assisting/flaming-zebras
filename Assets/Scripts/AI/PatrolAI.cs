@@ -17,7 +17,7 @@ public class PatrolAI : Enemy {
 		
 		// These will all require much, much tweaking.
 		SPEED = 0.9f;
-		ATTACK_DAMAGE = 4;
+		ATTACK_DAMAGE = 6;
 		
 		Do = testCanSeePlayer;
 		

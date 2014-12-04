@@ -19,7 +19,7 @@ public class Charge : Enemy {
 
 		// These will all require much, much tweaking.
 		SPEED = 0.8f;
-		ATTACK_DAMAGE = 6;
+		ATTACK_DAMAGE = 8;
 
 		// How fast is a charge attack compared to normal movement?
 		CHARGE_ATTACK_SPEED_MODIFIER = 1.5f;
