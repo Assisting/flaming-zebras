@@ -229,7 +229,10 @@ public class PlayerData : Actor
 			return;
 		}
 		else if (INVULNERABLE)
+		{
+			playerSounds.PlayDeflect();
 			return;
+		}
 		else
 		{
 			movement.SetJumpLag();
@@ -244,6 +247,10 @@ public class PlayerData : Actor
 		{
 			base.LifeChange(value);
 			playerSounds.PlayHurt();
+		}
+		else
+		{
+			playerSounds.PlayDeflect();
 		}
 	}
 

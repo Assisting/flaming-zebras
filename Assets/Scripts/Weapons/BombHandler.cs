@@ -61,7 +61,7 @@ public class BombHandler : Explosive {
 
 	public void OnTriggerEnter2D(Collider2D other)
 	{
-		if (level == 2)
+		if (level == 2 && armed)
 			ExplodeCheck();
 	}	
 }
