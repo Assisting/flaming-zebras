@@ -22,10 +22,10 @@ public class Charge : Enemy {
 		ATTACK_DAMAGE = 6;
 
 		// How fast is a charge attack compared to normal movement?
-		CHARGE_ATTACK_SPEED_MODIFIER = 1.33f;
+		CHARGE_ATTACK_SPEED_MODIFIER = 1.5f;
 
 		// How much more damage does a charge attack do to the player?
-		CHARGE_ATTACK_DAMAGE_MODIFIER = 1.5f;
+		CHARGE_ATTACK_DAMAGE_MODIFIER = 2f;
 
 		Do = testCanSeePlayer;
 
