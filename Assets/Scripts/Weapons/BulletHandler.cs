@@ -3,8 +3,8 @@ using System.Collections;
 
 public class BulletHandler : Projectile {
 
-	private int BULLET_DAMAGE = 12; //damage per bullet
-	private float BULLET_VELOCITY = 15f; // speed of bullets in-game
+	protected int BULLET_DAMAGE = 12; //damage per bullet
+	protected float BULLET_VELOCITY = 15f; // speed of bullets in-game
 
 	// Use this for initialization
 	void Start () {
