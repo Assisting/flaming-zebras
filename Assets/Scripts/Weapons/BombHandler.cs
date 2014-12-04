@@ -6,6 +6,7 @@ public class BombHandler : Explosive {
 	public Transform bomb;
 
 	private float TIMER = 2f;
+	private float PROX_WAIT = 0.6f;
 
 	// Use this for initialization
 	void Start () {
@@ -62,6 +63,6 @@ public class BombHandler : Explosive {
 	public void OnTriggerEnter2D(Collider2D other)
 	{
 		if (level == 2 && armed)
-			ExplodeCheck();
+			Invoke ("ExplodeCheck", PROX_WAIT);
 	}	
 }
