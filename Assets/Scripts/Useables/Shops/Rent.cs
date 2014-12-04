@@ -45,7 +45,7 @@ public class Rent : MonoBehaviour {
 
 	private void KickOut()
 	{
-		transform.position = new Vector3(0f, 0f, 0f); //move out of shop
+		transform.position = playerData.getLastTeleport ();
 		playerData.SetTeleportCooldown(); //can't come back for a while
 		playerData.MakeInvuln(RootTeleporter.teleInvulnTime); //normal leaving invuln
 		transform.parent.Find("GUIText").Find("Shop").gameObject.layer = LayerMask.NameToLayer ("NoGUI"); //turn off the shopGUI, just in case
