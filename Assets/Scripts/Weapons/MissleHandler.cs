@@ -15,7 +15,7 @@ public class MissleHandler : Explosive {
 
 	// Use this for initialization
 	void Start () {
-		Invoke("Arm", 0.1f);
+		Invoke("Arm", 0.05f);
 		LOW_DAMAGE = 8;
 		HIGH_DAMAGE = 15; //really 23
 		CLOSE_RANGE = 0.9f;
