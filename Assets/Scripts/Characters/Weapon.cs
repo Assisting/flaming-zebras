@@ -45,7 +45,7 @@ public class Weapon : MonoBehaviour {
 	private bool laserShooting = false;
 
 	private int MELEE_DAMAGE = 35;
-	private float SHIELD_TIME = 2.0f;
+	private float SHIELD_TIME = 1.5f;
 	private float SHIELD_REGEN = 20f;
 	private bool SHIELD_ACTIVE = true;
 	
