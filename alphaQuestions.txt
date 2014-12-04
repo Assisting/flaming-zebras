@@ -1,0 +1,46 @@
+(lead) means push the player further in that direction if their answer is already going there.
+
+Were you able to purchase things in a reasonable time?
+	Were you happy with your end-game purchases? (lead)
+	Did you spend much time with nothing to buy/that you wanted to buy? (lead)
+
+Did upgrades feel worth it?
+	Spending win points not worth it/non-issue?(lead)
+	Risk of holding on to the gold too high/low?(lead)
+
+Did you feel like any information was missing?
+	*Make special note if we've conveyed the information, but in a way they missed
+		*Or if it wasn't obvious enough/too intrusive
+
+Did the game drag on at all?
+	Everything bought that you want? (lead)
+	Everything looted already? (lead)
+
+Did you have enough time to explore?
+
+How much of an impact did you feel other players had on your gameplay experience?
+	They weren't ever there (lead)
+	They were always in my face (lead)
+		I could ignore them though (lead)
+		I couldn't do anything else when another player was in the room (lead)
+
+How did the behavior of non-player enemies affect your gameplay?
+	I had to figure out what the enemies were doing all the time (lead)
+	I learned what an enemy did then I knew exactly what they were doing (lead)
+
+How did traps affect your PvP experience?
+	They didn't/were ignorable (lead)
+	I had to be very careful about how other players used traps (lead)
+
+How did traps affect your gameplay when you were not in combat?
+	They didn't/were ignorable (lead)
+	They presented a challenge in and of themselves (lead)
+
+Did sources of damage feel worth avoiding?
+	Which ones did or didn't?
+		Why (lead)
+			ex. Too easy/hard to dodge
+			Too much/little damage
+			etc.
+			
+Any major issues/bugs that you noticed?
