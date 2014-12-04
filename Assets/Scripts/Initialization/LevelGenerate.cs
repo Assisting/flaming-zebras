@@ -89,19 +89,11 @@ public class LevelGenerate : MonoBehaviour {
 		{
 			player.transform.position = storeRoom.transform.position; //move all players to shop
 			player.transform.Find("Camera").GetComponent<CameraShift>().UpdateViewport(); //separate players into correct number of quadrants
+			player.AddComponent("Rent");
 		}
 
 		GameObject shop = GameObject.FindWithTag("Shop"); //find a shop
 		shop.GetComponent<Shop>().GetGUIs(); //populate dictionary with the four available GUIs (index by playerNum)
-
-		yield return new WaitForSeconds(40f);
-		foreach (GameObject player in newPlayers)
-		{
-			player.AddComponent("Rent");
-		}
-
-		
-
 	}
 
 	// recursive generation function, spawns levels from a predefined list currently
