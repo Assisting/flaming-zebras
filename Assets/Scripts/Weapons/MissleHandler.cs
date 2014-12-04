@@ -35,7 +35,12 @@ public class MissleHandler : Explosive {
 		{
 			if (level > 1) // possibly do special things
 			{
-				Collider2D closestTarget = Physics2D.OverlapCircle(sensorPoint.position, DETECTION_RADIUS, targetTypes);
+				Collider2D[] closestTargets = Physics2D.OverlapCircleAll(sensorPoint.position, DETECTION_RADIUS, targetTypes);
+				Collider2D closestTarget;
+				for (int i = 0; closestTargets[i].tag != "Player"; i++)
+				{
+					closestTarget = closestTargets[i];
+				}
 				if (closestTarget != null && ORIGIN != closestTarget.gameObject)
 				{
 					if (level > 2) //level 3 (swarm)
