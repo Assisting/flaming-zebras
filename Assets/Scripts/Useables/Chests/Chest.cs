@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Chest : Usable 
 {
+	public AudioClip open;
 
 	protected int treasureAmount;
 	private bool treasureTaken = false;
@@ -20,6 +21,7 @@ public class Chest : Usable
 		if (opener == null && caller.tag == "Player" && !treasureTaken)
 		{
 			opener = caller;
+			audio.PlayOneShot(open);
 			Invoke("GiveMoney", TREASURE_WAIT);
 		}
 	}
