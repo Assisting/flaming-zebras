@@ -243,7 +243,13 @@ public class PlayerData : Actor
 
 	public override void LifeChange(int value)
 	{
-		if ( (!INVULNERABLE && value < 0) || value >= 0)
+		if (CURRENT_WEAPON == Weapon.WeaponType.Melee && weapon.ShieldUp())
+		{
+			MakeInvuln(weapon.GetShieldTime());
+			weapon.DropShield();
+			return;
+		}
+		else if ( (!INVULNERABLE && value < 0) || value >= 0)
 		{
 			base.LifeChange(value);
 			playerSounds.PlayHurt();

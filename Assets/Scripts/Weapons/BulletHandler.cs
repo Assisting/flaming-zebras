@@ -21,7 +21,7 @@ public class BulletHandler : Projectile {
 			{
 				PlayerData target = other.GetComponent<PlayerData>();
 				target.SetLastHit(ORIGIN);
-				target.StunDamage(BULLET_DAMAGE, rigidbody2D.velocity.x > 0f);
+				target.LifeChange(-BULLET_DAMAGE);
 				Destroy(gameObject);
 			}
 		}

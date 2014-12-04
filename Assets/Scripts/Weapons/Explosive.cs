@@ -24,13 +24,13 @@ public class Explosive : Projectile {
 		// applies damage twice to inner people, they will therefore take both HIGH and LOW damage simultaneously
 		Collider2D[] targets = Physics2D.OverlapCircleAll(transform.position, CLOSE_RANGE, targetTypes); //hit close targets
 		bool goRight = true; //whether or not to stunDamage() to the right (or left)
-		Vector2 targetDirection = Vector2.zero; //direction to each target in explosion
+		//Vector2 targetDirection = Vector2.zero; //direction to each target in explosion
 		for (int i = 0; i < targets.Length; i ++)
 		{
 			if (targets[i].gameObject != ORIGIN)
 			{
-				targetDirection = targets[i].transform.position - transform.position;
-				goRight = targetDirection.x >= 0f;
+				//targetDirection = targets[i].transform.position - transform.position;
+				//goRight = targetDirection.x >= 0f;
 				if (targets[i].tag == "Player")
 				{
 					PlayerData target = targets[i].GetComponent<PlayerData>();
@@ -38,7 +38,7 @@ public class Explosive : Projectile {
 					target.StunDamage(HIGH_DAMAGE, goRight);
 				}
 				else
-					targets[i].GetComponent<Actor>().StunDamage(HIGH_DAMAGE, goRight);
+					targets[i].GetComponent<Actor>().LifeChange(-HIGH_DAMAGE);
 			}
 		}
 		targets = Physics2D.OverlapCircleAll(transform.position, LONG_RANGE, targetTypes); //hit far targets
@@ -46,8 +46,8 @@ public class Explosive : Projectile {
 		{
 			if (targets[i].gameObject != ORIGIN)
 			{
-				targetDirection = targets[i].transform.position - transform.position;
-				goRight = targetDirection.x >= 0f;
+				//targetDirection = targets[i].transform.position - transform.position;
+				//goRight = targetDirection.x >= 0f;
 				if (targets[i].tag == "Player")
 				{
 					PlayerData target = targets[i].GetComponent<PlayerData>();
@@ -55,7 +55,7 @@ public class Explosive : Projectile {
 					target.StunDamage(LOW_DAMAGE, goRight);
 				}
 				else
-					targets[i].GetComponent<Actor>().StunDamage(LOW_DAMAGE, goRight);
+					targets[i].GetComponent<Actor>().LifeChange(-LOW_DAMAGE);
 			}
 		}
 		GetComponent<Animator>().SetTrigger("Explode");
