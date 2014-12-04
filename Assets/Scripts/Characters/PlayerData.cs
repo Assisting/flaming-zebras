@@ -9,8 +9,8 @@ public class PlayerData : Actor
 
 	private struct MoveLevel
 	{
-		public static float[] moveSpeed = new float[3] { 60f, 65f, 70f };
-		public static float[] maxSpeed = new float[3] { 5f, 6.25f, 7.5f };
+		public static float[] moveSpeed = new float[3] { 45f, 50f, 55f };
+		public static float[] maxSpeed = new float[3] { 10f, 11f, 12f };
 	}
 
 	private struct DashLevel
@@ -53,7 +53,7 @@ public class PlayerData : Actor
 	private float MAX_SPEED; // maximum lateral speed of the player
 
 	//Jumping
-	private readonly float JUMP_FORCE = 875f; // speed of player's jump
+	private readonly float JUMP_FORCE = 2000f; // speed of player's jump
 	private bool grounded; // Whether or not the player is on the ground
 	private bool jumpAvailable; // whether or not the player must wait to hit the ground before jumping again
 	private int timesJumped; // The number of times the player has air-jumped

@@ -84,7 +84,7 @@ public class Movement : MonoBehaviour {
 			
 			playerXAxisValue = Input.GetAxis( keyBind.playerXAxis() );
 			//move left
-			if (playerXAxisValue < -0.05f)
+			if (playerXAxisValue < -0.4f)
 			{
 				if ( !wallLeft && !playerData.isStunned() && rigidbody2D.velocity.x >= -playerData.GetMAX_SPEED() )
 				{
@@ -93,7 +93,7 @@ public class Movement : MonoBehaviour {
 			}
 
 			//move right
-			else if (playerXAxisValue > 0.05f)
+			else if (playerXAxisValue > 0.4f)
 			{
 				if ( !wallRight && !playerData.isStunned() && rigidbody2D.velocity.x <= playerData.GetMAX_SPEED() )
 				{
