@@ -151,7 +151,7 @@ public class Movement : MonoBehaviour {
 	{
 		playerData.RemoveDash();
 		playerData.SetDashing(true);
-		rigidbody2D.gravityScale = 0;
+		rigidbody2D.gravityScale = 0f;
 		rigidbody2D.velocity = Vector2.zero;
 	}
 
@@ -160,7 +160,7 @@ public class Movement : MonoBehaviour {
 	{
 		playerData.SetDashing(false);
 		rigidbody2D.velocity = Vector2.zero;
-		rigidbody2D.gravityScale = 1;
+		rigidbody2D.gravityScale = 2.5f;
 	}
 
 	private void AirPhysics()
