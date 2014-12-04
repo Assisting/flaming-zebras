@@ -37,6 +37,12 @@ public class RunGame : MonoBehaviour {
 		{
 			player.GetComponent<Movement>().TeleportHome(new Vector3(0f, 0f, 0f)); //everyone goes to the shop before the fight
 		}
+		GameObject originRoom = GameObject.Find("originRoom");
+		Door[] doors = originRoom.GetComponentsInChildren<Door>();
+		foreach (Door door in doors)
+		{
+			Destroy(door.gameObject);
+		}
 	}
 
 	private void EndGame()

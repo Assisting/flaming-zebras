@@ -5,7 +5,7 @@ public class BombHandler : Explosive {
 
 	public Transform bomb;
 
-	private float TIMER = 3f;
+	private float TIMER = 2f;
 
 	// Use this for initialization
 	void Start () {

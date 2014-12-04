@@ -11,6 +11,7 @@ public class Weapon : MonoBehaviour {
 	public static int[] bulletClips = new int[3] { 1, 5, 8};
 
 	public static float[] laserFades = new float[3] { 0.1f, 0.4f, 0.3f};
+	public static int[] laserBurn = new int[3] { 0, 3, 6};
 
 	public static int[] swordDamage = new int[3] { 35, 55, 55};
 	public static float[] swordSpeed = new float[3] { 0.6f, 0.5f, 0.45f };
@@ -37,9 +38,11 @@ public class Weapon : MonoBehaviour {
 	private PlayerSounds playerSounds;
 
 	private float LASER_FADE; //time for laser to disappear
-	private int LASER_DAMAGE = 26; //damage per laser burst
+	private int LASER_DAMAGE = 32; //damage per laser burst
 	private int LASER_BURN_DAMAGE = 2;
-	private float LASER_BURN_TIME = 4f;
+	private float LASER_BURN_TIME = 3f;
+	private float LASER_CHARGE = 1f; //time to charge a laser shot
+	private bool laserShooting = false;
 
 	private int MELEE_DAMAGE = 35;
 	private float SHIELD_TIME = 2.0f;
@@ -99,7 +102,7 @@ public class Weapon : MonoBehaviour {
 
 			case WeaponType.Laser :
 			{
-				RELOAD_WAIT = 2.1f;
+				RELOAD_WAIT = 0f;
 				MAX_BULLETS = 1;
 				LASER_FADE = laserFades[wepLevel - 1];
 				return;
@@ -161,7 +164,12 @@ public class Weapon : MonoBehaviour {
 
 			case WeaponType.Laser :
 			{
-				FireLaser();
+				if (laserShooting)
+					return;
+				else
+					laserShooting = true;
+				playerSounds.PlayLaserCharge();
+				Invoke("FireLaser", LASER_CHARGE);
 				return;
 			}
 
@@ -287,6 +295,7 @@ public class Weapon : MonoBehaviour {
 		else
 			newLaser.SetPosition( 1, new Vector3(muzzle.position.x - hitTargets[i].distance, muzzle.position.y, muzzle.position.z) );
 		playerSounds.PlayLaser();
+		laserShooting = false;
 		Destroy(newLaser.gameObject, LASER_FADE);
 			
 	}

@@ -10,6 +10,7 @@ public class PlayerSounds : MonoBehaviour {
 	public AudioClip shield;
 	public AudioClip deflect;
 	public AudioClip laser;
+	public AudioClip laserCharge;
 	public AudioClip bullet;
 	public AudioClip missile;
 	public AudioClip hurt;
@@ -49,6 +50,11 @@ public class PlayerSounds : MonoBehaviour {
 	public void PlayLaser()
 	{
 		audio.PlayOneShot(laser);
+	}
+
+	public void PlayLaserCharge()
+	{
+		audio.PlayOneShot(laserCharge, 0.25f);
 	}
 
 	public void PlayBullet()
