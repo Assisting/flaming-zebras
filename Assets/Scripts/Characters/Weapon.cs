@@ -311,7 +311,7 @@ public class Weapon : MonoBehaviour {
 				Actor target = hitTarget.GetComponent<Actor>();
 				if (hitTarget.tag == "Player")
 					((PlayerData)target).SetLastHit(gameObject);
-				target.StunDamage(MELEE_DAMAGE, playerData.IsMovingRight());
+				target.LifeChange(MELEE_DAMAGE);
 			}
 		}
 

@@ -1,12 +1,13 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\AI\ArcherSpawn.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Characters\PlayerData.cs">
     <Files>
-      <File FileName="Assets\Scripts\AI\PatrolSpawn.cs" Line="27" Column="12" />
-      <File FileName="Assets\Scripts\AI\ChargerSpawn.cs" Line="27" Column="1" />
-      <File FileName="Assets\Scripts\AI\ArcherSpawn.cs" Line="27" Column="12" />
-      <File FileName="Assets\Scripts\AI\Charge.cs" Line="241" Column="1" />
-      <File FileName="Assets\Scripts\AI\Enemy.cs" Line="106" Column="1" />
+      <File FileName="Assets\Scripts\Characters\LeftWallTrigger.cs" Line="39" Column="4" />
+      <File FileName="Assets\Scripts\Characters\Actor.cs" Line="266" Column="1" />
+      <File FileName="Assets\Scripts\Characters\PlayerData.cs" Line="267" Column="31" />
+      <File FileName="Assets\Scripts\HUD Scripts\HudCenter.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Initialization\LevelGenerate.cs" Line="37" Column="18" />
+      <File FileName="Assets\Scripts\Traps\PoisonGas.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
