@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class LevelGenerate : MonoBehaviour {
 
-	public GameObject player1; //prefabs of players to spwan
+	public GameObject player1; //prefabs of players to spawn
 	public GameObject player2;
 	public GameObject player3;
 	public GameObject player4;
