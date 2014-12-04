@@ -77,14 +77,14 @@ public abstract class Enemy : MonoBehaviour
 	
 	// Test
 	public bool sightCheck() {
-		bool behindMe = Physics2D.Linecast (eye.position, hindsight.position, playerLayer);
-
-		if(behindMe == true) {
-			turnAround();
-		}
-
 		canISeePlayer = Physics2D.Linecast (eye.position, sight.position, playerLayer);
 
+		bool behindMe = Physics2D.Linecast (eye.position, hindsight.position, playerLayer);
+
+		if((behindMe == true) && (canISeePlayer == false)) {
+			turnAround();
+			canISeePlayer = Physics2D.Linecast (eye.position, sight.position, playerLayer);
+		}
 		return canISeePlayer;
 	}
 	
