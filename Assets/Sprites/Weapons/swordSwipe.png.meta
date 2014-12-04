@@ -7,6 +7,8 @@ TextureImporter:
     21300004: swordSwipe_1
     21300006: swordSwipe_2
     21300008: swordSwipe_3
+    21300010: swordSwipe_4
+    21300012: swordSwipe_5
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -82,6 +84,26 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 30
+        y: 0
+        width: 10
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: swordSwipe_4
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 0
+        width: 10
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: swordSwipe_5
+      rect:
+        serializedVersion: 2
+        x: 50
         y: 0
         width: 10
         height: 20

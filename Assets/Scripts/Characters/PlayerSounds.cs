@@ -8,6 +8,7 @@ public class PlayerSounds : MonoBehaviour {
 	public AudioClip dash;
 	public AudioClip melee;
 	public AudioClip shield;
+	public AudioClip deflect;
 	public AudioClip laser;
 	public AudioClip bullet;
 	public AudioClip missile;
@@ -38,6 +39,11 @@ public class PlayerSounds : MonoBehaviour {
 	public void PlayShield()
 	{
 		audio.PlayOneShot(shield);
+	}
+
+	public void PlayDeflect()
+	{
+		audio.PlayOneShot(deflect);
 	}
 
 	public void PlayLaser()

@@ -300,9 +300,15 @@ public class Weapon : MonoBehaviour {
 		// get targets
 		Collider2D[] hitTargets;
 		if ( playerData.IsMovingRight() )
+		{
 			hitTargets = Physics2D.OverlapAreaAll(rightCenter - cornerDistance, rightCenter + cornerDistance, projectileTargets);
+			rightMelee.gameObject.GetComponent<Animator>().SetTrigger("Sword");
+		}
 		else
+		{
 			hitTargets = Physics2D.OverlapAreaAll(leftCenter - cornerDistance, leftCenter + cornerDistance, projectileTargets);
+			leftMelee.gameObject.GetComponent<Animator>().SetTrigger("Sword");
+		}
 
 		// do damage
 		foreach (Collider2D hitTarget in hitTargets)
@@ -312,10 +318,10 @@ public class Weapon : MonoBehaviour {
 				Actor target = hitTarget.GetComponent<Actor>();
 				if (hitTarget.tag == "Player")
 					((PlayerData)target).SetLastHit(gameObject);
-				target.LifeChange(MELEE_DAMAGE);
+				target.LifeChange(-MELEE_DAMAGE);
 			}
 		}
-
+		
 		playerSounds.PlayMelee();
 	}
 
@@ -328,9 +334,15 @@ public class Weapon : MonoBehaviour {
 		// get targets
 		Collider2D[] hitTargets;
 		if ( playerData.IsMovingRight() )
+		{
 			hitTargets = Physics2D.OverlapAreaAll(rightCenter - cornerDistance, rightCenter + cornerDistance, projectileTargets);
+			rightMelee.gameObject.GetComponent<Animator>().SetTrigger("Chicken");
+		}
 		else
+		{
 			hitTargets = Physics2D.OverlapAreaAll(leftCenter - cornerDistance, leftCenter + cornerDistance, projectileTargets);
+			leftMelee.gameObject.GetComponent<Animator>().SetTrigger("Chicken");
+		}
 
 		// do damage
 		foreach (Collider2D hitTarget in hitTargets)

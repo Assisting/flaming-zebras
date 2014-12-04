@@ -7,6 +7,8 @@ TextureImporter:
     21300004: chickenSwipe_1
     21300006: chickenSwipe_2
     21300008: chickenSwipe_3
+    21300010: chickenSwipe_4
+    21300012: chickenSwipe_5
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -82,6 +84,26 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 30
+        y: 0
+        width: 10
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: chickenSwipe_4
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 0
+        width: 10
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: chickenSwipe_5
+      rect:
+        serializedVersion: 2
+        x: 50
         y: 0
         width: 10
         height: 20
