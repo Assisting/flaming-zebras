@@ -27,9 +27,9 @@ public class Archer : Enemy {
 		actor.setStunForce(0f);
 
 		MOVING_RIGHT = true;
-		ATTACK_DELAY = 0.8f;
+		ATTACK_DELAY = 0.6f;
 
-		DELAY_BEFORE_FIRE = 0.5f;
+		DELAY_BEFORE_FIRE = 0.2f;
 		DELAY_BETWEEN_ATTACKS = 5f;
 
 		// These will all require much, much tweaking.
