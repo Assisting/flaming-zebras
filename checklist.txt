@@ -1,0 +1,9 @@
+Bugs
+Shop heal not working
+Shop rent out of shop
+
+Implements
+Chest capturing halted on damage
+Thicker lasers
+Respawning enemies
+Icons that indicate time, and spawn dynamically into their bar
